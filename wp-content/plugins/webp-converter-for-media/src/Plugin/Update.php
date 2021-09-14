@@ -1,0 +1,41 @@
+<?php
+
+namespace WebpConverter\Plugin;
+
+use WebpConverter\Helper\OptionsAccess;
+use WebpConverter\HookableInterface;
+use WebpConverter\Loader\LoaderAbstract;
+use WebpConverter\Plugin\Activation\DefaultSettings;
+
+/**
+ * Runs actions after plugin update to new version.
+ */
+class Update implements HookableInterface {
+
+	const VERSION_OPTION = 'webpc_latest_version';
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function init_hooks() {
+		add_action( 'admin_init', [ $this, 'run_actions_after_update' ], 0 );
+	}
+
+	/**
+	 * Initializes actions after updating plugin to different version.
+	 *
+	 * @return void
+	 * @internal
+	 */
+	public function run_actions_after_update() {
+		$version = OptionsAccess::get_option( self::VERSION_OPTION );
+		if ( $version === WEBPC_VERSION ) {
+			return;
+		}
+
+		( new DefaultSettings() )->add_default_options();
+		do_action( LoaderAbstract::ACTION_NAME, true );
+
+		OptionsAccess::update_option( self::VERSION_OPTION, WEBPC_VERSION );
+	}
+}
