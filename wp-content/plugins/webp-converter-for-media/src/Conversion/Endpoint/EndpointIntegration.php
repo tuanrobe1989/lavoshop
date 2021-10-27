@@ -18,9 +18,6 @@ class EndpointIntegration implements HookableInterface {
 	 */
 	private $endpoint_object;
 
-	/**
-	 * @param EndpointInterface $endpoint_object .
-	 */
 	public function __construct( EndpointInterface $endpoint_object ) {
 		$this->endpoint_object = $endpoint_object;
 	}

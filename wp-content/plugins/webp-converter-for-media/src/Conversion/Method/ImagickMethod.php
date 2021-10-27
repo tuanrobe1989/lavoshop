@@ -5,11 +5,14 @@ namespace WebpConverter\Conversion\Method;
 use WebpConverter\Conversion\Exception;
 use WebpConverter\Conversion\Format\AvifFormat;
 use WebpConverter\Conversion\Format\WebpFormat;
+use WebpConverter\Settings\Option\ExtraFeaturesOption;
+use WebpConverter\Settings\Option\ImagesQualityOption;
+use WebpConverter\Settings\Option\SupportedExtensionsOption;
 
 /**
  * Supports image conversion method using Imagick library.
  */
-class ImagickMethod extends MethodAbstract {
+class ImagickMethod extends LibraryMethodAbstract {
 
 	const METHOD_NAME        = 'imagick';
 	const MAX_METHOD_QUALITY = 99.9;
@@ -79,7 +82,7 @@ class ImagickMethod extends MethodAbstract {
 
 		if ( ! extension_loaded( 'imagick' ) || ! class_exists( 'Imagick' ) ) {
 			throw new Exception\ImagickUnavailableException();
-		} elseif ( ! in_array( $extension, $plugin_settings['extensions'] ) ) {
+		} elseif ( ! in_array( $extension, $plugin_settings[ SupportedExtensionsOption::OPTION_NAME ] ) ) {
 			throw new Exception\ExtensionUnsupportedException( [ $extension, $source_path ] );
 		}
 
@@ -99,14 +102,14 @@ class ImagickMethod extends MethodAbstract {
 	public function convert_image_to_output( $image, string $source_path, string $output_path, string $format, array $plugin_settings ) {
 		$extension      = self::get_format_extension( $format );
 		$image          = apply_filters( 'webpc_imagick_before_saving', $image, $source_path );
-		$output_quality = min( $plugin_settings['quality'], self::MAX_METHOD_QUALITY );
+		$output_quality = min( $plugin_settings[ ImagesQualityOption::OPTION_NAME ], self::MAX_METHOD_QUALITY );
 
 		if ( ! in_array( $extension, $image->queryFormats() ) ) {
 			throw new Exception\ImagickNotSupportWebpException();
 		}
 
 		$image->setImageFormat( $extension );
-		if ( ! in_array( 'keep_metadata', $plugin_settings['features'] ) ) {
+		if ( ! in_array( ExtraFeaturesOption::OPTION_VALUE_KEEP_METADATA, $plugin_settings[ ExtraFeaturesOption::OPTION_NAME ] ) ) {
 			$image->stripImage();
 		}
 		$image->setImageCompressionQuality( $output_quality );

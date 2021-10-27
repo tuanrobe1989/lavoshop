@@ -7,6 +7,7 @@ use WebpConverter\Conversion\Method\GdMethod;
 use WebpConverter\Conversion\Method\ImagickMethod;
 use WebpConverter\Error\Notice\LibsWithoutAvifSupportNotice;
 use WebpConverter\PluginData;
+use WebpConverter\Settings\Option\OutputFormatsOption;
 
 /**
  * Checks for configuration errors about image conversion methods that do not support AVIF output format.
@@ -14,13 +15,10 @@ use WebpConverter\PluginData;
 class LibsWithoutAvifSupportDetector implements ErrorDetector {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 	}
@@ -29,7 +27,7 @@ class LibsWithoutAvifSupportDetector implements ErrorDetector {
 	 * {@inheritdoc}
 	 */
 	public function get_error() {
-		$output_formats = $this->plugin_data->get_plugin_settings()['output_formats'] ?? [];
+		$output_formats = $this->plugin_data->get_plugin_settings()[ OutputFormatsOption::OPTION_NAME ];
 
 		if ( ! in_array( AvifFormat::FORMAT_EXTENSION, $output_formats )
 			|| GdMethod::is_method_active( AvifFormat::FORMAT_EXTENSION )

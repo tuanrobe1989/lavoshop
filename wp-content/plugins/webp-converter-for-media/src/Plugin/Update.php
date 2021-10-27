@@ -6,6 +6,7 @@ use WebpConverter\Helper\OptionsAccess;
 use WebpConverter\HookableInterface;
 use WebpConverter\Loader\LoaderAbstract;
 use WebpConverter\Plugin\Activation\DefaultSettings;
+use WebpConverter\PluginInfo;
 
 /**
  * Runs actions after plugin update to new version.
@@ -13,6 +14,15 @@ use WebpConverter\Plugin\Activation\DefaultSettings;
 class Update implements HookableInterface {
 
 	const VERSION_OPTION = 'webpc_latest_version';
+
+	/**
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	public function __construct( PluginInfo $plugin_info ) {
+		$this->plugin_info = $plugin_info;
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -29,13 +39,13 @@ class Update implements HookableInterface {
 	 */
 	public function run_actions_after_update() {
 		$version = OptionsAccess::get_option( self::VERSION_OPTION );
-		if ( $version === WEBPC_VERSION ) {
+		if ( $version === $this->plugin_info->get_plugin_version() ) {
 			return;
 		}
 
-		( new DefaultSettings() )->add_default_options();
+		( new DefaultSettings( $this->plugin_info ) )->add_default_options();
 		do_action( LoaderAbstract::ACTION_NAME, true );
 
-		OptionsAccess::update_option( self::VERSION_OPTION, WEBPC_VERSION );
+		OptionsAccess::update_option( self::VERSION_OPTION, $this->plugin_info->get_plugin_version() );
 	}
 }

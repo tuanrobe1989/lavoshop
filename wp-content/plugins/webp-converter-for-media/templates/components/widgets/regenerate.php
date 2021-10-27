@@ -7,9 +7,6 @@
  * @package WebP Converter for Media
  */
 
-/* translators: %s error message */
-$error_message = __( 'An unknown error occurred while converting the images: %s', 'webp-converter-for-media' );
-
 ?>
 <div class="webpPage__widget">
 	<h3 class="webpPage__widgetTitle">
@@ -18,7 +15,7 @@ $error_message = __( 'An unknown error occurred while converting the images: %s'
 	<div class="webpLoader webpContent"
 		data-api-paths="<?php echo esc_url( $api_paths_url ); ?>"
 		data-api-regenerate="<?php echo esc_url( $api_regenerate_url ); ?>"
-		data-api-error-message="<?php echo esc_attr( $error_message ); ?>"
+		data-api-error-message="<?php echo wp_kses_post( __( 'An error occurred while connecting to REST API. Please try again.', 'webp-converter-for-media' ) ); ?>"
 	>
 		<div class="webpPage__widgetRow">
 			<p>
@@ -89,12 +86,7 @@ $error_message = __( 'An unknown error occurred while converting the images: %s'
 					<div class="webpLoader__errorsTitle">
 						<?php echo esc_html( __( 'Additional informations about process:', 'webp-converter-for-media' ) ); ?>
 					</div>
-					<div class="webpLoader__errorsContent">
-						<div class="webpLoader__errorsContentList"></div>
-						<div class="webpLoader__errorsContentMessage" hidden>
-							<?php echo wp_kses_post( __( 'An error occurred while connecting to REST API. Please try again.', 'webp-converter-for-media' ) ); ?>
-						</div>
-					</div>
+					<div class="webpLoader__errorsContent"></div>
 				</div>
 			</div>
 		</div>
@@ -105,10 +97,10 @@ $error_message = __( 'An unknown error occurred while converting the images: %s'
 					value="1"
 					id="webpc-regenerate-force"
 					class="webpField__input webpField__input--toggle">
-				<label for="webpc-regenerate-force"
-					class="webpField__label">
+				<label for="webpc-regenerate-force"></label>
+				<span class="webpField__label">
 					<?php echo esc_html( __( 'Force convert all images again', 'webp-converter-for-media' ) ); ?>
-				</label>
+				</span>
 			</div>
 			<button type="button"
 				class="webpLoader__button webpButton webpButton--green"

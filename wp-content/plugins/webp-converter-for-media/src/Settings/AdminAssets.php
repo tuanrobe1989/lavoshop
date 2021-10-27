@@ -3,25 +3,24 @@
 namespace WebpConverter\Settings;
 
 use WebpConverter\HookableInterface;
+use WebpConverter\PluginInfo;
 
 /**
  * Initializes loading of assets in admin panel.
  */
 class AdminAssets implements HookableInterface {
 
-	/**
-	 * URL of CSS file.
-	 *
-	 * @var string
-	 */
-	private $path_css = WEBPC_URL . 'assets/build/css/styles.css';
+	const CSS_FILE_PATH = 'assets/build/css/styles.css';
+	const JS_FILE_PATH  = 'assets/build/js/scripts.js';
 
 	/**
-	 * URL of JS file.
-	 *
-	 * @var string
+	 * @var PluginInfo
 	 */
-	private $path_js = WEBPC_URL . 'assets/build/js/scripts.js';
+	private $plugin_info;
+
+	public function __construct( PluginInfo $plugin_info ) {
+		$this->plugin_info = $plugin_info;
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -38,7 +37,12 @@ class AdminAssets implements HookableInterface {
 	 * @internal
 	 */
 	public function load_styles() {
-		wp_register_style( 'webp-converter', $this->path_css, [], WEBPC_VERSION );
+		wp_register_style(
+			'webp-converter',
+			$this->plugin_info->get_plugin_directory_url() . self::CSS_FILE_PATH,
+			[],
+			$this->plugin_info->get_plugin_version()
+		);
 		wp_enqueue_style( 'webp-converter' );
 	}
 
@@ -49,7 +53,13 @@ class AdminAssets implements HookableInterface {
 	 * @internal
 	 */
 	public function load_scripts() {
-		wp_register_script( 'webp-converter', $this->path_js, [ 'jquery' ], WEBPC_VERSION, true );
+		wp_register_script(
+			'webp-converter',
+			$this->plugin_info->get_plugin_directory_url() . self::JS_FILE_PATH,
+			[],
+			$this->plugin_info->get_plugin_version(),
+			true
+		);
 		wp_enqueue_script( 'webp-converter' );
 	}
 }

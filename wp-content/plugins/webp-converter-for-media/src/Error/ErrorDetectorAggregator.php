@@ -15,6 +15,7 @@ use WebpConverter\Error\Notice\RewritesCachedNotice;
 use WebpConverter\Helper\OptionsAccess;
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginData;
+use WebpConverter\PluginInfo;
 
 /**
  * Supports generating list of server configuration errors.
@@ -24,7 +25,12 @@ class ErrorDetectorAggregator implements HookableInterface {
 	const ERRORS_CACHE_OPTION = 'webpc_errors_cache';
 
 	/**
-	 * @var PluginData .
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
@@ -40,10 +46,8 @@ class ErrorDetectorAggregator implements HookableInterface {
 	 */
 	private $cached_errors = null;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
-	public function __construct( PluginData $plugin_data ) {
+	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data ) {
+		$this->plugin_info = $plugin_info;
 		$this->plugin_data = $plugin_data;
 	}
 
@@ -152,9 +156,9 @@ class ErrorDetectorAggregator implements HookableInterface {
 			$this->cached_errors[] = $new_error;
 		}
 
-		if ( $new_error = ( new PassthruExecutionDetector( $this->plugin_data ) )->get_error() ) {
+		if ( $new_error = ( new PassthruExecutionDetector( $this->plugin_info, $this->plugin_data ) )->get_error() ) {
 			$this->cached_errors[] = $new_error;
-		} elseif ( $new_error = ( new RewritesErrorsDetector( $this->plugin_data ) )->get_error() ) {
+		} elseif ( $new_error = ( new RewritesErrorsDetector( $this->plugin_info, $this->plugin_data ) )->get_error() ) {
 			$this->cached_errors[] = $new_error;
 		}
 

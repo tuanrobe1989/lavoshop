@@ -5,11 +5,11 @@ namespace WebpConverter\Settings\Option;
 use WebpConverter\Conversion\Method\MethodFactory;
 
 /**
- * Handles data about "Conversion method" field in plugin settings.
+ * {@inheritdoc}
  */
 class ConversionMethodOption extends OptionAbstract {
 
-	const LOADER_TYPE = 'method';
+	const OPTION_NAME = 'method';
 
 	/**
 	 * Object of integration class supports all output formats.
@@ -18,7 +18,6 @@ class ConversionMethodOption extends OptionAbstract {
 	 */
 	private $methods_integration;
 
-
 	public function __construct() {
 		$this->methods_integration = new MethodFactory();
 	}
@@ -26,8 +25,15 @@ class ConversionMethodOption extends OptionAbstract {
 	/**
 	 * {@inheritdoc}
 	 */
+	public function get_priority(): int {
+		return 40;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function get_name(): string {
-		return self::LOADER_TYPE;
+		return self::OPTION_NAME;
 	}
 
 	/**
@@ -53,6 +59,8 @@ class ConversionMethodOption extends OptionAbstract {
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @return string[]
 	 */
 	public function get_values( array $settings ): array {
 		return $this->methods_integration->get_methods();
@@ -60,6 +68,8 @@ class ConversionMethodOption extends OptionAbstract {
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @return string[]
 	 */
 	public function get_disabled_values( array $settings ): array {
 		$methods           = $this->methods_integration->get_methods();

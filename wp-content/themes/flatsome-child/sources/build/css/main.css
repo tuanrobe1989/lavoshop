@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap);
+body {
+  font-family: 'Roboto', sans-serif !important; }
+
+.nav > li > a {
+  font-family: 'Roboto', sans-serif !important; }
+
+h1, h2, h3, h4, h5, h6, .heading-font {
+  font-family: 'Roboto', sans-serif !important; }
+
+.alt-font {
+  font-family: 'Roboto', sans-serif !important; }
+
+.box-blog-post .box-text {
+  padding: 1rem !important; }
+
+input, select, textarea {
+  border-radius: 5px !important; }
+
+
+/*# sourceMappingURL=main.css.map*/

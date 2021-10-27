@@ -3,6 +3,7 @@
 namespace WebpConverter\Plugin;
 
 use WebpConverter\HookableInterface;
+use WebpConverter\PluginInfo;
 use WebpConverter\Settings\Page\PageIntegration;
 
 /**
@@ -13,11 +14,20 @@ class Links implements HookableInterface {
 	const DONATION_URL = 'https://ko-fi.com/gbiorczyk/?utm_source=webp-converter-for-media&utm_medium=plugin-links';
 
 	/**
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	public function __construct( PluginInfo $plugin_info ) {
+		$this->plugin_info = $plugin_info;
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public function init_hooks() {
-		add_filter( 'plugin_action_links_' . WEBPC_NAME, [ $this, 'add_plugin_links_for_admin' ] );
-		add_filter( 'network_admin_plugin_action_links_' . WEBPC_NAME, [ $this, 'add_plugin_links_for_network' ] );
+		add_filter( 'plugin_action_links_' . $this->plugin_info->get_plugin_basename(), [ $this, 'add_plugin_links_for_admin' ] );
+		add_filter( 'network_admin_plugin_action_links_' . $this->plugin_info->get_plugin_basename(), [ $this, 'add_plugin_links_for_network' ] );
 	}
 
 	/**

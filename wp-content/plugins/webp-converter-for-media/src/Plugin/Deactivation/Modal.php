@@ -5,6 +5,7 @@ namespace WebpConverter\Plugin\Deactivation;
 use WebpConverter\Helper\ViewLoader;
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginData;
+use WebpConverter\PluginInfo;
 use WebpConverter\Settings\AdminAssets;
 
 /**
@@ -15,14 +16,17 @@ class Modal implements HookableInterface {
 	const FEEDBACK_API_URL = 'https://feedback.gbiorczyk.pl/';
 
 	/**
-	 * @var PluginData .
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
-	public function __construct( PluginData $plugin_data ) {
+	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data ) {
+		$this->plugin_info = $plugin_info;
 		$this->plugin_data = $plugin_data;
 	}
 
@@ -34,7 +38,7 @@ class Modal implements HookableInterface {
 			return;
 		}
 
-		( new AdminAssets() )->init_hooks();
+		( new AdminAssets( $this->plugin_info ) )->init_hooks();
 		add_action( 'admin_footer', [ $this, 'load_deactivation_modal' ] );
 	}
 
@@ -44,13 +48,14 @@ class Modal implements HookableInterface {
 	 * @return void
 	 */
 	public function load_deactivation_modal() {
-		ViewLoader::load_view(
+		( new ViewLoader( $this->plugin_info ) )->load_view(
 			'views/deactivation-modal.php',
 			[
-				'errors'   => apply_filters( 'webpc_server_errors', [] ),
-				'reasons'  => $this->get_reasons(),
-				'settings' => $this->plugin_data->get_plugin_settings(),
-				'api_url'  => self::FEEDBACK_API_URL,
+				'errors'         => apply_filters( 'webpc_server_errors', [] ),
+				'reasons'        => $this->get_reasons(),
+				'settings'       => $this->plugin_data->get_plugin_settings(),
+				'api_url'        => self::FEEDBACK_API_URL,
+				'plugin_version' => $this->plugin_info->get_plugin_version(),
 			]
 		);
 	}

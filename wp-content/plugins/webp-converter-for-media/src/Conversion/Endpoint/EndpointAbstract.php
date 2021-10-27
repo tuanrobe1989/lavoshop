@@ -10,13 +10,10 @@ use WebpConverter\PluginData;
 abstract class EndpointAbstract implements EndpointInterface {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginData
 	 */
 	protected $plugin_data;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 	}

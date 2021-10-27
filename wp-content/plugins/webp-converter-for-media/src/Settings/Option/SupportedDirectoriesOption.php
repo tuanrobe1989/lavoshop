@@ -5,17 +5,24 @@ namespace WebpConverter\Settings\Option;
 use WebpConverter\Conversion\Directory\DirectoryFactory;
 
 /**
- * Handles data about "Supported directories" field in plugin settings.
+ * {@inheritdoc}
  */
 class SupportedDirectoriesOption extends OptionAbstract {
 
-	const LOADER_TYPE = 'dirs';
+	const OPTION_NAME = 'dirs';
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function get_priority(): int {
+		return 30;
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function get_name(): string {
-		return self::LOADER_TYPE;
+		return self::OPTION_NAME;
 	}
 
 	/**
@@ -41,28 +48,26 @@ class SupportedDirectoriesOption extends OptionAbstract {
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @return string[]
 	 */
 	public function get_values( array $settings ): array {
 		return ( new DirectoryFactory() )->get_directories();
 	}
 
 	/**
-	 * Returns default value of field.
+	 * {@inheritdoc}
 	 *
-	 * @param mixed[]|null $settings Plugin settings.
-	 *
-	 * @return string[] Default value of field.
+	 * @return string[]
 	 */
 	public function get_default_value( array $settings = null ): array {
 		return [ 'uploads' ];
 	}
 
 	/**
-	 * Returns default value of field when debugging.
+	 * {@inheritdoc}
 	 *
-	 * @param mixed[] $settings Plugin settings.
-	 *
-	 * @return string[] Default value of field for debug.
+	 * @return string[]
 	 */
 	public function get_value_for_debug( array $settings ): array {
 		return [ 'uploads' ];

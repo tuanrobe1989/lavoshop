@@ -3,17 +3,24 @@
 namespace WebpConverter\Settings\Option;
 
 /**
- * Handles data about "Images quality" field in plugin settings.
+ * {@inheritdoc}
  */
 class ImagesQualityOption extends OptionAbstract {
 
-	const LOADER_TYPE = 'quality';
+	const OPTION_NAME = 'quality';
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function get_priority(): int {
+		return 60;
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function get_name(): string {
-		return self::LOADER_TYPE;
+		return self::OPTION_NAME;
 	}
 
 	/**
@@ -39,6 +46,8 @@ class ImagesQualityOption extends OptionAbstract {
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @return string[]
 	 */
 	public function get_values( array $settings ): array {
 		return [

@@ -5,12 +5,20 @@ namespace WebpConverter\Error\Detector;
 use WebpConverter\Conversion\Format\WebpFormat;
 use WebpConverter\Conversion\OutputPath;
 use WebpConverter\Error\Notice\BypassingApacheNotice;
+use WebpConverter\Error\Notice\ErrorNotice;
+use WebpConverter\Error\Notice\PassthruNotWorkingNotice;
 use WebpConverter\Error\Notice\RewritesCachedNotice;
 use WebpConverter\Error\Notice\RewritesNotExecutedNotice;
 use WebpConverter\Error\Notice\RewritesNotWorkingNotice;
 use WebpConverter\Helper\FileLoader;
+use WebpConverter\Loader\HtaccessLoader;
 use WebpConverter\Loader\LoaderAbstract;
+use WebpConverter\Loader\PassthruLoader;
 use WebpConverter\PluginData;
+use WebpConverter\PluginInfo;
+use WebpConverter\Settings\Option\LoaderTypeOption;
+use WebpConverter\Settings\Option\OutputFormatsOption;
+use WebpConverter\Settings\Option\SupportedDirectoriesOption;
 
 /**
  * Checks for configuration errors about non-working HTTP rewrites.
@@ -21,18 +29,27 @@ class RewritesErrorsDetector implements ErrorDetector {
 	const PATH_SOURCE_FILE_WEBP   = '/assets/img/icon-test.webp';
 	const PATH_OUTPUT_FILE_PNG    = '/webp-converter-for-media-test.png';
 	const PATH_OUTPUT_FILE_PNG2   = '/webp-converter-for-media-test.png2';
-	const URL_DEBUG_HTACCESS_FILE = WEBPC_URL . '/assets/img/debug-htaccess/icon-test.png';
+	const URL_DEBUG_HTACCESS_FILE = 'assets/img/debug-htaccess/icon-test.png';
 
 	/**
-	 * @var PluginData .
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
 	/**
-	 * @param PluginData $plugin_data .
+	 * @var FileLoader
 	 */
-	public function __construct( PluginData $plugin_data ) {
+	private $file_loader;
+
+	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data, FileLoader $file_loader = null ) {
+		$this->plugin_info = $plugin_info;
 		$this->plugin_data = $plugin_data;
+		$this->file_loader = $file_loader ?: new FileLoader( $plugin_info, $plugin_data );
 	}
 
 	/**
@@ -40,29 +57,52 @@ class RewritesErrorsDetector implements ErrorDetector {
 	 */
 	public function get_error() {
 		$settings = $this->plugin_data->get_plugin_settings();
-		if ( ! $settings['dirs'] || ! $settings['output_formats'] ) {
+		if ( ! $settings[ SupportedDirectoriesOption::OPTION_NAME ] || ! $settings[ OutputFormatsOption::OPTION_NAME ] ) {
 			return null;
 		}
 
-		$error = null;
 		$this->convert_images_for_debug();
+
 		do_action( LoaderAbstract::ACTION_NAME, true, true );
-
-		if ( $this->if_redirects_are_works() !== true ) {
-			if ( $this->if_bypassing_apache_is_active() === true ) {
-				$error = new BypassingApacheNotice();
-			} elseif ( $this->if_htaccess_can_be_overwritten() !== true ) {
-				$error = new RewritesNotExecutedNotice();
-			} else {
-				$error = new RewritesNotWorkingNotice();
-			}
-		} elseif ( $this->if_redirects_are_cached() === true ) {
-			$error = new RewritesCachedNotice();
-		}
-
+		$error = $this->detect_rewrites_error();
 		do_action( LoaderAbstract::ACTION_NAME, true );
 
 		return $error;
+	}
+
+	/**
+	 * @return ErrorNotice|null
+	 */
+	private function detect_rewrites_error() {
+		$settings    = $this->plugin_data->get_plugin_settings();
+		$loader_type = $settings[ LoaderTypeOption::OPTION_NAME ] ?? '';
+
+		switch ( $loader_type ) {
+			case HtaccessLoader::LOADER_TYPE:
+				if ( $this->if_redirects_are_works() === true ) {
+					break;
+				}
+
+				if ( $this->if_bypassing_apache_is_active() === true ) {
+					return new BypassingApacheNotice( $this->plugin_info );
+				} elseif ( $this->if_htaccess_can_be_overwritten() !== true ) {
+					return new RewritesNotExecutedNotice();
+				}
+
+				return new RewritesNotWorkingNotice();
+			case PassthruLoader::LOADER_TYPE:
+				if ( $this->if_redirects_are_works() === true ) {
+					break;
+				}
+
+				return new PassthruNotWorkingNotice();
+		}
+
+		if ( $this->if_redirects_are_cached() === true ) {
+			return new RewritesCachedNotice();
+		}
+
+		return null;
 	}
 
 	/**
@@ -79,17 +119,17 @@ class RewritesErrorsDetector implements ErrorDetector {
 		}
 
 		if ( ! file_exists( $path_file_png ) || ! file_exists( $path_file_png2 ) ) {
-			copy( WEBPC_PATH . self::PATH_SOURCE_FILE_PNG, $path_file_png );
-			copy( WEBPC_PATH . self::PATH_SOURCE_FILE_PNG, $path_file_png2 );
+			copy( $this->plugin_info->get_plugin_directory_path() . self::PATH_SOURCE_FILE_PNG, $path_file_png );
+			copy( $this->plugin_info->get_plugin_directory_path() . self::PATH_SOURCE_FILE_PNG, $path_file_png2 );
 		}
 
 		if ( ( $output_path = OutputPath::get_path( $path_file_png, true, WebpFormat::FORMAT_EXTENSION ) )
 			&& ! file_exists( $output_path ) ) {
-			copy( WEBPC_PATH . self::PATH_SOURCE_FILE_WEBP, $output_path );
+			copy( $this->plugin_info->get_plugin_directory_path() . self::PATH_SOURCE_FILE_WEBP, $output_path );
 		}
 		if ( ( $output_path = OutputPath::get_path( $path_file_png2, true, WebpFormat::FORMAT_EXTENSION ) )
 			&& ! file_exists( $output_path ) ) {
-			copy( WEBPC_PATH . self::PATH_SOURCE_FILE_WEBP, $output_path );
+			copy( $this->plugin_info->get_plugin_directory_path() . self::PATH_SOURCE_FILE_WEBP, $output_path );
 		}
 	}
 
@@ -103,12 +143,11 @@ class RewritesErrorsDetector implements ErrorDetector {
 		$uploads_url = apply_filters( 'webpc_dir_url', '', 'uploads' );
 		$ver_param   = sprintf( 'ver=%s', time() );
 
-		$file_size = FileLoader::get_file_size_by_path(
+		$file_size = $this->file_loader->get_file_size_by_path(
 			$uploads_dir . self::PATH_OUTPUT_FILE_PNG
 		);
-		$file_webp = FileLoader::get_file_size_by_url(
+		$file_webp = $this->file_loader->get_file_size_by_url(
 			$uploads_url . self::PATH_OUTPUT_FILE_PNG,
-			$this->plugin_data,
 			true,
 			$ver_param
 		);
@@ -122,9 +161,8 @@ class RewritesErrorsDetector implements ErrorDetector {
 	 * @return bool Verification status.
 	 */
 	private function if_htaccess_can_be_overwritten(): bool {
-		$file_size = FileLoader::get_file_size_by_url(
-			self::URL_DEBUG_HTACCESS_FILE,
-			$this->plugin_data
+		$file_size = $this->file_loader->get_file_size_by_url(
+			$this->plugin_info->get_plugin_directory_url() . self::URL_DEBUG_HTACCESS_FILE
 		);
 
 		return ( $file_size === 0 );
@@ -139,15 +177,13 @@ class RewritesErrorsDetector implements ErrorDetector {
 		$uploads_url = apply_filters( 'webpc_dir_url', '', 'uploads' );
 		$ver_param   = sprintf( '&?ver=%s', time() );
 
-		$file_png  = FileLoader::get_file_size_by_url(
+		$file_png  = $this->file_loader->get_file_size_by_url(
 			$uploads_url . self::PATH_OUTPUT_FILE_PNG,
-			$this->plugin_data,
 			true,
 			$ver_param
 		);
-		$file_png2 = FileLoader::get_file_size_by_url(
+		$file_png2 = $this->file_loader->get_file_size_by_url(
 			$uploads_url . self::PATH_OUTPUT_FILE_PNG2,
-			$this->plugin_data,
 			true,
 			$ver_param
 		);
@@ -164,15 +200,13 @@ class RewritesErrorsDetector implements ErrorDetector {
 		$uploads_url = apply_filters( 'webpc_dir_url', '', 'uploads' );
 		$ver_param   = sprintf( 'ver=%s', time() );
 
-		$file_webp     = FileLoader::get_file_size_by_url(
+		$file_webp     = $this->file_loader->get_file_size_by_url(
 			$uploads_url . self::PATH_OUTPUT_FILE_PNG,
-			$this->plugin_data,
 			true,
 			$ver_param
 		);
-		$file_original = FileLoader::get_file_size_by_url(
+		$file_original = $this->file_loader->get_file_size_by_url(
 			$uploads_url . self::PATH_OUTPUT_FILE_PNG,
-			$this->plugin_data,
 			false,
 			$ver_param
 		);

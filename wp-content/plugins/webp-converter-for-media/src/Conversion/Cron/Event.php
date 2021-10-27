@@ -4,6 +4,7 @@ namespace WebpConverter\Conversion\Cron;
 
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginData;
+use WebpConverter\Settings\Option\ExtraFeaturesOption;
 
 /**
  * Adds cron event that converts images.
@@ -11,13 +12,10 @@ use WebpConverter\PluginData;
 class Event implements HookableInterface {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 	}
@@ -40,7 +38,7 @@ class Event implements HookableInterface {
 	public function add_cron_event() {
 		if ( wp_next_scheduled( self::CRON_ACTION )
 			|| ! ( $settings = $this->plugin_data->get_plugin_settings() )
-			|| ! in_array( 'cron_enabled', $settings['features'] ) ) {
+			|| ! in_array( ExtraFeaturesOption::OPTION_VALUE_CRON_ENABLED, $settings[ ExtraFeaturesOption::OPTION_NAME ] ) ) {
 			return;
 		}
 

@@ -3,17 +3,24 @@
 namespace WebpConverter\Settings\Option;
 
 /**
- * Handles data about "Supported files extensions" field in plugin settings.
+ * {@inheritdoc}
  */
 class SupportedExtensionsOption extends OptionAbstract {
 
-	const LOADER_TYPE = 'extensions';
+	const OPTION_NAME = 'extensions';
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function get_priority(): int {
+		return 20;
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function get_name(): string {
-		return self::LOADER_TYPE;
+		return self::OPTION_NAME;
 	}
 
 	/**
@@ -32,6 +39,8 @@ class SupportedExtensionsOption extends OptionAbstract {
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @return string[]
 	 */
 	public function get_values( array $settings ): array {
 		return [
@@ -43,22 +52,18 @@ class SupportedExtensionsOption extends OptionAbstract {
 	}
 
 	/**
-	 * Returns default value of field.
+	 * {@inheritdoc}
 	 *
-	 * @param mixed[]|null $settings Plugin settings.
-	 *
-	 * @return string[] Default value of field.
+	 * @return string[]
 	 */
 	public function get_default_value( array $settings = null ): array {
 		return [ 'jpg', 'jpeg', 'png' ];
 	}
 
 	/**
-	 * Returns default value of field when debugging.
+	 * {@inheritdoc}
 	 *
-	 * @param mixed[] $settings Plugin settings.
-	 *
-	 * @return string[] Default value of field for debug.
+	 * @return string[]
 	 */
 	public function get_value_for_debug( array $settings ): array {
 		return [ 'png2', 'png' ];

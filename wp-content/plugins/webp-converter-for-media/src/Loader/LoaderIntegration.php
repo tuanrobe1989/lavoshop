@@ -16,9 +16,6 @@ class LoaderIntegration implements HookableInterface {
 	 */
 	private $loader;
 
-	/**
-	 * @param LoaderInterface $loader .
-	 */
 	public function __construct( LoaderInterface $loader ) {
 		$this->loader = $loader;
 	}
@@ -54,9 +51,7 @@ class LoaderIntegration implements HookableInterface {
 	 * @internal
 	 */
 	public function refresh_loader( bool $is_active, bool $is_debug = false ) {
-		$has_errors = ( apply_filters( 'webpc_server_errors', [], true ) !== [] );
-
-		if ( ( ( $is_active && ! $has_errors ) || $is_debug ) && $this->loader->is_active_loader() ) {
+		if ( ( $is_active || $is_debug ) && $this->loader->is_active_loader() ) {
 			$this->loader->activate_loader( $is_debug );
 		} else {
 			$this->loader->deactivate_loader();

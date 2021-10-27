@@ -32,7 +32,10 @@ class SubscribersRepository extends Repository {
     'last_subscribed_at',
   ];
 
-  public function __construct(EntityManager $entityManager, WPFunctions $wp) {
+  public function __construct(
+    EntityManager $entityManager,
+    WPFunctions $wp
+  ) {
     $this->wp = $wp;
     parent::__construct($entityManager);
   }
@@ -331,5 +334,20 @@ class SubscribersRepository extends Repository {
     // Update last engagement for human (and also unknown) user agent
     $subscriberEntity->setLastEngagementAt($now);
     $this->flush();
+  }
+
+  /**
+   * @param array $ids
+   * @return string[]
+   */
+  public function getUndeletedSubscribersEmailsByIds(array $ids): array {
+    return $this->entityManager->createQueryBuilder()
+      ->select('s.email')
+      ->from(SubscriberEntity::class, 's')
+      ->where('s.deletedAt IS NULL')
+      ->andWhere('s.id IN (:ids)')
+      ->setParameter('ids', $ids)
+      ->getQuery()
+      ->getArrayResult();
   }
 }

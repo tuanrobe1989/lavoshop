@@ -7,7 +7,9 @@ use WebpConverter\Conversion\Endpoint\PathsEndpoint;
 use WebpConverter\Conversion\Endpoint\RegenerateEndpoint;
 use WebpConverter\Helper\ViewLoader;
 use WebpConverter\Loader\LoaderAbstract;
-use WebpConverter\Settings\Option\OptionFactory;
+use WebpConverter\PluginData;
+use WebpConverter\PluginInfo;
+use WebpConverter\Settings\PluginOptions;
 use WebpConverter\Settings\SettingsSave;
 
 /**
@@ -16,6 +18,21 @@ use WebpConverter\Settings\SettingsSave;
 class SettingsPage extends PageAbstract {
 
 	const PAGE_VIEW_PATH = 'views/settings.php';
+
+	/**
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
+	 * @var PluginData
+	 */
+	private $plugin_data;
+
+	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data ) {
+		$this->plugin_info = $plugin_info;
+		$this->plugin_data = $plugin_data;
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -30,12 +47,12 @@ class SettingsPage extends PageAbstract {
 	public function show_page_view() {
 		( new SettingsSave( $this->plugin_data ) )->save_settings();
 
-		ViewLoader::load_view(
+		( new ViewLoader( $this->plugin_info ) )->load_view(
 			self::PAGE_VIEW_PATH,
 			[
 				'errors_messages'    => apply_filters( 'webpc_server_errors_messages', [] ),
 				'errors_codes'       => apply_filters( 'webpc_server_errors', [] ),
-				'options'            => ( new OptionFactory() )->get_options(),
+				'options'            => ( new PluginOptions() )->get_options(),
 				'submit_value'       => SettingsSave::SUBMIT_VALUE,
 				'settings_url'       => sprintf(
 					'%1$s&%2$s=%3$s',

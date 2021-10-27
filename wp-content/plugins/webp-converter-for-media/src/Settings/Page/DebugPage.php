@@ -7,6 +7,8 @@ use WebpConverter\Error\Detector\RewritesErrorsDetector;
 use WebpConverter\Helper\FileLoader;
 use WebpConverter\Helper\ViewLoader;
 use WebpConverter\Loader\LoaderAbstract;
+use WebpConverter\PluginData;
+use WebpConverter\PluginInfo;
 use WebpConverter\Settings\SettingsSave;
 
 /**
@@ -15,6 +17,21 @@ use WebpConverter\Settings\SettingsSave;
 class DebugPage extends PageAbstract {
 
 	const PAGE_VIEW_PATH = 'views/settings-debug.php';
+
+	/**
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
+	 * @var FileLoader
+	 */
+	private $file_loader;
+
+	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data, FileLoader $file_loader = null ) {
+		$this->plugin_info = $plugin_info;
+		$this->file_loader = $file_loader ?: new FileLoader( $plugin_info, $plugin_data );
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -33,7 +50,7 @@ class DebugPage extends PageAbstract {
 
 		do_action( LoaderAbstract::ACTION_NAME, true, true );
 
-		ViewLoader::load_view(
+		( new ViewLoader( $this->plugin_info ) )->load_view(
 			self::PAGE_VIEW_PATH,
 			[
 				'settings_url'          => sprintf(
@@ -46,33 +63,29 @@ class DebugPage extends PageAbstract {
 					'%s&action=server',
 					PageIntegration::get_settings_page_url()
 				),
-				'size_png_path'         => FileLoader::get_file_size_by_path(
+				'size_png_path'         => $this->file_loader->get_file_size_by_path(
 					$uploads_path . RewritesErrorsDetector::PATH_OUTPUT_FILE_PNG
 				),
-				'size_png2_path'        => FileLoader::get_file_size_by_path(
+				'size_png2_path'        => $this->file_loader->get_file_size_by_path(
 					$uploads_path . RewritesErrorsDetector::PATH_OUTPUT_FILE_PNG2
 				),
-				'size_png_url'          => FileLoader::get_file_size_by_url(
+				'size_png_url'          => $this->file_loader->get_file_size_by_url(
 					$uploads_url . RewritesErrorsDetector::PATH_OUTPUT_FILE_PNG,
-					$this->plugin_data,
 					false,
 					$ver_param
 				),
-				'size_png2_url'         => FileLoader::get_file_size_by_url(
+				'size_png2_url'         => $this->file_loader->get_file_size_by_url(
 					$uploads_url . RewritesErrorsDetector::PATH_OUTPUT_FILE_PNG2,
-					$this->plugin_data,
 					false,
 					$ver_param
 				),
-				'size_png_as_webp_url'  => FileLoader::get_file_size_by_url(
+				'size_png_as_webp_url'  => $this->file_loader->get_file_size_by_url(
 					$uploads_url . RewritesErrorsDetector::PATH_OUTPUT_FILE_PNG,
-					$this->plugin_data,
 					true,
 					$ver_param
 				),
-				'size_png2_as_webp_url' => FileLoader::get_file_size_by_url(
+				'size_png2_as_webp_url' => $this->file_loader->get_file_size_by_url(
 					$uploads_url . RewritesErrorsDetector::PATH_OUTPUT_FILE_PNG2,
-					$this->plugin_data,
 					true,
 					$ver_param
 				),

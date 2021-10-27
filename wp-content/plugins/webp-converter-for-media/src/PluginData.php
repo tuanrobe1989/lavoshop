@@ -2,7 +2,7 @@
 
 namespace WebpConverter;
 
-use WebpConverter\Settings\Option\OptionFactory;
+use WebpConverter\Settings\PluginOptions;
 
 /**
  * Manages plugin values.
@@ -12,7 +12,7 @@ class PluginData {
 	/**
 	 * Handler of class with plugin settings.
 	 *
-	 * @var OptionFactory
+	 * @var PluginOptions
 	 */
 	private $settings_object;
 
@@ -31,7 +31,7 @@ class PluginData {
 	private $debug_settings = null;
 
 	public function __construct() {
-		$this->settings_object = new OptionFactory();
+		$this->settings_object = new PluginOptions();
 	}
 
 	/**

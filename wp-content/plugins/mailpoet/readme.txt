@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.3
 Tested up to: 5.8
-Stable tag: 3.69.0
+Stable tag: 3.70.0
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -183,6 +183,33 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.70.0 - 2021-09-20 =
+* Added: filter to alter mailpoet database table prefix;
+* Added: bounced metric on the Email Stats page;
+* Improved: update lucatume/wp-browser;
+* Improved: MailPoet form security against spambots;
+* Improved: coding standards;
+* Improved: refactor to Doctrine;
+* Improved: code comment on warning;
+* Fixed: machine-opened metric on the Email Stats page;
+* Fixed: flaky integration test;
+* Fixed: "Updated at" in the System Status shows time with incorrect time zone;
+* Fixed: horizontal scrollbar in form style settings sidebar.
+
+= 3.69.1 - 2021-09-13 =
+* Added: saving detailed bounce stats;
+* Added: show last engagement date on the Subscriber page;
+* Added: notice when creating opens-related segment;
+* Added: new machine-opened and # of machine-opens segments;
+* Changed: throttle also logged-in users when signing up multiple times;
+* Changed: show CAPTCHA on the first signup, instead on the second;
+* Changed: performance of the queries used to sync WooCommerce data;
+* Changed: display more specific error message for banned users;
+* Fixed: an error when using MySQL in strict mode;
+* Fixed: compatibility with WooCommerce Payments new checkout experience;
+* Fixed: segment counter when using multiple text input fields;
+* Fixed: missing space after signup checkbox on the checkout.
 
 = 3.69.0 - 2021-09-07 =
 * Added: saving subscribers' last engagement date;

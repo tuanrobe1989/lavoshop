@@ -5,6 +5,7 @@ namespace WebpConverter\Notice;
 use WebpConverter\Helper\OptionsAccess;
 use WebpConverter\Helper\ViewLoader;
 use WebpConverter\HookableInterface;
+use WebpConverter\PluginInfo;
 use WebpConverter\Settings\AdminAssets;
 
 /**
@@ -13,17 +14,18 @@ use WebpConverter\Settings\AdminAssets;
 class NoticeIntegration implements HookableInterface {
 
 	/**
-	 * Object of notice.
-	 *
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
 	 * @var NoticeInterface
 	 */
 	private $notice;
 
-	/**
-	 * @param NoticeInterface $notice .
-	 */
-	public function __construct( NoticeInterface $notice ) {
-		$this->notice = $notice;
+	public function __construct( PluginInfo $plugin_info, NoticeInterface $notice ) {
+		$this->plugin_info = $plugin_info;
+		$this->notice      = $notice;
 	}
 
 	/**
@@ -48,7 +50,7 @@ class NoticeIntegration implements HookableInterface {
 			return;
 		}
 
-		( new AdminAssets() )->init_hooks();
+		( new AdminAssets( $this->plugin_info ) )->init_hooks();
 		if ( ! is_multisite() ) {
 			add_action( 'admin_notices', [ $this, 'load_notice' ] );
 		} else {
@@ -63,7 +65,7 @@ class NoticeIntegration implements HookableInterface {
 	 * @internal
 	 */
 	public function load_notice() {
-		ViewLoader::load_view(
+		( new ViewLoader( $this->plugin_info ) )->load_view(
 			$this->notice->get_output_path(),
 			$this->notice->get_vars_for_view()
 		);

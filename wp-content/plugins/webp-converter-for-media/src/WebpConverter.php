@@ -17,7 +17,7 @@ use WebpConverter\Settings\Page;
  */
 class WebpConverter {
 
-	public function __construct() {
+	public function __construct( PluginInfo $plugin_info ) {
 		$plugin_data = new PluginData();
 
 		( new Action\ConvertAttachment( $plugin_data ) )->init_hooks();
@@ -29,25 +29,26 @@ class WebpConverter {
 		( new Conversion\DirectoryFiles( $plugin_data ) )->init_hooks();
 		( new Endpoint\EndpointIntegration( new Endpoint\PathsEndpoint( $plugin_data ) ) )->init_hooks();
 		( new Endpoint\EndpointIntegration( new Endpoint\RegenerateEndpoint( $plugin_data ) ) )->init_hooks();
-		( new Conversion\SkipExists( $plugin_data ) )->init_hooks();
+		( new Conversion\SkipConvertedPaths( $plugin_data ) )->init_hooks();
+		( new Conversion\SkipExcludedPaths() )->init_hooks();
 		( new Conversion\SkipLarger( $plugin_data ) )->init_hooks();
 		( new Cron\Event( $plugin_data ) )->init_hooks();
 		( new Cron\Schedules() )->init_hooks();
-		( new ErrorDetectorAggregator( $plugin_data ) )->init_hooks();
-		( new Notice\NoticeFactory() )->init_hooks();
-		( new Loader\LoaderIntegration( new Loader\HtaccessLoader( $plugin_data ) ) )->init_hooks();
-		( new Loader\LoaderIntegration( new Loader\PassthruLoader( $plugin_data ) ) )->init_hooks();
+		( new ErrorDetectorAggregator( $plugin_info, $plugin_data ) )->init_hooks();
+		( new Notice\NoticeFactory( $plugin_info ) )->init_hooks();
+		( new Loader\LoaderIntegration( new Loader\HtaccessLoader( $plugin_info, $plugin_data ) ) )->init_hooks();
+		( new Loader\LoaderIntegration( new Loader\PassthruLoader( $plugin_info, $plugin_data ) ) )->init_hooks();
 		( new Media\Delete() )->init_hooks();
 		( new Media\Upload( $plugin_data ) )->init_hooks();
-		( new Plugin\Activation() )->init_hooks();
-		( new Plugin\Deactivation() )->init_hooks();
-		( new Plugin\Deactivation\Modal( $plugin_data ) )->init_hooks();
-		( new Plugin\Links() )->init_hooks();
-		( new Plugin\Uninstall() )->init_hooks();
-		( new Plugin\Update() )->init_hooks();
-		( new Page\PageIntegration() )
-			->set_page_integration( new Page\SettingsPage( $plugin_data ) )
-			->set_page_integration( new Page\DebugPage( $plugin_data ) )
+		( new Plugin\Activation( $plugin_info ) )->init_hooks();
+		( new Plugin\Deactivation( $plugin_info ) )->init_hooks();
+		( new Plugin\Deactivation\Modal( $plugin_info, $plugin_data ) )->init_hooks();
+		( new Plugin\Links( $plugin_info ) )->init_hooks();
+		( new Plugin\Uninstall( $plugin_info ) )->init_hooks();
+		( new Plugin\Update( $plugin_info ) )->init_hooks();
+		( new Page\PageIntegration( $plugin_info ) )
+			->set_page_integration( new Page\SettingsPage( $plugin_info, $plugin_data ) )
+			->set_page_integration( new Page\DebugPage( $plugin_info, $plugin_data ) )
 			->init_hooks();
 	}
 }

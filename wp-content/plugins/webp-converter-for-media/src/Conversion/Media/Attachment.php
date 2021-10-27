@@ -3,6 +3,7 @@
 namespace WebpConverter\Conversion\Media;
 
 use WebpConverter\PluginData;
+use WebpConverter\Settings\Option\SupportedExtensionsOption;
 
 /**
  * Returns all image paths for attachment.
@@ -10,7 +11,7 @@ use WebpConverter\PluginData;
 class Attachment {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
@@ -28,9 +29,6 @@ class Attachment {
 	 */
 	private $image_sizes;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 		$this->upload_dir  = wp_upload_dir();
@@ -66,14 +64,12 @@ class Attachment {
 
 		$extension = strtolower( pathinfo( $metadata['file'], PATHINFO_EXTENSION ) );
 		if ( ! isset( $metadata['file'] )
-			|| ! in_array( $extension, $settings['extensions'] ) ) {
+			|| ! in_array( $extension, $settings[ SupportedExtensionsOption::OPTION_NAME ] ) ) {
 			return $list;
 		}
 
 		$paths = $this->get_paths_by_sizes( $post_id, $metadata['file'] );
-		$paths = apply_filters( 'webpc_attachment_paths', $paths, $post_id );
-		$paths = apply_filters( 'webpc_files_paths', $paths, false );
-		return $paths;
+		return apply_filters( 'webpc_attachment_paths', $paths, $post_id );
 	}
 
 	/**

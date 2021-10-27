@@ -46,12 +46,16 @@ class FormatFactory {
 	/**
 	 * Returns list of available output formats.
 	 *
-	 * @param string $conversion_method Name of conversion method.
+	 * @param string|null $conversion_method Name of conversion method.
 	 *
 	 * @return string[] Extensions of output formats with labels.
 	 */
-	public function get_available_formats( string $conversion_method ): array {
+	public function get_available_formats( string $conversion_method = null ): array {
 		$values = [];
+		if ( $conversion_method === null ) {
+			return $values;
+		}
+
 		foreach ( $this->formats as $format ) {
 			if ( ! $format->is_available( $conversion_method ) ) {
 				continue;

@@ -4,6 +4,7 @@ namespace WebpConverter\Helper;
 
 use WebpConverter\Loader\PassthruLoader;
 use WebpConverter\PluginData;
+use WebpConverter\PluginInfo;
 
 /**
  * Returns size of image downloaded based on server path or URL.
@@ -11,22 +12,36 @@ use WebpConverter\PluginData;
 class FileLoader {
 
 	/**
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
+	 * @var PluginData
+	 */
+	private $plugin_data;
+
+	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data ) {
+		$this->plugin_info = $plugin_info;
+		$this->plugin_data = $plugin_data;
+	}
+
+	/**
 	 * Checks size of file by sending request using active image loader.
 	 *
-	 * @param string     $url         URL of image.
-	 * @param PluginData $plugin_data .
-	 * @param bool       $set_headers Whether to send headers to confirm that browser supports WebP?
-	 * @param string     $extra_param Additional GET param.
+	 * @param string $url         URL of image.
+	 * @param bool   $set_headers Whether to send headers to confirm that browser supports WebP?
+	 * @param string $extra_param Additional GET param.
 	 *
 	 * @return int Size of retrieved file.
 	 */
-	public static function get_file_size_by_url( string $url, PluginData $plugin_data, bool $set_headers = true, string $extra_param = '' ): int {
+	public function get_file_size_by_url( string $url, bool $set_headers = true, string $extra_param = '' ): int {
 		$headers = [
 			'Accept: image/webp',
-			'Referer: ' . WEBPC_URL,
+			'Referer: ' . $this->plugin_info->get_plugin_directory_url(),
 		];
 
-		$image_url = ( new PassthruLoader( $plugin_data ) )->update_image_urls( $url, true );
+		$image_url = ( new PassthruLoader( $this->plugin_info, $this->plugin_data ) )->update_image_urls( $url, true );
 		if ( $extra_param ) {
 			$image_url .= ( ( strpos( $image_url, '?' ) !== false ) ? '&' : '?' ) . $extra_param;
 		}
@@ -41,7 +56,7 @@ class FileLoader {
 	 *
 	 * @return int Size of file.
 	 */
-	public static function get_file_size_by_path( string $path ): int {
+	public function get_file_size_by_path( string $path ): int {
 		return ( file_exists( $path ) ) ? ( filesize( $path ) ?: 0 ) : 0;
 	}
 
@@ -53,7 +68,7 @@ class FileLoader {
 	 *
 	 * @return int Size of retrieved file.
 	 */
-	private static function get_file_size_for_loaded_file( string $url, array $headers ): int {
+	private function get_file_size_for_loaded_file( string $url, array $headers ): int {
 		foreach ( wp_get_nocache_headers() as $header_key => $header_value ) {
 			$headers[] = sprintf( '%s: %s', $header_key, $header_value );
 		}

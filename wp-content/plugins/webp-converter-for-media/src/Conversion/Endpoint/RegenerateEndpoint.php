@@ -38,6 +38,7 @@ class RegenerateEndpoint extends EndpointAbstract {
 	public function get_route_response( \WP_REST_Request $request ) {
 		$params = $request->get_params();
 		$data   = $this->convert_images( $params['paths'] );
+
 		if ( $data !== false ) {
 			return new \WP_REST_Response(
 				$data,

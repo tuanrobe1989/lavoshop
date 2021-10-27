@@ -3,6 +3,7 @@
 namespace WebpConverter\Conversion\Method;
 
 use WebpConverter\PluginData;
+use WebpConverter\Settings\Option\ConversionMethodOption;
 
 /**
  * Initializes image conversion using active image conversion method.
@@ -10,13 +11,10 @@ use WebpConverter\PluginData;
 class MethodIntegrator {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 	}
@@ -53,7 +51,7 @@ class MethodIntegrator {
 			return null;
 		}
 
-		$method_key = $this->plugin_data->get_plugin_settings()['method'] ?? '';
+		$method_key = $this->plugin_data->get_plugin_settings()[ ConversionMethodOption::OPTION_NAME ] ?? null;
 		$methods    = ( new MethodFactory() )->get_methods_objects();
 		foreach ( $methods as $method_name => $method ) {
 			if ( $method_key === $method_name ) {

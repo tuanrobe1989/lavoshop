@@ -12,13 +12,10 @@ use WebpConverter\PluginData;
 class ConvertAttachment implements HookableInterface {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 	}

@@ -4,6 +4,7 @@ namespace WebpConverter\Conversion\Media;
 
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginData;
+use WebpConverter\Settings\Option\ExtraFeaturesOption;
 
 /**
  * Initializes image conversion when uploading images to media library.
@@ -11,7 +12,7 @@ use WebpConverter\PluginData;
 class Upload implements HookableInterface {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
@@ -22,9 +23,6 @@ class Upload implements HookableInterface {
 	 */
 	private $converted_paths = [];
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 	}
@@ -52,7 +50,6 @@ class Upload implements HookableInterface {
 
 		$paths = $this->get_sizes_paths( $data );
 		$paths = apply_filters( 'webpc_attachment_paths', $paths, $attachment_id );
-		$paths = apply_filters( 'webpc_files_paths', $paths, false );
 
 		$paths                 = array_diff( $paths, $this->converted_paths );
 		$this->converted_paths = array_merge( $this->converted_paths, $paths );
@@ -106,7 +103,7 @@ class Upload implements HookableInterface {
 	private function init_conversion( array $paths ) {
 		$settings = $this->plugin_data->get_plugin_settings();
 
-		if ( in_array( 'cron_conversion', $settings['features'] ) ) {
+		if ( in_array( ExtraFeaturesOption::OPTION_VALUE_CRON_CONVERSION, $settings[ ExtraFeaturesOption::OPTION_NAME ] ) ) {
 			wp_schedule_single_event( ( time() + 1 ), 'webpc_convert_paths', [ $paths ] );
 		} else {
 			do_action( 'webpc_convert_paths', $paths );

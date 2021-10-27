@@ -19,9 +19,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.0.29';
+    public static $version = '3.1.1';
 
-    public static $nslPROMinVersion = '3.0.29';
+    public static $nslPROMinVersion = '3.1.1';
 
     public static $proxyPage = false;
 
@@ -178,6 +178,7 @@ class NextendSocialLogin {
             'buddypress_register_button'       => 'bp_before_account_details_fields',
             'buddypress_register_button_align' => 'left',
             'buddypress_register_button_style' => 'default',
+            'buddypress_register_form_layout'  => 'default',
             'buddypress_login'                 => 'show',
             'buddypress_login_form_layout'     => 'default',
             'buddypress_login_button_style'    => 'default',
@@ -215,13 +216,12 @@ class NextendSocialLogin {
 
             'userpro_show_login_form'            => 'show',
             'userpro_show_register_form'         => 'show',
-            'userpro_form_button_align'          => 'left',
             'userpro_login_form_button_style'    => 'default',
-            'userpro_register_form_button_style' => 'default',
             'userpro_login_form_layout'          => 'below',
+            'userpro_register_form_button_style' => 'default',
             'userpro_register_form_layout'       => 'below',
+            'userpro_form_button_align'          => 'left',
 
-            'ultimatemember_form_button_align'          => 'left',
             'ultimatemember_login'                      => 'after',
             'ultimatemember_login_form_button_style'    => 'default',
             'ultimatemember_login_form_layout'          => 'below-separator',
@@ -229,6 +229,15 @@ class NextendSocialLogin {
             'ultimatemember_register_form_button_style' => 'default',
             'ultimatemember_register_form_layout'       => 'below-separator',
             'ultimatemember_account_details'            => 'after',
+            'ultimatemember_form_button_align'          => 'left',
+
+            'edd_login'                      => 'after',
+            'edd_login_form_button_style'    => 'default',
+            'edd_login_form_layout'          => 'default',
+            'edd_register'                   => 'after',
+            'edd_register_form_button_style' => 'default',
+            'edd_register_form_layout'       => 'default',
+            'edd_form_button_align'          => 'left',
 
             'admin_bar_roles' => array(),
         ));
@@ -432,6 +441,17 @@ class NextendSocialLogin {
 
             // Fix for Jetpack SSO
             add_filter('jetpack_sso_bypass_login_forward_wpcom', '__return_false');
+
+            /**
+             * Fix: our autologin after the registration prevents WooRewards (MyRewards) plugin from awarding the points for the registration
+             * so we need to make our autologin happen after WooRewards have already awarded the points. They use 999999 priority.
+             * @url https://plugins.longwatchstudio.com/product/woorewards/
+             */
+            if (class_exists('LWS_WooRewards')) {
+                add_filter('nsl_autologin_priority', function () {
+                    return 10000000;
+                });
+            }
         }
     }
 
@@ -614,7 +634,7 @@ class NextendSocialLogin {
 
     public static function alternate_login_page_template_redirect() {
 
-        $isAlternatePage = ((self::getProxyPage() !== false && is_page(self::getProxyPage())) || (self::getRegisterFlowPage() !== false && is_page(self::getRegisterFlowPage())));
+        $isAlternatePage = ((self::getProxyPage() !== false && (is_page(self::getProxyPage()) || get_permalink() === get_permalink(self::getProxyPage()))) || (self::getRegisterFlowPage() !== false && (is_page(self::getRegisterFlowPage()) || get_permalink() === get_permalink(self::getRegisterFlowPage()))));
         if ($isAlternatePage) {
             nocache_headers();
 
@@ -707,6 +727,7 @@ class NextendSocialLogin {
 
             self::$providers[$_REQUEST['loginSocial']]->connect();
         }
+
     }
 
     private static function onInterimLoginSuccess() {
@@ -1027,7 +1048,7 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
         return $currentUrl;
     }
 
-    public static function getLoginUrl($scheme = null) {
+    public static function getLoginUrl($scheme = 'login') {
         static $alternateLoginPage = null;
         if ($alternateLoginPage === null) {
             $proxyPage = self::getProxyPage();
@@ -1367,6 +1388,7 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
 
         return $id;
     }
+
 }
 
 NextendSocialLogin::init();

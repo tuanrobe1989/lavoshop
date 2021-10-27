@@ -5,6 +5,7 @@ namespace WebpConverter\Settings\Page;
 use WebpConverter\HookableInterface;
 use WebpConverter\Notice\NoticeIntegration;
 use WebpConverter\Notice\WelcomeNotice;
+use WebpConverter\PluginInfo;
 use WebpConverter\Settings\AdminAssets;
 
 /**
@@ -13,6 +14,15 @@ use WebpConverter\Settings\AdminAssets;
 class PageIntegration implements HookableInterface {
 
 	const ADMIN_MENU_PAGE = 'webpc_admin_page';
+
+	/**
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	public function __construct( PluginInfo $plugin_info ) {
+		$this->plugin_info = $plugin_info;
+	}
 
 	/**
 	 * Objects of supported plugin settings pages.
@@ -131,7 +141,7 @@ class PageIntegration implements HookableInterface {
 	 * @internal
 	 */
 	public function load_scripts_for_page() {
-		( new NoticeIntegration( new WelcomeNotice() ) )->set_disable_value();
-		( new AdminAssets() )->init_hooks();
+		( new NoticeIntegration( $this->plugin_info, new WelcomeNotice() ) )->set_disable_value();
+		( new AdminAssets( $this->plugin_info ) )->init_hooks();
 	}
 }

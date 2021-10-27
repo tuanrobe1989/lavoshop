@@ -10,27 +10,24 @@ abstract class OptionAbstract implements OptionInterface {
 	const OPTION_TYPE_CHECKBOX = 'checkbox';
 	const OPTION_TYPE_RADIO    = 'radio';
 	const OPTION_TYPE_QUALITY  = 'quality';
+	const OPTION_TYPE_INPUT    = 'input';
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function get_info(): string {
-		return '';
+	public function get_info() {
+		return null;
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function get_disabled_values( array $settings ): array {
-		return [];
+	public function get_disabled_values( array $settings ) {
+		return null;
 	}
 
 	/**
-	 * Returns default value of field when debugging.
-	 *
-	 * @param mixed[] $settings Plugin settings.
-	 *
-	 * @return string|string[] Default value of field for debug.
+	 * {@inheritdoc}
 	 */
 	public function get_value_for_debug( array $settings ) {
 		return $this->get_default_value( $settings );

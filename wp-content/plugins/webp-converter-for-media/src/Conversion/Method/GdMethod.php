@@ -5,11 +5,13 @@ namespace WebpConverter\Conversion\Method;
 use WebpConverter\Conversion\Exception;
 use WebpConverter\Conversion\Format\AvifFormat;
 use WebpConverter\Conversion\Format\WebpFormat;
+use WebpConverter\Settings\Option\ImagesQualityOption;
+use WebpConverter\Settings\Option\SupportedExtensionsOption;
 
 /**
  * Supports image conversion method using GD library.
  */
-class GdMethod extends MethodAbstract {
+class GdMethod extends LibraryMethodAbstract {
 
 	const METHOD_NAME        = 'gd';
 	const MAX_METHOD_QUALITY = 99.9;
@@ -83,7 +85,8 @@ class GdMethod extends MethodAbstract {
 		);
 
 		foreach ( $methods as $method => $extensions ) {
-			if ( ! in_array( $extension, $plugin_settings['extensions'] ) || ! in_array( $extension, $extensions ) ) {
+			if ( ! in_array( $extension, $plugin_settings[ SupportedExtensionsOption::OPTION_NAME ] )
+				|| ! in_array( $extension, $extensions ) ) {
 				continue;
 			} elseif ( ! function_exists( $method ) ) {
 				throw new Exception\FunctionUnavailableException( $method );
@@ -151,7 +154,7 @@ class GdMethod extends MethodAbstract {
 		}
 
 		$image          = apply_filters( 'webpc_gd_before_saving', $image, $source_path );
-		$output_quality = min( $plugin_settings['quality'], self::MAX_METHOD_QUALITY );
+		$output_quality = min( $plugin_settings[ ImagesQualityOption::OPTION_NAME ], self::MAX_METHOD_QUALITY );
 
 		if ( ! function_exists( $function ) ) {
 			throw new Exception\FunctionUnavailableException( $function );

@@ -2,10 +2,11 @@
 /**
  * Modal with poll displayed in list of plugins.
  *
- * @var string[] $errors   List of errors detected by plugin.
- * @var mixed[]  $reasons  Reasons for plugin deactivation.
- * @var mixed[]  $settings Plugin settings.
- * @var string   $api_url  URL of API for feedback request.
+ * @var string[] $errors         List of errors detected by plugin.
+ * @var mixed[]  $reasons        Reasons for plugin deactivation.
+ * @var mixed[]  $settings       Plugin settings.
+ * @var string   $api_url        URL of API for feedback request.
+ * @var string   $plugin_version .
  * @package WebP Converter for Media
  */
 
@@ -29,10 +30,8 @@
 							class="webpField__input webpField__input--radio"
 							data-placeholder="<?php echo esc_attr( $reason['placeholder'] ); ?>"
 						>
-						<label for="webpc-option-<?php echo esc_attr( $index ); ?>"
-							class="webpField__label">
-							<?php echo esc_html( $reason['label'] ); ?>
-						</label>
+						<label for="webpc-option-<?php echo esc_attr( $index ); ?>"></label>
+						<span class="webpField__label"><?php echo esc_html( $reason['label'] ); ?></span>
 					</div>
 				<?php endforeach; ?>
 			</div>
@@ -56,7 +55,7 @@
 				value='<?php echo json_encode( $settings ); ?>'
 			>
 			<input type="hidden" name="webpc_plugin_version"
-				value="<?php echo esc_attr( WEBPC_VERSION ); ?>"
+				value="<?php echo esc_attr( $plugin_version ); ?>"
 			>
 		</form>
 	</div>

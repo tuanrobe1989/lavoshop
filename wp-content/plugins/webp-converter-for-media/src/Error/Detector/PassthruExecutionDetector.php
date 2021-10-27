@@ -6,6 +6,7 @@ use WebpConverter\Error\Notice\PassthruExecutionNotice;
 use WebpConverter\Loader\LoaderAbstract;
 use WebpConverter\Loader\PassthruLoader;
 use WebpConverter\PluginData;
+use WebpConverter\PluginInfo;
 
 /**
  * Checks for configuration errors about disabled file supports Pass Thru loader.
@@ -13,14 +14,17 @@ use WebpConverter\PluginData;
 class PassthruExecutionDetector implements ErrorDetector {
 
 	/**
-	 * @var PluginData .
+	 * @var PluginInfo
+	 */
+	private $plugin_info;
+
+	/**
+	 * @var PluginData
 	 */
 	private $plugin_data;
 
-	/**
-	 * @param PluginData $plugin_data .
-	 */
-	public function __construct( PluginData $plugin_data ) {
+	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data ) {
+		$this->plugin_info = $plugin_info;
 		$this->plugin_data = $plugin_data;
 	}
 
@@ -46,7 +50,7 @@ class PassthruExecutionDetector implements ErrorDetector {
 	 * @return bool Verification status.
 	 */
 	private function if_passthru_execution_allowed(): bool {
-		$loader = new PassthruLoader( $this->plugin_data );
+		$loader = new PassthruLoader( $this->plugin_info, $this->plugin_data );
 		if ( $loader->is_active_loader() !== true ) {
 			return true;
 		}
