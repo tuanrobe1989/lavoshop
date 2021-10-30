@@ -10,6 +10,8 @@ use MailPoet\Entities\NewsletterEntity;
 use MailPoet\Entities\ScheduledTaskEntity;
 use MailPoet\Entities\ScheduledTaskSubscriberEntity;
 use MailPoet\Entities\SendingQueueEntity;
+use MailPoet\WP\Functions as WPFunctions;
+use MailPoetVendor\Carbon\Carbon;
 use MailPoetVendor\Doctrine\ORM\Query\Expr\Join;
 
 /**
@@ -27,6 +29,22 @@ class ScheduledTasksRepository extends Repository {
       ->andWhere('st.status = :status')
       ->andWhere('sq.newsletter = :newsletter')
       ->setParameter('status', $status)
+      ->setParameter('newsletter', $newsletter)
+      ->getQuery()
+      ->getResult();
+  }
+
+  /**
+   * @param NewsletterEntity $newsletter
+   * @return ScheduledTaskEntity[]
+   */
+  public function findByScheduledAndRunningForNewsletter(NewsletterEntity $newsletter): array {
+    return $this->doctrineRepository->createQueryBuilder('st')
+      ->select('st')
+      ->join(SendingQueueEntity::class, 'sq', Join::WITH, 'st = sq.task')
+      ->andWhere('st.status = :status OR st.status IS NULL')
+      ->andWhere('sq.newsletter = :newsletter')
+      ->setParameter('status', NewsletterEntity::STATUS_SCHEDULED)
       ->setParameter('newsletter', $newsletter)
       ->getQuery()
       ->getResult();
@@ -88,6 +106,49 @@ class ScheduledTasksRepository extends Repository {
       ->setMaxResults(1)
       ->getQuery()
       ->getOneOrNullResult();
+  }
+
+  public function findDueByType($type, $limit = null) {
+    return $this->findByTypeAndStatus($type, ScheduledTaskEntity::STATUS_SCHEDULED, $limit);
+  }
+
+  public function findRunningByType($type, $limit = null) {
+    return $this->findByTypeAndStatus($type, null, $limit);
+  }
+
+  public function findCompletedByType($type, $limit = null) {
+    return $this->findByTypeAndStatus($type, ScheduledTaskEntity::STATUS_COMPLETED, $limit);
+  }
+
+  protected function findByTypeAndStatus($type, $status, $limit = null, $future = false) {
+    $queryBuilder = $this->doctrineRepository->createQueryBuilder('st')
+      ->select('st')
+      ->where('st.type = :type')
+      ->setParameter('type', $type)
+      ->andWhere('st.deletedAt IS NULL');
+
+    if (is_null($status)) {
+      $queryBuilder->andWhere('st.status IS NULL');
+    } else {
+      $queryBuilder
+        ->andWhere('st.status = :status')
+        ->setParameter('status', $status);
+    }
+
+    if ($future) {
+      $queryBuilder->andWhere('st.scheduledAt > :now');
+    } else {
+      $queryBuilder->andWhere('st.scheduledAt <= :now');
+    }
+
+    $now = Carbon::createFromTimestamp(WPFunctions::get()->currentTime('timestamp'));
+    $queryBuilder->setParameter('now', $now);
+
+    if ($limit) {
+      $queryBuilder->setMaxResults($limit);
+    }
+
+    return $queryBuilder->getQuery()->getResult();
   }
 
   protected function getEntityClassName() {

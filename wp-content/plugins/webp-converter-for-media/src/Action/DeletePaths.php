@@ -3,6 +3,7 @@
 namespace WebpConverter\Action;
 
 use WebpConverter\Conversion\OutputPath;
+use WebpConverter\Conversion\SkipCrashed;
 use WebpConverter\Conversion\SkipLarger;
 use WebpConverter\HookableInterface;
 
@@ -40,15 +41,21 @@ class DeletePaths implements HookableInterface {
 	 * @return void
 	 */
 	private function delete_file_by_path( string $path ) {
-		if ( ! ( $source_paths = OutputPath::get_paths( $path ) ) ) {
+		if ( ! ( $output_paths = OutputPath::get_paths( $path ) ) ) {
 			return;
 		}
 
-		foreach ( $source_paths as $source_path ) {
-			if ( is_writable( $source_path ) ) {
-				unlink( $source_path );
-			} elseif ( is_writable( $source_path . '.' . SkipLarger::DELETED_FILE_EXTENSION ) ) {
-				unlink( $source_path . '.' . SkipLarger::DELETED_FILE_EXTENSION );
+		foreach ( $output_paths as $output_path ) {
+			if ( is_writable( $output_path ) ) {
+				unlink( $output_path );
+			}
+
+			if ( is_writable( $output_path . '.' . SkipLarger::DELETED_FILE_EXTENSION ) ) {
+				unlink( $output_path . '.' . SkipLarger::DELETED_FILE_EXTENSION );
+			}
+
+			if ( is_writable( $output_path . '.' . SkipCrashed::CRASHED_FILE_EXTENSION ) ) {
+				unlink( $output_path . '.' . SkipCrashed::CRASHED_FILE_EXTENSION );
 			}
 		}
 	}

@@ -458,6 +458,9 @@ This is all very important to us and allows us to do even better things for you!
 
 == Changelog ==
 
+= 3.2.3 (2021-10-15) =
+* `[Added]` Exclusion of re-converting images that caused regeneration error
+
 = 3.2.2 (2021-09-26) =
 * `[Changed]` Option "Force redirections to WebP for all domains" as default
 * `[Added]` Debug information for regeneration error
@@ -472,15 +475,6 @@ This is all very important to us and allows us to do even better things for you!
 * `[Added]` Filter `webpc_supported_source_file` to exclude paths to files from converting
 * `[Added]` Filter `webpc_supported_source_directory` to exclude paths to directories from converting
 * `[Added]` Modifications to appearance of plugin settings page
-
-= 3.1.1 (2021-09-08) =
-* `[Fixed]` Generating .htaccess files for multisite websites
-* `[Changed]` Fields on plugin settings page
-* `[Changed]` Server configuration error detection
-
-= 3.1.0 (2021-09-02) =
-* `[Fixed]` Default state of notice displaying
-* `[Added]` Error detection for server that does not supports using .htaccess files from custom locations
 
 See [changelog.txt](https://plugins.svn.wordpress.org/webp-converter-for-media/trunk/changelog.txt) for previous versions.
 

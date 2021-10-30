@@ -61,6 +61,7 @@ return array(
     'WebpConverter\\Conversion\\OutputPath' => $baseDir . '/src/Conversion/OutputPath.php',
     'WebpConverter\\Conversion\\PathsValidator' => $baseDir . '/src/Conversion/PathsValidator.php',
     'WebpConverter\\Conversion\\SkipConvertedPaths' => $baseDir . '/src/Conversion/SkipConvertedPaths.php',
+    'WebpConverter\\Conversion\\SkipCrashed' => $baseDir . '/src/Conversion/SkipCrashed.php',
     'WebpConverter\\Conversion\\SkipExcludedPaths' => $baseDir . '/src/Conversion/SkipExcludedPaths.php',
     'WebpConverter\\Conversion\\SkipLarger' => $baseDir . '/src/Conversion/SkipLarger.php',
     'WebpConverter\\Error\\Detector\\ErrorDetector' => $baseDir . '/src/Error/Detector/ErrorDetector.php',

@@ -19,9 +19,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.1.1';
+    public static $version = '3.1.2';
 
-    public static $nslPROMinVersion = '3.1.1';
+    public static $nslPROMinVersion = '3.1.2';
 
     public static $proxyPage = false;
 
@@ -172,9 +172,16 @@ class NextendSocialLogin {
             'embedded_login_form_button_align' => 'left',
             'embedded_login_form_button_style' => 'default',
             'embedded_login_form_layout'       => 'below',
-            'comment_login_button'             => 'show',
-            'comment_button_align'             => 'left',
-            'comment_button_style'             => 'default',
+
+            'custom_actions'               => '',
+            'custom_actions_button_style'  => 'default',
+            'custom_actions_button_layout' => 'default',
+            'custom_actions_button_align'  => 'left',
+
+            'comment_login_button' => 'show',
+            'comment_button_align' => 'left',
+            'comment_button_style' => 'default',
+
             'buddypress_register_button'       => 'bp_before_account_details_fields',
             'buddypress_register_button_align' => 'left',
             'buddypress_register_button_style' => 'default',
@@ -237,6 +244,9 @@ class NextendSocialLogin {
             'edd_register'                   => 'after',
             'edd_register_form_button_style' => 'default',
             'edd_register_form_layout'       => 'default',
+            'edd_checkout'                   => 'form_after',
+            'edd_checkout_form_button_style' => 'default',
+            'edd_checkout_form_layout'       => 'default',
             'edd_form_button_align'          => 'left',
 
             'admin_bar_roles' => array(),
@@ -509,7 +519,12 @@ class NextendSocialLogin {
         if ($once === null) {
             $scripts = NSL_PATH . '/js/nsl.js';
             if (file_exists($scripts)) {
-                echo '<script type="text/javascript">(function (undefined) {var _targetWindow =' . wp_json_encode(self::$settings->get('target')) . ";\n" . file_get_contents($scripts) . '})();</script>';
+                $localizedStrings = array(
+                    'redirect_overlay_title' => __('Hold On', 'nextend-facebook-connect'),
+                    'redirect_overlay_text'  => __('You are being redirected to another page,<br>it may take a few seconds.', 'nextend-facebook-connect')
+                );
+
+                echo '<script type="text/javascript">(function (undefined) {var _localizedStrings=' . wp_json_encode($localizedStrings) . ';var _targetWindow=' . wp_json_encode(self::$settings->get('target')) . ";\n" . file_get_contents($scripts) . '})();</script>';
             }
             $once = true;
         }
@@ -1104,7 +1119,6 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
                 }
             }
         }
-
 
         return true;
     }

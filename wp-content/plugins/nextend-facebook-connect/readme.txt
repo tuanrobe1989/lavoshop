@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: social login, facebook, google, twitter, linkedin, register, login, social, nextend facebook connect, social sign in
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
-Tested up to: 5.7.2
-Stable tag: 3.1.1
+Tested up to: 5.8.1
+Stable tag: 3.1.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,7 +47,7 @@ Providers are the services which the visitors can use to register and log in to 
 * UserPro compatibility
 * Ultimate Member compatibility
 * Easy Digital Downloads compatibility
-* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line and more coming soon
+* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord and more coming soon
 * Configure whether email address should be asked on registration at each provider
 * Configure whether username should be asked on registration at each provider
 * Choose from icons or wide buttons
@@ -125,11 +125,23 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 
 == Changelog ==
 
+= 3.1.2 =
+* Improvement: If there is a slow server or a poor internet connection, the redirect after the authentication with social login might take some time. During this time we will display a loading spinner, so the visitor will know that something is about to happen.
+
+* PRO: New provider: [Discord](https://nextendweb.com/nextend-social-login-docs/provider-discord/)
+* PRO: Fix: The Microsoft provider used a wrong redirect url, when the Frontend and the Backend URL of the site were different.
+* PRO: Improvement: New options for the Line provider: [Force reauthorization on each login](https://nextendweb.com/nextend-social-login-docs/provider-line/#force-reauth) and [Add LINE Official Account as a friend](https://nextendweb.com/nextend-social-login-docs/provider-line/#add-friend)
+* PRO: Improvement: New options for the Microsoft provider: [Audience](https://nextendweb.com/nextend-social-login-docs/provider-microsoft/#audience) and [Authorization Prompt](https://nextendweb.com/nextend-social-login-docs/provider-microsoft/#auth-prompt)
+* PRO: Feature: Integration for Easy Digital Downloads [Checkout](https://nextendweb.com/nextend-social-login-docs/global-settings-easy-digital-downloads/#edd-checkout-form) form.
+* PRO: Feature: Display social buttons with layouts on [Custom Actions](https://nextendweb.com/nextend-social-login-docs/global-settings-custom-actions/)
+
+
 = 3.1.1 =
 * Improvement: string paths from the language files have been removed.
 
 * PRO: Improvement: VKontakte provider – we will use the API version 5.131 for the endpoints, as API version 5.74 is deprecated.
 * PRO: Feature: Easy Digital Downloads login and register form support.
+
 
 = 3.1.0 =
 * Fix: Display error message for logged out users, when they try to login with a social media account that's email address matches with a WordPress account email address, that has a linked provider from the same kind.

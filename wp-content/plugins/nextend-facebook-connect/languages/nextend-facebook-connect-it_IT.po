@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-09-13 20:37+0200\n"
-"PO-Revision-Date: 2021-09-13 20:42+0200\n"
+"POT-Creation-Date: 2021-10-13 19:51+0200\n"
+"PO-Revision-Date: 2021-10-13 19:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: it_IT\n"
@@ -213,6 +213,16 @@ msgid ""
 "information please check our %2$s %1$s compatibility tutorial%3$s!"
 msgstr ""
 
+#, php-format
+msgid ""
+"<p style=\"max-width:55em;\"><strong><u>Warning</u></strong>: Providers "
+"change the App setup process quite often, which means some steps below might "
+"not be accurate. If you see significant difference in the written "
+"instructions and what you see at the provider, feel free to %1$sreport it"
+"%2$s, so we can check and update the instructions.<br><strong>Last updated:</"
+"strong> %3$s.</p>"
+msgstr ""
+
 msgid "You have logged in successfully."
 msgstr "Ti sei loggato."
 
@@ -400,6 +410,9 @@ msgstr "Form di login"
 
 msgid "Comment"
 msgstr "Commento"
+
+msgid "Custom Actions"
+msgstr ""
 
 msgid "Docs"
 msgstr "Docs"
@@ -720,6 +733,43 @@ msgstr "Gli utenti devono essere registrati e loggati per commentare"
 msgid "Button style"
 msgstr "Stile bottone"
 
+#, php-format
+msgid "%1$s Add your custom actions here. One action per line."
+msgstr ""
+
+msgid "Usage:"
+msgstr "Utilizzo:"
+
+#, php-format
+msgid ""
+"%1$s The HTML of the social buttons will be added at the place where the "
+"action is fired."
+msgstr ""
+
+msgid "Important:"
+msgstr "Importante:"
+
+#, php-format
+msgid ""
+"If you %1$sexperience problems%2$s because of this feature, you can disable "
+"it by defining the %3$s constant."
+msgstr ""
+
+#, fuzzy
+#| msgid "Login layout"
+msgid "Button layout"
+msgstr "Layout del login"
+
+#, fuzzy
+#| msgid "Default with separator"
+msgid "Default with top separator"
+msgstr "Default con separatore"
+
+#, fuzzy
+#| msgid "Default with separator"
+msgid "Default with bottom separator"
+msgstr "Default con separatore"
+
 msgid "No Connect button in Login form"
 msgstr "Non connettere bottone nel form di Login"
 
@@ -734,6 +784,26 @@ msgstr ""
 
 msgid "Register form button style"
 msgstr "Stile del bottone del form registrati"
+
+#, fuzzy
+#| msgid "Checkout for WooCommerce"
+msgid "Checkout form"
+msgstr "Checkout per WooCommerce"
+
+#, fuzzy
+#| msgid "No Connect button in Login form"
+msgid "No Connect button in Checkout form"
+msgstr "Non connettere bottone nel form di Login"
+
+#, fuzzy
+#| msgid "Login form button style"
+msgid "Checkout form button style"
+msgstr "Stile del bottone del form di login"
+
+#, fuzzy
+#| msgid "Register layout"
+msgid "Checkout layout"
+msgstr "Layout registrazione"
 
 msgid "Target window"
 msgstr "Finestra target"
@@ -805,9 +875,6 @@ msgstr ""
 "%2$s Prima crea una nuova pagina e inserisci il seguente shortcode: %1$s, "
 "dopo seleziona una voce dal menù sopra"
 
-msgid "Usage:"
-msgstr "Utilizzo:"
-
 #, php-format
 msgid ""
 "%1$s You won't be able to reach the selected page unless a social login/"
@@ -815,9 +882,6 @@ msgid ""
 msgstr ""
 "%1$s Non potrai raggiungere la pagina selezionata fino a quando un login, o "
 "un accesso social non avvengono."
-
-msgid "Important:"
-msgstr "Importante:"
 
 msgid "OAuth redirect uri proxy page"
 msgstr "Pagina proxy OAuth redirect uri"
@@ -1205,6 +1269,12 @@ msgstr "Please update %1$s to version %2$s or newer."
 
 msgid "Update now!"
 msgstr "Aggiorna adesso!"
+
+msgid "Hold On"
+msgstr ""
+
+msgid "You are being redirected to another page,<br>it may take a few seconds."
+msgstr ""
 
 msgid "Social Login"
 msgstr "Social Login"
@@ -2451,6 +2521,106 @@ msgid "Apple Credentials"
 msgstr "Credenziali Apple"
 
 #, php-format
+msgid ""
+"If you are not logged in yet, then log in with your %s credentials and visit "
+"the link above again."
+msgstr ""
+
+#, php-format
+msgid ""
+"Select your %s App and click on the “<b>%2$s</b>” menu point under the "
+"Settings section on the left side."
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
+msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
+msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect URLs</b>\": <b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on the \"<b>Create New Application</b>\" button."
+msgid "Click the \"<b>New Application</b>\" button."
+msgstr "Clicca sul bottone \"<b>Crea Nuova Applicazione</b>\"."
+
+#, fuzzy
+#| msgid ""
+#| "Fill the \"<b>App Name</b>\" field and click \"<b>Create App</b>\" button."
+msgid "Fill the \"<b>Name</b>\" field and click the \"<b>Create</b>\" button."
+msgstr ""
+"Compila il campo \"<b>Nome App</b>\" e clicca il bottone \"<b>Crea App</b>\"."
+
+msgid ""
+"Optional: Select an \"<b>App Icon</b>\" and add a \"<b>Terms of Service URL</"
+"b>\" and \"<b>Privacy Policy URL</b>\"."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid ""
+#| "On the top left side, click on the “<b>%1$s</b>” menu point, then click "
+#| "“<b>%2$s</b>”"
+msgid ""
+"On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
+msgstr ""
+"In alto a sinistra, clicca nel menù su “<b>%1$s</b>”, quindi clicca “<b>"
+"%2$s</b>”"
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
+msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
+msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect URLs</b>\": <b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on the \"<b>Save Changes</b>\" button."
+msgid "Click the \"<b>Save Changes</b>\" button."
+msgstr "Clicca sul bottone \"<b>Salva Modifiche</b>\"."
+
+#, fuzzy
+#| msgid ""
+#| "Find the necessary <b>Client ID</b> and <b>Client Secret</b> at the "
+#| "middle of the page. These will be needed in the plugin's settings!"
+msgid ""
+"Copy the necessary \"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values "
+"and fill these fields in the plugin settings!"
+msgstr ""
+"Cerca il <b>Client ID</b> and il <b>Client Secret</b>richiesti al centro "
+"della pagina. Questi saranno necessari nei settaggi del plugin!"
+
+#, fuzzy
+#| msgid "Select account on each login"
+msgid "Force reauthorization on each login"
+msgstr "Scegli un account ad ogni accesso"
+
+#, fuzzy
+#| msgid ""
+#| "Disable, when you don't want to see the account select prompt on each "
+#| "login."
+msgid "Disable, when you don't want to see the consent screen on each login."
+msgstr ""
+"Disabilita, quando non vuoi vedere la scelta dell'account ad ogni accesso."
+
+#, fuzzy
+#| msgid "Continue with <b>Disqus</b>"
+msgid "Continue with <b>Discord</b>"
+msgstr "Continua con <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>Disqus</b>"
+msgid "Sign up with <b>Discord</b>"
+msgstr "Continua con <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>Disqus</b>"
+msgid "Link account with <b>Discord</b>"
+msgstr "Collega account con <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Disqus</b>"
+msgid "Unlink account from <b>Discord</b>"
+msgstr "Scollega account da <b>Disqus</b>"
+
+#, php-format
 msgid "Click on the name of your %s App."
 msgstr "Clicca sul nome della tua %s App."
 
@@ -2751,6 +2921,32 @@ msgid "Channel Secret"
 msgstr "Client Secret"
 
 #, fuzzy
+#| msgid ""
+#| "Disable, when you don't want to see the account select prompt on each "
+#| "login."
+msgid "Enable, when you want to see the consent screen on each login."
+msgstr ""
+"Disabilita, quando non vuoi vedere la scelta dell'account ad ogni accesso."
+
+msgid "Add LINE Official Account as a friend"
+msgstr ""
+
+msgid "Don't display"
+msgstr ""
+
+msgid "Display the add friend option in the consent screen"
+msgstr ""
+
+msgid "Opens a new screen with the add friend option after the consent screen"
+msgstr ""
+
+#, php-format
+msgid ""
+"If you have a LINE Official Account, people can add it as a friend when they "
+"authorize your App. %1$sLearn more%2$s."
+msgstr ""
+
+#, fuzzy
 #| msgid "Continue with <b>LinkedIn</b>"
 msgid "Continue with <b>Line</b>"
 msgstr "Continua con <b>LinkedIn</b>"
@@ -2910,9 +3106,12 @@ msgid "Fill the \"<b>Name</b>\" field with your App Name."
 msgstr ""
 "Compila il campo \"<b>Domini</b>\" col nome del tuo dominio, come: <b>%s</b>"
 
+#, php-format
 msgid ""
-"Choose \"<b>Personal Microsoft accounts only</b>\" from the Supported "
-"account types."
+"Select an option at Supported account types.<br><strong><u>Important:</u></"
+"strong> On our Settings tab, you will need to select the Audience depending "
+"on the selected value! If you are not sure what to choose, then %1$shere%2$s "
+"you can learn more."
 msgstr ""
 
 #, fuzzy
@@ -2981,6 +3180,46 @@ msgstr ""
 #| msgid "Client Secret"
 msgid "Client secret"
 msgstr "Client Secret"
+
+msgid "Audience"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant)"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)"
+msgstr ""
+
+msgid "Personal Microsoft accounts only"
+msgstr ""
+
+msgid ""
+"Only users in an organizational directory from a particular Azure AD tenant:"
+msgstr ""
+
+#, php-format
+msgid ""
+"The selected value will define the supported account types. %1$sLearn more."
+"%2$s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Authentication error"
+msgid "Authorization Prompt"
+msgstr "Errore di autenticazione"
+
+msgid "Display account select modal"
+msgstr ""
+
+msgid "Force user to enter login credentials on each login"
+msgstr ""
+
+msgid "Display authorization and authentication dialog only when necessary"
+msgstr ""
 
 #, fuzzy
 #| msgid "Continue with <b>Yahoo</b>"

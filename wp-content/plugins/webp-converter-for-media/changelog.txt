@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 3.2.3 (2021-10-15) =
+* `[Added]` Exclusion of re-converting images that caused regeneration error
+
 = 3.2.2 (2021-09-26) =
 * `[Changed]` Option "Force redirections to WebP for all domains" as default
 * `[Added]` Debug information for regeneration error

@@ -3,7 +3,7 @@ Contributors: mailpoet
 Tags: email, email marketing, post notification, woocommerce emails, email automation, newsletter, newsletter builder, newsletter subscribers
 Requires at least: 5.3
 Tested up to: 5.8
-Stable tag: 3.70.0
+Stable tag: 3.72.0
 Requires PHP: 7.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -183,6 +183,42 @@ Check our [Knowledge Base](https://kb.mailpoet.com) or contact us through our [s
 6. WooCommerce emails
 
 == Changelog ==
+
+= 3.72.0 - 2021-10-25 =
+* Improved: updated Mixpanel configuration;
+* Improved: refactor CronWorkerRunner and related classes to Doctrine;
+* Improved: removed old StatisticsWooCommercePurchases model and replaced it with code that uses Doctrine;
+* Fixed: mailpoet_register_form_extend filter not working;
+* Fixed: automatic latest content block shows wrong content;
+* Fixed: "Create a new form" link not working in MailPoet widget;
+* Fixed: preselect a first form in form widget.
+
+= 3.71.3 - 2021-10-18 =
+* Improved: show email stats with less then 0.1% with two decimal places;
+* Improved: more options when sending is paused because of unauthorized email address;
+* Improved: offer activating premium plugin in settings when already installed;
+* Changed: offer more tools to clean your lists;
+* Fixed: an error when using MySQL in strict mode;
+* Fixed: rare database error when using incompatible collations;
+* Fixed: automatic emails can be set up without providing scheduled time;
+* Fixed: after editing an order the customer is subscribed when they shouldn't be.
+
+= 3.71.2 - 2021-10-04 =
+* Improved: better handle reply-to address with missing reply-to name;
+* Improved: use WordPress functions to get post excerpt and content in post notifications;
+* Changed: inactive subscribers conditions;
+* Fixed: PHP warning about PHPMailer class not found;
+* Fixed: welcome email setup accepts non-numerical values;
+* Fixed: missing space between paragraph and heading in post notifications.
+
+= 3.71.1 - 2021-09-29 =
+* Fixed: conflict with Elementor plugin.
+
+= 3.71.0 - 2021-09-28 =
+* Improved: handling recipient related SMTP errors;
+* Changed: removed "MailPoet Page" from form's "After submit, go to page" options;
+* Changed: don't save a form without assigned list;
+* Fixed: unable to remove description from segments.
 
 = 3.70.0 - 2021-09-20 =
 * Added: filter to alter mailpoet database table prefix;

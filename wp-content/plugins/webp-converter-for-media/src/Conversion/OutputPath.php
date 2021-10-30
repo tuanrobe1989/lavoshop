@@ -43,7 +43,7 @@ class OutputPath {
 		$paths      = [];
 		foreach ( $extensions as $extension ) {
 			$output_path = sprintf( '%1$s.%2$s', $new_path, $extension );
-			if ( in_array( $extension, $file_extensions, true ) || file_exists( $output_path ) ) {
+			if ( in_array( $extension, $file_extensions, true ) ) {
 				$paths[] = $output_path;
 			}
 		}

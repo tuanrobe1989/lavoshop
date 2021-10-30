@@ -31,6 +31,7 @@ class NewsletterEntity {
   const TYPE_NOTIFICATION = 'notification';
   const TYPE_NOTIFICATION_HISTORY = 'notification_history';
   const TYPE_WC_TRANSACTIONAL_EMAIL = 'wc_transactional';
+  const TYPE_RE_ENGAGEMENT = 're_engagement';
 
   // standard newsletters
   const STATUS_DRAFT = 'draft';
@@ -418,6 +419,16 @@ class NewsletterEntity {
    */
   public function getNewsletterSegments() {
     return $this->newsletterSegments;
+  }
+
+  /**
+   * @return int[]
+   */
+  public function getSegmentIds() {
+    return array_filter($this->newsletterSegments->map(function(NewsletterSegmentEntity $newsletterSegment) {
+      $segment = $newsletterSegment->getSegment();
+      return $segment ? (int)$segment->getId() : null;
+    })->toArray());
   }
 
   /**

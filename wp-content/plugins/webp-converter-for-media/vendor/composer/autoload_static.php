@@ -76,6 +76,7 @@ class ComposerStaticInit2030f27ad23da16097b04d49bce16e0c
         'WebpConverter\\Conversion\\OutputPath' => __DIR__ . '/../..' . '/src/Conversion/OutputPath.php',
         'WebpConverter\\Conversion\\PathsValidator' => __DIR__ . '/../..' . '/src/Conversion/PathsValidator.php',
         'WebpConverter\\Conversion\\SkipConvertedPaths' => __DIR__ . '/../..' . '/src/Conversion/SkipConvertedPaths.php',
+        'WebpConverter\\Conversion\\SkipCrashed' => __DIR__ . '/../..' . '/src/Conversion/SkipCrashed.php',
         'WebpConverter\\Conversion\\SkipExcludedPaths' => __DIR__ . '/../..' . '/src/Conversion/SkipExcludedPaths.php',
         'WebpConverter\\Conversion\\SkipLarger' => __DIR__ . '/../..' . '/src/Conversion/SkipLarger.php',
         'WebpConverter\\Error\\Detector\\ErrorDetector' => __DIR__ . '/../..' . '/src/Error/Detector/ErrorDetector.php',

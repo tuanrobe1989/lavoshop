@@ -3,11 +3,17 @@
 namespace WebpConverter\Conversion\Method;
 
 use WebpConverter\Conversion\Format\FormatFactory;
+use WebpConverter\Conversion\SkipCrashed;
 
 /**
  * Adds support for all conversion methods and returns information about them.
  */
 class MethodFactory {
+
+	/**
+	 * @var SkipCrashed
+	 */
+	private $skip_crashed;
 
 	/**
 	 * Objects of supported conversion methods.
@@ -16,9 +22,11 @@ class MethodFactory {
 	 */
 	private $methods = [];
 
-	public function __construct() {
-		$this->set_integration( new ImagickMethod() );
-		$this->set_integration( new GdMethod() );
+	public function __construct( SkipCrashed $skip_crashed = null ) {
+		$this->skip_crashed = $skip_crashed ?: new SkipCrashed();
+
+		$this->set_integration( new ImagickMethod( $this->skip_crashed ) );
+		$this->set_integration( new GdMethod( $this->skip_crashed ) );
 	}
 
 	/**

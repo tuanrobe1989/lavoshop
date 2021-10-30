@@ -15,6 +15,7 @@
       var mailpoet_premium_key_valid = <%= json_encode(premium_key_valid) %>;
       var mailpoet_premium_plugin_installed = <%= json_encode(premium_plugin_installed) %>;
       var mailpoet_premium_plugin_download_url = <%= json_encode(premium_plugin_download_url) %>;
+      var mailpoet_premium_plugin_activation_url = <%= json_encode(premium_plugin_activation_url) %>;
       var mailpoet_paths = <%= json_encode(paths) %>;
       var mailpoet_built_in_captcha_supported = <%= json_encode(built_in_captcha_supported == true) %>;
       var mailpoet_free_plan_url = "<%= add_referral_id('https://www.mailpoet.com/free-plan') %>";
@@ -141,9 +142,9 @@
     'shareDataTitle': __('Share anonymous data'),
     'shareDataDescription': __('Share anonymous data and help us improve the plugin. We appreciate your help!'),
     'captchaTitle': __('Protect your forms against spam signups'),
-    'captchaDescription': __('Built-in CAPTCHA protects your subscription forms after a second signup attempt by a bot. Alternatively, use reCAPTCHA by Google.'),
+    'captchaDescription': __('Built-in CAPTCHA protects your subscription forms against bots. Alternatively, use reCAPTCHA by Google.'),
     'signupForCaptchaKey': __('Sign up for an API key pair here.'),
-    'builtInCaptcha': __('Built-in captcha (default)'),
+    'builtInCaptcha': __('Built-in CAPTCHA (default)'),
     'disbaledBecauseExtensionMissing': __('(disabled because GD or FreeType extension is missing)'),
     'googleReCaptcha': __('Google reCAPTCHA v2'),
     'yourReCaptchaKey': __('Your reCAPTCHA Site Key'),
@@ -183,7 +184,9 @@
     'learnMore': __('Learn more'),
     'premiumTabPremiumActiveMessage': __('MailPoet Premium is active', 'mailpoet'),
     'premiumTabPremiumNotInstalledMessage': __('MailPoet Premium is not installed.', 'mailpoet'),
+    'premiumTabPremiumNotActivatedMessage': __('MailPoet Premium is installed but not activated.', 'mailpoet'),
     'premiumTabPremiumDownloadMessage': __('Download MailPoet Premium plugin', 'mailpoet'),
+    'premiumTabPremiumActivateMessage': __('Activate MailPoet Premium plugin', 'mailpoet'),
     'premiumTabPremiumInstallationInstallingMessage': __('downloading MailPoet Premium…', 'mailpoet'),
     'premiumTabPremiumInstallationActivatingMessage': __('activating MailPoet Premium…', 'mailpoet'),
     'premiumTabPremiumInstallationActiveMessage': __('MailPoet Premium is active!', 'mailpoet'),

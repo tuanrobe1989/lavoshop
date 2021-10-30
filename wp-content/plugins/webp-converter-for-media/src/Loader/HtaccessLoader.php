@@ -162,7 +162,7 @@ class HtaccessLoader extends LoaderAbstract {
 				}
 				$content .= "  RewriteRule (.+)\.${ext}$ ${prefix_rule}${path}/$1.${ext}.${format} [NC,T=${mime_type},L]" . PHP_EOL;
 			}
-			$content .= '</IfModule>';
+			$content .= '</IfModule>' . PHP_EOL;
 		}
 
 		return apply_filters( 'webpc_htaccess_mod_rewrite', trim( $content ), $path );

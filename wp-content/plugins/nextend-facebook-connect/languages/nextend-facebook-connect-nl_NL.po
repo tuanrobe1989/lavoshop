@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-09-13 20:38+0200\n"
-"PO-Revision-Date: 2021-09-13 20:42+0200\n"
+"POT-Creation-Date: 2021-10-13 19:51+0200\n"
+"PO-Revision-Date: 2021-10-13 19:51+0200\n"
 "Last-Translator: Erik Molenaar <info@erikmolenaar.nl>\n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: nl_NL\n"
@@ -218,6 +218,16 @@ msgid ""
 "information please check our %2$s %1$s compatibility tutorial%3$s!"
 msgstr ""
 
+#, php-format
+msgid ""
+"<p style=\"max-width:55em;\"><strong><u>Warning</u></strong>: Providers "
+"change the App setup process quite often, which means some steps below might "
+"not be accurate. If you see significant difference in the written "
+"instructions and what you see at the provider, feel free to %1$sreport it"
+"%2$s, so we can check and update the instructions.<br><strong>Last updated:</"
+"strong> %3$s.</p>"
+msgstr ""
+
 msgid "You have logged in successfully."
 msgstr "Je bent succesvol ingelogd."
 
@@ -408,6 +418,9 @@ msgstr "Loginformulier"
 
 msgid "Comment"
 msgstr "Reactie"
+
+msgid "Custom Actions"
+msgstr ""
 
 msgid "Docs"
 msgstr "Documentatie"
@@ -730,6 +743,43 @@ msgstr ""
 msgid "Button style"
 msgstr "Knop stijl"
 
+#, php-format
+msgid "%1$s Add your custom actions here. One action per line."
+msgstr ""
+
+msgid "Usage:"
+msgstr "Gebruik:"
+
+#, php-format
+msgid ""
+"%1$s The HTML of the social buttons will be added at the place where the "
+"action is fired."
+msgstr ""
+
+msgid "Important:"
+msgstr "Let op:"
+
+#, php-format
+msgid ""
+"If you %1$sexperience problems%2$s because of this feature, you can disable "
+"it by defining the %3$s constant."
+msgstr ""
+
+#, fuzzy
+#| msgid "Login layout"
+msgid "Button layout"
+msgstr "Inlog-layout"
+
+#, fuzzy
+#| msgid "Below with separator"
+msgid "Default with top separator"
+msgstr "Hieronder met separator"
+
+#, fuzzy
+#| msgid "Below with separator"
+msgid "Default with bottom separator"
+msgstr "Hieronder met separator"
+
 msgid "No Connect button in Login form"
 msgstr "Geen Verbindingsknop  in inlogformulier"
 
@@ -744,6 +794,24 @@ msgstr "Geen Verbindingsknop in het Registratieformulier"
 
 msgid "Register form button style"
 msgstr "Registratieformulier knopstijl"
+
+msgid "Checkout form"
+msgstr ""
+
+#, fuzzy
+#| msgid "No Connect button in Login form"
+msgid "No Connect button in Checkout form"
+msgstr "Geen Verbindingsknop  in inlogformulier"
+
+#, fuzzy
+#| msgid "Login form button style"
+msgid "Checkout form button style"
+msgstr "Aanmeldingsformulier knopstijl"
+
+#, fuzzy
+#| msgid "Register layout"
+msgid "Checkout layout"
+msgstr "Registratie layout"
 
 msgid "Target window"
 msgstr "Doelvenster"
@@ -819,9 +887,6 @@ msgstr ""
 "%2$s Maak eerst een nieuwe pagina aan en voeg de volgende shortcode toe: "
 "%1$s en selecteer dan deze pagina hierboven"
 
-msgid "Usage:"
-msgstr "Gebruik:"
-
 #, php-format
 msgid ""
 "%1$s You won't be able to reach the selected page unless a social login/"
@@ -829,9 +894,6 @@ msgid ""
 msgstr ""
 "%1$s Je kunt de geselecteerde pagina niet bereiken tenzij er een social "
 "login/registratie plaatsvindt."
-
-msgid "Important:"
-msgstr "Let op:"
 
 msgid "OAuth redirect uri proxy page"
 msgstr "OAuth omleidings-uri proxy pagina"
@@ -1225,6 +1287,12 @@ msgstr "Gelieve %1$s bij te werken naar versie %2$s of nieuwer."
 
 msgid "Update now!"
 msgstr "Update nu!"
+
+msgid "Hold On"
+msgstr ""
+
+msgid "You are being redirected to another page,<br>it may take a few seconds."
+msgstr ""
 
 msgid "Social Login"
 msgstr "Social Login"
@@ -2445,6 +2513,91 @@ msgid "Apple Credentials"
 msgstr ""
 
 #, php-format
+msgid ""
+"If you are not logged in yet, then log in with your %s credentials and visit "
+"the link above again."
+msgstr ""
+
+#, php-format
+msgid ""
+"Select your %s App and click on the “<b>%2$s</b>” menu point under the "
+"Settings section on the left side."
+msgstr ""
+
+#, fuzzy
+#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
+msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+
+#, fuzzy
+#| msgid "Click on the \"Create New Application\" button."
+msgid "Click the \"<b>New Application</b>\" button."
+msgstr "Klik op de knop \"Nieuwe Applicatie Maken\"."
+
+#, fuzzy
+#| msgid "Fill the \"App Name\" field and click \"Create App\" button."
+msgid "Fill the \"<b>Name</b>\" field and click the \"<b>Create</b>\" button."
+msgstr "Vul het veld \"App Naam\" in en klik op de knop \"Maak App\"."
+
+msgid ""
+"Optional: Select an \"<b>App Icon</b>\" and add a \"<b>Terms of Service URL</"
+"b>\" and \"<b>Privacy Policy URL</b>\"."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the \"Credentials\" in the left hand menu"
+msgid ""
+"On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
+msgstr "Klik op de \"Inloggegevens\" in het linker menu"
+
+#, fuzzy
+#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
+msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+
+#, fuzzy
+#| msgid "Click on the \"Save Changes\" button."
+msgid "Click the \"<b>Save Changes</b>\" button."
+msgstr "Klik op de knop \"Wijzigingen Opslaan\"."
+
+#, fuzzy
+#| msgid ""
+#| "Find the necessary \"Client ID\" and \"Client Secret\" at the middle of "
+#| "the page, under the \"Web Settings\" tab."
+msgid ""
+"Copy the necessary \"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values "
+"and fill these fields in the plugin settings!"
+msgstr ""
+"Vind de benodigde \"Client ID\" en \"Client Geheim\" in het midden van de "
+"pagina, onder het tabblad \"Web Instelling\"."
+
+msgid "Force reauthorization on each login"
+msgstr ""
+
+msgid "Disable, when you don't want to see the consent screen on each login."
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>Disqus</b>"
+msgid "Continue with <b>Discord</b>"
+msgstr "Doorgaan met <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>Disqus</b>"
+msgid "Sign up with <b>Discord</b>"
+msgstr "Doorgaan met <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>Disqus</b>"
+msgid "Link account with <b>Discord</b>"
+msgstr "Koppel met <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Disqus</b>"
+msgid "Unlink account from <b>Discord</b>"
+msgstr "Ontkoppel van <b>Disqus</b>"
+
+#, php-format
 msgid "Click on the name of your %s App."
 msgstr "Klik op de naam van je %s App."
 
@@ -2750,6 +2903,27 @@ msgstr ""
 msgid "Channel Secret"
 msgstr "Client Geheim"
 
+msgid "Enable, when you want to see the consent screen on each login."
+msgstr ""
+
+msgid "Add LINE Official Account as a friend"
+msgstr ""
+
+msgid "Don't display"
+msgstr ""
+
+msgid "Display the add friend option in the consent screen"
+msgstr ""
+
+msgid "Opens a new screen with the add friend option after the consent screen"
+msgstr ""
+
+#, php-format
+msgid ""
+"If you have a LINE Official Account, people can add it as a friend when they "
+"authorize your App. %1$sLearn more%2$s."
+msgstr ""
+
 #, fuzzy
 #| msgid "Continue with <b>LinkedIn</b>"
 msgid "Continue with <b>Line</b>"
@@ -2913,9 +3087,12 @@ msgstr "Klik op \"Opslaan\""
 msgid "Fill the \"<b>Name</b>\" field with your App Name."
 msgstr "Vul het veld \"Domeinen\" in met je domeinnaam zoals: <b>%s</b>"
 
+#, php-format
 msgid ""
-"Choose \"<b>Personal Microsoft accounts only</b>\" from the Supported "
-"account types."
+"Select an option at Supported account types.<br><strong><u>Important:</u></"
+"strong> On our Settings tab, you will need to select the Audience depending "
+"on the selected value! If you are not sure what to choose, then %1$shere%2$s "
+"you can learn more."
 msgstr ""
 
 #, fuzzy
@@ -2981,6 +3158,46 @@ msgstr "Applicatie-ID"
 #| msgid "Client Secret"
 msgid "Client secret"
 msgstr "Client Geheim"
+
+msgid "Audience"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant)"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)"
+msgstr ""
+
+msgid "Personal Microsoft accounts only"
+msgstr ""
+
+msgid ""
+"Only users in an organizational directory from a particular Azure AD tenant:"
+msgstr ""
+
+#, php-format
+msgid ""
+"The selected value will define the supported account types. %1$sLearn more."
+"%2$s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Authentication error"
+msgid "Authorization Prompt"
+msgstr "Authenticatiefout"
+
+msgid "Display account select modal"
+msgstr ""
+
+msgid "Force user to enter login credentials on each login"
+msgstr ""
+
+msgid "Display authorization and authentication dialog only when necessary"
+msgstr ""
 
 #, fuzzy
 #| msgid "Continue with <b>Yahoo</b>"

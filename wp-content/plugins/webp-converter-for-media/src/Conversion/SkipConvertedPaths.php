@@ -36,25 +36,50 @@ class SkipConvertedPaths implements HookableInterface {
 	 * @param string $server_path    .
 	 * @param bool   $skip_converted Skip images already converted?
 	 *
-	 * @return bool Status if the given path has not been converted yet.
+	 * @return bool Status if the given path should be converted.
 	 * @internal
 	 */
 	public function skip_converted_path( bool $path_status, string $filename, string $server_path, bool $skip_converted ): bool {
-		if ( ! $skip_converted ) {
-			return $path_status;
-		}
-
 		$directory    = new OutputPath();
 		$extensions   = $this->get_output_extensions();
 		$output_paths = $directory->get_paths( urldecode( $server_path ), false, $extensions );
 
+		if ( $this->has_crashed_paths( $output_paths )
+			|| ( $skip_converted && $this->has_converted_paths( $output_paths ) ) ) {
+			return false;
+		}
+
+		return $path_status;
+	}
+
+	/**
+	 * @param string[] $output_paths .
+	 *
+	 * @return bool
+	 */
+	private function has_crashed_paths( array $output_paths ): bool {
 		foreach ( $output_paths as $output_path ) {
-			if ( file_exists( $output_path ) || file_exists( $output_path . '.' . SkipLarger::DELETED_FILE_EXTENSION ) ) {
+			if ( file_exists( $output_path . '.' . SkipCrashed::CRASHED_FILE_EXTENSION ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param string[] $output_paths .
+	 *
+	 * @return bool
+	 */
+	private function has_converted_paths( array $output_paths ): bool {
+		foreach ( $output_paths as $output_path ) {
+			if ( ! file_exists( $output_path ) && ! file_exists( $output_path . '.' . SkipLarger::DELETED_FILE_EXTENSION ) ) {
 				return false;
 			}
 		}
 
-		return $path_status;
+		return true;
 	}
 
 	/**

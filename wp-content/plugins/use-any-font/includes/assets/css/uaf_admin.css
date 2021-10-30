@@ -55,4 +55,6 @@ span.field_error{ display: none; color: #900; }
 .uaf_search_bar input[type=search]{ display: block; width: 100%; padding: 3px;}
 .uaf_search_bar input[type=submit]{ display: inline-block;  position: absolute;right: 12px;top: 13px;}
 
+body.rtl .uaf_search_bar input[type=submit]{left: 12px !important;right: auto !important;}
+
 #predefined_font_load_msg{ text-align: center;color:#04a2c7; }

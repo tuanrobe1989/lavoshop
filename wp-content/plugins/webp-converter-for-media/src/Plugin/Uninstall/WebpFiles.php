@@ -3,6 +3,7 @@
 namespace WebpConverter\Plugin\Uninstall;
 
 use WebpConverter\Conversion\Format\FormatFactory;
+use WebpConverter\Conversion\SkipCrashed;
 use WebpConverter\Conversion\SkipLarger;
 
 /**
@@ -63,6 +64,7 @@ class WebpFiles {
 
 		$extensions   = ( new FormatFactory() )->get_format_extensions();
 		$extensions[] = SkipLarger::DELETED_FILE_EXTENSION;
+		$extensions[] = SkipCrashed::CRASHED_FILE_EXTENSION;
 
 		foreach ( $paths as $path ) {
 			if ( ! is_writable( $path ) || ! is_writable( dirname( $path ) ) ) {

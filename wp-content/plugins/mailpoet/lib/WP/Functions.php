@@ -731,4 +731,12 @@ class Functions {
   public function deprecatedHook(string $hook_name, string $version, string $replacement, string $message) {
     _deprecated_hook($hook_name, $version, $replacement, $message);
   }
+
+  public function getTheExcerpt($post = null) {
+    return get_the_excerpt($post);
+  }
+
+  public function hasExcerpt($post = null) {
+    return has_excerpt($post);
+  }
 }

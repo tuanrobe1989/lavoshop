@@ -37,14 +37,15 @@ class Upload implements HookableInterface {
 	/**
 	 * Initializes converting attachment images while attachment is uploaded.
 	 *
-	 * @param mixed[] $data          Updated attachment meta data.
-	 * @param int     $attachment_id ID of attachment.
+	 * @param mixed[]|null $data          Updated attachment meta data.
+	 * @param int|null     $attachment_id ID of attachment.
 	 *
-	 * @return mixed[] Attachment meta data.
+	 * @return mixed[]|null Attachment meta data.
 	 * @internal
 	 */
-	public function init_attachment_convert( array $data, int $attachment_id ): array {
-		if ( ! $data || ! isset( $data['file'] ) || ! isset( $data['sizes'] ) ) {
+	public function init_attachment_convert( array $data = null, int $attachment_id = null ) {
+		if ( ( $data === null ) || ( $attachment_id === null )
+			|| ! is_array( $data ) || ! isset( $data['file'] ) || ! isset( $data['sizes'] ) ) {
 			return $data;
 		}
 

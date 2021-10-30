@@ -116,7 +116,7 @@ class NextendSocialLoginAdmin {
     public static function admin_init() {
 
         if (current_user_can('manage_options')) {
-            require_once(dirname(__FILE__).'/notice.php');
+            require_once(dirname(__FILE__) . '/notice.php');
 
             if (!isset($_GET['page']) || $_GET['page'] != 'nextend-social-login' || !isset($_GET['view']) || $_GET['view'] != 'fix-redirect-uri') {
                 add_action('admin_notices', 'NextendSocialLoginAdmin::show_oauth_uri_notice');
@@ -231,6 +231,11 @@ class NextendSocialLoginAdmin {
             ), 10, 3);
 
         };
+
+        add_action('nsl_getting_started_warnings', array(
+            'NextendSocialLoginAdmin',
+            'show_getting_started_warning'
+        ), 100, 2);
     }
 
     public static function save_form_data() {
@@ -855,5 +860,23 @@ class NextendSocialLoginAdmin {
         }
 
         return $providerLoginUrl;
+    }
+
+    public static function show_getting_started_warning($provider, $lastUpdated) {
+        if ($provider && $lastUpdated) {
+
+            $lastUpdatedDate = date_format(date_create_from_format('Y-m-d', $lastUpdated), get_option('date_format'));
+
+            $supportURL         = 'https://nextendweb.com/contact-us/nextend-social-login-support/';
+            $version            = defined('NSL_PRO_PATH') ? 'Pro-Addon' : 'Free';
+            $args               = array(
+                'topic'    => 'Wrong-Steps',
+                'provider' => $provider->getLabel(),
+                'version'  => $version
+            );
+            $supportUrlWithArgs = add_query_arg($args, $supportURL);
+
+            printf(__('<p style="max-width:55em;"><strong><u>Warning</u></strong>: Providers change the App setup process quite often, which means some steps below might not be accurate. If you see significant difference in the written instructions and what you see at the provider, feel free to %1$sreport it%2$s, so we can check and update the instructions.<br><strong>Last updated:</strong> %3$s.</p>', 'nextend-facebook-connect'), '<a href="' . $supportUrlWithArgs . '" target="_blank">', '</a>', $lastUpdatedDate);
+        }
     }
 }

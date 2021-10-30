@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-09-13 20:40+0200\n"
-"PO-Revision-Date: 2021-09-13 20:43+0200\n"
+"POT-Creation-Date: 2021-10-13 19:51+0200\n"
+"PO-Revision-Date: 2021-10-13 19:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: zh_CN\n"
@@ -206,6 +206,16 @@ msgid ""
 "information please check our %2$s %1$s compatibility tutorial%3$s!"
 msgstr ""
 
+#, php-format
+msgid ""
+"<p style=\"max-width:55em;\"><strong><u>Warning</u></strong>: Providers "
+"change the App setup process quite often, which means some steps below might "
+"not be accurate. If you see significant difference in the written "
+"instructions and what you see at the provider, feel free to %1$sreport it"
+"%2$s, so we can check and update the instructions.<br><strong>Last updated:</"
+"strong> %3$s.</p>"
+msgstr ""
+
 msgid "You have logged in successfully."
 msgstr "你已经成功登录。"
 
@@ -398,6 +408,9 @@ msgstr "登录界面"
 
 msgid "Comment"
 msgstr "评论"
+
+msgid "Custom Actions"
+msgstr ""
 
 msgid "Docs"
 msgstr "文档"
@@ -729,6 +742,47 @@ msgstr "必须是登录用户才能评论"
 msgid "Button style"
 msgstr "按钮样式:"
 
+#, php-format
+msgid "%1$s Add your custom actions here. One action per line."
+msgstr ""
+
+#, fuzzy
+#| msgid "Usage"
+msgid "Usage:"
+msgstr "用法"
+
+#, php-format
+msgid ""
+"%1$s The HTML of the social buttons will be added at the place where the "
+"action is fired."
+msgstr ""
+
+#, fuzzy
+#| msgid "Import"
+msgid "Important:"
+msgstr "导入"
+
+#, php-format
+msgid ""
+"If you %1$sexperience problems%2$s because of this feature, you can disable "
+"it by defining the %3$s constant."
+msgstr ""
+
+#, fuzzy
+#| msgid "Login layout"
+msgid "Button layout"
+msgstr "登录界面布局"
+
+#, fuzzy
+#| msgid "Below with separator"
+msgid "Default with top separator"
+msgstr "下面并分割"
+
+#, fuzzy
+#| msgid "Below with separator"
+msgid "Default with bottom separator"
+msgstr "下面并分割"
+
 #, fuzzy
 #| msgid "No Connect button in login form"
 msgid "No Connect button in Login form"
@@ -751,6 +805,24 @@ msgstr "不要登录按钮在注册表上"
 #| msgid "Login form button style"
 msgid "Register form button style"
 msgstr "登录界面按钮样式"
+
+msgid "Checkout form"
+msgstr ""
+
+#, fuzzy
+#| msgid "No Connect button in login form"
+msgid "No Connect button in Checkout form"
+msgstr "在登录表单里不要登录按钮"
+
+#, fuzzy
+#| msgid "Login form button style"
+msgid "Checkout form button style"
+msgstr "登录界面按钮样式"
+
+#, fuzzy
+#| msgid "Register"
+msgid "Checkout layout"
+msgstr "注册"
 
 msgid "Target window"
 msgstr "目标窗口"
@@ -828,21 +900,11 @@ msgid ""
 "select this page above"
 msgstr ""
 
-#, fuzzy
-#| msgid "Usage"
-msgid "Usage:"
-msgstr "用法"
-
 #, php-format
 msgid ""
 "%1$s You won't be able to reach the selected page unless a social login/"
 "registration happens."
 msgstr ""
-
-#, fuzzy
-#| msgid "Import"
-msgid "Important:"
-msgstr "导入"
 
 msgid "OAuth redirect uri proxy page"
 msgstr ""
@@ -1246,6 +1308,12 @@ msgstr "请更新 %1$s 到 %2$s 版本."
 
 msgid "Update now!"
 msgstr "现在更新！"
+
+msgid "Hold On"
+msgstr ""
+
+msgid "You are being redirected to another page,<br>it may take a few seconds."
+msgstr ""
 
 msgid "Social Login"
 msgstr "社交登录"
@@ -2378,6 +2446,96 @@ msgstr ""
 msgid "Apple Credentials"
 msgstr ""
 
+#, php-format
+msgid ""
+"If you are not logged in yet, then log in with your %s credentials and visit "
+"the link above again."
+msgstr ""
+
+#, php-format
+msgid ""
+"Select your %s App and click on the “<b>%2$s</b>” menu point under the "
+"Settings section on the left side."
+msgstr ""
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"Authorized Redirect URLs:\" field: <b>%s</"
+#| "b>"
+msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
+msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on the \"Create New App\" button"
+msgid "Click the \"<b>New Application</b>\" button."
+msgstr "点击\"创建新应用\"按钮"
+
+#, fuzzy
+#| msgid "Name your project and then click on the Create button"
+msgid "Fill the \"<b>Name</b>\" field and click the \"<b>Create</b>\" button."
+msgstr "命名您的项目，然后点击创建按钮"
+
+msgid ""
+"Optional: Select an \"<b>App Icon</b>\" and add a \"<b>Terms of Service URL</"
+"b>\" and \"<b>Privacy Policy URL</b>\"."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the \"Credentials\" in the left hand menu"
+msgid ""
+"On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
+msgstr "点击左侧菜单的\"凭据\""
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"Authorized Redirect URLs:\" field: <b>%s</"
+#| "b>"
+msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
+msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on \"Save Changes\""
+msgid "Click the \"<b>Save Changes</b>\" button."
+msgstr "点击\"保存设置\""
+
+#, fuzzy
+#| msgid ""
+#| "Here you can see your \"APP ID\" and you can see your \"App secret\" if "
+#| "you click on the \"Show\" button. These will be needed in plugin's "
+#| "settings."
+msgid ""
+"Copy the necessary \"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values "
+"and fill these fields in the plugin settings!"
+msgstr ""
+"然后，你可以看见你的 \"APP ID\" 和 \"APP secret\"密匙，你可以看到\"显示\"按"
+"钮，这些都需要填写到插件的设置里。"
+
+msgid "Force reauthorization on each login"
+msgstr ""
+
+msgid "Disable, when you don't want to see the consent screen on each login."
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>Disqus</b>"
+msgid "Continue with <b>Discord</b>"
+msgstr "通过 <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>Disqus</b>"
+msgid "Sign up with <b>Discord</b>"
+msgstr "通过 <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>Disqus</b>"
+msgid "Link account with <b>Discord</b>"
+msgstr "关联 <b>Disqus</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Disqus</b>"
+msgid "Unlink account from <b>Discord</b>"
+msgstr "取消关联 <b>Disqus</b>"
+
 #, fuzzy, php-format
 #| msgid "Click on the Create button"
 msgid "Click on the name of your %s App."
@@ -2662,6 +2820,27 @@ msgstr ""
 msgid "Channel Secret"
 msgstr "用户密码"
 
+msgid "Enable, when you want to see the consent screen on each login."
+msgstr ""
+
+msgid "Add LINE Official Account as a friend"
+msgstr ""
+
+msgid "Don't display"
+msgstr ""
+
+msgid "Display the add friend option in the consent screen"
+msgstr ""
+
+msgid "Opens a new screen with the add friend option after the consent screen"
+msgstr ""
+
+#, php-format
+msgid ""
+"If you have a LINE Official Account, people can add it as a friend when they "
+"authorize your App. %1$sLearn more%2$s."
+msgstr ""
+
 #, fuzzy
 #| msgid "Continue with <b>LinkedIn</b>"
 msgid "Continue with <b>Line</b>"
@@ -2821,9 +3000,12 @@ msgstr "点击\"保存“"
 msgid "Fill the \"<b>Name</b>\" field with your App Name."
 msgstr "将你网站的首页URL填写到 \"网站URL\"，应该是 <b>%s</b>"
 
+#, php-format
 msgid ""
-"Choose \"<b>Personal Microsoft accounts only</b>\" from the Supported "
-"account types."
+"Select an option at Supported account types.<br><strong><u>Important:</u></"
+"strong> On our Settings tab, you will need to select the Audience depending "
+"on the selected value! If you are not sure what to choose, then %1$shere%2$s "
+"you can learn more."
 msgstr ""
 
 #, fuzzy
@@ -2890,6 +3072,46 @@ msgstr ""
 #| msgid "Client Secret"
 msgid "Client secret"
 msgstr "客户端密码"
+
+msgid "Audience"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant)"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)"
+msgstr ""
+
+msgid "Personal Microsoft accounts only"
+msgstr ""
+
+msgid ""
+"Only users in an organizational directory from a particular Azure AD tenant:"
+msgstr ""
+
+#, php-format
+msgid ""
+"The selected value will define the supported account types. %1$sLearn more."
+"%2$s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Authentication error"
+msgid "Authorization Prompt"
+msgstr "授权认证出错"
+
+msgid "Display account select modal"
+msgstr ""
+
+msgid "Force user to enter login credentials on each login"
+msgstr ""
+
+msgid "Display authorization and authentication dialog only when necessary"
+msgstr ""
 
 #, fuzzy
 #| msgid "Continue with <b>Yahoo</b>"

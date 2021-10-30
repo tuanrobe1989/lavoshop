@@ -3,6 +3,7 @@
 namespace WebpConverter\Conversion\Method;
 
 use WebpConverter\Conversion\Exception;
+use WebpConverter\Conversion\SkipCrashed;
 use WebpConverter\Conversion\SkipLarger;
 use WebpConverter\Settings\Option\OutputFormatsOption;
 
@@ -10,6 +11,15 @@ use WebpConverter\Settings\Option\OutputFormatsOption;
  * Abstract class for class that converts images using the PHP library.
  */
 abstract class LibraryMethodAbstract extends MethodAbstract implements LibraryMethodInterface {
+
+	/**
+	 * @var SkipCrashed
+	 */
+	private $skip_crashed;
+
+	public function __construct( SkipCrashed $skip_crashed ) {
+		$this->skip_crashed = $skip_crashed;
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -47,14 +57,18 @@ abstract class LibraryMethodAbstract extends MethodAbstract implements LibraryMe
 
 		try {
 			$source_path = $this->get_image_source_path( $path );
-			$image       = $this->create_image_by_path( $source_path, $plugin_settings );
 			$output_path = $this->get_image_output_path( $source_path, $format );
+
+			$this->skip_crashed->create_crashed_file( $output_path );
+
+			$image = $this->create_image_by_path( $source_path, $plugin_settings );
+			$this->convert_image_to_output( $image, $source_path, $output_path, $format, $plugin_settings );
+
+			$this->skip_crashed->delete_crashed_file( $output_path );
 
 			if ( file_exists( $output_path . '.' . SkipLarger::DELETED_FILE_EXTENSION ) ) {
 				unlink( $output_path . '.' . SkipLarger::DELETED_FILE_EXTENSION );
 			}
-
-			$this->convert_image_to_output( $image, $source_path, $output_path, $format, $plugin_settings );
 			do_action( 'webpc_convert_after', $output_path, $source_path );
 
 			return [

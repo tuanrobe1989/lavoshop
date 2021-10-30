@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-09-13 20:37+0200\n"
-"PO-Revision-Date: 2021-09-13 20:42+0200\n"
+"POT-Creation-Date: 2021-10-13 19:50+0200\n"
+"PO-Revision-Date: 2021-10-13 19:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: hu\n"
@@ -204,6 +204,16 @@ msgid ""
 "information please check our %2$s %1$s compatibility tutorial%3$s!"
 msgstr ""
 
+#, php-format
+msgid ""
+"<p style=\"max-width:55em;\"><strong><u>Warning</u></strong>: Providers "
+"change the App setup process quite often, which means some steps below might "
+"not be accurate. If you see significant difference in the written "
+"instructions and what you see at the provider, feel free to %1$sreport it"
+"%2$s, so we can check and update the instructions.<br><strong>Last updated:</"
+"strong> %3$s.</p>"
+msgstr ""
+
 msgid "You have logged in successfully."
 msgstr "Sikeresen bejelentkeztél"
 
@@ -390,6 +400,9 @@ msgstr "Bejelentkezési form"
 
 msgid "Comment"
 msgstr "Komment"
+
+msgid "Custom Actions"
+msgstr ""
 
 msgid "Docs"
 msgstr "Dokumentáció"
@@ -718,6 +731,43 @@ msgstr "A felhasználóknak be kell jelentkezve lenniük a kommenteléshez."
 msgid "Button style"
 msgstr "Gomb stílus:"
 
+#, php-format
+msgid "%1$s Add your custom actions here. One action per line."
+msgstr ""
+
+msgid "Usage:"
+msgstr "Használat"
+
+#, php-format
+msgid ""
+"%1$s The HTML of the social buttons will be added at the place where the "
+"action is fired."
+msgstr ""
+
+msgid "Important:"
+msgstr "Fontos:"
+
+#, php-format
+msgid ""
+"If you %1$sexperience problems%2$s because of this feature, you can disable "
+"it by defining the %3$s constant."
+msgstr ""
+
+#, fuzzy
+#| msgid "Login layout"
+msgid "Button layout"
+msgstr "Login elrendezése"
+
+#, fuzzy
+#| msgid "Below with separator"
+msgid "Default with top separator"
+msgstr "Alul, elválasztóval"
+
+#, fuzzy
+#| msgid "Below with separator"
+msgid "Default with bottom separator"
+msgstr "Alul, elválasztóval"
+
 #, fuzzy
 #| msgid "No Connect button in login form"
 msgid "No Connect button in Login form"
@@ -740,6 +790,24 @@ msgstr "Ne legyen összekapcsoló gomb a belépő űrlapnál"
 #| msgid "Login form button style"
 msgid "Register form button style"
 msgstr "Login gomb stílusa"
+
+msgid "Checkout form"
+msgstr ""
+
+#, fuzzy
+#| msgid "No Connect button in login form"
+msgid "No Connect button in Checkout form"
+msgstr "Ne legyen összekapcsoló gomb a belépő űrlapnál"
+
+#, fuzzy
+#| msgid "Login form button style"
+msgid "Checkout form button style"
+msgstr "Login gomb stílusa"
+
+#, fuzzy
+#| msgid "Login layout"
+msgid "Checkout layout"
+msgstr "Login elrendezése"
 
 msgid "Target window"
 msgstr "Célablak"
@@ -816,9 +884,6 @@ msgstr ""
 "%2$s Előszőr hozz létre egy új oldalt, majd másold be a következő shortcode-"
 "ot: %1$s majd válaszd ki azt az oldal itt."
 
-msgid "Usage:"
-msgstr "Használat"
-
 #, php-format
 msgid ""
 "%1$s You won't be able to reach the selected page unless a social login/"
@@ -826,9 +891,6 @@ msgid ""
 msgstr ""
 "%1$s A kiválasztott csak a login és regisztráció folyamat számára less "
 "elérhető."
-
-msgid "Important:"
-msgstr "Fontos:"
 
 msgid "OAuth redirect uri proxy page"
 msgstr "OAuth redirect uri proxy page"
@@ -1226,6 +1288,12 @@ msgstr ""
 
 msgid "Update now!"
 msgstr ""
+
+msgid "Hold On"
+msgstr "Egy kis türelmet kérünk..."
+
+msgid "You are being redirected to another page,<br>it may take a few seconds."
+msgstr "Átirányítás folyamatban,<br> ez eltarthat néhány másodpercig."
 
 msgid "Social Login"
 msgstr "Közösségi belépés"
@@ -2358,6 +2426,95 @@ msgid "Apple Credentials"
 msgstr ""
 
 #, php-format
+msgid ""
+"If you are not logged in yet, then log in with your %s credentials and visit "
+"the link above again."
+msgstr ""
+
+#, php-format
+msgid ""
+"Select your %s App and click on the “<b>%2$s</b>” menu point under the "
+"Settings section on the left side."
+msgstr ""
+
+#, fuzzy
+#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
+msgstr "Tedd a következő linket az \"Redirect URLs:\" mezőbe: <b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on the \"Create New Application\" button."
+msgid "Click the \"<b>New Application</b>\" button."
+msgstr "Kattints a \"Create New Application\" gombra."
+
+#, fuzzy
+#| msgid "Read the Developer Terms and click the Create button again!"
+msgid "Fill the \"<b>Name</b>\" field and click the \"<b>Create</b>\" button."
+msgstr "Olvasd el a Fejlesztői feltételeket és kattints a Create gombra újra."
+
+msgid ""
+"Optional: Select an \"<b>App Icon</b>\" and add a \"<b>Terms of Service URL</"
+"b>\" and \"<b>Privacy Policy URL</b>\"."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Click on the \"Credentials\" in the left hand menu to create new API "
+#| "credentials"
+msgid ""
+"On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
+msgstr ""
+"Kattints a \"Credentials\" feliratra a bal oldali menüben hogy új API "
+"adatokat készíts"
+
+#, fuzzy
+#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
+msgstr "Tedd a következő linket az \"Redirect URLs:\" mezőbe: <b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on the \"Save Changes\" button."
+msgid "Click the \"<b>Save Changes</b>\" button."
+msgstr "Kattints a \"Save Changes\" gombra."
+
+#, fuzzy
+#| msgid ""
+#| "Find the necessary \"Client ID\" and \"Client Secret\" at the middle of "
+#| "the page, under the \"Web Settings\" tab."
+msgid ""
+"Copy the necessary \"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values "
+"and fill these fields in the plugin settings!"
+msgstr ""
+"Itt találod a \"Client ID\"-t és a \"Client Secret\"-et az oldal közepén, a "
+"Web Settings tab alatt."
+
+msgid "Force reauthorization on each login"
+msgstr ""
+
+msgid "Disable, when you don't want to see the consent screen on each login."
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>Disqus</b>"
+msgid "Continue with <b>Discord</b>"
+msgstr "Folytatás a <b>Disqus</b>-szal"
+
+#, fuzzy
+#| msgid "Sign up with <b>Disqus</b>"
+msgid "Sign up with <b>Discord</b>"
+msgstr "Regisztrálás a <b>Disqus</b>-szal"
+
+#, fuzzy
+#| msgid "Link account with <b>Disqus</b>"
+msgid "Link account with <b>Discord</b>"
+msgstr "Fiók összekapcsolása a <b>Disqus</b>-szal"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Disqus</b>"
+msgid "Unlink account from <b>Discord</b>"
+msgstr "Szétkapcsolás <b>Disqus</b>-tól"
+
+#, php-format
 msgid "Click on the name of your %s App."
 msgstr "Kattints az %s Appod nevére."
 
@@ -2654,6 +2811,27 @@ msgstr ""
 msgid "Channel Secret"
 msgstr "Consumer Secret"
 
+msgid "Enable, when you want to see the consent screen on each login."
+msgstr ""
+
+msgid "Add LINE Official Account as a friend"
+msgstr ""
+
+msgid "Don't display"
+msgstr ""
+
+msgid "Display the add friend option in the consent screen"
+msgstr ""
+
+msgid "Opens a new screen with the add friend option after the consent screen"
+msgstr ""
+
+#, php-format
+msgid ""
+"If you have a LINE Official Account, people can add it as a friend when they "
+"authorize your App. %1$sLearn more%2$s."
+msgstr ""
+
 #, fuzzy
 #| msgid "Continue with <b>LinkedIn</b>"
 msgid "Continue with <b>Line</b>"
@@ -2803,9 +2981,12 @@ msgstr ""
 "Írd be a weboldalad főoldalának címét a \"Domains\" mezőbe. Valószínűleg ez "
 "lesz az: <b>%s</b>"
 
+#, php-format
 msgid ""
-"Choose \"<b>Personal Microsoft accounts only</b>\" from the Supported "
-"account types."
+"Select an option at Supported account types.<br><strong><u>Important:</u></"
+"strong> On our Settings tab, you will need to select the Audience depending "
+"on the selected value! If you are not sure what to choose, then %1$shere%2$s "
+"you can learn more."
 msgstr ""
 
 #, fuzzy
@@ -2867,6 +3048,46 @@ msgstr ""
 #| msgid "Client Secret"
 msgid "Client secret"
 msgstr "Client Secret"
+
+msgid "Audience"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant)"
+msgstr ""
+
+msgid ""
+"Accounts in any organizational directory (Any Azure AD directory - "
+"Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)"
+msgstr ""
+
+msgid "Personal Microsoft accounts only"
+msgstr ""
+
+msgid ""
+"Only users in an organizational directory from a particular Azure AD tenant:"
+msgstr ""
+
+#, php-format
+msgid ""
+"The selected value will define the supported account types. %1$sLearn more."
+"%2$s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Authentication error"
+msgid "Authorization Prompt"
+msgstr "Hitelesítési hiba"
+
+msgid "Display account select modal"
+msgstr ""
+
+msgid "Force user to enter login credentials on each login"
+msgstr ""
+
+msgid "Display authorization and authentication dialog only when necessary"
+msgstr ""
 
 #, fuzzy
 #| msgid "Continue with <b>Yahoo</b>"
