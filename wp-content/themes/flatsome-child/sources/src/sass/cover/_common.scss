@@ -4,7 +4,10 @@
 #header .container,
 .banner-layers.container,
 .footer-wrapper .container{
-    background-color: inherit;
+    background-color: initial;
+}
+.page-title-inner.container{
+    background-color: initial;
 }
 .container{
     background-color: #ffffff;
