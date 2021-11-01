@@ -7,7 +7,7 @@
           shortcode.options.textAlign ||
           shortcode.options.textColor
   }"
-  ng-bind-html="shortcode.content | html"
+  ng-bind-html="shortcode.content | autop | html"
 ></div>
 <style>
   #{{:: shortcode.$id }} {

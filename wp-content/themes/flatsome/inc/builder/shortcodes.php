@@ -37,6 +37,7 @@ require_once __DIR__ . '/shortcodes/ux_menu.php';
 require_once __DIR__ . '/shortcodes/ux_pages.php';
 require_once __DIR__ . '/shortcodes/ux_gallery.php';
 require_once __DIR__ . '/shortcodes/ux_gutenberg.php';
+require_once __DIR__ . '/shortcodes/ux_html.php';
 require_once __DIR__ . '/shortcodes/ux_slider.php';
 require_once __DIR__ . '/shortcodes/ux_logo.php';
 require_once __DIR__ . '/shortcodes/ux_hotspot.php';

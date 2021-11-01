@@ -106,6 +106,7 @@ require get_template_directory() . '/inc/shortcodes/testimonials.php';
 require get_template_directory() . '/inc/shortcodes/team_members.php';
 require get_template_directory() . '/inc/shortcodes/messages.php';
 require get_template_directory() . '/inc/shortcodes/search.php';
+require get_template_directory() . '/inc/shortcodes/ux_html.php';
 require get_template_directory() . '/inc/shortcodes/ux_logo.php';
 require get_template_directory() . '/inc/shortcodes/ux_image.php';
 require get_template_directory() . '/inc/shortcodes/ux_image_box.php';

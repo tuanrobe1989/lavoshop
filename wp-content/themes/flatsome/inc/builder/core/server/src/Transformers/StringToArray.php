@@ -44,7 +44,7 @@ class StringToArray extends Transformer {
         if ( $shortcode['compile'] ) {
           $item['children'] = $this->transform( $content );
         } else {
-          $item['content'] = ux_builder_trim( $content );
+          $item['content'] = trim( $content );
         }
       }
 
@@ -111,7 +111,7 @@ class StringToArray extends Transformer {
       return '[ux_gutenberg]' . $content . '[/ux_gutenberg]';
     }
 
-    return '[text]' . $content . '[/text]';
+    return '[text]' . wpautop( $content ) . '[/text]';
   }
 
   /**
