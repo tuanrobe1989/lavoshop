@@ -1,0 +1,21 @@
+#wrapper, #main{
+    background-color: #f4f4f4 !important;
+}
+#header .container,
+.banner-layers.container,
+.footer-wrapper .container{
+    background-color: inherit;
+}
+.container{
+    background-color: #ffffff;
+}
+.row{
+    background-color: #ffffff;
+}
+.section-title-container{
+    margin-bottom: 0 !important;
+    padding-bottom: 1.5em;
+}
+.row.row-small{
+    max-width: 1290px !important;
+}
