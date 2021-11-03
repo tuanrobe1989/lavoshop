@@ -14,7 +14,6 @@ const BUILD_DIR = path.resolve(__dirname, 'build');
 
 const entry = {
     main: JS_DIR + '/main.js',
-    single: JS_DIR + '/single.js'
 };
 
 const output = {
