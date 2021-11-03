@@ -1,7 +1,5 @@
-import './clock';
-
-//images
-
 import '../sass/main.scss';
-
-import '../img/cat.jpg';
+import 'jquery-match-height';
+jQuery(document).ready(function(){
+    jQuery('.product-small > .col-inner').matchHeight();
+})
