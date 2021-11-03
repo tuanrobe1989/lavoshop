@@ -2,9 +2,25 @@
     padding: 1rem !important;
 }
 .product-small{
-    .col-inner{
-        border: 1px solid $gray;
+    .box-image{
         padding: 0.5rem;
         border-radius: 5px;
+        box-shadow: 0 0 25px 0 rgba(0,0,0,0.1);
+        -moz-box-shadow: 0 0 25px 0 rgba(0,0,0,0.1);
+        -webkit-box-shadow: 0 0 25px 0 rgba(0,0,0,0.1);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    .product-title{
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+    .price{
+        bdi{
+            color: $maincolor;
+            font-size: 1rem;
+            .woocommerce-Price-currencySymbol{
+                color: $maincolor;
+            }
+        }
     }
 }

@@ -11,6 +11,10 @@ h1, h2, h3, h4, h5, h6, .heading-font {
 .alt-font {
   font-family: 'Roboto', sans-serif !important; }
 
+.tit__promo {
+  font-size: 4.5rem;
+  text-transform: uppercase; }
+
 .top__banner {
   margin: 0 0 2rem 0 !important; }
   .top__banner > div {
@@ -20,10 +24,23 @@ h1, h2, h3, h4, h5, h6, .heading-font {
 .product-lightbox {
   padding: 1rem !important; }
 
-.product-small .col-inner {
-  border: 1px solid #e6e6e6;
+.product-small .box-image {
   padding: 0.5rem;
-  border-radius: 5px; }
+  border-radius: 5px;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05); }
+
+.product-small .product-title {
+  margin: 0.5rem 0;
+  font-size: 0.9rem; }
+
+.product-small .price bdi {
+  color: #e8533b;
+  font-size: 1rem; }
+  .product-small .price bdi .woocommerce-Price-currencySymbol {
+    color: #e8533b; }
 
 .box-blog-post .box-text {
   padding: 1rem !important; }
