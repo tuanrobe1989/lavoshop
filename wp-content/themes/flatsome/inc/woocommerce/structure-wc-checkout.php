@@ -17,7 +17,7 @@ add_action( 'woocommerce_before_cart_totals', 'flatsome_woocommerce_before_cart_
 
 // Custom Thank You Html
 function flatsome_thank_you_html(){
-    echo get_theme_mod('html_thank_you');
+	echo do_shortcode( get_theme_mod( 'html_thank_you' ) );
 }
 add_action( 'woocommerce_thankyou', 'flatsome_thank_you_html', 100);
 

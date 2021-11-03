@@ -11,6 +11,39 @@ h1, h2, h3, h4, h5, h6, .heading-font {
 .alt-font {
   font-family: 'Roboto', sans-serif !important; }
 
+#wrapper, #main {
+  background-color: #f4f4f4 !important; }
+
+#header .container,
+.banner-layers.container,
+.footer-wrapper .container {
+  background-color: initial; }
+
+.page-title-inner.container {
+  background-color: initial; }
+
+.container {
+  background-color: #ffffff; }
+
+.row {
+  background-color: #ffffff; }
+
+.section-title-container {
+  margin-bottom: 0 !important;
+  padding-bottom: 1.5em; }
+
+.row.row-small {
+  max-width: 1290px !important; }
+
+.top__banner {
+  margin: 0 0 2rem 0 !important; }
+  .top__banner > div {
+    padding: 0;
+    margin: 0; }
+
+.product-lightbox {
+  padding: 1rem !important; }
+
 .box-blog-post .box-text {
   padding: 1rem !important; }
 

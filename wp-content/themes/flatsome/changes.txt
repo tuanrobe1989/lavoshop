@@ -1,3 +1,18 @@
+--- 3.14.3 ---
+NEW: HTML element in UX Builder.
+
+FIXED: Builder: Render paragraphs correctly for classic editor content.
+FIXED: Thank you page content option didn't render shortcodes.
+FIXED: Scroll to on mobile navigated incorrectly in some cases.
+FIXED: Infinite scroll on masonry catalog layout.
+
+ENHANCEMENT: Improved swatch compatibility for multiple woocommerce extension plugins.
+ENHANCEMENT: Builder: Check post existence before going into edit mode.
+ENHANCEMENT: Shop sticky sidebar height when infinite scroll items are appended.
+ENHANCEMENT: Improved WPML configuration.
+
+REVERT: Builder does not wrap text element content with paragraph anymore. (Use the new HTML element for raw content instead)
+
 --- 3.14.2 ---
 FIXED: Product categories element displayed sub categories.
 FIXED: PHP notice product categories variable may not support offset operations.

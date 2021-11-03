@@ -11,6 +11,8 @@
 	<admin-texts>
 		<key name="theme_mods_flatsome">
 			<key name="404_block"/>
+			<key name="account_login_lightbox_side_panel_bg_image"/>
+			<key name="account_login_lightbox_side_panel_block"/>
 			<key name="blog_after_post" />
 			<key name="blog_header" />
 			<key name="catalog_mode_header" />
@@ -37,6 +39,8 @@
 			<key name="html_cart_sidebar"/>
 			<key name="html_checkout_sidebar"/>
 			<key name="html_intro" />
+			<key name="html_scripts_after_body" />
+			<key name="html_scripts_before_body" />
 			<key name="html_scripts_footer" />
 			<key name="html_scripts_header" />
 			<key name="html_shop_page" />
