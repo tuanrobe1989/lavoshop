@@ -1,6 +1,27 @@
 .tit{
     &__promo{
-        font-size: 4.5rem;
         text-transform: uppercase;
+        color: $darkback;
+        font-size: 2.5rem;
+        text-align: center;
+        width: 100%;
+        display: block;
+        @include breakpoint-up(md){
+            font-size: 4.5rem;
+            text-align: left;
+        }   
+        &.sub{
+            color:$maincolor;
+            font-size: 2rem;
+            @include breakpoint-up(md){
+                font-size: 2.5rem;
+            }  
+        } 
+        
+    }
+}
+p{
+    &.marbt{
+        margin-bottom: 0;
     }
 }
