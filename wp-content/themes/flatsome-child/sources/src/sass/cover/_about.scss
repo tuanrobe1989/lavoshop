@@ -381,13 +381,13 @@
       position: absolute;
       top: 0;
       height: 100%;
-      right: -66%;
+      left: -28%;
     }
     @include breakpoint-up(md) {
-      right: -30%;
+      left: -20%;
     }
     @include breakpoint-up(lg) {
-      right: -8%;
+      left: -10%;
     }
   }
 }

@@ -421,13 +421,13 @@ p.marbt {
         position: absolute;
         top: 0;
         height: 100%;
-        right: -66%; } }
+        left: -28%; } }
     @media (min-width: 992px) {
       .foundation__right-column__bg-img-pc {
-        right: -30%; } }
+        left: -20%; } }
     @media (min-width: 1200px) {
       .foundation__right-column__bg-img-pc {
-        right: -8%; } }
+        left: -10%; } }
 
 .mission {
   position: relative; }
