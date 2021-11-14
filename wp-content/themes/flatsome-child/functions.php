@@ -1,4 +1,7 @@
 <?php
+require_once( get_stylesheet_directory() . '/includes/single-product.php' );
+require_once( get_stylesheet_directory() . '/includes/common.php' );
+
 // Add custom Theme Functions hereadd_filter( 'upload_mimes', 'my_myme_types', 1, 1 );
 add_filter( 'upload_mimes', 'my_myme_types', 1, 1 );
 add_filter( 'mine_types', 'my_myme_types', 1, 1 );
@@ -20,4 +23,3 @@ function add_theme_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'add_theme_scripts');
-require_once( get_stylesheet_directory() . '/includes/single-product.php' );

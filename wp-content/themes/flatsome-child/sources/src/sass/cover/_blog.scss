@@ -3,3 +3,33 @@
         padding: 1rem !important;
     }
 }
+.article-inner{
+    .wp-block-image{
+        img{
+            border: 1px solid $grey;
+            padding: 1rem;
+        }
+        figcaption{
+            text-align: center;
+        }
+    }
+    h1.entry-title{
+        font-size: 2.5rem !important;
+    }
+    h2{
+        color: $maincolor;
+        border-bottom: 1px solid $maincolor;
+        strong,em{
+            color: $maincolor;
+        }
+    }
+    h2,h3{
+        text-transform: uppercase;
+        padding-bottom: 1rem;
+        margin: 1.5rem 0;
+    }
+    h3,h4,h5{
+        color: $black;
+        border-bottom: 1px solid $gray;
+    }
+}
