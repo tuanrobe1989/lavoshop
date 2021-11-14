@@ -1,0 +1,122 @@
+.row-divided.row-reverse>.col+.col:not(.large-12) {
+    @include breakpoint-up(wmd) {
+        border-right: 0 !important;
+    }
+}
+
+.shop-container {
+    .product-type-simple {
+        .row {
+            .col.large-9 {
+                @include breakpoint-up(wmd) {
+                    padding-right: 1rem;
+                }
+            }
+
+            #product-sidebar {
+                @include breakpoint-up(wmd) {
+                    padding-left: 1rem;
+                }
+            }
+        }
+    }
+
+}
+
+#product-sidebar {
+    @include breakpoint-up(wmd) {
+        border: none;
+    }
+
+    .widget {
+        @include breakpoint-up(wmd) {
+            background: $white;
+            padding: 1rem;
+        }
+    }
+    .widget-title{
+        color: $maincolor;
+    }
+    .recent-blog-posts a{
+        font-size: 0.9rem;
+    }
+}
+
+.product-page-title {
+    background: $black;
+
+    .page-title-inner {
+        padding-top: 0;
+    }
+
+    .woocommerce-breadcrumb {
+        a {
+            font-size: 0.8rem;
+            color: $white;
+            &:hover{
+                color: $white !important;
+                text-decoration: underline;
+            }
+        }
+
+        span {
+            color: $white;
+        }
+    }
+}
+
+.single-product {
+
+    #wrapper,
+    #main {
+        @include breakpoint-up(wmd) {
+            background: $grey !important;
+        }
+    }
+
+    .product-main {
+        @include breakpoint-up(wmd) {
+            padding: 0 1rem;
+            background: $white;
+        }
+    }
+
+    .product-section:not(.related) {
+        @include breakpoint-up(wmd) {
+            border: none !important;
+        }
+
+        >.row {
+            background: $white;
+
+            @include breakpoint-up(wmd) {
+                border: 1px solid $grey;
+                margin: 1rem 0;
+            }
+
+            >.col {
+                @include breakpoint-up(wmd) {
+                    max-width: 100% !important;
+                    @include flex-basis(100% !important);
+                }
+            }
+        }
+    }
+
+    .product-section {
+        &.related {
+            @include breakpoint-up(wmd) {
+                background: $white;
+                border: none;
+                padding: 1.2rem;
+            }
+        }
+    }
+
+    .box-image {
+        @include breakpoint-up(wmd) {
+            background: $white;
+            border: 0;
+        }
+    }
+}

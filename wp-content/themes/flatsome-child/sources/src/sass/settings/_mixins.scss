@@ -19,6 +19,8 @@ $xs: 576px;
 $sm: 768px;
 $md: 992px;
 $lg: 1200px;
+
+$wmd: 850px;
 @mixin transition($param) {
   -webkit-transition: $param;
   -moz-transition: $param;
@@ -31,6 +33,11 @@ $lg: 1200px;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+}
+@mixin flex-basis($param) {
+  -webkit-flex-basis:$param;
+  -moz-flex-basis:$param;
+  flex-basis:$param;
 }
 @mixin flex-direction($param) {
   -moz-flex-direction: $param;
@@ -74,6 +81,7 @@ $lg: 1200px;
 $breakpoints-up: (
   "xs": "576px",
   "sm": "768px",
+  "wmd": "850px",
   "md": "992px",
   "lg": "1200px",
 );
@@ -81,6 +89,7 @@ $breakpoints-up: (
 $breakpoints-down: (
   "xs": "575px",
   "sm": "767px",
+  "wmd": "850px",
   "md": "991px",
   "lg": "1199px",
 );

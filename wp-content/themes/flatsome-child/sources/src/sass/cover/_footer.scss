@@ -1,0 +1,22 @@
+.footer{
+    &__title{
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        font-size: 1.4rem !important;
+        display: block;
+    }
+    &__social{
+        ul{
+            li{
+                i{
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+}
+.cat-item{
+    .icon-dribbble,.icon-envelop,.icon-phone{
+        margin-right: 8px;
+    }
+}
