@@ -9,7 +9,7 @@ const cssnano = require('cssnano');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const JS_DIR = path.resolve(__dirname, 'src/js');
-const IMG_DIR = path.resolve(__dirname, 'src/img');
+const IMG_DIR = path.resolve(__dirname, '../images');
 const BUILD_DIR = path.resolve(__dirname, 'build');
 
 const entry = {
@@ -32,24 +32,31 @@ const rules = [{
         exclude: /node_modules/,
         use: [
             MiniCssExtractPlugin.loader,
+            // {
+            //     loader: "style-loader"
+            // },
             'css-loader',
             {
                 loader: "sass-loader",
                 options: {
-                  sourceMap: true,
+                    sourceMap: true,
                 },
-              },
+            },
         ]
     },
+    // {
+    //     test: /\.(png|jpg|svg|jpeg|gif|ico)$/,
+    //     use: {
+    //         loader: 'file-loader',
+    //         options: {
+    //             name: '[path][name].[ext]',
+    //             publicPath: 'production' === process.env.NODE_ENV ? '../' : '../../'
+    //         }
+    //     }
+    // },
     {
-        test: /\.(png|jpg|svg|jpeg|gif|ico)$/,
-        use: {
-            loader: 'file-loader',
-            options: {
-                name: '[path][name].[ext]',
-                publicPath: 'production' === process.env.NODE_ENV ? '../' : '../../'
-            }
-        }
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader'
     },
     {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -77,7 +84,7 @@ const plugins = (argv) => [
         host: 'lavoshop.localhost',
         port: 8080,
         proxy: 'lavoshop.localhost',
-        files:['../*.php']
+        files: ['../*.php']
     })
 ];
 
@@ -106,5 +113,5 @@ module.exports = (env, argv) => ({
     externals: {
         jquery: 'jQuery',
     },
-    
+
 })

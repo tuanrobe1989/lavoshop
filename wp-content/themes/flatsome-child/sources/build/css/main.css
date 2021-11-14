@@ -38,6 +38,22 @@ p.marbt {
 .widget-title, strong {
   color: #1a1a1a; }
 
+@media (min-width: 850px) {
+  .header-search-form {
+    min-width: 850px !important; } }
+
+.footer__title {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 1.4rem !important;
+  display: block; }
+
+.footer__social ul li i {
+  font-size: 1.5rem; }
+
+.cat-item .icon-dribbble, .cat-item .icon-envelop, .cat-item .icon-phone {
+  margin-right: 8px; }
+
 .top__banner {
   margin: 0 0 2rem 0 !important; }
   .top__banner > div {
@@ -76,6 +92,31 @@ p.marbt {
 
 .box-blog-post .box-text {
   padding: 1rem !important; }
+
+.article-inner .wp-block-image img {
+  border: 1px solid #f7f7f7;
+  padding: 1rem; }
+
+.article-inner .wp-block-image figcaption {
+  text-align: center; }
+
+.article-inner h1.entry-title {
+  font-size: 2.5rem !important; }
+
+.article-inner h2 {
+  color: #e8533b;
+  border-bottom: 1px solid #e8533b; }
+  .article-inner h2 strong, .article-inner h2 em {
+    color: #e8533b; }
+
+.article-inner h2, .article-inner h3 {
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+  margin: 1.5rem 0; }
+
+.article-inner h3, .article-inner h4, .article-inner h5 {
+  color: #333333;
+  border-bottom: 1px solid #e6e6e6; }
 
 .value {
   position: relative; }
@@ -654,17 +695,17 @@ p.marbt {
     background: #ffffff;
     border: 0; } }
 
-.footer__title {
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  font-size: 1.4rem !important;
-  display: block; }
+h1.page-title {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA/QAAAAIBAMAAACls6muAAAALVBMVEUAAAAAAAB/f39AQEC/v7+vr6/v7+9gYGAQEBCTk5Pf39/Pz89wcHBQUFAwMDB2cFbAAAAAAXRSTlMAQObYZgAAAMRJREFUSMft17ENwjAQBVBXNKmsNKlPpECigSugoIjQUUCJGICCDZgAsUiGYAM2gAkQi9DYPsuysIQENonfCl9f908kYUA+EDDG6GYQQj570RkFWdZgO6JjIjOfEh0LsO3IIr6OtCVoaMxlloAKjRsoI9Ia8cZB15QLepJZ1zxVtirqIdGGLy13+4rKQ2Z/rXI3Sa2ibj+YYVsw0CKzHyqRTT1zoBGxXHyjj90Rsd/b7xz6Ffg3iJ9mFAWFrCCumkJakawX62U49Fr3VHkAAAAASUVORK5CYII=) no-repeat;
+  background-position: bottom center;
+  background-size: 280px auto;
+  padding-bottom: 2rem; }
+  @media (min-width: 850px) {
+    h1.page-title {
+      font-size: 3rem !important; } }
 
-.footer__social ul li i {
-  font-size: 1.5rem; }
-
-.cat-item .icon-dribbble, .cat-item .icon-envelop, .cat-item .icon-phone {
-  margin-right: 8px; }
+.archive .post-item .box {
+  border: 1px solid #e6e6e6; }
 
 input, select, textarea {
   border-radius: 5px !important; }
