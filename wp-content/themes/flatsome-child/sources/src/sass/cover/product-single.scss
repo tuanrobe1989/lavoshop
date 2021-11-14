@@ -111,6 +111,25 @@
                 padding: 1.2rem;
             }
         }
+        h5{
+            border-bottom: 1px solid $maincolor;
+            padding-bottom: 1rem;
+            @include breakpoint-up(wmd) {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .product-footer{
+        .product-section-title{
+            border-bottom: 1px solid $maincolor;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            @include breakpoint-up(wmd) {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+        }
     }
 
     .box-image {

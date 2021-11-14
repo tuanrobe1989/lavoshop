@@ -42,3 +42,13 @@
         }
     }
 }
+.woocommerce-loop-product__title{
+    a{
+        font-weight: 600;
+    }
+}
+.row-large>.flickity-viewport>.flickity-slider>.col, .row-large>.col{
+    @include breakpoint-up(wmd){
+        padding: 0 1rem !important;
+    }
+}
