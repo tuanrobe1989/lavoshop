@@ -1,0 +1,17 @@
+.tax-product_cat{
+    #main{
+        background: $grey;
+    }
+    .category-page-row{
+        .large-9{
+            .products {
+                background: #fff !important;
+            }
+        }
+    }
+    .sidebar-inner{
+        background: #fff;
+        border: 1px solid $grey;
+        padding: 1rem;
+    }
+}

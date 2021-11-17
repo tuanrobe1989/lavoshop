@@ -25,6 +25,12 @@ p{
         margin-bottom: 0;
     }
 }
+.widget-title{
+    color: $maincolor !important;
+    @include breakpoint-up(wmd) {
+        font-size: 1.35rem !important;
+    }
+}
 .widget-title,strong{
     color: $darkback;
 }
