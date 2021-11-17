@@ -696,7 +696,7 @@ p.marbt {
     border: 0; } }
 
 h1.page-title {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA/QAAAAIBAMAAACls6muAAAALVBMVEUAAAAAAAB/f39AQEC/v7+vr6/v7+9gYGAQEBCTk5Pf39/Pz89wcHBQUFAwMDB2cFbAAAAAAXRSTlMAQObYZgAAAMRJREFUSMft17ENwjAQBVBXNKmsNKlPpECigSugoIjQUUCJGICCDZgAsUiGYAM2gAkQi9DYPsuysIQENonfCl9f908kYUA+EDDG6GYQQj570RkFWdZgO6JjIjOfEh0LsO3IIr6OtCVoaMxlloAKjRsoI9Ia8cZB15QLepJZ1zxVtirqIdGGLy13+4rKQ2Z/rXI3Sa2ibj+YYVsw0CKzHyqRTT1zoBGxXHyjj90Rsd/b7xz6Ffg3iJ9mFAWFrCCumkJakawX62U49Fr3VHkAAAAASUVORK5CYII=) no-repeat;
+  background: url(../../_/images/line.png) no-repeat;
   background-position: bottom center;
   background-size: 280px auto;
   padding-bottom: 2rem; }
