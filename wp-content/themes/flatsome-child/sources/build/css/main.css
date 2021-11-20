@@ -99,10 +99,14 @@ p.marbt {
 .woocommerce-loop-product__title a {
   font-weight: 600; }
 
+.woocommerce-variation-price .price {
+  font-size: 2.5rem !important; }
+
 @media (min-width: 850px) {
   .row-large > .flickity-viewport > .flickity-slider > .col, .row-large > .col {
     padding: 0 1rem !important; } }
 
+.single_add_to_cart_button,
 .add_to_cart_button {
   width: 100%;
   padding: 0.5rem 1rem !important;
@@ -111,6 +115,13 @@ p.marbt {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDA2IDc5LjE2NDc1MywgMjAyMS8wMi8xNS0xMTo1MjoxMyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjMgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkRBRTJFNzk4NDlCMDExRUNCNzkyRDUwM0MwQjQ2RjVFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkRBRTJFNzk5NDlCMDExRUNCNzkyRDUwM0MwQjQ2RjVFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6REFFMkU3OTY0OUIwMTFFQ0I3OTJENTAzQzBCNDZGNUUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6REFFMkU3OTc0OUIwMTFFQ0I3OTJENTAzQzBCNDZGNUUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5ZMRcSAAABcklEQVR42qxVbXHDMAxVe/vfMKghlEE6BAuEQAiEjEEZrBDKYCmDjIHLIEPg2j15p3iWrDZ5d+/OJ8nRRyQZnHPwAiN67Z03AGiREaNnBysjODKeNZGF88nTru0ofPBKnAT0SZYHz13m/j4J8proK8/pcUpqeSb1N0Q+OB3otwzKvsIZGKVDp0scXWjQuQ6JBpNnhbKDZ01Ig6Hy+I3UBnKOakX7lvRDGixoDZ9w1OT0nKNSVpLOos7SIKVppllpN0ZHgmipTrrUcJcYVhhUzGam3zy88bA4lDfPc2H4w1B/4Pn4b3gLUWrnh2LgliqHhqyXn79VIsNyC1kqXSzbLy7eaclS3TLyFp0ARjitsb1zMOTcJZtci/m7xjSBccsxaJrBYot+LqjWqG2GVbEVdC1mNmKrg2JgL9g4J3xdiwNbZ2puCsNtE/vZwuUyes/IjoWM9pI95+i79HMzuIn2Qil63MZWub3Dcz+S53v2YN4FGADkBpf5t9ACmQAAAABJRU5ErkJggg==);
   background-repeat: no-repeat;
   background-position: center right 1rem; }
+
+.product-summary .quantity {
+  width: 100%; }
+
+.form-minimal.quantity .qty {
+  width: 100%;
+  max-width: 100%; }
 
 .box-blog-post .box-text {
   padding: 1rem !important; }

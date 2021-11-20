@@ -499,6 +499,8 @@ __webpack_require__.r(__webpack_exports__);
 
 jQuery(document).ready(function () {
   jQuery('.product-small > .col-inner').matchHeight();
+  jQuery('.title-wrapper').matchHeight();
+  jQuery('.post-item .box-text').matchHeight();
 });
 
 /***/ }),
