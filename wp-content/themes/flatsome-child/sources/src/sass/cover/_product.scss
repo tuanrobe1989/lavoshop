@@ -47,12 +47,17 @@
         font-weight: 600;
     }
 }
+.woocommerce-variation-price{
+    .price{
+        font-size: 2.5rem !important;
+    }
+}
 .row-large>.flickity-viewport>.flickity-slider>.col, .row-large>.col{
     @include breakpoint-up(wmd){
         padding: 0 1rem !important;
     }
 }
-
+.single_add_to_cart_button,
 .add_to_cart_button{
     width: 100%;
     padding: 0.5rem 1rem !important;
@@ -61,4 +66,11 @@
     background: url(../../../images/icon-cart-01.png);
     background-repeat: no-repeat;
     background-position: center right 1rem;
+}
+.product-summary .quantity{
+    width: 100%;
+}
+.form-minimal.quantity .qty{
+    width: 100%;
+    max-width: 100%;
 }
