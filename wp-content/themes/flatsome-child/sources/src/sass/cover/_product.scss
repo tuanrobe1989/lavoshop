@@ -52,3 +52,13 @@
         padding: 0 1rem !important;
     }
 }
+
+.add_to_cart_button{
+    width: 100%;
+    padding: 0.5rem 1rem !important;
+    box-sizing: border-box;
+    display: block;
+    background: url(../../../images/icon-cart-01.png);
+    background-repeat: no-repeat;
+    background-position: center right 1rem;
+}
