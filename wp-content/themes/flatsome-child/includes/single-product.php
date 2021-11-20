@@ -24,7 +24,7 @@ function add_upsell_products_func()
 
     if ($upsell_products) :
         $list_id_upsell_products = implode(', ', $upsell_products);
-        echo $list_id_upsell_products;
+
 ?>
         <div class="product-section">
             <?php
