@@ -2,10 +2,10 @@
 
 namespace WebpConverter\Notice;
 
-use WebpConverter\Helper\OptionsAccess;
-use WebpConverter\Helper\ViewLoader;
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginInfo;
+use WebpConverter\Service\OptionsAccessManager;
+use WebpConverter\Service\ViewLoader;
 use WebpConverter\Settings\AdminAssets;
 
 /**
@@ -77,11 +77,11 @@ class NoticeIntegration implements HookableInterface {
 	 * @return void
 	 */
 	public function set_default_value() {
-		if ( OptionsAccess::get_option( $this->notice->get_option_name() ) !== null ) {
+		if ( OptionsAccessManager::get_option( $this->notice->get_option_name() ) !== null ) {
 			return;
 		}
 
-		OptionsAccess::update_option( $this->notice->get_option_name(), $this->notice->get_default_value() );
+		OptionsAccessManager::update_option( $this->notice->get_option_name(), $this->notice->get_default_value() );
 	}
 
 	/**
@@ -90,6 +90,6 @@ class NoticeIntegration implements HookableInterface {
 	 * @return void
 	 */
 	public function set_disable_value() {
-		OptionsAccess::update_option( $this->notice->get_option_name(), $this->notice->get_disable_value() );
+		OptionsAccessManager::update_option( $this->notice->get_option_name(), $this->notice->get_disable_value() );
 	}
 }

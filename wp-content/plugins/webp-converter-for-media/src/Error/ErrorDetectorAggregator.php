@@ -3,7 +3,6 @@
 namespace WebpConverter\Error;
 
 use WebpConverter\Error\Detector\LibsNotInstalledDetector;
-use WebpConverter\Error\Detector\LibsWithoutAvifSupportDetector;
 use WebpConverter\Error\Detector\LibsWithoutWebpSupportDetector;
 use WebpConverter\Error\Detector\PassthruExecutionDetector;
 use WebpConverter\Error\Detector\PathsErrorsDetector;
@@ -12,10 +11,10 @@ use WebpConverter\Error\Detector\RewritesErrorsDetector;
 use WebpConverter\Error\Detector\SettingsIncorrectDetector;
 use WebpConverter\Error\Notice\ErrorNotice;
 use WebpConverter\Error\Notice\RewritesCachedNotice;
-use WebpConverter\Helper\OptionsAccess;
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginData;
 use WebpConverter\PluginInfo;
+use WebpConverter\Service\OptionsAccessManager;
 
 /**
  * Supports generating list of server configuration errors.
@@ -107,7 +106,7 @@ class ErrorDetectorAggregator implements HookableInterface {
 				$error_codes[] = $error->get_key();
 			}
 		} else {
-			$error_codes = OptionsAccess::get_option( self::ERRORS_CACHE_OPTION, [] );
+			$error_codes = OptionsAccessManager::get_option( self::ERRORS_CACHE_OPTION, [] );
 		}
 
 		return $error_codes;
@@ -124,7 +123,7 @@ class ErrorDetectorAggregator implements HookableInterface {
 			$error_codes[] = $error->get_key();
 		}
 
-		OptionsAccess::update_option( self::ERRORS_CACHE_OPTION, $error_codes );
+		OptionsAccessManager::update_option( self::ERRORS_CACHE_OPTION, $error_codes );
 	}
 
 	/**
@@ -143,8 +142,6 @@ class ErrorDetectorAggregator implements HookableInterface {
 		if ( $new_error = ( new LibsNotInstalledDetector() )->get_error() ) {
 			$this->cached_errors[] = $new_error;
 		} elseif ( $new_error = ( new LibsWithoutWebpSupportDetector() )->get_error() ) {
-			$this->cached_errors[] = $new_error;
-		} elseif ( $new_error = ( new LibsWithoutAvifSupportDetector( $this->plugin_data ) )->get_error() ) {
 			$this->cached_errors[] = $new_error;
 		}
 

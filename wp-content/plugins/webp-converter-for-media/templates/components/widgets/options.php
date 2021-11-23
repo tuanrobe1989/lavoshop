@@ -16,8 +16,21 @@
 	<div class="webpContent">
 		<?php foreach ( $options as $index => $option ) : ?>
 			<div class="webpPage__widgetRow">
-				<h4><?php echo esc_html( $option['label'] ); ?></h4>
-				<?php include dirname( __DIR__ ) . '/fields/' . $option['type'] . '.php'; ?>
+				<ul class="webpPage__widgetColumns">
+					<li class="webpPage__widgetColumn">
+						<h4><?php echo esc_html( $option['label'] ); ?></h4>
+						<?php include dirname( __DIR__ ) . '/fields/' . $option['type'] . '.php'; ?>
+					</li>
+					<?php if ( $option['notice_lines'] ) : ?>
+						<li class="webpPage__widgetColumn">
+							<div class="webpPage__widgetColumnNotice">
+								<?php foreach ( $option['notice_lines'] as $line ) : ?>
+									<p><?php echo wp_kses_post( $line ); ?></p>
+								<?php endforeach; ?>
+							</div>
+						</li>
+					<?php endif; ?>
+				</ul>
 			</div>
 		<?php endforeach; ?>
 		<div class="webpPage__widgetRow">

@@ -2,10 +2,10 @@
 
 namespace WebpConverter\Plugin\Deactivation;
 
-use WebpConverter\Helper\ViewLoader;
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginData;
 use WebpConverter\PluginInfo;
+use WebpConverter\Service\ViewLoader;
 use WebpConverter\Settings\AdminAssets;
 
 /**

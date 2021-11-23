@@ -55,6 +55,8 @@ class NextendSocialProviderTwitter extends NextendSocialProvider {
             'consumer_secret' => 'Consumer Secret'
         );
 
+        $this->oauthRedirectBehavior = 'default_redirect_but_app_has_restriction';
+
         parent::__construct(array(
             'consumer_key'       => '',
             'consumer_secret'    => '',
@@ -106,12 +108,6 @@ class NextendSocialProviderTwitter extends NextendSocialProvider {
         return $newData;
     }
 
-    public function getRedirectUriForApp() {
-        $parts = explode('?', $this->getRedirectUri());
-
-        return $parts[0];
-    }
-
     /**
      * @return NextendSocialProviderTwitterClient
      */
@@ -122,7 +118,7 @@ class NextendSocialProviderTwitter extends NextendSocialProvider {
 
             $this->client = new NextendSocialProviderTwitterClient($this->id, $this->settings->get('consumer_key'), $this->settings->get('consumer_secret'));
 
-            $this->client->setRedirectUri($this->getRedirectUri());
+            $this->client->setRedirectUri($this->getRedirectUriForOAuthFlow());
         }
 
         return $this->client;

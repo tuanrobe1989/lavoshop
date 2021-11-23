@@ -171,15 +171,31 @@ function checkWebView() {
     return isWebView;
 }
 
-function isAllowedWebViewForUserAgent() {
-    var nav = window.navigator || {};
-    var ua = nav.userAgent || "";
-    if (ua.match(new RegExp([
+function isAllowedWebViewForUserAgent(provider) {
+    var googleAllowedWebViews = [
         'Instagram',
         'FBAV',
         'FBAN',
         'Line',
-    ].join('|')))) {
+    ], facebookAllowedWebViews = [
+        'Instagram',
+        'FBAV',
+        'FBAN'
+    ], whitelist = [];
+
+    switch (provider) {
+        case 'facebook':
+            whitelist = facebookAllowedWebViews;
+            break;
+        case 'google':
+            whitelist = googleAllowedWebViews;
+            break;
+    }
+
+    var nav = window.navigator || {};
+    var ua = nav.userAgent || "";
+
+    if (whitelist.length && ua.match(new RegExp(whitelist.join('|')))) {
         return true;
     }
 
@@ -189,10 +205,31 @@ function isAllowedWebViewForUserAgent() {
 window._nslDOMReady(function () {
 
     window.nslRedirect = function (url) {
-        var overlay = document.createElement('div');
-        overlay.id = "nsl-redirect-overlay";
-        overlay.insertAdjacentHTML("afterbegin", "<div id='nsl-redirect-overlay-container'><div id='nsl-redirect-overlay-spinner'></div><p id='nsl-redirect-overlay-title'>" + _localizedStrings.redirect_overlay_title + "</p><p id='nsl-redirect-overlay-text'>" + _localizedStrings.redirect_overlay_text + "</p></div>");
-        document.body.appendChild(overlay);
+        if (_redirectOverlay) {
+            var overlay = document.createElement('div');
+            overlay.id = "nsl-redirect-overlay";
+            var overlayHTML = '',
+                overlayContainer = "<div id='nsl-redirect-overlay-container'>",
+                overlayContainerClose = "</div>",
+                overlaySpinner = "<div id='nsl-redirect-overlay-spinner'></div>",
+                overlayTitle = "<p id='nsl-redirect-overlay-title'>" + _localizedStrings.redirect_overlay_title + "</p>",
+                overlayText = "<p id='nsl-redirect-overlay-text'>" + _localizedStrings.redirect_overlay_text + "</p>";
+
+            switch (_redirectOverlay) {
+                case "overlay-only":
+                    break;
+                case "overlay-with-spinner":
+                    overlayHTML = overlayContainer + overlaySpinner + overlayContainerClose;
+                    break;
+                default:
+                    overlayHTML = overlayContainer + overlaySpinner + overlayTitle + overlayText + overlayContainerClose;
+                    break;
+            }
+
+            overlay.insertAdjacentHTML("afterbegin", overlayHTML);
+            document.body.appendChild(overlay);
+        }
+
         window.location = url;
     };
 
@@ -253,9 +290,16 @@ window._nslDOMReady(function () {
     });
 
     var googleLoginButtons = document.querySelectorAll(' a[data-plugin="nsl"][data-provider="google"]');
-    if (googleLoginButtons.length && checkWebView() && !isAllowedWebViewForUserAgent()) {
+    if (googleLoginButtons.length && checkWebView() && !isAllowedWebViewForUserAgent('google')) {
         googleLoginButtons.forEach(function (googleLoginButton) {
             googleLoginButton.remove();
+        });
+    }
+
+    var facebookLoginButtons = document.querySelectorAll(' a[data-plugin="nsl"][data-provider="facebook"]');
+    if (facebookLoginButtons.length && checkWebView() && /Android/.test(window.navigator.userAgent) && !isAllowedWebViewForUserAgent('facebook')) {
+        facebookLoginButtons.forEach(function (facebookLoginButton) {
+            facebookLoginButton.remove();
         });
     }
 });

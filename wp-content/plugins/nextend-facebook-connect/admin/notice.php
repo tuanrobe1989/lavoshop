@@ -2,28 +2,24 @@
 
 
 $current = time();
-if ($current <= mktime(0, 0, 0, 7, 28, 2021)) {
-    if (get_option('nsl_summer_2021') != '1') {
+if (mktime(0, 0, 0, 11, 23, 2021) <= $current && $current < mktime(0, 0, 0, 12, 1, 2021)) {
+    if (get_option('nsl_bf_2021') != '1') {
 
         add_action('admin_notices', function () {
-            if (!defined('NSL_PRO_PATH')) {
-                //FREE
-                ?>
-                <div class="notice notice-info is-dismissible" data-nsldismissable="nsl_summer_2021" style="display:grid;grid-template-columns: 100px auto;padding-top: 25px; padding-bottom: 22px;">
-                    <img alt="Nextend Social Login" src="<?php echo plugins_url('images/notice/nslnotice.png', NSL_ADMIN_PATH) ?>" width="64" height="64" style="grid-row: 1 / 4; align-self: center;justify-self: center">
-                    <h3 style="margin:0;">Do you wish to use Nextend Social Login Pro Addon on your site?</h3>
-                    <p style="margin:0 0 2px;">If the answer is yes, then you may be interested in our <b>Summer
-                            Sale</b>.
-                        We are excited to offer a <b>30% discount on all Nextend Social Login Premium plans!</b>
-                        Limited time offer expires on July 27.</p>
-                    <p style="margin:0;">
-                        <a class="button button-primary" href="https://nextendweb.com/social-login/?coupon=SUMMER21&utm_source=wpfree&utm_medium=wp&utm_campaign=summer21#pricing" target="_blank">
-                            Buy Now</a>
-                        <a class="button button-dismiss" href="#">Dismiss</a>
-                    </p>
-                </div>
-                <?php
-            }
+            ?>
+            <div class="notice notice-info is-dismissible" data-nsldismissable="nsl_bf_2021" style="display:grid;grid-template-columns: 100px auto;padding-top: 25px; padding-bottom: 22px;">
+                <img alt="Nextend Social Login" src="<?php echo plugins_url('images/notice/nslnotice.png', NSL_ADMIN_PATH) ?>" width="74" height="74" style="grid-row: 1 / 4; align-self: center;justify-self: center">
+                <h3 style="margin:0;">Nextend Social Login - Black Friday Deal</h3>
+                <p style="margin:0 0 2px;">Don't miss out on our biggest sale of the year! Get your <b>Pro Addon</b>
+                    with <b>40% OFF</b> to access <b>WooCommerce support</b>, Apple provider and much more!
+                    Limited time offer expires on November 30.</p>
+                <p style="margin:0;">
+                    <a class="button button-primary" href="https://nextendweb.com/social-login/?coupon=SAVE4021&utm_source=wpfree&utm_medium=wp&utm_campaign=bf21#pricing" target="_blank">
+                        Buy Now</a>
+                    <a class="button button-dismiss" href="#">Dismiss</a>
+                </p>
+            </div>
+            <?php
         });
 
         add_action('admin_footer', function () {
@@ -74,7 +70,7 @@ if ($current <= mktime(0, 0, 0, 7, 28, 2021)) {
         add_action('wp_ajax_nsl_dismiss_admin_notice', function () {
             check_ajax_referer('nsl-dismissible-notice', 'nonce');
 
-            update_option('nsl_summer_2021', '1');
+            update_option('nsl_bf_2021', '1');
             wp_die();
         });
     }

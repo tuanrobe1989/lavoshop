@@ -2,7 +2,7 @@
 
 namespace WebpConverter\Settings;
 
-use WebpConverter\Helper\OptionsAccess;
+use WebpConverter\Service\OptionsAccessManager;
 use WebpConverter\Settings\Option\OptionIntegration;
 use WebpConverter\Settings\Option\OptionsAggregator;
 
@@ -30,7 +30,7 @@ class PluginOptions {
 	 */
 	public function get_options( bool $is_debug = false, array $posted_settings = null ): array {
 		$is_save  = ( $posted_settings !== null );
-		$settings = ( $is_save ) ? $posted_settings : OptionsAccess::get_option( SettingsSave::SETTINGS_OPTION, [] );
+		$settings = ( $is_save ) ? $posted_settings : OptionsAccessManager::get_option( SettingsSave::SETTINGS_OPTION, [] );
 
 		$options = [];
 		foreach ( $this->options_aggregator->get_options() as $option_object ) {

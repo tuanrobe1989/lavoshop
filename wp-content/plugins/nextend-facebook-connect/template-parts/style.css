@@ -163,6 +163,16 @@ div.nsl-container .nsl-button-apple div.nsl-button-label-container {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+div.nsl-container .nsl-button-slack div.nsl-button-label-container {
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+div.nsl-container .nsl-button-slack[data-skin="light"] {
+    color: #000000;
+    box-shadow: inset 0 0 0 1px #DDDDDD;
+}
+
 .nsl-clear {
     clear: both;
 }
@@ -225,7 +235,7 @@ div.nsl-container-grid[data-align="space-between"] .nsl-container-buttons {
     background-color: RGBA(0, 0, 0, .32);;
 }
 
-#nsl-redirect-overlay-container{
+#nsl-redirect-overlay-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -238,7 +248,7 @@ div.nsl-container-grid[data-align="space-between"] .nsl-container-buttons {
 #nsl-redirect-overlay-spinner {
     content: '';
     display: block;
-    margin: 20px 0;
+    margin: 20px;
     border: 9px solid RGBA(0, 0, 0, .6);
     border-top: 9px solid #fff;
     border-radius: 50%;
@@ -257,7 +267,7 @@ div.nsl-container-grid[data-align="space-between"] .nsl-container-buttons {
     }
 }
 
-#nsl-redirect-overlay-title{
+#nsl-redirect-overlay-title {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-size: 18px;
     font-weight: bold;

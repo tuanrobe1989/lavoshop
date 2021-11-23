@@ -2,7 +2,7 @@
 
 namespace WebpConverter\Notice;
 
-use WebpConverter\Helper\OptionsAccess;
+use WebpConverter\Service\OptionsAccessManager;
 
 /**
  * Supports notice displayed as thank you for using plugin.
@@ -38,7 +38,7 @@ class ThanksNotice extends NoticeAbstract implements NoticeInterface {
 	 * {@inheritdoc}
 	 */
 	public function is_active(): bool {
-		$option_value = OptionsAccess::get_option( $this->get_option_name() );
+		$option_value = OptionsAccessManager::get_option( $this->get_option_name() );
 		return ( ( $option_value !== null ) && ( $option_value < time() ) );
 	}
 

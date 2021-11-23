@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.2.4 (2021-11-21) =
+* `[Fixed]` Automatic image conversion when /uploads directory is not organized into monthly and yearly folders
+* `[Fixed]` Displaying errors when converting images
+
 = 3.2.3 (2021-10-15) =
 * `[Added]` Exclusion of re-converting images that caused regeneration error
 

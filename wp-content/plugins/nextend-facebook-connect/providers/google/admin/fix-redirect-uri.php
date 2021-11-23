@@ -10,7 +10,7 @@ $provider = $this->getProvider();
     <li><?php _e('Click on the "<b>Credentials</b>" in the left hand menu', 'nextend-facebook-connect'); ?></li>
     <li><?php printf(__('Under the "<b>OAuth 2.0 Client IDs</b>" section find your Client ID: <b>%s</b>', 'nextend-facebook-connect'), $provider->settings->get('client_id')); ?></li>
     <li><?php
-        $loginUrls = apply_filters('nsl_redirect_uri_override', array($provider->getLoginUrl()), $provider, true);
+        $loginUrls = $provider->getAllRedirectUrisForAppCreation();
         printf(__('Under the "<b>%1$s</b>" section click "<b>%2$s</b>" and add the following URL:', 'nextend-facebook-connect'), 'Authorised redirect URIs', 'Add URI');
         echo "<ul>";
         foreach ($loginUrls as $loginUrl) {

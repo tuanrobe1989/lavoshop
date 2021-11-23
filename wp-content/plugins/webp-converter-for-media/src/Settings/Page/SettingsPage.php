@@ -5,10 +5,10 @@ namespace WebpConverter\Settings\Page;
 
 use WebpConverter\Conversion\Endpoint\PathsEndpoint;
 use WebpConverter\Conversion\Endpoint\RegenerateEndpoint;
-use WebpConverter\Helper\ViewLoader;
 use WebpConverter\Loader\LoaderAbstract;
 use WebpConverter\PluginData;
 use WebpConverter\PluginInfo;
+use WebpConverter\Service\ViewLoader;
 use WebpConverter\Settings\PluginOptions;
 use WebpConverter\Settings\SettingsSave;
 
@@ -29,7 +29,10 @@ class SettingsPage extends PageAbstract {
 	 */
 	private $plugin_data;
 
-	public function __construct( PluginInfo $plugin_info, PluginData $plugin_data ) {
+	public function __construct(
+		PluginInfo $plugin_info,
+		PluginData $plugin_data
+	) {
 		$this->plugin_info = $plugin_info;
 		$this->plugin_data = $plugin_data;
 	}

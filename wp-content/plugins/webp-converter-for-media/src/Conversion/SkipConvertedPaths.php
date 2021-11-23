@@ -6,6 +6,7 @@ use WebpConverter\Conversion\Format\FormatFactory;
 use WebpConverter\HookableInterface;
 use WebpConverter\PluginData;
 use WebpConverter\Settings\Option\ConversionMethodOption;
+use WebpConverter\Settings\Option\OutputFormatsOption;
 
 /**
  * Removes from list of source file paths those that have already been converted.
@@ -88,12 +89,15 @@ class SkipConvertedPaths implements HookableInterface {
 	 * @return string[] Available output extensions.
 	 */
 	private function get_output_extensions(): array {
-		$settings   = $this->plugin_data->get_plugin_settings();
-		$extensions = ( new FormatFactory() )->get_available_formats( $settings[ ConversionMethodOption::OPTION_NAME ] ?? null );
+		$settings     = $this->plugin_data->get_plugin_settings();
+		$current_exts = $settings[ OutputFormatsOption::OPTION_NAME ];
+		$allowed_exts = ( new FormatFactory() )->get_available_formats( $settings[ ConversionMethodOption::OPTION_NAME ] ?? null );
 
 		$values = [];
-		foreach ( $extensions as $extension => $format_label ) {
-			$values[] = $extension;
+		foreach ( $allowed_exts as $extension => $format_label ) {
+			if ( in_array( $extension, $current_exts ) ) {
+				$values[] = $extension;
+			}
 		}
 		return $values;
 	}

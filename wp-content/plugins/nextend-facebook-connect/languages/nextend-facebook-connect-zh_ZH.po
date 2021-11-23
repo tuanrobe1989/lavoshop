@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-10-13 19:51+0200\n"
-"PO-Revision-Date: 2021-10-13 19:51+0200\n"
+"POT-Creation-Date: 2021-11-15 18:51+0100\n"
+"PO-Revision-Date: 2021-11-15 18:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: zh_CN\n"
@@ -208,12 +208,11 @@ msgstr ""
 
 #, php-format
 msgid ""
-"<p style=\"max-width:55em;\"><strong><u>Warning</u></strong>: Providers "
-"change the App setup process quite often, which means some steps below might "
-"not be accurate. If you see significant difference in the written "
-"instructions and what you see at the provider, feel free to %1$sreport it"
-"%2$s, so we can check and update the instructions.<br><strong>Last updated:</"
-"strong> %3$s.</p>"
+"<p><strong><u>Warning</u></strong>: Providers change the App setup process "
+"quite often, which means some steps below might not be accurate. If you see "
+"significant difference in the written instructions and what you see at the "
+"provider, feel free to %1$sreport it%2$s, so we can check and update the "
+"instructions.<br><strong>Last updated:</strong> %3$s.</p>"
 msgstr ""
 
 msgid "You have logged in successfully."
@@ -987,6 +986,33 @@ msgid ""
 "Set a custom label for the social buttons in registration forms and for "
 "shortcodes with %1$s parameter set to %2$s.<br>The register specific labels "
 "can be modified at the Buttons tab of each provider."
+msgstr ""
+
+msgid "Redirect overlay"
+msgstr ""
+
+msgid "No overlay"
+msgstr ""
+
+msgid "Display overlay"
+msgstr ""
+
+msgid "Display overlay with spinner"
+msgstr ""
+
+msgid "Display overlay with spinner and message"
+msgstr ""
+
+msgid ""
+"You can display an overlay on your site when we start the redirect after the "
+"authentication."
+msgstr ""
+
+#, php-format
+msgid "%1$s The overlay won't be displayed if the %2$s setting is set to %3$s!"
+msgstr ""
+
+msgid "Note:"
 msgstr ""
 
 msgid "Below and floating"
@@ -2513,7 +2539,7 @@ msgstr ""
 msgid "Force reauthorization on each login"
 msgstr ""
 
-msgid "Disable, when you don't want to see the consent screen on each login."
+msgid "Enable, when you want to see the consent screen on each login."
 msgstr ""
 
 #, fuzzy
@@ -2819,9 +2845,6 @@ msgstr ""
 #| msgid "Consumer Secret"
 msgid "Channel Secret"
 msgstr "用户密码"
-
-msgid "Enable, when you want to see the consent screen on each login."
-msgstr ""
 
 msgid "Add LINE Official Account as a friend"
 msgstr ""
@@ -3245,6 +3268,175 @@ msgstr "关联 <b>PayPal</b>"
 msgid "Unlink account from <b>PayPal</b>"
 msgstr "取消关联 <b>PayPal</b>"
 
+#, fuzzy, php-format
+#| msgid "Select your app."
+msgid "Select your %s App."
+msgstr "选择你的应用程序."
+
+msgid ""
+"Under the \"<b>Add features and functionality</b>\" panel click on the "
+"\"<b>Permissions</b>\" option."
+msgstr ""
+
+#, fuzzy
+#| msgid "Click on \"Save Changes\""
+msgid "Click on the \"<b>Add</b>\" and \"<b>Save URLs</b>\" button."
+msgstr "点击\"保存设置\""
+
+#, fuzzy, php-format
+#| msgid "Log in with your %s credentials if you are not logged in"
+msgid ""
+"Visit the %1$s page and log in with your %2$s credentials if you are not "
+"logged in, yet."
+msgstr "如果您未登录，请使用您的 %s 凭据登录"
+
+#, fuzzy
+#| msgid "Click on the \"Create New App\" button"
+msgid ""
+"Click the \"<b>Create New App</b>\" button. (If you can not see this button, "
+"you might need to create a workspace first!)"
+msgstr "点击\"创建新应用\"按钮"
+
+#, fuzzy
+#| msgid "Click on the Create button"
+msgid "Choose the \"<b>From scratch</b>\" option."
+msgstr "点击创建按钮"
+
+#, fuzzy
+#| msgid "Name your project and then click on the Create button"
+msgid ""
+"Fill the \"<b>App Name</b>\" field, select your workspace and click the "
+"\"<b>Create App</b>\" button."
+msgstr "命名您的项目，然后点击创建按钮"
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"Authorized Redirect URLs:\" field: <b>%s</"
+#| "b>"
+msgid "Scroll down to the \"<b>Redirect URLs</b>\" section."
+msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on \"Save Changes\""
+msgid "Click on the \"<b>Save URLs</b>\" button."
+msgstr "点击\"保存设置\""
+
+#, fuzzy
+#| msgid "Click on the Create button"
+msgid "Scroll down to the \"<b>Scopes</b>\" section."
+msgstr "点击创建按钮"
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"Authorized Redirect URLs:\" field: <b>%s</"
+#| "b>"
+msgid ""
+"Add the following Scopes to the \"<b>User Token Scopes</b>\" field: "
+"\"<b>openid</b>\", \"<b>profile</b>\", \"<b>email</b>\""
+msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on the \"Credentials\" in the left hand menu"
+msgid ""
+"On the top left side click on the \"<b>Basic Information</b>\" option in the "
+"\"<b>Settings</b>\"."
+msgstr "点击左侧菜单的\"凭据\""
+
+#, fuzzy
+#| msgid "Name your project and then click on the Create button"
+msgid ""
+"Under the \"<b>Install your app</b>\" panel click on the \"<b>Install to "
+"Workspace</b>\" button."
+msgstr "命名您的项目，然后点击创建按钮"
+
+#, fuzzy
+#| msgid "Click on the Create button"
+msgid "Click on the \"<b>Allow</b>\" button."
+msgstr "点击创建按钮"
+
+#, fuzzy
+#| msgid "Name your project and then click on the Create button"
+msgid ""
+"Under the \"<b>Manage distribution</b>\" panel click on the \"<b>Distribute "
+"App</b>\" button."
+msgstr "命名您的项目，然后点击创建按钮"
+
+msgid "Scroll down to the \"<b>Remove Hard Coded Information</b>\" section."
+msgstr ""
+
+msgid ""
+"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</b>"
+"\". "
+msgstr ""
+
+#, fuzzy
+#| msgid "Click on the \"Create New App\" button"
+msgid "Click on the \"<b>Activate Public Distribution</b>\" button."
+msgstr "点击\"创建新应用\"按钮"
+
+#, fuzzy
+#| msgid "Click on the \"Credentials\" in the left hand menu"
+msgid ""
+"On the top left side click on the \"<b>Basic Information</b>\" option, that "
+"you find under \"<b>Settings</b>\"."
+msgstr "点击左侧菜单的\"凭据\""
+
+#, fuzzy
+#| msgid ""
+#| "Here you can see your \"APP ID\" and you can see your \"App secret\" if "
+#| "you click on the \"Show\" button. These will be needed in plugin's "
+#| "settings."
+msgid ""
+"Scroll down to the \"<b>App Credentials</b>\" section, find the necessary "
+"\"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values and fill these "
+"fields in the plugin settings!"
+msgstr ""
+"然后，你可以看见你的 \"APP ID\" 和 \"APP secret\"密匙，你可以看到\"显示\"按"
+"钮，这些都需要填写到插件的设置里。"
+
+msgid "Slack Team ID"
+msgstr ""
+
+msgid "Optional"
+msgstr ""
+
+#, php-format
+msgid ""
+"The Team ID of a workspace to attempt to restrict to. %1$sLearn more.%2$s"
+msgstr ""
+
+msgid "72x72"
+msgstr ""
+
+msgid "192x192"
+msgstr ""
+
+msgid "512x512"
+msgstr ""
+
+msgid "1024x1024"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>Facebook</b>"
+msgid "Sign in with <b>Slack</b>"
+msgstr "通过 <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>Facebook</b>"
+msgid "Sign up with <b>Slack</b>"
+msgstr "通过 <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>Facebook</b>"
+msgid "Link account with <b>Slack</b>"
+msgstr "关联 <b>Facebook</b> 账号"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Facebook</b>"
+msgid "Unlink account from <b>Slack</b>"
+msgstr "解除关联 <b>Facebook</b> 账号"
+
 #, fuzzy
 #| msgid "Click on the Create button"
 msgid "Click on the \"<b>Manage</b>\" button next to the associated App."
@@ -3503,14 +3695,6 @@ msgstr "社交账号"
 #~ "%s</b> "
 #~ msgstr "将旁边的URL 填入\"Authorised redirect URIs\" 应该是 <b>%s</b>"
 
-#, fuzzy, php-format
-#~| msgid ""
-#~| "Add the following URL to the \"Authorized Redirect URLs:\" field: <b>%s</"
-#~| "b>"
-#~ msgid ""
-#~ "Add the following URL to the \"<b>Redirect URLs</b>\" field <b>%s</b> "
-#~ msgstr "将以下网址添加到“授权重定向网址”字段中：<b>%s</b>"
-
 #~ msgid "ERROR"
 #~ msgstr "错误"
 
@@ -3745,9 +3929,6 @@ msgstr "社交账号"
 
 #~ msgid "Visit %s."
 #~ msgstr "访问 %s."
-
-#~ msgid "Select your app."
-#~ msgstr "选择你的应用程序."
 
 #~ msgid ""
 #~ "Go to the Settings menu which you can find below the Facebook Login in "

@@ -78,6 +78,7 @@ class MethodFactory {
 				|| ( ! ( new FormatFactory() )->get_available_formats( $method_name ) ) ) {
 				continue;
 			}
+
 			$values[ $method_name ] = $method->get_label();
 		}
 		return $values;

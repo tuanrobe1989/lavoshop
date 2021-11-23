@@ -10,7 +10,7 @@ $provider = $this->getProvider();
     <li><?php _e('Find your App and click on the <b>App settings</b> icon. (The one that looks like a gear.)', 'nextend-facebook-connect'); ?></li>
     <li><?php _e('Click on the <b>Edit</b> button at <b>Authentication settings</b>.', 'nextend-facebook-connect'); ?></li>
     <li><?php
-        $loginUrls = apply_filters('nsl_redirect_uri_override', array($provider->getRedirectUriForApp()), $provider, false);
+        $loginUrls = $provider->getAllRedirectUrisForAppCreation();
         printf(__('Add the following URL to the "<b>%1$s</b>" field:', 'nextend-facebook-connect'), 'Callback URLs');
         echo "<ul>";
         foreach ($loginUrls as $loginUrl) {

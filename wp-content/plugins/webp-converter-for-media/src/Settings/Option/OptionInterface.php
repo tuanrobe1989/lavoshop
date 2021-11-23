@@ -36,6 +36,11 @@ interface OptionInterface {
 	public function get_label(): string;
 
 	/**
+	 * @return string[]|null
+	 */
+	public function get_notice_lines();
+
+	/**
 	 * Returns additional information of field.
 	 *
 	 * @return string|null

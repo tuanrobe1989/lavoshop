@@ -15,6 +15,13 @@ abstract class OptionAbstract implements OptionInterface {
 	/**
 	 * {@inheritdoc}
 	 */
+	public function get_notice_lines() {
+		return null;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function get_info() {
 		return null;
 	}

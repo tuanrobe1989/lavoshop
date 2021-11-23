@@ -3,3 +3,29 @@
         min-width: $wmd !important;
     }
 }
+.header{
+    &__productcat{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        .h4{
+            text-transform: uppercase;
+            color: $maincolor;
+        }
+    }
+}
+.header-search-form {
+    .searchform{
+        border: 2px solid $maincolor;
+        border-radius: 10px;
+    }
+    .searchform .button.icon{
+        width: 100px;
+    }
+    .search_categories {
+        width: 8rem !important; 
+        border-radius: 0 !important;
+    }
+    input[type=search]{
+        border-radius: 0 !important;
+    }
+}

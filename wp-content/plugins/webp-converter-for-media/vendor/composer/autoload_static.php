@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2030f27ad23da16097b04d49bce16e0c
+class ComposerStaticInit37614692d30f246008194d111fcdb36b
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
@@ -81,7 +81,6 @@ class ComposerStaticInit2030f27ad23da16097b04d49bce16e0c
         'WebpConverter\\Conversion\\SkipLarger' => __DIR__ . '/../..' . '/src/Conversion/SkipLarger.php',
         'WebpConverter\\Error\\Detector\\ErrorDetector' => __DIR__ . '/../..' . '/src/Error/Detector/ErrorDetector.php',
         'WebpConverter\\Error\\Detector\\LibsNotInstalledDetector' => __DIR__ . '/../..' . '/src/Error/Detector/LibsNotInstalledDetector.php',
-        'WebpConverter\\Error\\Detector\\LibsWithoutAvifSupportDetector' => __DIR__ . '/../..' . '/src/Error/Detector/LibsWithoutAvifSupportDetector.php',
         'WebpConverter\\Error\\Detector\\LibsWithoutWebpSupportDetector' => __DIR__ . '/../..' . '/src/Error/Detector/LibsWithoutWebpSupportDetector.php',
         'WebpConverter\\Error\\Detector\\PassthruExecutionDetector' => __DIR__ . '/../..' . '/src/Error/Detector/PassthruExecutionDetector.php',
         'WebpConverter\\Error\\Detector\\PathsErrorsDetector' => __DIR__ . '/../..' . '/src/Error/Detector/PathsErrorsDetector.php',
@@ -92,7 +91,6 @@ class ComposerStaticInit2030f27ad23da16097b04d49bce16e0c
         'WebpConverter\\Error\\Notice\\BypassingApacheNotice' => __DIR__ . '/../..' . '/src/Error/Notice/BypassingApacheNotice.php',
         'WebpConverter\\Error\\Notice\\ErrorNotice' => __DIR__ . '/../..' . '/src/Error/Notice/ErrorNotice.php',
         'WebpConverter\\Error\\Notice\\LibsNotInstalledNotice' => __DIR__ . '/../..' . '/src/Error/Notice/LibsNotInstalledNotice.php',
-        'WebpConverter\\Error\\Notice\\LibsWithoutAvifSupportNotice' => __DIR__ . '/../..' . '/src/Error/Notice/LibsWithoutAvifSupportNotice.php',
         'WebpConverter\\Error\\Notice\\LibsWithoutWebpSupportNotice' => __DIR__ . '/../..' . '/src/Error/Notice/LibsWithoutWebpSupportNotice.php',
         'WebpConverter\\Error\\Notice\\PassthruExecutionNotice' => __DIR__ . '/../..' . '/src/Error/Notice/PassthruExecutionNotice.php',
         'WebpConverter\\Error\\Notice\\PassthruNotWorkingNotice' => __DIR__ . '/../..' . '/src/Error/Notice/PassthruNotWorkingNotice.php',
@@ -105,9 +103,6 @@ class ComposerStaticInit2030f27ad23da16097b04d49bce16e0c
         'WebpConverter\\Error\\Notice\\RewritesNotExecutedNotice' => __DIR__ . '/../..' . '/src/Error/Notice/RewritesNotExecutedNotice.php',
         'WebpConverter\\Error\\Notice\\RewritesNotWorkingNotice' => __DIR__ . '/../..' . '/src/Error/Notice/RewritesNotWorkingNotice.php',
         'WebpConverter\\Error\\Notice\\SettingsIncorrectNotice' => __DIR__ . '/../..' . '/src/Error/Notice/SettingsIncorrectNotice.php',
-        'WebpConverter\\Helper\\FileLoader' => __DIR__ . '/../..' . '/src/Helper/FileLoader.php',
-        'WebpConverter\\Helper\\OptionsAccess' => __DIR__ . '/../..' . '/src/Helper/OptionsAccess.php',
-        'WebpConverter\\Helper\\ViewLoader' => __DIR__ . '/../..' . '/src/Helper/ViewLoader.php',
         'WebpConverter\\HookableInterface' => __DIR__ . '/../..' . '/src/HookableInterface.php',
         'WebpConverter\\Loader\\HtaccessLoader' => __DIR__ . '/../..' . '/src/Loader/HtaccessLoader.php',
         'WebpConverter\\Loader\\LoaderAbstract' => __DIR__ . '/../..' . '/src/Loader/LoaderAbstract.php',
@@ -137,6 +132,9 @@ class ComposerStaticInit2030f27ad23da16097b04d49bce16e0c
         'WebpConverter\\Plugin\\Uninstall\\PluginSettings' => __DIR__ . '/../..' . '/src/Plugin/Uninstall/PluginSettings.php',
         'WebpConverter\\Plugin\\Uninstall\\WebpFiles' => __DIR__ . '/../..' . '/src/Plugin/Uninstall/WebpFiles.php',
         'WebpConverter\\Plugin\\Update' => __DIR__ . '/../..' . '/src/Plugin/Update.php',
+        'WebpConverter\\Service\\FileLoader' => __DIR__ . '/../..' . '/src/Service/FileLoader.php',
+        'WebpConverter\\Service\\OptionsAccessManager' => __DIR__ . '/../..' . '/src/Service/OptionsAccessManager.php',
+        'WebpConverter\\Service\\ViewLoader' => __DIR__ . '/../..' . '/src/Service/ViewLoader.php',
         'WebpConverter\\Settings\\AdminAssets' => __DIR__ . '/../..' . '/src/Settings/AdminAssets.php',
         'WebpConverter\\Settings\\Option\\ConversionMethodOption' => __DIR__ . '/../..' . '/src/Settings/Option/ConversionMethodOption.php',
         'WebpConverter\\Settings\\Option\\ExtraFeaturesOption' => __DIR__ . '/../..' . '/src/Settings/Option/ExtraFeaturesOption.php',
@@ -162,9 +160,9 @@ class ComposerStaticInit2030f27ad23da16097b04d49bce16e0c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2030f27ad23da16097b04d49bce16e0c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2030f27ad23da16097b04d49bce16e0c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit2030f27ad23da16097b04d49bce16e0c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit37614692d30f246008194d111fcdb36b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit37614692d30f246008194d111fcdb36b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit37614692d30f246008194d111fcdb36b::$classMap;
 
         }, null, ClassLoader::class);
     }

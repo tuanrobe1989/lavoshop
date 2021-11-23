@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-10-11 07:35:19+00:00\n"
+"POT-Creation-Date: 2021-11-09 12:50:28+00:00\n"
 "PO-Revision-Date: 2021-02-11 18:07:46+0000\n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
@@ -113,62 +113,62 @@ msgstr "Είστε σίγουρος;"
 msgid "Reset to default"
 msgstr "Επαναφορά σε προεπιλεγμένο"
 
-#: includes/class-yit-plugin-panel.php:959
+#: includes/class-yit-plugin-panel.php:979
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "Το στοιχείο που εισάγατε υπάρχει ήδη. Παρακαλώ, εισάγετε άλλο όνομα."
 
-#: includes/class-yit-plugin-panel.php:960
+#: includes/class-yit-plugin-panel.php:980
 msgid "Settings saved"
 msgstr "Ρυθμίσεις αποθηκεύτηκαν"
 
-#: includes/class-yit-plugin-panel.php:961
+#: includes/class-yit-plugin-panel.php:981
 msgid "Settings reset"
 msgstr "Επαναφορά ρυθμίσεων"
 
-#: includes/class-yit-plugin-panel.php:962
+#: includes/class-yit-plugin-panel.php:982
 msgid "Element deleted correctly."
 msgstr "Το στοιχείο διαγράφηκε επιτυχώς."
 
-#: includes/class-yit-plugin-panel.php:963
-#: includes/class-yit-plugin-panel.php:964
+#: includes/class-yit-plugin-panel.php:983
+#: includes/class-yit-plugin-panel.php:984
 msgid "Element updated correctly."
 msgstr "Το στοιχείο αναβαθμίστηκε επιτυχώς."
 
-#: includes/class-yit-plugin-panel.php:965
+#: includes/class-yit-plugin-panel.php:985
 msgid "Database imported correctly."
 msgstr "Επιτυχής εισαγωγή βάσης δεδομένων."
 
-#: includes/class-yit-plugin-panel.php:966
+#: includes/class-yit-plugin-panel.php:986
 msgid "An error has occurred during import. Please try again."
 msgstr "Παρουσιάστηκε σφάλμα κατά την εισαγωγή. Παρακαλώ προσπαθήστε ξανά."
 
-#: includes/class-yit-plugin-panel.php:967
+#: includes/class-yit-plugin-panel.php:987
 msgid "The added file is not valid."
 msgstr "Το προστιθέμενο αρχείο δεν είναι έγκυρο."
 
-#: includes/class-yit-plugin-panel.php:968
+#: includes/class-yit-plugin-panel.php:988
 msgid "Sorry, import is disabled."
 msgstr "Συγνώμη, η εισαγωγή είναι απενεργοποιημένη."
 
-#: includes/class-yit-plugin-panel.php:969
+#: includes/class-yit-plugin-panel.php:989
 msgid "Sorting successful."
 msgstr "Διαλογή επιτυχής."
 
-#: includes/class-yit-plugin-panel.php:1437
+#: includes/class-yit-plugin-panel.php:1457
 msgid "We need your support"
 msgstr "Χρειαζόμαστε την υποστήριξή σας"
 
-#: includes/class-yit-plugin-panel.php:1438
+#: includes/class-yit-plugin-panel.php:1458
 msgid "to keep updating and improving the plugin. Please,"
 msgstr ""
 "για να διατηρήσετε την ενημέρωση και τη βελτίωση του πρόσθετου. Παρακαλώ,"
 
-#: includes/class-yit-plugin-panel.php:1440
+#: includes/class-yit-plugin-panel.php:1460
 msgid "help us by leaving a good review"
 msgstr ""
 
-#: includes/class-yit-plugin-panel.php:1441
+#: includes/class-yit-plugin-panel.php:1461
 msgid ":) Thanks!"
 msgstr ":) Ευχαριστώ!"
 
@@ -491,7 +491,7 @@ msgstr "Διαγραφή"
 msgid "Add All"
 msgstr "Προσθήκη Όλων"
 
-#: templates/fields/select-buttons.php:32
+#: templates/fields/select-buttons.php:20
 msgid "Remove All"
 msgstr "Αφαίρεση Όλων"
 

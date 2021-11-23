@@ -2,7 +2,7 @@
 
 namespace WebpConverter\Notice;
 
-use WebpConverter\Helper\OptionsAccess;
+use WebpConverter\Service\OptionsAccessManager;
 use WebpConverter\Settings\Page\PageIntegration;
 
 /**
@@ -38,7 +38,7 @@ class WelcomeNotice extends NoticeAbstract implements NoticeInterface {
 	 * {@inheritdoc}
 	 */
 	public function is_active(): bool {
-		return ( OptionsAccess::get_option( $this->get_option_name() ) === $this->get_default_value() );
+		return ( OptionsAccessManager::get_option( $this->get_option_name() ) === $this->get_default_value() );
 	}
 
 	/**

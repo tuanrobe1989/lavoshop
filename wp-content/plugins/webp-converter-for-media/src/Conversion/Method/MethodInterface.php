@@ -2,14 +2,10 @@
 
 namespace WebpConverter\Conversion\Method;
 
-use WebpConverter\Conversion\SkipCrashed;
-
 /**
  * Interface for class that converts images.
  */
 interface MethodInterface {
-
-	public function __construct( SkipCrashed $skip_crashed );
 
 	/**
 	 * Returns name of conversion method.
@@ -40,6 +36,11 @@ interface MethodInterface {
 	 * @return bool
 	 */
 	public static function is_method_active( string $format ): bool;
+
+	/**
+	 * @return bool
+	 */
+	public function is_fatal_error(): bool;
 
 	/**
 	 * Returns errors generated during image conversion.

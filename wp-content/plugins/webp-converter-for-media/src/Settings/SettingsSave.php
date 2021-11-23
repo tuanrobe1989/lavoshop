@@ -4,15 +4,20 @@ namespace WebpConverter\Settings;
 
 use WebpConverter\Conversion\Cron\Event;
 use WebpConverter\Conversion\Directory\DirectoryFactory;
-use WebpConverter\Helper\OptionsAccess;
 use WebpConverter\Loader\LoaderAbstract;
 use WebpConverter\PluginData;
+use WebpConverter\Service\OptionsAccessManager;
 use WebpConverter\Settings\Option\SupportedDirectoriesOption;
 
 /**
  * Supports saving plugin settings on plugin settings page.
  */
 class SettingsSave {
+
+	const SETTINGS_OPTION   = 'webpc_settings';
+	const SUBMIT_VALUE      = 'webpc_save';
+	const NONCE_PARAM_KEY   = '_wpnonce';
+	const NONCE_PARAM_VALUE = 'webpc-save';
 
 	/**
 	 * @var PluginData
@@ -22,11 +27,6 @@ class SettingsSave {
 	public function __construct( PluginData $plugin_data ) {
 		$this->plugin_data = $plugin_data;
 	}
-
-	const SETTINGS_OPTION   = 'webpc_settings';
-	const SUBMIT_VALUE      = 'webpc_save';
-	const NONCE_PARAM_KEY   = '_wpnonce';
-	const NONCE_PARAM_VALUE = 'webpc-save';
 
 	/**
 	 * Saves plugin settings after submitting form on plugin settings page.
@@ -40,7 +40,13 @@ class SettingsSave {
 			return;
 		}
 
-		OptionsAccess::update_option( self::SETTINGS_OPTION, ( new PluginOptions() )->get_values( false, $_POST ) );
+		if ( isset( $_POST[ self::SUBMIT_VALUE ] ) ) {
+			$plugin_settings = ( new PluginOptions() )->get_values( false, $_POST );
+		} else {
+			$plugin_settings = $this->plugin_data->get_plugin_settings();
+		}
+
+		OptionsAccessManager::update_option( self::SETTINGS_OPTION, $plugin_settings );
 		$this->plugin_data->invalidate_plugin_settings();
 		$this->init_actions_after_save();
 	}

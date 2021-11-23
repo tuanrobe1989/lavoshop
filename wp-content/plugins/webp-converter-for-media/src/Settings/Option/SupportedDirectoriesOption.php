@@ -15,7 +15,7 @@ class SupportedDirectoriesOption extends OptionAbstract {
 	 * {@inheritdoc}
 	 */
 	public function get_priority(): int {
-		return 30;
+		return 20;
 	}
 
 	/**
