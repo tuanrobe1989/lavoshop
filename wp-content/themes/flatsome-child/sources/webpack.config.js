@@ -54,10 +54,10 @@ const rules = [{
     //         }
     //     }
     // },
-    {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader'
-    },
+    // {
+    //     test: /\.(png|jpg)$/,
+    //     loader: 'url-loader'
+    // },
     {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         exclude: [IMG_DIR, /node_modules/],

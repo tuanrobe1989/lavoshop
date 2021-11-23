@@ -508,9 +508,9 @@ jQuery(document).ready(function () {
   !*** ./src/sass/main.scss ***!
   \****************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-// extracted by mini-css-extract-plugin
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleParseError: Module parse failed: Unexpected character '�' (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n(Source code omitted for this binary file)\n    at handleParseError (D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\webpack\\lib\\NormalModule.js:469:19)\n    at D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\webpack\\lib\\NormalModule.js:503:5\n    at D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\webpack\\lib\\NormalModule.js:358:12\n    at D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\loader-runner\\lib\\LoaderRunner.js:373:3\n    at iterateNormalLoaders (D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\loader-runner\\lib\\LoaderRunner.js:214:10)\n    at Array.<anonymous> (D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\loader-runner\\lib\\LoaderRunner.js:205:4)\n    at Storage.finished (D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:55:16)\n    at D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:91:9\n    at D:\\projects\\lavo\\shop\\wp-content\\themes\\flatsome-child\\sources\\node_modules\\graceful-fs\\graceful-fs.js:123:16\n    at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:73:3)");
 
 /***/ }),
 
