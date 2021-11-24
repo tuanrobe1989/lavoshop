@@ -3,7 +3,6 @@
 namespace WebpConverter\Conversion\Method;
 
 use WebpConverter\Conversion\Exception;
-use WebpConverter\Conversion\Format\AvifFormat;
 use WebpConverter\Conversion\Format\WebpFormat;
 use WebpConverter\Settings\Option\ImagesQualityOption;
 use WebpConverter\Settings\Option\SupportedExtensionsOption;
@@ -58,8 +57,6 @@ class GdMethod extends LibraryMethodAbstract {
 		switch ( $format ) {
 			case WebpFormat::FORMAT_EXTENSION:
 				return 'imagewebp';
-			case AvifFormat::FORMAT_EXTENSION:
-				return 'imageavif';
 			default:
 				return null;
 		}

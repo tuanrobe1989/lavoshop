@@ -54,6 +54,7 @@ class Upload implements HookableInterface {
 
 		$paths                 = array_diff( $paths, $this->converted_paths );
 		$this->converted_paths = array_merge( $this->converted_paths, $paths );
+
 		$this->init_conversion( $paths );
 
 		return $data;
@@ -88,10 +89,11 @@ class Upload implements HookableInterface {
 	 * @return string Server path of source image.
 	 */
 	private function get_attachment_directory( string $path ): string {
-		$upload = wp_upload_dir();
-		$source = rtrim( $upload['basedir'], '/\\' ) . '/' . rtrim( dirname( $path ), '/\\' ) . '/';
-		$source = str_replace( '\\', '/', $source );
-		return $source;
+		$upload         = wp_upload_dir();
+		$path_directory = rtrim( dirname( $path ), '/\\.' );
+		$source         = rtrim( $upload['basedir'], '/\\' ) . '/' . $path_directory . '/';
+
+		return str_replace( '\\', '/', $source );
 	}
 
 	/**

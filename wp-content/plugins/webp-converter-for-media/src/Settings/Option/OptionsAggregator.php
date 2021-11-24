@@ -15,12 +15,14 @@ class OptionsAggregator {
 	private $options = [];
 
 	public function __construct() {
-		$this->set_option( new LoaderTypeOption() );
+		$conversion_method = new ConversionMethodOption();
+
 		$this->set_option( new SupportedExtensionsOption() );
 		$this->set_option( new SupportedDirectoriesOption() );
-		$this->set_option( new ConversionMethodOption() );
-		$this->set_option( new OutputFormatsOption() );
+		$this->set_option( new OutputFormatsOption( $conversion_method ) );
+		$this->set_option( $conversion_method );
 		$this->set_option( new ImagesQualityOption() );
+		$this->set_option( new LoaderTypeOption() );
 		$this->set_option( new ExtraFeaturesOption() );
 	}
 
@@ -37,6 +39,23 @@ class OptionsAggregator {
 			}
 		);
 		return $options;
+	}
+
+	/**
+	 * @param string $option_name .
+	 *
+	 * @return OptionInterface|null
+	 */
+	public function get_option( string $option_name ) {
+		$options = $this->get_options();
+
+		foreach ( $options as $option ) {
+			if ( $option->get_name() === $option_name ) {
+				return $option;
+			}
+		}
+
+		return null;
 	}
 
 	/**

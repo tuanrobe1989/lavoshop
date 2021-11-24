@@ -15,7 +15,7 @@
 	<div class="webpLoader webpContent"
 		data-api-paths="<?php echo esc_url( $api_paths_url ); ?>"
 		data-api-regenerate="<?php echo esc_url( $api_regenerate_url ); ?>"
-		data-api-error-message="<?php echo wp_kses_post( __( 'An error occurred while connecting to REST API. Please try again.', 'webp-converter-for-media' ) ); ?>"
+		data-api-error-message="<?php echo esc_html( __( 'An error occurred while connecting to REST API. Please try again.', 'webp-converter-for-media' ) ); ?>"
 	>
 		<div class="webpPage__widgetRow">
 			<p>

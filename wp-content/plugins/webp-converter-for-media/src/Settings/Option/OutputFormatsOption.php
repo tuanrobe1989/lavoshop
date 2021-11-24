@@ -13,21 +13,27 @@ class OutputFormatsOption extends OptionAbstract {
 	const OPTION_NAME = 'output_formats';
 
 	/**
+	 * @var ConversionMethodOption
+	 */
+	private $conversion_method_option;
+
+	/**
 	 * Object of integration class supports all conversion methods.
 	 *
 	 * @var FormatFactory
 	 */
 	private $formats_integration;
 
-	public function __construct() {
-		$this->formats_integration = new FormatFactory();
+	public function __construct( ConversionMethodOption $conversion_method_option ) {
+		$this->conversion_method_option = $conversion_method_option;
+		$this->formats_integration      = new FormatFactory();
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function get_priority(): int {
-		return 50;
+		return 30;
 	}
 
 	/**
@@ -66,7 +72,9 @@ class OutputFormatsOption extends OptionAbstract {
 	 * @return string[]
 	 */
 	public function get_default_value( array $settings = null ): array {
-		$method  = $settings[ ConversionMethodOption::OPTION_NAME ] ?? ( new ConversionMethodOption() )->get_default_value();
+		$method  = ( isset( $settings[ ConversionMethodOption::OPTION_NAME ] ) && $settings[ ConversionMethodOption::OPTION_NAME ] )
+			? $settings[ ConversionMethodOption::OPTION_NAME ]
+			: $this->conversion_method_option->get_default_value( $settings );
 		$formats = array_keys( $this->formats_integration->get_available_formats( $method ) );
 
 		return ( in_array( WebpFormat::FORMAT_EXTENSION, $formats ) ) ? [ WebpFormat::FORMAT_EXTENSION ] : [];
@@ -78,9 +86,12 @@ class OutputFormatsOption extends OptionAbstract {
 	 * @return string[]
 	 */
 	public function get_disabled_values( array $settings ): array {
-		$method            = $settings[ ConversionMethodOption::OPTION_NAME ] ?? ( new ConversionMethodOption() )->get_default_value();
+		$method            = ( isset( $settings[ ConversionMethodOption::OPTION_NAME ] ) && $settings[ ConversionMethodOption::OPTION_NAME ] )
+			? $settings[ ConversionMethodOption::OPTION_NAME ]
+			: $this->conversion_method_option->get_default_value( $settings );
 		$formats           = $this->formats_integration->get_formats();
 		$formats_available = $this->formats_integration->get_available_formats( $method );
+
 		return array_keys( array_diff( $formats, $formats_available ) );
 	}
 }

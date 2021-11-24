@@ -186,7 +186,7 @@ class NextendSocialProviderGoogle extends NextendSocialProvider {
 
             $this->client->setClientId($this->settings->get('client_id'));
             $this->client->setClientSecret($this->settings->get('client_secret'));
-            $this->client->setRedirectUri($this->getRedirectUri());
+            $this->client->setRedirectUri($this->getRedirectUriForOAuthFlow());
 
             if (!$this->settings->get('select_account')) {
                 $this->client->setPrompt('');

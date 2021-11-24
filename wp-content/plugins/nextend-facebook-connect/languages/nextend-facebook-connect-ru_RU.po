@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-10-13 19:51+0200\n"
-"PO-Revision-Date: 2021-10-13 19:51+0200\n"
+"POT-Creation-Date: 2021-11-15 18:51+0100\n"
+"PO-Revision-Date: 2021-11-15 18:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: ru\n"
@@ -181,12 +181,11 @@ msgstr ""
 
 #, php-format
 msgid ""
-"<p style=\"max-width:55em;\"><strong><u>Warning</u></strong>: Providers "
-"change the App setup process quite often, which means some steps below might "
-"not be accurate. If you see significant difference in the written "
-"instructions and what you see at the provider, feel free to %1$sreport it"
-"%2$s, so we can check and update the instructions.<br><strong>Last updated:</"
-"strong> %3$s.</p>"
+"<p><strong><u>Warning</u></strong>: Providers change the App setup process "
+"quite often, which means some steps below might not be accurate. If you see "
+"significant difference in the written instructions and what you see at the "
+"provider, feel free to %1$sreport it%2$s, so we can check and update the "
+"instructions.<br><strong>Last updated:</strong> %3$s.</p>"
 msgstr ""
 
 msgid "You have logged in successfully."
@@ -862,6 +861,33 @@ msgid ""
 "Set a custom label for the social buttons in registration forms and for "
 "shortcodes with %1$s parameter set to %2$s.<br>The register specific labels "
 "can be modified at the Buttons tab of each provider."
+msgstr ""
+
+msgid "Redirect overlay"
+msgstr ""
+
+msgid "No overlay"
+msgstr ""
+
+msgid "Display overlay"
+msgstr ""
+
+msgid "Display overlay with spinner"
+msgstr ""
+
+msgid "Display overlay with spinner and message"
+msgstr ""
+
+msgid ""
+"You can display an overlay on your site when we start the redirect after the "
+"authentication."
+msgstr ""
+
+#, php-format
+msgid "%1$s The overlay won't be displayed if the %2$s setting is set to %3$s!"
+msgstr ""
+
+msgid "Note:"
 msgstr ""
 
 msgid "Below and floating"
@@ -2163,7 +2189,7 @@ msgstr ""
 msgid "Force reauthorization on each login"
 msgstr ""
 
-msgid "Disable, when you don't want to see the consent screen on each login."
+msgid "Enable, when you want to see the consent screen on each login."
 msgstr ""
 
 #, fuzzy
@@ -2398,9 +2424,6 @@ msgid "Channel ID"
 msgstr ""
 
 msgid "Channel Secret"
-msgstr ""
-
-msgid "Enable, when you want to see the consent screen on each login."
 msgstr ""
 
 msgid "Add LINE Official Account as a friend"
@@ -2745,6 +2768,134 @@ msgstr "Связать аккаунты с <b>PayPal</b>"
 
 msgid "Unlink account from <b>PayPal</b>"
 msgstr "Отвязать аккаунты от <b>PayPal</b>"
+
+#, php-format
+msgid "Select your %s App."
+msgstr ""
+
+msgid ""
+"Under the \"<b>Add features and functionality</b>\" panel click on the "
+"\"<b>Permissions</b>\" option."
+msgstr ""
+
+msgid "Click on the \"<b>Add</b>\" and \"<b>Save URLs</b>\" button."
+msgstr ""
+
+#, php-format
+msgid ""
+"Visit the %1$s page and log in with your %2$s credentials if you are not "
+"logged in, yet."
+msgstr ""
+
+msgid ""
+"Click the \"<b>Create New App</b>\" button. (If you can not see this button, "
+"you might need to create a workspace first!)"
+msgstr ""
+
+msgid "Choose the \"<b>From scratch</b>\" option."
+msgstr ""
+
+msgid ""
+"Fill the \"<b>App Name</b>\" field, select your workspace and click the "
+"\"<b>Create App</b>\" button."
+msgstr ""
+
+msgid "Scroll down to the \"<b>Redirect URLs</b>\" section."
+msgstr ""
+
+msgid "Click on the \"<b>Save URLs</b>\" button."
+msgstr ""
+
+msgid "Scroll down to the \"<b>Scopes</b>\" section."
+msgstr ""
+
+msgid ""
+"Add the following Scopes to the \"<b>User Token Scopes</b>\" field: "
+"\"<b>openid</b>\", \"<b>profile</b>\", \"<b>email</b>\""
+msgstr ""
+
+msgid ""
+"On the top left side click on the \"<b>Basic Information</b>\" option in the "
+"\"<b>Settings</b>\"."
+msgstr ""
+
+msgid ""
+"Under the \"<b>Install your app</b>\" panel click on the \"<b>Install to "
+"Workspace</b>\" button."
+msgstr ""
+
+msgid "Click on the \"<b>Allow</b>\" button."
+msgstr ""
+
+msgid ""
+"Under the \"<b>Manage distribution</b>\" panel click on the \"<b>Distribute "
+"App</b>\" button."
+msgstr ""
+
+msgid "Scroll down to the \"<b>Remove Hard Coded Information</b>\" section."
+msgstr ""
+
+msgid ""
+"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</b>"
+"\". "
+msgstr ""
+
+msgid "Click on the \"<b>Activate Public Distribution</b>\" button."
+msgstr ""
+
+msgid ""
+"On the top left side click on the \"<b>Basic Information</b>\" option, that "
+"you find under \"<b>Settings</b>\"."
+msgstr ""
+
+msgid ""
+"Scroll down to the \"<b>App Credentials</b>\" section, find the necessary "
+"\"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values and fill these "
+"fields in the plugin settings!"
+msgstr ""
+
+msgid "Slack Team ID"
+msgstr ""
+
+msgid "Optional"
+msgstr ""
+
+#, php-format
+msgid ""
+"The Team ID of a workspace to attempt to restrict to. %1$sLearn more.%2$s"
+msgstr ""
+
+msgid "72x72"
+msgstr ""
+
+msgid "192x192"
+msgstr ""
+
+msgid "512x512"
+msgstr ""
+
+msgid "1024x1024"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>Facebook</b>"
+msgid "Sign in with <b>Slack</b>"
+msgstr "Войти через <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>Facebook</b>"
+msgid "Sign up with <b>Slack</b>"
+msgstr "Войти через <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>Facebook</b>"
+msgid "Link account with <b>Slack</b>"
+msgstr "Связать аккаунты с <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Facebook</b>"
+msgid "Unlink account from <b>Slack</b>"
+msgstr "Отвязать аккаунты от <b>Facebook</b>"
 
 msgid "Click on the \"<b>Manage</b>\" button next to the associated App."
 msgstr ""

@@ -13,7 +13,7 @@ class SupportedExtensionsOption extends OptionAbstract {
 	 * {@inheritdoc}
 	 */
 	public function get_priority(): int {
-		return 20;
+		return 10;
 	}
 
 	/**

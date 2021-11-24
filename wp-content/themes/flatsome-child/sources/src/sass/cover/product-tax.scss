@@ -2,16 +2,18 @@
     #main{
         background: $grey;
     }
-    .category-page-row{
-        .large-9{
-            .products {
-                background: #fff !important;
-            }
-        }
+    .shop-container{
+        padding: 1.5rem 1.5rem;
+        background: #FFF;
     }
     .sidebar-inner{
         background: #fff;
         border: 1px solid $grey;
         padding: 1rem;
+    }
+}
+.productcat{
+    &__banner{
+        margin-bottom: 1.5rem;
     }
 }

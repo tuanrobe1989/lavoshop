@@ -9,7 +9,7 @@ use WebpConverter\Settings\Option\SupportedDirectoriesOption;
  */
 class PathsEndpoint extends EndpointAbstract {
 
-	const PATHS_PER_REQUEST = 10;
+	const PATHS_PER_REQUEST_LOCAL = 10;
 
 	/**
 	 * {@inheritdoc}
@@ -41,7 +41,11 @@ class PathsEndpoint extends EndpointAbstract {
 		$params         = $request->get_params();
 		$skip_converted = ( $params['regenerate_force'] !== true );
 
-		$data = $this->get_paths( $skip_converted, self::PATHS_PER_REQUEST );
+		$data = $this->get_paths(
+			$skip_converted,
+			self::PATHS_PER_REQUEST_LOCAL
+		);
+
 		return new \WP_REST_Response(
 			$data,
 			200
@@ -72,6 +76,8 @@ class PathsEndpoint extends EndpointAbstract {
 			$paths = apply_filters( 'webpc_dir_files', [], $dir_path, $skip_converted );
 			$list  = array_merge( $list, $paths );
 		}
+
+		rsort( $list );
 
 		if ( $chunk_size === 0 ) {
 			return $list;

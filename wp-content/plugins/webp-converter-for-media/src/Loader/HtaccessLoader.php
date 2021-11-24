@@ -219,11 +219,11 @@ class HtaccessLoader extends LoaderAbstract {
 			return $content;
 		}
 
+		$content .= '<IfModule mod_mime.c>' . PHP_EOL;
 		foreach ( $this->get_mime_types() as $format => $mime_type ) {
-			$content .= '<IfModule mod_mime.c>' . PHP_EOL;
 			$content .= "  AddType ${mime_type} .${format}" . PHP_EOL;
-			$content .= '</IfModule>';
 		}
+		$content .= '</IfModule>';
 
 		return apply_filters( 'webpc_htaccess_mod_mime', $content );
 	}

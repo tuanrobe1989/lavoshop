@@ -12,6 +12,11 @@ use WebpConverter\Settings\Option\ExtraFeaturesOption;
 abstract class MethodAbstract implements MethodInterface {
 
 	/**
+	 * @var bool
+	 */
+	protected $is_fatal_error = false;
+
+	/**
 	 * Messages of errors that occurred during conversion.
 	 *
 	 * @var string[]
@@ -31,6 +36,13 @@ abstract class MethodAbstract implements MethodInterface {
 	 * @var int
 	 */
 	protected $size_after = 0;
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function is_fatal_error(): bool {
+		return $this->is_fatal_error;
+	}
 
 	/**
 	 * {@inheritdoc}

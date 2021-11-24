@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Framework\n"
 "Report-Msgid-Bugs-To: YITH <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2021-10-11 07:35:19+00:00\n"
+"POT-Creation-Date: 2021-11-09 12:50:28+00:00\n"
 "PO-Revision-Date: 2021-09-28 13:56:41+0000\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -114,63 +114,63 @@ msgstr "¿Estás seguro?"
 msgid "Reset to default"
 msgstr "Restablecer valores predeterminados"
 
-#: includes/class-yit-plugin-panel.php:959
+#: includes/class-yit-plugin-panel.php:979
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr ""
 "El elemento que has introducido ya existe. Por favor, introduce otro nombre."
 
-#: includes/class-yit-plugin-panel.php:960
+#: includes/class-yit-plugin-panel.php:980
 msgid "Settings saved"
 msgstr "Ajustes guardados"
 
-#: includes/class-yit-plugin-panel.php:961
+#: includes/class-yit-plugin-panel.php:981
 msgid "Settings reset"
 msgstr "Restablecer ajustes"
 
-#: includes/class-yit-plugin-panel.php:962
+#: includes/class-yit-plugin-panel.php:982
 msgid "Element deleted correctly."
 msgstr "Elemento eliminado correctamente."
 
-#: includes/class-yit-plugin-panel.php:963
-#: includes/class-yit-plugin-panel.php:964
+#: includes/class-yit-plugin-panel.php:983
+#: includes/class-yit-plugin-panel.php:984
 msgid "Element updated correctly."
 msgstr "Elemento actualizado correctamente."
 
-#: includes/class-yit-plugin-panel.php:965
+#: includes/class-yit-plugin-panel.php:985
 msgid "Database imported correctly."
 msgstr "Base de datos importada correctamente."
 
-#: includes/class-yit-plugin-panel.php:966
+#: includes/class-yit-plugin-panel.php:986
 msgid "An error has occurred during import. Please try again."
 msgstr ""
 "Ha ocurrido un error durante la importación. Por favor, inténtalo de nuevo."
 
-#: includes/class-yit-plugin-panel.php:967
+#: includes/class-yit-plugin-panel.php:987
 msgid "The added file is not valid."
 msgstr "El archivo añadido no es válido."
 
-#: includes/class-yit-plugin-panel.php:968
+#: includes/class-yit-plugin-panel.php:988
 msgid "Sorry, import is disabled."
 msgstr "Lo siento, la importación está desactivada."
 
-#: includes/class-yit-plugin-panel.php:969
+#: includes/class-yit-plugin-panel.php:989
 msgid "Sorting successful."
 msgstr "Clasificación realizada con éxito"
 
-#: includes/class-yit-plugin-panel.php:1437
+#: includes/class-yit-plugin-panel.php:1457
 msgid "We need your support"
 msgstr "Necesitamos tu apoyo"
 
-#: includes/class-yit-plugin-panel.php:1438
+#: includes/class-yit-plugin-panel.php:1458
 msgid "to keep updating and improving the plugin. Please,"
 msgstr "para que podamos seguir actualizando y mejorando el plugin. Por favor,"
 
-#: includes/class-yit-plugin-panel.php:1440
+#: includes/class-yit-plugin-panel.php:1460
 msgid "help us by leaving a good review"
 msgstr "ayúdanos dejando una buena valoración"
 
-#: includes/class-yit-plugin-panel.php:1441
+#: includes/class-yit-plugin-panel.php:1461
 msgid ":) Thanks!"
 msgstr ":) ¡Gracias!"
 
@@ -500,7 +500,7 @@ msgstr "Eliminar"
 msgid "Add All"
 msgstr "Añadir todo"
 
-#: templates/fields/select-buttons.php:32
+#: templates/fields/select-buttons.php:20
 msgid "Remove All"
 msgstr "Eliminar todo"
 

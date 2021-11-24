@@ -13,10 +13,16 @@
                 }
             }
         }
+        &__youtube{
+            color: red;
+        }
     }
 }
 .cat-item{
     .icon-dribbble,.icon-envelop,.icon-phone{
         margin-right: 8px;
     }
+}
+.icon-phone{
+    color: $maincolor;
 }

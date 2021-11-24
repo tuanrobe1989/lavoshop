@@ -4,11 +4,11 @@
 namespace WebpConverter\Settings\Page;
 
 use WebpConverter\Error\Detector\RewritesErrorsDetector;
-use WebpConverter\Helper\FileLoader;
-use WebpConverter\Helper\ViewLoader;
 use WebpConverter\Loader\LoaderAbstract;
 use WebpConverter\PluginData;
 use WebpConverter\PluginInfo;
+use WebpConverter\Service\FileLoader;
+use WebpConverter\Service\ViewLoader;
 use WebpConverter\Settings\SettingsSave;
 
 /**

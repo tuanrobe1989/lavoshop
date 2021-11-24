@@ -71,7 +71,9 @@
             background: $grey !important;
         }
     }
-
+    .form-minimal.quantity .qty{
+        max-width: 100%;
+    }
     .variations{
         display: block;
         tbody{
@@ -141,6 +143,14 @@
             padding-bottom: 1rem;
             @include breakpoint-up(wmd) {
                 font-size: 1.5rem;
+            }
+        }
+        .section-title-normal{
+            border: none !important;
+            padding: 0;
+            margin: 0;
+            .section-title-main{
+                border: none;
             }
         }
     }

@@ -3,7 +3,6 @@
 namespace WebpConverter\Conversion\Method;
 
 use WebpConverter\Conversion\Exception;
-use WebpConverter\Conversion\Format\AvifFormat;
 use WebpConverter\Conversion\Format\WebpFormat;
 use WebpConverter\Settings\Option\ExtraFeaturesOption;
 use WebpConverter\Settings\Option\ImagesQualityOption;
@@ -28,8 +27,7 @@ class ImagickMethod extends LibraryMethodAbstract {
 	 * {@inheritdoc}
 	 */
 	public function get_label(): string {
-		/* translators: %s method name */
-		return sprintf( __( '%s (recommended)', 'webp-converter-for-media' ), 'Imagick' );
+		return 'Imagick';
 	}
 
 	/**
@@ -62,8 +60,6 @@ class ImagickMethod extends LibraryMethodAbstract {
 		switch ( $format ) {
 			case WebpFormat::FORMAT_EXTENSION:
 				return 'WEBP';
-			case AvifFormat::FORMAT_EXTENSION:
-				return 'AVIF';
 			default:
 				return null;
 		}

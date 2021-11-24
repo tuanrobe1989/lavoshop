@@ -19,9 +19,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.1.2';
+    public static $version = '3.1.3';
 
-    public static $nslPROMinVersion = '3.1.2';
+    public static $nslPROMinVersion = '3.1.3';
 
     public static $proxyPage = false;
 
@@ -160,6 +160,7 @@ class NextendSocialLogin {
             'default_redirect'                 => '',
             'default_redirect_reg'             => '',
             'blacklisted_urls'                 => '',
+            'redirect_overlay'                 => 'overlay-with-spinner-and-message',
             'target'                           => 'prefer-popup',
             'allow_register'                   => -1,
             'allow_unlink'                     => 1,
@@ -524,7 +525,7 @@ class NextendSocialLogin {
                     'redirect_overlay_text'  => __('You are being redirected to another page,<br>it may take a few seconds.', 'nextend-facebook-connect')
                 );
 
-                echo '<script type="text/javascript">(function (undefined) {var _localizedStrings=' . wp_json_encode($localizedStrings) . ';var _targetWindow=' . wp_json_encode(self::$settings->get('target')) . ";\n" . file_get_contents($scripts) . '})();</script>';
+                echo '<script type="text/javascript">(function (undefined) {var _localizedStrings=' . wp_json_encode($localizedStrings) . ';var _targetWindow=' . wp_json_encode(self::$settings->get('target')) . ';var _redirectOverlay=' . wp_json_encode(self::$settings->get('redirect_overlay')) . ";\n" . file_get_contents($scripts) . '})();</script>';
             }
             $once = true;
         }
@@ -536,38 +537,44 @@ class NextendSocialLogin {
         $charset_collate = $wpdb->get_charset_collate();
 
         $lastVersion = get_option('nsl-version');
-        /**
-         * In 3.0.27 we added a new column to the social_users table as autoincrement and primary key.
-         * This causes an SQL error for the dbDelta() function so we need to add it beforehand.
+
+        /*
+         * We should run these codes only if our database table already exists.
          */
-        if (version_compare($lastVersion, '3.0.26', '<=')) {
-            $row = $wpdb->get_results("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . DB_NAME . "' AND TABLE_NAME = '" . $table_name . "' AND COLUMN_NAME = 'social_users_id';");
-            if (!$row) {
-                $alterQuery = "ALTER TABLE " . $table_name . " ADD `social_users_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY;";
-                $wpdb->query($alterQuery);
-            }
-        }
-
-        if (version_compare($lastVersion, '3.0.27', '<=')) {
-            /*
-             * In version 3.0.21 we started storing the register_date, login_date and link_date with '0000-00-00 00:00:00' as default value.
-             * That value returned an invalid value error on databases where 'sql_mode' has 'NO_ZERO_DATE, NO_ZERO_IN_DATE' modes, so it prevented us from modifying our database structure.
+        if ($wpdb->get_var("SHOW TABLES LIKE '" . $table_name . "'") === $table_name) {
+            /**
+             * In 3.0.27 we added a new column to the social_users table as autoincrement and primary key.
+             * This causes an SQL error for the dbDelta() function so we need to add it beforehand.
              */
-            $row = $wpdb->get_results("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . DB_NAME . "' AND TABLE_NAME = '" . $table_name . "' AND COLUMN_NAME = 'register_date';");
-            if (!empty($row)) {
-                $alterQuery = "ALTER TABLE " . $table_name . " CHANGE `register_date` `register_date` datetime DEFAULT NULL, CHANGE `login_date` `login_date` datetime DEFAULT NULL, CHANGE `link_date` `link_date` datetime DEFAULT NULL;";
-                $result     = $wpdb->query($alterQuery);
+            if (version_compare($lastVersion, '3.0.26', '<=')) {
+                $row = $wpdb->get_results("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . DB_NAME . "' AND TABLE_NAME = '" . $table_name . "' AND COLUMN_NAME = 'social_users_id';");
+                if (!$row) {
+                    $alterQuery = "ALTER TABLE " . $table_name . " ADD `social_users_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY;";
+                    $wpdb->query($alterQuery);
+                }
+            }
 
-                if ($result) {
-                    $wpdb->update($table_name, array('register_date' => NULL,), array(
-                        'register_date' => '0000-00-00 00:00:00'
-                    ));
-                    $wpdb->update($table_name, array('login_date' => NULL,), array(
-                        'login_date' => '0000-00-00 00:00:00'
-                    ));
-                    $wpdb->update($table_name, array('link_date' => NULL,), array(
-                        'link_date' => '0000-00-00 00:00:00'
-                    ));
+            if (version_compare($lastVersion, '3.0.27', '<=')) {
+                /*
+                 * In version 3.0.21 we started storing the register_date, login_date and link_date with '0000-00-00 00:00:00' as default value.
+                 * That value returned an invalid value error on databases where 'sql_mode' has 'NO_ZERO_DATE, NO_ZERO_IN_DATE' modes, so it prevented us from modifying our database structure.
+                 */
+                $row = $wpdb->get_results("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '" . DB_NAME . "' AND TABLE_NAME = '" . $table_name . "' AND COLUMN_NAME = 'register_date';");
+                if (!empty($row)) {
+                    $alterQuery = "ALTER TABLE " . $table_name . " CHANGE `register_date` `register_date` datetime DEFAULT NULL, CHANGE `login_date` `login_date` datetime DEFAULT NULL, CHANGE `link_date` `link_date` datetime DEFAULT NULL;";
+                    $result     = $wpdb->query($alterQuery);
+
+                    if ($result) {
+                        $wpdb->update($table_name, array('register_date' => NULL,), array(
+                            'register_date' => '0000-00-00 00:00:00'
+                        ));
+                        $wpdb->update($table_name, array('login_date' => NULL,), array(
+                            'login_date' => '0000-00-00 00:00:00'
+                        ));
+                        $wpdb->update($table_name, array('link_date' => NULL,), array(
+                            'link_date' => '0000-00-00 00:00:00'
+                        ));
+                    }
                 }
             }
         }

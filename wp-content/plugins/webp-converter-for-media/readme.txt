@@ -137,7 +137,7 @@ When you have installed plugin and converted all images, follow these steps:
 7. In addition, you can check weight of website before and after using plugin. The difference will be huge!
 8. More information: [here](https://gbiorczyk.pl/webp-converter/check-devtools.png)
 
-Please remember that in default loading mode *(via .htaccess)* URLs will remain unchanged. When you open the image in a new tab or look at its URL, you'll see the original URL. When you try to save the image to disk *(e.g. by clicking Save as...)* the original image will be saved.
+Please remember that in default loading mode *(via .htaccess)* URLs will remain unchanged. When you open the image in a new tab or look at its URL, you'll see the original URL.
 
 WebP is only used when loading a image on a website. In default loading mode *(via .htaccess)* it is done by the rules from the .htaccess file, on the server side, without the visible URL change to the image. Yes, it can be called magic :)
 
@@ -457,6 +457,10 @@ This is all very important to us and allows us to do even better things for you!
 3. Screenshot when regenerating images
 
 == Changelog ==
+
+= 3.2.4 (2021-11-21) =
+* `[Fixed]` Automatic image conversion when /uploads directory is not organized into monthly and yearly folders
+* `[Fixed]` Displaying errors when converting images
 
 = 3.2.3 (2021-10-15) =
 * `[Added]` Exclusion of re-converting images that caused regeneration error

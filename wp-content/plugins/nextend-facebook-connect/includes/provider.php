@@ -87,6 +87,10 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
 
     }
 
+    public function needPro() {
+        return false;
+    }
+
     /**
      * @return string
      */
@@ -135,18 +139,58 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
         return add_query_arg($args, NextendSocialLogin::getLoginUrl());
     }
 
-    public function getRedirectUri() {
-        $args = array('loginSocial' => $this->getId());
+    /**
+     * Returns the url where the Provider App should redirect during the OAuth flow.
+     *
+     * @return string
+     */
+    public function getRedirectUriForOAuthFlow() {
+        if ($this->oauthRedirectBehavior === 'rest_redirect') {
+
+            return rest_url('/nextend-social-login/v1/' . $this->id . '/redirect_uri');
+        }
+
+        $args = array('loginSocial' => $this->id);
 
         return add_query_arg($args, NextendSocialLogin::getLoginUrl());
     }
 
-    public function getRedirectUriForApp() {
-        return $this->getRedirectUri();
+    /**
+     * Returns a single redirect URL that:
+     * - we us as default redirect uri suggestion in the Getting Started and Fixed redirect uri pages.
+     * - we store to detect the OAuth redirect url changes
+     *
+     * @return string
+     */
+    public function getBaseRedirectUriForAppCreation() {
+
+        $redirectUri = $this->getRedirectUriForOAuthFlow();
+
+        if ($this->oauthRedirectBehavior === 'default_redirect_but_app_has_restriction') {
+            $parts = explode('?', $redirectUri);
+
+            return $parts[0];
+        }
+
+        return $redirectUri;
     }
 
-    public function needPro() {
-        return false;
+    /**
+     * This function should return an array of URLs generated from getRedirectUri().
+     *
+     * We display the generated results in the Getting Started section and the Fixed redirect uri pages.
+     * Also we use these for the OAuth redirect uri change checking.
+     *
+     * @return array
+     */
+    public function getAllRedirectUrisForAppCreation() {
+        /**
+         * Parameters:
+         * 1: Array with an URL that should be added to the App by default.
+         *
+         * 2: The provider instance
+         */
+        return apply_filters('nsl_redirect_uri_override', array($this->getBaseRedirectUriForAppCreation()), $this);
     }
 
     /**
@@ -181,14 +225,36 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
     }
 
     /**
-     * Check if login url was changed by another plugin. If it was changed returns true, else false.
+     * Check if the current redirect url of the provider matches with the one that we stored when the provider was
+     * configured. Returns "false" if they are different, so a new URL needs to be added to the App.
      *
      * @return bool
      */
     public function checkOauthRedirectUrl() {
         $oauth_redirect_url = $this->settings->get('oauth_redirect_url');
-        if (empty($oauth_redirect_url) || $oauth_redirect_url == $this->getRedirectUri()) {
-            return true;
+
+        $redirectUrls = $this->getAllRedirectUrisForAppCreation();
+
+
+        if (is_array($redirectUrls)) {
+            /**
+             * Before 3.1.2 we saved the default redirect url of the provider ( e.g.:
+             * https://example.com/wp-login.php?loginSocial=twitter ) for the OAuth check. However, some providers ( e.g.
+             * Microsoft ) can use the REST API URL as redirect url. In these cases if the URL of the OAuth page was changed,
+             * we gave a false warning for such providers.
+             *
+             * We shouldn't throw warnings for users who have the redirect uri stored still with the old format.
+             * For this reason we need to push the legacy redirect url into the $redirectUrls array, too!
+             */
+            $legacyRedirectURL = add_query_arg(array('loginSocial' => $this->getId()), NextendSocialLogin::getLoginUrl());
+            if (!in_array($legacyRedirectURL, $redirectUrls)) {
+                $redirectUrls[] = $legacyRedirectURL;
+            }
+
+
+            if (in_array($oauth_redirect_url, $redirectUrls)) {
+                return true;
+            }
         }
 
         return false;
@@ -196,7 +262,7 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
 
     public function updateOauthRedirectUrl() {
         $this->settings->update(array(
-            'oauth_redirect_url' => $this->getRedirectUri()
+            'oauth_redirect_url' => $this->getBaseRedirectUriForAppCreation()
         ));
     }
 
@@ -888,7 +954,7 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
 
         $this->settings->update(array(
             'tested'             => 1,
-            'oauth_redirect_url' => $this->getRedirectUri()
+            'oauth_redirect_url' => $this->getBaseRedirectUriForAppCreation()
         ));
 
         Notices::addSuccess(__('The test was successful', 'nextend-facebook-connect'));
@@ -1161,7 +1227,7 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
     }
 
     public function registerRedirectRESTRoute() {
-        if ($this->hasRedirectRESTRoute) {
+        if ($this->oauthRedirectBehavior === 'rest_redirect') {
             register_rest_route('nextend-social-login/v1', $this->id . '/redirect_uri', array(
                 'methods'             => WP_REST_Server::READABLE,
                 'callback'            => array(
@@ -1184,6 +1250,10 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
     /**
      * @param WP_REST_Request $request Full details about the request.
      *
+     * Registers a REST API endpoints for a provider. This endpoint handles the redirect to the login endpoint of the
+     * currently used provider. The state and code GET parameters will be added to the login URL, so we can imitate as
+     * if the provider would already returned the state and code parameters to the original login url.
+     *
      * @return WP_Error|WP_REST_Response
      */
     public function redirectToProviderEndpointWithStateAndCode($request) {
@@ -1195,7 +1265,12 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
             $provider = NextendSocialLogin::$allowedProviders[$this->id];
 
             try {
-                $providerEndpoint                 = $provider->getRedirectUri();
+                $providerEndpoint = $provider->getLoginUrl();
+
+                if (defined('WPML_PLUGIN_BASENAME')) {
+                    $providerEndpoint = $provider->getTranslatedLoginURLForRestRedirect();
+                }
+
                 $providerEndpointWithStateAndCode = add_query_arg(array(
                     'state' => $params['state'],
                     'code'  => $params['code']
@@ -1217,5 +1292,109 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
         }
 
         return new WP_Error('error', $errorMessage);
+    }
+
+    /**
+     * Generates a single translated login URL where the REST /redirect_uri endpoint of the currently used provider
+     * should redirect to instead of the original login url.
+     *
+     * @return string
+     */
+    public function getTranslatedLoginURLForRestRedirect() {
+        $originalLoginUrl = $this->getLoginUrl();
+
+        /**
+         * We should attempt to generate translated login URLs only if WPML is active and there is a language code defined.
+         */
+        if (defined('WPML_PLUGIN_BASENAME') && defined('ICL_LANGUAGE_CODE')) {
+
+            global $sitepress;
+
+            $languageCode = ICL_LANGUAGE_CODE;
+
+
+            if ($sitepress && method_exists($sitepress, 'get_active_languages') && $languageCode) {
+
+                $WPML_active_languages = $sitepress->get_active_languages();
+
+                if (count($WPML_active_languages) > 1) {
+                    /**
+                     * Fix:
+                     * When WPML has the language URL format set to "Language name added as a parameter",
+                     * we can not pass that parameter in the Authorization request in some cases ( e.g.: Microsoft ).
+                     * In these cases the user will end up redirected to the redirect URL without language parameter,
+                     * so after the login we won't be able to redirect them to registration flow page of the corresponding language.
+                     * In these cases we need to use the language code according to the url where we should redirect after the login.
+                     */
+                    $WPML_language_url_format = false;
+                    if (method_exists($sitepress, 'get_setting')) {
+                        $WPML_language_url_format = $sitepress->get_setting('language_negotiation_type');
+                    }
+                    if ($WPML_language_url_format && $WPML_language_url_format == 3) {
+                        $persistentRedirect = Persistent::get('redirect');
+                        if ($persistentRedirect) {
+                            $persistentRedirectQueryParams = array();
+                            $persistentRedirectQueryString = parse_url($persistentRedirect, PHP_URL_QUERY);
+                            parse_str($persistentRedirectQueryString, $persistentRedirectQueryParams);
+                            if (isset($persistentRedirectQueryParams['lang']) && !empty($persistentRedirectQueryParams['lang'])) {
+                                $languageParam = sanitize_text_field($persistentRedirectQueryParams['lang']);
+                                if (in_array($languageParam, array_keys($WPML_active_languages))) {
+                                    /**
+                                     * The language code that we got from the persistent redirect url is a valid language code for WPML,
+                                     * so we can use this code.
+                                     */
+                                    $languageCode = $languageParam;
+                                }
+                            }
+                        }
+                    }
+
+
+                    $args      = array('loginSocial' => $this->getId());
+                    $proxyPage = NextendSocialLogin::getProxyPage();
+
+                    if ($proxyPage) {
+                        //OAuth flow handled over OAuth redirect uri proxy page
+                        $convertedURL = get_permalink(apply_filters('wpml_object_id', $proxyPage, 'page', false, $languageCode));
+                        if ($convertedURL) {
+                            $convertedURL = add_query_arg($args, $convertedURL);
+
+                            return $convertedURL;
+                        }
+
+                    } else {
+                        //OAuth flow handled over wp-login.php
+
+                        if ($WPML_language_url_format && $WPML_language_url_format == 3 && (!class_exists('\WPML\UrlHandling\WPLoginUrlConverter') || (class_exists('\WPML\UrlHandling\WPLoginUrlConverter') && (!get_option(\WPML\UrlHandling\WPLoginUrlConverter::SETTINGS_KEY, false))))) {
+                            /**
+                             * We need to display the original redirect url when the
+                             * Language URL format is set to "Language name added as a parameter and:
+                             * -when the WPLoginUrlConverter class doesn't exists, since that case it is an old WPML version that can not translate the /wp-login.php page
+                             * -if "Login and registration pages - Allow translating the login and registration pages" is disabled
+                             */
+                            return $originalLoginUrl;
+                        } else {
+                            global $wpml_url_converter;
+                            /**
+                             * When the language URL format is set to "Different languages in directories" or "A different domain per language", then the Redirect URI will be different for each languages
+                             * Also when the language URL format is set to "Language name added as a parameter" and the "Login and registration pages - Allow translating the login and registration pages" setting is enabled, the urls will be different.
+                             */
+                            if ($wpml_url_converter && method_exists($wpml_url_converter, 'convert_url')) {
+
+                                $convertedURL = $wpml_url_converter->convert_url(site_url('wp-login.php'), $languageCode);
+
+                                $convertedURL = add_query_arg($args, $convertedURL);
+
+
+                                return $convertedURL;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $originalLoginUrl;
     }
 }

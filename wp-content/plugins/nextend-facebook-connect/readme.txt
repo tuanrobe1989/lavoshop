@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: social login, facebook, google, twitter, linkedin, register, login, social, nextend facebook connect, social sign in
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
-Tested up to: 5.8.1
-Stable tag: 3.1.2
+Tested up to: 5.8.2
+Stable tag: 3.1.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,7 +47,7 @@ Providers are the services which the visitors can use to register and log in to 
 * UserPro compatibility
 * Ultimate Member compatibility
 * Easy Digital Downloads compatibility
-* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord and more coming soon
+* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord, Slack and more coming soon
 * Configure whether email address should be asked on registration at each provider
 * Configure whether username should be asked on registration at each provider
 * Choose from icons or wide buttons
@@ -124,6 +124,18 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 4. The Settings page of the Facebook provider.
 
 == Changelog ==
+
+= 3.1.3 =
+* Fix: Database error on clean install
+* Improvement: [WPML Redirect URL compatibility](https://nextendweb.com/nextend-social-login-docs/how-to-make-nextend-social-login-compatible-with-wpml/)
+* Improvement: Updated Italian translation files
+* Improvement: [Twitter Getting Started](https://nextendweb.com/nextend-social-login-docs/provider-twitter/#configuration) Update
+* Improvement: Facebook provider - Facebook popup height has been increased, so everything will be visible during Authorization
+* Improvement: Facebook provider - The Facebook button will no longer be visible in Android WebView, as [Facebook has deprecated the support for Facebook Login Authentication on Android WebView](https://developers.facebook.com/blog/post/2021/06/28/deprecating-support-fb-login-authentication-android-embedded-browsers/). In the WebView of the Facebook and Instagram Android Apps the buttons will still be visible, as Facebook currently allows the authentication over these Android WebViews.
+* Feature: Option to control the appearance of the [Redirect Overlay](https://nextendweb.com/nextend-social-login-docs/global-settings/#redirect-overlay)
+
+* PRO: New provider: [Slack](https://nextendweb.com/nextend-social-login-docs/provider-slack/)
+
 
 = 3.1.2 =
 * Improvement: If there is a slow server or a poor internet connection, the redirect after the authentication with social login might take some time. During this time we will display a loading spinner, so the visitor will know that something is about to happen.

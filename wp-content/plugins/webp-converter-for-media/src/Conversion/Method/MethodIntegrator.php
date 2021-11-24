@@ -24,7 +24,7 @@ class MethodIntegrator {
 	 *
 	 * @param string[] $paths Server paths for source images.
 	 *
-	 * @return array[]|null Results data of conversion.
+	 * @return mixed[]|null Results data of conversion.
 	 */
 	public function init_conversion( array $paths ) {
 		if ( ! $method = $this->get_method_used() ) {
@@ -33,8 +33,9 @@ class MethodIntegrator {
 
 		$method->convert_paths( $paths, $this->plugin_data->get_plugin_settings() );
 		return [
-			'errors' => apply_filters( 'webpc_convert_errors', $method->get_errors() ),
-			'size'   => [
+			'is_fatal_error' => $method->is_fatal_error(),
+			'errors'         => apply_filters( 'webpc_convert_errors', $method->get_errors() ),
+			'size'           => [
 				'before' => $method->get_size_before(),
 				'after'  => $method->get_size_after(),
 			],

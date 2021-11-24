@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-10-13 19:51+0200\n"
-"PO-Revision-Date: 2021-10-13 19:51+0200\n"
+"POT-Creation-Date: 2021-11-15 18:50+0100\n"
+"PO-Revision-Date: 2021-11-15 18:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: it_IT\n"
@@ -215,19 +215,24 @@ msgstr ""
 
 #, php-format
 msgid ""
-"<p style=\"max-width:55em;\"><strong><u>Warning</u></strong>: Providers "
-"change the App setup process quite often, which means some steps below might "
-"not be accurate. If you see significant difference in the written "
-"instructions and what you see at the provider, feel free to %1$sreport it"
-"%2$s, so we can check and update the instructions.<br><strong>Last updated:</"
-"strong> %3$s.</p>"
+"<p><strong><u>Warning</u></strong>: Providers change the App setup process "
+"quite often, which means some steps below might not be accurate. If you see "
+"significant difference in the written instructions and what you see at the "
+"provider, feel free to %1$sreport it%2$s, so we can check and update the "
+"instructions.<br><strong>Last updated:</strong> %3$s.</p>"
 msgstr ""
+"<p><strong><u>Attenzione</u></strong>: I provider cambiano spesso il "
+"processo di setup delle App, significa che qualche passaggio che "
+"descriveremo potrebbe essere non accurato. Se noti differenze significative "
+"nelle istruzioni o in ciò che riscontri nel provider, puoi %1$ssegnalarcelo"
+"%2$s, così da potere verificare e aggiornare le nostre istruzioni. "
+"<br><strong>Ultimo aggiornamento:</strong> %3$s.</p>"
 
 msgid "You have logged in successfully."
 msgstr "Ti sei loggato."
 
 msgid "Login label"
-msgstr "Etichetta login"
+msgstr "Layout login"
 
 msgid "Reset to default"
 msgstr "Ripristina predefiniti"
@@ -238,10 +243,10 @@ msgid "Register label"
 msgstr "Layout registrazione"
 
 msgid "Link label"
-msgstr "Collega etichetta"
+msgstr "Layout collega"
 
 msgid "Unlink label"
-msgstr "Scollega etichetta"
+msgstr "Layout scollega"
 
 msgid "Default button"
 msgstr "Bottone standard"
@@ -252,8 +257,8 @@ msgstr "Usa bottone personalizzato"
 #, php-format
 msgid "Use the %s in your custom button's code to make the label show up."
 msgstr ""
-"Utilizza %s nei codici dei tuoi bottoni personalizzati per rendere "
-"l'etichetta visibile."
+"Utilizza %s nei codici dei tuoi bottoni personalizzati per rendere il layout "
+"visibile."
 
 msgid "Icon button"
 msgstr "Bottone icona"
@@ -280,7 +285,7 @@ msgid "Username prefix on register"
 msgstr "Prefisso allo username alla registrazione"
 
 msgid "Fallback username prefix on register"
-msgstr ""
+msgstr "Prefisso di correzione allo username alla registrazione"
 
 msgid "Used when username is invalid or not stored"
 msgstr "Usato quando lo username non è valido o non è memorizzato"
@@ -755,20 +760,14 @@ msgid ""
 "it by defining the %3$s constant."
 msgstr ""
 
-#, fuzzy
-#| msgid "Login layout"
 msgid "Button layout"
-msgstr "Layout del login"
+msgstr "Layout del bottone"
 
-#, fuzzy
-#| msgid "Default with separator"
 msgid "Default with top separator"
-msgstr "Default con separatore"
+msgstr "Default con separatore superiore"
 
-#, fuzzy
-#| msgid "Default with separator"
 msgid "Default with bottom separator"
-msgstr "Default con separatore"
+msgstr "Default con separatore inferiore"
 
 msgid "No Connect button in Login form"
 msgstr "Non connettere bottone nel form di Login"
@@ -785,25 +784,17 @@ msgstr ""
 msgid "Register form button style"
 msgstr "Stile del bottone del form registrati"
 
-#, fuzzy
-#| msgid "Checkout for WooCommerce"
 msgid "Checkout form"
-msgstr "Checkout per WooCommerce"
+msgstr "Modulo di checkout"
 
-#, fuzzy
-#| msgid "No Connect button in Login form"
 msgid "No Connect button in Checkout form"
-msgstr "Non connettere bottone nel form di Login"
+msgstr "Non connettere bottone nel form di checkout"
 
-#, fuzzy
-#| msgid "Login form button style"
 msgid "Checkout form button style"
-msgstr "Stile del bottone del form di login"
+msgstr "Stile del bottone del form di checkout"
 
-#, fuzzy
-#| msgid "Register layout"
 msgid "Checkout layout"
-msgstr "Layout registrazione"
+msgstr "Layout checkout"
 
 msgid "Target window"
 msgstr "Finestra target"
@@ -910,7 +901,7 @@ msgid "for Login"
 msgstr "per Accedere"
 
 msgid "for Register"
-msgstr "per Regisstrarsi"
+msgstr "per Registrarsi"
 
 msgid "Fixed redirect url"
 msgstr "Url di redirect fissa"
@@ -946,16 +937,44 @@ msgstr "Abbonamento"
 msgid "Allow registration with Social login."
 msgstr "Consenti la registrazione con Social login."
 
-#, fuzzy
-#| msgid "Page for register flow"
 msgid "Custom label for register buttons"
-msgstr "Pagina per il flusso di registrazione"
+msgstr "Layout personalizzato per i bottoni di registrazione"
 
 #, php-format
 msgid ""
 "Set a custom label for the social buttons in registration forms and for "
 "shortcodes with %1$s parameter set to %2$s.<br>The register specific labels "
 "can be modified at the Buttons tab of each provider."
+msgstr ""
+"Imposta un layout personalizzato per i bottoni social nei moduli di "
+"registrazione, e per gli shortcode, con i parametri %1$s settati come %2$s."
+"<br>Il layout può essere modificata nella tab Bottoni di ogni provider."
+
+msgid "Redirect overlay"
+msgstr ""
+
+msgid "No overlay"
+msgstr ""
+
+msgid "Display overlay"
+msgstr ""
+
+msgid "Display overlay with spinner"
+msgstr ""
+
+msgid "Display overlay with spinner and message"
+msgstr ""
+
+msgid ""
+"You can display an overlay on your site when we start the redirect after the "
+"authentication."
+msgstr ""
+
+#, php-format
+msgid "%1$s The overlay won't be displayed if the %2$s setting is set to %3$s!"
+msgstr ""
+
+msgid "Note:"
 msgstr ""
 
 msgid "Below and floating"
@@ -1061,20 +1080,14 @@ msgstr ""
 msgid "Link buttons on"
 msgstr "Collega bottoni a"
 
-#, fuzzy
-#| msgid "Ask E-mail on registration"
 msgid "Email template for registration"
-msgstr "Chiedi E-mail alla registrazione"
+msgstr "Template dell'email di registrazione"
 
-#, fuzzy
-#| msgid "WordPress default"
 msgid "WordPress default notification"
-msgstr "Default WordPress"
+msgstr "Notifiche default di WordPress"
 
-#, fuzzy
-#| msgid "Registration notification sent to"
 msgid "WooCommerce registration notification"
-msgstr "Invia notifica di registrazione a"
+msgstr "Notifica di registrazione di WooCommerce"
 
 #, php-format
 msgid ""
@@ -1200,8 +1213,6 @@ msgstr "Autenticazione fallita"
 msgid "Identifier"
 msgstr "Identificatore"
 
-#, fuzzy
-#| msgid "Profile picture"
 msgid "Profile Picture"
 msgstr "Immagine del profilo"
 
@@ -1213,10 +1224,7 @@ msgstr ""
 "Il tuo account %1$s è correttamente collegato al tuo account. Adesso puoi "
 "accedere facilmente con %2$s."
 
-#, fuzzy, php-format
-#| msgid ""
-#| "You have already linked a(n) %s account. Please unlink the current and "
-#| "then you can link other %s account."
+#, php-format
 msgid ""
 "You have already linked a(n) %s account. Please unlink the current and then "
 "you can link another %s account."
@@ -1224,8 +1232,7 @@ msgstr ""
 "Hai già collegato un account %s. Per favore scollega quello corrente e "
 "potrai successivamente collegarne un altro a %s."
 
-#, fuzzy, php-format
-#| msgid "This %s account is already linked to other user."
+#, php-format
 msgid "This %s account is already linked to another user."
 msgstr "Questo account %s è già collegato ad un altro utente."
 
@@ -1239,13 +1246,9 @@ msgid ""
 "linked %1$s account or log in with your password!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Register For This Site!"
 msgid "Register For This Site"
-msgstr "Registrati per questo sito!"
+msgstr "Registrati su questo sito"
 
-#, fuzzy
-#| msgid "Register"
 msgctxt "Register form submit button label"
 msgid "Register"
 msgstr "Registra"
@@ -1314,15 +1317,9 @@ msgstr ""
 "Sulla barra laterale clicca clicca su \"<b>Accesso Facebook > Impostazioni</"
 "b>\""
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Valid OAuth redirect URIs</b>\" field: "
-#| "<b>%s</b>"
 msgid ""
 "Add the following URL to the \"<b>Valid OAuth redirect URIs</b>\" field:"
-msgstr ""
-"Aggiungi l'URL seguente al campo \"<b>Valid OAuth redirect URIs</b>\": <b>"
-"%s</b>"
+msgstr "Aggiungi l'URL seguente al campo \"<b>Valid OAuth redirect URIs</b>\":"
 
 msgid "Click on \"<b>Save Changes</b>\""
 msgstr "Clicca su \"<b>Salva Modifiche</b>\""
@@ -1347,10 +1344,10 @@ msgid ""
 "%1$s App."
 msgstr ""
 "Per consentire ai tuoi visitatori di accedere con il loro account %1$s, per "
-"primo dovrai creare un'App %1$s. La seguente guida ti aiuterà attraverso il "
+"primo dovrai creare un'App %1$s. Questa guida ti aiuterà attraverso il "
 "processo di creazione di un'App %1$s. Dopo avere creato la tua App %1$s, vai "
-"su \"Impostazioni\" e configura il \"%2$s\" ottenuto e \"%3$s\" secondo la "
-"tua App %1$s."
+"su \"Impostazioni\" e configura il \"%2$s\" ottenuto e il \"%3$s\" secondo "
+"la tua App %1$s."
 
 #, php-format
 msgctxt "App creation"
@@ -1359,20 +1356,18 @@ msgstr "Crea %s"
 
 #, php-format
 msgid "Navigate to %s"
-msgstr "Naviga a %s"
+msgstr "Vai su %s"
 
 #, php-format
 msgid "Log in with your %s credentials if you are not logged in."
 msgstr "Accedi con le tue credenziali %s se non sei loggato."
 
-#, fuzzy
-#| msgid ""
-#| "Click on the \"<b>Create an App</b>\" button on the top right corner."
 msgid ""
 "Click on the \"<b>Create App</b>\" button and in the Popup choose the "
 "\"<b>Consumer</b>\" App type!"
 msgstr ""
-"Clicca sul bottone \"<b>Crea un'App</b>\" nell'angolo in alto a destra."
+"Clicca sul bottone \"<b>Crea un'App</b>\" e nel popup scegli \"<b>App "
+"Utente</b>\"!"
 
 msgid ""
 "If you see the message \"<b>Become a Facebook Developer</b>\", then you need "
@@ -1383,10 +1378,7 @@ msgstr ""
 "cliccare sul bottone verde \"<b>Registrati Adesso</b>\", compilare il form "
 "ed infine verificare il tuo account."
 
-#, fuzzy, php-format
-#| msgid ""
-#| "Fill \"<b>Display Name</b>\" and \"<b>Contact Email</b>\". The specified "
-#| "\"Display Name\" will appear on your %s!"
+#, php-format
 msgid ""
 "Fill \"<b>App Display Name</b>\", \"<b>App Contact Email</b>\". The "
 "specified \"App Display Name\" will appear on your %s!"
@@ -1399,17 +1391,13 @@ msgid ""
 "if you have any."
 msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "Click the \"<b>Create App ID</b>\" button and complete the Security Check."
 msgid "Click the \"<b>Create App</b>\" button and complete the Security Check."
 msgstr ""
-"Clicca il bottone \"<b>Crea App ID</b>\" e completa la Verifica di Sicurezza."
+"Clicca il bottone \"<b>Crea App</b>\" e completa la Verifica di Sicurezza."
 
-#, fuzzy, php-format
-#| msgid "Find <b>\"%s\"</b> and click \"<b>Select</b>\"."
+#, php-format
 msgid "Find \"<b>%1$s</b>\" and click \"<b>Set Up</b>\"."
-msgstr "Cerca <b>\"%s\"</b> e clicca \"<b>Seleziona</b>\"."
+msgstr "Cerca <b>\"%s\"</b> e clicca \"<b>Imposta</b>\"."
 
 #, php-format
 msgid ""
@@ -1419,10 +1407,8 @@ msgstr ""
 "Seleziona \"<b>Web</b>\" e inserisci la seguente URL nel campo \"<b>URL sito "
 "internet</b>\": <b>%s</b>"
 
-#, fuzzy
-#| msgid "Press “<b>Save</b>”"
 msgid "Press “<b>Save</b>”."
-msgstr "Premi “<b>Salva</b>”"
+msgstr "Premi “<b>Salva</b>”."
 
 #, php-format
 msgid ""
@@ -1432,21 +1418,16 @@ msgstr ""
 "Clicca sulla opzione “<b>%1$s</b>” che troverai sul lato sinistro, sotto“<b>"
 "%2$s</b> - <b>%3$s</b>”"
 
-#, fuzzy
-#| msgid "Click on “<b>Save Changes</b>”"
 msgid "Click on “<b>Save Changes</b>”."
-msgstr "Clicca su \"<b>Salva Modifiche</b>”"
+msgstr "Clicca su \"<b>Salva Modifiche</b>”."
 
-#, fuzzy, php-format
-#| msgid ""
-#| "On the top left side, click on the “<b>%1$s</b>” menu point, then click "
-#| "“<b>%2$s</b>”"
+#, php-format
 msgid ""
 "On the top left side, click on the “<b>%1$s</b>” menu point, then click “<b>"
 "%2$s</b>”."
 msgstr ""
 "In alto a sinistra, clicca nel menù su “<b>%1$s</b>”, quindi clicca “<b>"
-"%2$s</b>”"
+"%2$s</b>”."
 
 #, php-format
 msgid ""
@@ -1488,33 +1469,23 @@ msgid ""
 "point to this section of the document."
 msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "Select a “<b>Category</b>”, an “<b>App Icon</b>” and pick the "
-#| "“<b>Business Use</b>” option that describes your the App best, then press "
-#| "\"<b>Save Changes</b>\""
 msgid ""
 "Select a “<b>Category</b>”, an “<b>App Icon</b>” and pick the “<b>App "
 "Purpose</b>” option that describes your App the best, then press \"<b>Save "
 "Changes</b>\"."
 msgstr ""
 "Seleziona una “<b>Categoria</b>”, una “<b>Icona dell'App</b>” e seleziona "
-"l'opzione “<b>Uso Commerciale</b>” che descriva al meglio la tua App, poi "
-"premi \"<b>Salva Modifiche</b>\""
+"l'opzione “<b>Finalità App</b>” che descriva al meglio la tua App, poi premi "
+"\"<b>Salva Modifiche</b>\"."
 
-#, fuzzy
-#| msgid ""
-#| "Your application is currently private, which means that only you can log "
-#| "in with it. In the top bar click on the switch next to the \"<b>In "
-#| "development</b>\" label, then click the \"<b>Switch Mode</b>\" button."
 msgid ""
 "Your application is currently private, which means that only you can log in "
 "with it. In the top bar switch the \"<b>App Mode</b>\" from "
 "\"<b>Development</b>\" to \"<b>Live</b>\"."
 msgstr ""
 "La tua applicazione è attualmente privata, che significa che solo tu puoi "
-"accedere con essa. Nella barra in alto clicca sullo switch all'etichetta "
-"\"<b>In sviluppo</b>\", quindi clicca il bottone \"<b>Cambia modalità</b>\"."
+"accedere con essa. Nella barra in alto cambia il selettore \"<b>Modalità "
+"App</b>\" da \"<b>Sviluppo</b>\" a \"<b>Live</b>\"."
 
 #, php-format
 msgid ""
@@ -1525,18 +1496,14 @@ msgid ""
 "should click on the <strong>%6$s</strong> buttons next to them. "
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid ""
-#| "At the top of the page you can find your \"<b>App ID</b>\" and you can "
-#| "see your \"<b>App secret</b>\" if you click on the \"Show\" button. These "
-#| "will be needed in plugin’s settings."
+#, php-format
 msgid ""
 "At the top of the page you can find your \"<b>%1$s</b>\" and you can see "
 "your \"<b>%2$s</b>\" if you click on the \"Show\" button. These will be "
 "needed in plugin’s settings."
 msgstr ""
-"In cima alla pagina troverai la tua \"<b>App ID</b>\" e l'\"<b>App secret</b>"
-"\" se clicchi sul bottone \"Mostra\". Questi ti serviranno per la "
+"In cima alla pagina troverai la tua \"<b>%1$s</b>\" e potrai vedere la tua "
+"\"<b>%2$s</b>\" se clicchi sul bottone \"Mostra\". Ti serviranno per la "
 "configurazione del plugin."
 
 #, php-format
@@ -1577,7 +1544,7 @@ msgid ""
 "If you are not sure what is your %1$s, please head over to <a href=\"%2$s"
 "\">Getting Started</a>"
 msgstr ""
-"Se non sei sicuro di quale sia il tuo %1$s, gentilmente vai su<a href=\"%2$s"
+"Se non sei sicuro di quale sia il tuo %1$s, gentilmente vai su <a href=\"%2$s"
 "\">Inizia</a>"
 
 msgid "App Secret"
@@ -1595,10 +1562,8 @@ msgstr ""
 msgid "Continue with <b>Facebook</b>"
 msgstr "Continua con <b>Facebook</b>"
 
-#, fuzzy
-#| msgid "Continue with <b>Facebook</b>"
 msgid "Sign up with <b>Facebook</b>"
-msgstr "Continua con <b>Facebook</b>"
+msgstr "Registrati con <b>Facebook</b>"
 
 msgid "Link account with <b>Facebook</b>"
 msgstr "Collega account con <b>Facebook</b>"
@@ -1631,27 +1596,18 @@ msgstr ""
 "Sotto la sezione \"<b>OAuth 2.0 Client IDs</b>\" trova il tuo Client ID: <b>"
 "%s</b>"
 
-#, fuzzy, php-format
-#| msgid ""
-#| "Make sure the <b>%1$s</b> tab is selected and click on the <b>%2$s</b> "
-#| "button."
+#, php-format
 msgid ""
 "Under the \"<b>%1$s</b>\" section click \"<b>%2$s</b>\" and add the "
 "following URL:"
 msgstr ""
-"Accertati che la tab <b>%1$s</b> sia selezionata e clicca sul bottone <b>"
-"%2$s</b>."
+"Sotto la sezione \"<b>%1$s</b>\" clicca sul bottone <b>%2$s</b> e aggiungi "
+"l'URL seguente:"
 
 msgid "Click on \"<b>Save</b>\""
 msgstr "Clicca su \"<b>Salva</b>\""
 
-#, fuzzy, php-format
-#| msgid ""
-#| "If you don't have a project yet, you'll need to create one. You can do "
-#| "this by clicking on the blue \"<b>Create</b>\" button on the right side!  "
-#| "( If you already have a project, click on the name of your project in the "
-#| "dashboard instead, which will bring up a modal and click <b>\"New Project"
-#| "\"</b>. )"
+#, php-format
 msgid ""
 "If you don't have a project yet, you'll need to create one. You can do this "
 "by clicking on the blue \"<b>%1$s</b>\" text on the right side!  ( If you "
@@ -1659,43 +1615,38 @@ msgid ""
 "project instead, which will bring up a modal and click <b>\"%2$s\"</b>. )"
 msgstr ""
 "Se non hai ancora un progetto, avrai bisogno di crearne uno. Puoi farlo "
-"cliccando sul bottone blu \"<b>Crea</b>\" sul lato destro!  ( Se già hai un "
+"cliccando sul testo blu \"<b>%1$s</b>\" sul lato destro! (Se già hai un "
 "progetto, clicca sul nome del tuo progetto sulla dashboard, ti apparità una "
-"finestra e dovri cliccare su <b>\"Nuovo Progetto\"</b>. )"
+"finestra e dovrai cliccare su <b>\"%2$s\"</b>.)"
 
-#, fuzzy, php-format
-#| msgid ""
-#| "Name your project and then click on the \"<b>Create</b>\" button again"
+#, php-format
 msgid "Name your project and then click on the \"<b>%1$s</b>\" button again!"
 msgstr ""
-"Inserisci un nome per il tuo progetto e poi clicca di nuovo sul bottone "
-"\"<b>Crea</b>\""
+"Inserisci un nome per il tuo progetto e poi clicca di nuovo sul bottone \"<b>"
+"%1$s</b>\"!"
 
 msgid ""
 "Once you have a project, you'll end up in the dashboard. ( If earlier you "
 "have already had a Project, then make sure you select the created project in "
 "the top bar! )"
 msgstr ""
+"Una volta ottenuto un progetto finirai sulla dashboard. (Se in precedenza "
+"avevi già un Progetto, assicurati di avere selezionato sulla barra superiore "
+"il progetto che hai appena creato !)"
 
-#, fuzzy, php-format
-#| msgid ""
-#| "Click the “<b>OAuth consent screen</b>” button on the left hand side."
+#, php-format
 msgid "Click the “<b>%1$s</b>” button on the left hand side."
-msgstr "Clicca il bottone “<b>OAuth consent screen</b>” sulla sinistra."
+msgstr "Clicca il bottone “<b>%1$s</b>” sulla sinistra."
 
-#, fuzzy, php-format
-#| msgid ""
-#| "Choose a <b>User Type</b> according to your needs. If you want to enable "
-#| "the social login with Google for any users with a Google account, then "
-#| "pick the External option!"
+#, php-format
 msgid ""
 "Choose a <b>%1$s</b> according to your needs and press \"<b>%2$s</b>\". If "
 "you want to enable the social login with %3$s for any users with a %3$s "
 "account, then pick the \"%4$s\" option!"
 msgstr ""
-"Scegli un <b>Tipo Utente</b> secondo le tue necessità. Se vuoi attivare "
-"Social Login con Google per qualunque utente con un account Google, "
-"seleziona l'opzione Esterna!"
+"Scegli un <b>%1$s</b> secondo le tue necessità e premi \"<b>%2$s</b>\". Se "
+"vuoi attivare Social Login con %3$s per qualunque utente con un account "
+"%3$s, seleziona l'opzione \"%4$s\"!"
 
 #, php-format
 msgid ""
@@ -1720,6 +1671,8 @@ msgid ""
 "For the \"<b>%1$s</b>\" field, select an email address that users can use to "
 "contact you with questions about their consent."
 msgstr ""
+"Per il campo \"<b>%1$s</b>\", seleziona un indirizzo email che gli utenti "
+"possano utilizzare per contattarti con domande sul loro consenso."
 
 #, fuzzy, php-format
 #| msgid ""
@@ -1865,20 +1818,18 @@ msgstr ""
 "Una volta il tuo account sviluppatore sarà completo, naviga indietro a <b>"
 "%s</b> se non sei già lì!"
 
-#, fuzzy, php-format
-#| msgid "Click on \"<b>Save</b>\""
+#, php-format
 msgid "Click on \"<b>%s</b>\"!"
-msgstr "Clicca su \"<b>Salva</b>\""
+msgstr "Clicca su \"<b>%s</b>\"!"
 
 msgid ""
 "Name your project, and go through the basic setup. You’ll need to select "
 "your use case, give a description and enter a name for the App as well."
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Click \"<b>Edit</b>\"."
+#, php-format
 msgid "Click \"<b>%s</b>\"!"
-msgstr "Clicca \"<b>Modifica</b>\"."
+msgstr "Clicca \"<b>>%s</b>\"!"
 
 #, php-format
 msgid ""
@@ -1893,26 +1844,17 @@ msgid ""
 "\" section click on the name of your App."
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid ""
-#| "Name your project and then click on the \"<b>Create</b>\" button again"
+#, php-format
 msgid "Scroll down and click on the \"<b>%1$s</b>\" button at \"<b>%2$s</b>\"."
 msgstr ""
-"Inserisci un nome per il tuo progetto e poi clicca di nuovo sul bottone "
-"\"<b>Crea</b>\""
 
-#, fuzzy, php-format
-#| msgid "Choose the \"<b>OAuth client ID</b>\" option."
+#, php-format
 msgid "Switch on the \"<b>%s</b>\" option."
-msgstr "Scegli l'opzione \"<b>OAuth client ID</b>\"."
+msgstr "Scegli l'opzione \"<b>%s</b>\"."
 
-#, fuzzy, php-format
-#| msgid ""
-#| "Enter the URL of your site to the \"<b>Home Page URL</b>\" field: <b>%s</"
-#| "b>"
+#, php-format
 msgid "Enter your site's URL to the \"<b>%1$s</b>\" field: <b>%2$s</b>"
-msgstr ""
-"Inserisci l'URL del tuo sito nel campo \"<b>Home Page URL</b>\": <b>%s</b>"
+msgstr "Inserisci l'URL del tuo sito nel campo \"<b>%1$s</b>\": <b>%2$s</b>"
 
 #, php-format
 msgid ""
@@ -1921,10 +1863,9 @@ msgid ""
 "%2$s</b>\" and the \"<b>%3$s</b>\" fields with the corresponding URLs!"
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Click on \"<b>Save</b>\""
+#, php-format
 msgid "Click on \"<b>%s</b>\"."
-msgstr "Clicca su \"<b>Salva</b>\""
+msgstr "Clicca su \"<b>%s</b>\"."
 
 #, php-format
 msgid "Go back to %1$s and <b>Verify</b> your %2$s provider."
@@ -1945,10 +1886,8 @@ msgstr "Originale"
 msgid "Continue with <b>Twitter</b>"
 msgstr "Continua con <b>Twitter</b>"
 
-#, fuzzy
-#| msgid "Continue with <b>Twitter</b>"
 msgid "Sign up with <b>Twitter</b>"
-msgstr "Continua con <b>Twitter</b>"
+msgstr "Registrati con <b>Twitter</b>"
 
 msgid "Link account with <b>Twitter</b>"
 msgstr "Collega account con <b>Twitter</b>"
@@ -1988,63 +1927,48 @@ msgstr ""
 "Questo username non è valido perché contiene caratteri non consentiti. Per "
 "favore inserisci uno username valido."
 
-#, fuzzy
-#| msgid "This username is already registered. Please choose another one."
 msgid ""
 "<strong>Error</strong>: This username is already registered. Please choose "
 "another one."
-msgstr "Questo username è già registrato. Per favore scegline un altro."
+msgstr ""
+"<strong>Errore</strong>: Questo username è già registrato. Per favore "
+"scegline un altro."
 
-#, fuzzy
-#| msgid "Sorry, that username is not allowed."
 msgid "<strong>Error</strong>: Sorry, that username is not allowed."
-msgstr "Mi spiace, quello username non è consentito."
+msgstr "<strong>Error</strong>: Mi spiace, quello username non è consentito."
 
 msgid "Username"
 msgstr "Username"
 
-#, fuzzy
-#| msgid "<strong>ERROR</strong>: Please enter a password."
 msgid "<strong>Error</strong>: Please enter an email address."
-msgstr "<strong>ERRORE</strong>: Per favore inserisci una password."
+msgstr "<strong>Errore</strong>: Per favore inserisci una password."
 
-#, fuzzy
-#| msgid "The email address isn&#8217;t correct."
 msgid "<strong>Error</strong>: The email address isn&#8217;t correct."
-msgstr "L'indirizzo email non è corretto."
+msgstr "<strong>Errore</strong>: L'indirizzo email non è corretto."
 
-#, fuzzy
-#| msgid "This email is already registered, please choose another one."
 msgid ""
 "<strong>Error</strong>: This email is already registered. Please choose "
 "another one."
-msgstr "Questa email è già registrata, per favore scegline un'altra."
+msgstr ""
+"<strong>Errore</strong>: Questa email è già registrata, per favore scegline "
+"un'altra."
 
 msgid "Registration confirmation will be emailed to you."
 msgstr "La conferma di registrazione ti sarà inviata per email."
 
-#, fuzzy
-#| msgid "<strong>ERROR</strong>: Please enter a password."
 msgid "<strong>Error</strong>: Please enter a password."
-msgstr "<strong>ERRORE</strong>: Per favore inserisci una password."
+msgstr "<strong>Errore</strong>: Per favore inserisci una password."
 
-#, fuzzy
-#| msgid ""
-#| "<strong>ERROR</strong>: Passwords may not contain the character \"\\\"."
 msgid "<strong>Error</strong>: Passwords may not contain the character \"\\\"."
 msgstr ""
-"<strong>ERRORE</strong>: Le password non possono contenere il carattere \"\\"
+"<strong>Errore</strong>: Le password non possono contenere il carattere \"\\"
 "\"."
 
-#, fuzzy
-#| msgid ""
-#| "<strong>ERROR</strong>: Please enter the same password in both password "
-#| "fields."
 msgid ""
 "<strong>Error</strong>: Passwords don&#8217;t match. Please enter the same "
 "password in both password fields."
 msgstr ""
-"<strong>ERRORE</strong>: Per favore inserisci la stessa password in entrambi "
+"<strong>Errore</strong>: Per favore inserisci la stessa password in entrambi "
 "i campi."
 
 msgid "Password"
@@ -2107,14 +2031,10 @@ msgstr ""
 msgid "Click \"<b>Edit</b>\"."
 msgstr "Clicca \"<b>Modifica</b>\"."
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Allowed Return URLs</b>\" field <b>%s</"
-#| "b> "
 msgid "Add the following URL to the \"<b>Allowed Return URLs</b>\" field: "
 msgstr ""
 "Aggiungi l'url seguente alle \"<b>URL di Ritorno consentite</b>\" campo <b>"
-"%s</b> "
+"%s</b>: "
 
 #, php-format
 msgid ""
@@ -2165,10 +2085,8 @@ msgstr ""
 msgid "Continue with <b>Amazon</b>"
 msgstr "Continua con <b>Amazon</b>"
 
-#, fuzzy
-#| msgid "Continue with <b>Amazon</b>"
 msgid "Sign up with <b>Amazon</b>"
-msgstr "Continua con <b>Amazon</b>"
+msgstr "Registrati con <b>Amazon</b>"
 
 msgid "Link account with <b>Amazon</b>"
 msgstr "Collega account con <b>Amazon</b>"
@@ -2532,20 +2450,12 @@ msgid ""
 "Settings section on the left side."
 msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
 msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
-msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect URLs</b>\": <b>%s</b>"
+msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect</b>\":"
 
-#, fuzzy
-#| msgid "Click on the \"<b>Create New Application</b>\" button."
 msgid "Click the \"<b>New Application</b>\" button."
 msgstr "Clicca sul bottone \"<b>Crea Nuova Applicazione</b>\"."
 
-#, fuzzy
-#| msgid ""
-#| "Fill the \"<b>App Name</b>\" field and click \"<b>Create App</b>\" button."
 msgid "Fill the \"<b>Name</b>\" field and click the \"<b>Create</b>\" button."
 msgstr ""
 "Compila il campo \"<b>Nome App</b>\" e clicca il bottone \"<b>Crea App</b>\"."
@@ -2555,68 +2465,44 @@ msgid ""
 "b>\" and \"<b>Privacy Policy URL</b>\"."
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid ""
-#| "On the top left side, click on the “<b>%1$s</b>” menu point, then click "
-#| "“<b>%2$s</b>”"
+#, php-format
 msgid ""
 "On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
-msgstr ""
-"In alto a sinistra, clicca nel menù su “<b>%1$s</b>”, quindi clicca “<b>"
-"%2$s</b>”"
+msgstr "A sinistra, clicca nel menù su “<b>%1$s</b>” nei Settaggi."
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
 msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
-msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect URLs</b>\": <b>%s</b>"
+msgstr "Aggiungi l'URL seguente al campo \"<b>Redirect</b>\":"
 
-#, fuzzy
-#| msgid "Click on the \"<b>Save Changes</b>\" button."
 msgid "Click the \"<b>Save Changes</b>\" button."
 msgstr "Clicca sul bottone \"<b>Salva Modifiche</b>\"."
 
-#, fuzzy
-#| msgid ""
-#| "Find the necessary <b>Client ID</b> and <b>Client Secret</b> at the "
-#| "middle of the page. These will be needed in the plugin's settings!"
 msgid ""
 "Copy the necessary \"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values "
 "and fill these fields in the plugin settings!"
 msgstr ""
-"Cerca il <b>Client ID</b> and il <b>Client Secret</b>richiesti al centro "
-"della pagina. Questi saranno necessari nei settaggi del plugin!"
+"Copia il <b>Client ID</b> e il <b>Client Secret</b>e compila questi campi "
+"nei settaggi del plugin!"
 
-#, fuzzy
-#| msgid "Select account on each login"
 msgid "Force reauthorization on each login"
-msgstr "Scegli un account ad ogni accesso"
+msgstr "Forza l'autorizzazione ad ogni accesso"
 
 #, fuzzy
 #| msgid ""
 #| "Disable, when you don't want to see the account select prompt on each "
 #| "login."
-msgid "Disable, when you don't want to see the consent screen on each login."
+msgid "Enable, when you want to see the consent screen on each login."
 msgstr ""
 "Disabilita, quando non vuoi vedere la scelta dell'account ad ogni accesso."
 
-#, fuzzy
-#| msgid "Continue with <b>Disqus</b>"
 msgid "Continue with <b>Discord</b>"
 msgstr "Continua con <b>Disqus</b>"
 
-#, fuzzy
-#| msgid "Continue with <b>Disqus</b>"
 msgid "Sign up with <b>Discord</b>"
-msgstr "Continua con <b>Disqus</b>"
+msgstr "Registrati con <b>Disqus</b>"
 
-#, fuzzy
-#| msgid "Link account with <b>Disqus</b>"
 msgid "Link account with <b>Discord</b>"
 msgstr "Collega account con <b>Disqus</b>"
 
-#, fuzzy
-#| msgid "Unlink account from <b>Disqus</b>"
 msgid "Unlink account from <b>Discord</b>"
 msgstr "Scollega account da <b>Disqus</b>"
 
@@ -2631,11 +2517,8 @@ msgstr ""
 "Seleziona la tab \"<b>Settaggi</b>\" e scrolla giù alla sezione "
 "Autenticazione!"
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Callback URLs</b>\" field: <b>%s</b>"
 msgid "Add the following URL to the \"<b>Callback URL</b>\" field:"
-msgstr "Aggiungi l'URL seguente al campo \"<b>Callback URLs</b>\": <b>%s</b>"
+msgstr "Aggiungi l'URL seguente al campo \"<b>Callback URLs</b>\":"
 
 msgid "Click on the \"<b>Save Changes</b>\" button."
 msgstr "Clicca sul bottone \"<b>Salva Modifiche</b>\"."
@@ -2697,10 +2580,8 @@ msgstr "API Secret"
 msgid "Continue with <b>Disqus</b>"
 msgstr "Continua con <b>Disqus</b>"
 
-#, fuzzy
-#| msgid "Continue with <b>Disqus</b>"
 msgid "Sign up with <b>Disqus</b>"
-msgstr "Continua con <b>Disqus</b>"
+msgstr "Registrati con <b>Disqus</b>"
 
 msgid "Link account with <b>Disqus</b>"
 msgstr "Collega account con <b>Disqus</b>"
@@ -2716,14 +2597,8 @@ msgstr "Clicca sul nome dell'App che hai configurato per %s."
 msgid "Make sure the <b>Homepage URL</b> matches with: <b>%s</b>"
 msgstr "Accertati che l'<b>URL della Homepage</b> coincida con: <b>%s</b>"
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the <b>Authorization callback URL</b> field: <b>"
-#| "%s</b>"
 msgid "Add the following URL to the <b>Authorization callback URL</b> field:"
-msgstr ""
-"Aggiungi questa URL nel campo della <b>Authorization callback URL</b>: <b>"
-"%s</b>"
+msgstr "Aggiungi questa URL nel campo della <b>Authorization callback URL</b>:"
 
 msgid "Press the <b>Update application</b> button to save the changes."
 msgstr ""
@@ -2759,7 +2634,7 @@ msgstr ""
 "App."
 
 msgid "Click the <b>Register application</b> button."
-msgstr "Clicca il bottone <b>Regisstra applicazione</b>."
+msgstr "Clicca il bottone <b>Registra applicazione</b>."
 
 msgid ""
 "Find the necessary <b>Client ID</b> and <b>Client Secret</b> at the middle "
@@ -2920,14 +2795,6 @@ msgstr ""
 msgid "Channel Secret"
 msgstr "Client Secret"
 
-#, fuzzy
-#| msgid ""
-#| "Disable, when you don't want to see the account select prompt on each "
-#| "login."
-msgid "Enable, when you want to see the consent screen on each login."
-msgstr ""
-"Disabilita, quando non vuoi vedere la scelta dell'account ad ogni accesso."
-
 msgid "Add LINE Official Account as a friend"
 msgstr ""
 
@@ -3028,16 +2895,12 @@ msgstr ""
 msgid "Click on the \"<b>Auth</b>\" tab."
 msgstr "Clicca sulla tab \"<b>Auth</b>\"."
 
-#, fuzzy
-#| msgid ""
-#| "Find \"<b>OAuth 2.0 settings</b>\" section and add the following URL to "
-#| "the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
 msgid ""
 "Find \"<b>OAuth 2.0 settings</b>\" section and add the following URL to the "
 "\"<b>Redirect URLs</b>\" field:"
 msgstr ""
 "Cerca la sezione \"<b>OAuth 2.0 settings</b>\" e aggiungi l'URL seguente al "
-"campo \"<b>Redirect URLs</b>\": <b>%s</b>"
+"campo \"<b>Redirect URLs</b>\":"
 
 msgid ""
 "Find the necessary \"<b>Client ID</b>\" and \"<b>Client Secret</b>\" under "
@@ -3049,10 +2912,8 @@ msgstr ""
 msgid "Continue with <b>LinkedIn</b>"
 msgstr "Continua con <b>LinkedIn</b>"
 
-#, fuzzy
-#| msgid "Continue with <b>LinkedIn</b>"
 msgid "Sign up with <b>LinkedIn</b>"
-msgstr "Continua con <b>LinkedIn</b>"
+msgstr "Registrati con <b>LinkedIn</b>"
 
 msgid "Link account with <b>LinkedIn</b>"
 msgstr "Collega account con <b>LinkedIn</b>"
@@ -3364,6 +3225,193 @@ msgstr "Collega account con <b>PayPal</b>"
 msgid "Unlink account from <b>PayPal</b>"
 msgstr "Scollega account da <b>PayPal</b>"
 
+#, fuzzy, php-format
+#| msgid "Click on the name of your %s App."
+msgid "Select your %s App."
+msgstr "Clicca sul nome della tua %s App."
+
+#, fuzzy
+#| msgid ""
+#| "Under the \"<b>Capabilities</b>\" section, tick the \"<b>Sign In with "
+#| "Apple</b>\" option."
+msgid ""
+"Under the \"<b>Add features and functionality</b>\" panel click on the "
+"\"<b>Permissions</b>\" option."
+msgstr ""
+"Sotto la sezione \"<b>Capacità</b>\", spunta l'opzione \"<b>Accedi con "
+"Apple</b>\"."
+
+#, fuzzy
+#| msgid "Click on the \"<b>Save Changes</b>\" button."
+msgid "Click on the \"<b>Add</b>\" and \"<b>Save URLs</b>\" button."
+msgstr "Clicca sul bottone \"<b>Salva Modifiche</b>\"."
+
+#, fuzzy, php-format
+#| msgid "Log in with your %s credentials if you are not logged in yet"
+msgid ""
+"Visit the %1$s page and log in with your %2$s credentials if you are not "
+"logged in, yet."
+msgstr "Accedi con le tue credenziali %s se non sei ancora loggato"
+
+#, fuzzy
+#| msgid ""
+#| "Click on the \"<b>Create an App</b>\" button on the top right corner."
+msgid ""
+"Click the \"<b>Create New App</b>\" button. (If you can not see this button, "
+"you might need to create a workspace first!)"
+msgstr ""
+"Clicca sul bottone \"<b>Crea un'App</b>\" nell'angolo in alto a destra."
+
+#, fuzzy
+#| msgid "Choose the \"<b>OAuth client ID</b>\" option."
+msgid "Choose the \"<b>From scratch</b>\" option."
+msgstr "Scegli l'opzione \"<b>OAuth client ID</b>\"."
+
+#, fuzzy
+#| msgid ""
+#| "Fill the \"<b>App Name</b>\" field and click \"<b>Create App</b>\" button."
+msgid ""
+"Fill the \"<b>App Name</b>\" field, select your workspace and click the "
+"\"<b>Create App</b>\" button."
+msgstr ""
+"Compila il campo \"<b>Nome App</b>\" e clicca il bottone \"<b>Crea App</b>\"."
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
+msgid "Scroll down to the \"<b>Redirect URLs</b>\" section."
+msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect URLs</b>\": <b>%s</b>"
+
+#, fuzzy
+#| msgid "Click on the \"<b>Save Changes</b>\" button."
+msgid "Click on the \"<b>Save URLs</b>\" button."
+msgstr "Clicca sul bottone \"<b>Salva Modifiche</b>\"."
+
+#, fuzzy
+#| msgid "Switch on the \"<b>%s</b>\" option."
+msgid "Scroll down to the \"<b>Scopes</b>\" section."
+msgstr "Scegli l'opzione \"<b>%s</b>\"."
+
+#, fuzzy
+#| msgid ""
+#| "Add the following URL to the \"<b>Redirect URLs</b>\" field <b>%s</b> "
+msgid ""
+"Add the following Scopes to the \"<b>User Token Scopes</b>\" field: "
+"\"<b>openid</b>\", \"<b>profile</b>\", \"<b>email</b>\""
+msgstr ""
+"Aggiungi l'URL seguente al campo \"<b>Redirect URLs</b>\" field <b>%s</b> "
+
+#, fuzzy
+#| msgid ""
+#| "On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
+msgid ""
+"On the top left side click on the \"<b>Basic Information</b>\" option in the "
+"\"<b>Settings</b>\"."
+msgstr "A sinistra, clicca nel menù su “<b>%1$s</b>” nei Settaggi."
+
+#, fuzzy
+#| msgid ""
+#| "Fill the \"<b>App Name</b>\" field and click \"<b>Create App</b>\" button."
+msgid ""
+"Under the \"<b>Install your app</b>\" panel click on the \"<b>Install to "
+"Workspace</b>\" button."
+msgstr ""
+"Compila il campo \"<b>Nome App</b>\" e clicca il bottone \"<b>Crea App</b>\"."
+
+#, fuzzy
+#| msgid "Click on the \"<b>Create</b>\" button"
+msgid "Click on the \"<b>Allow</b>\" button."
+msgstr "Clicca sul bottone \"<b>Crea</b>\""
+
+#, fuzzy
+#| msgid ""
+#| "Under the \"<b>Capabilities</b>\" section, tick the \"<b>Sign In with "
+#| "Apple</b>\" option."
+msgid ""
+"Under the \"<b>Manage distribution</b>\" panel click on the \"<b>Distribute "
+"App</b>\" button."
+msgstr ""
+"Sotto la sezione \"<b>Capacità</b>\", spunta l'opzione \"<b>Accedi con "
+"Apple</b>\"."
+
+msgid "Scroll down to the \"<b>Remove Hard Coded Information</b>\" section."
+msgstr ""
+
+msgid ""
+"Click on the \"<b>I’ve reviewed and removed any hard-coded information.</b>"
+"\". "
+msgstr ""
+
+#, fuzzy
+#| msgid "Click on the \"<b>Create New Application</b>\" button."
+msgid "Click on the \"<b>Activate Public Distribution</b>\" button."
+msgstr "Clicca sul bottone \"<b>Crea Nuova Applicazione</b>\"."
+
+#, fuzzy
+#| msgid ""
+#| "On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
+msgid ""
+"On the top left side click on the \"<b>Basic Information</b>\" option, that "
+"you find under \"<b>Settings</b>\"."
+msgstr "A sinistra, clicca nel menù su “<b>%1$s</b>” nei Settaggi."
+
+#, fuzzy
+#| msgid ""
+#| "On the top of the page, you will find the necessary \"<b>Client ID</b>\" "
+#| "and \"<b>Client Secret</b>\"! These will be needed in the plugin's "
+#| "settings."
+msgid ""
+"Scroll down to the \"<b>App Credentials</b>\" section, find the necessary "
+"\"<b>Client ID</b>\" and \"<b>Client Secret</b>\" values and fill these "
+"fields in the plugin settings!"
+msgstr ""
+"In alto nella pagina, troverai i necessari \"<b>Client ID</b>\" e "
+"\"<b>Client Secret</b>\"! Questi ti serviranno nella configurazione del "
+"plugin."
+
+msgid "Slack Team ID"
+msgstr ""
+
+msgid "Optional"
+msgstr ""
+
+#, php-format
+msgid ""
+"The Team ID of a workspace to attempt to restrict to. %1$sLearn more.%2$s"
+msgstr ""
+
+msgid "72x72"
+msgstr ""
+
+msgid "192x192"
+msgstr ""
+
+msgid "512x512"
+msgstr ""
+
+msgid "1024x1024"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up with <b>Facebook</b>"
+msgid "Sign in with <b>Slack</b>"
+msgstr "Registrati con <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Sign up with <b>Facebook</b>"
+msgid "Sign up with <b>Slack</b>"
+msgstr "Registrati con <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>Facebook</b>"
+msgid "Link account with <b>Slack</b>"
+msgstr "Collega account con <b>Facebook</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Facebook</b>"
+msgid "Unlink account from <b>Slack</b>"
+msgstr "Scollega account da <b>Facebook</b>"
+
 msgid "Click on the \"<b>Manage</b>\" button next to the associated App."
 msgstr "Clicca sul bottone \"<b>Gestisci</b>\" vicino l'App associata."
 
@@ -3572,6 +3620,12 @@ msgstr "OR"
 msgid "Social accounts"
 msgstr "Account social"
 
+#~ msgid ""
+#~ "Disable, when you don't want to see the consent screen on each login."
+#~ msgstr ""
+#~ "Disabilita, quando non vuoi vedere la schermata del consenso ad ogni "
+#~ "accesso."
+
 #, php-format
 #~ msgid ""
 #~ "At the \"<b>Add a Product</b>\" panel find \"<b>%1$s</b>\" and click "
@@ -3616,12 +3670,6 @@ msgstr "Account social"
 #~ msgstr ""
 #~ "Aggiungi l'URL seguente al campo \"<b>Authorized redirect URI</b>\" <b>"
 #~ "%s</b> "
-
-#, php-format
-#~ msgid ""
-#~ "Add the following URL to the \"<b>Redirect URLs</b>\" field <b>%s</b> "
-#~ msgstr ""
-#~ "Aggiungi l'URL seguente al campo \"<b>Redirect URLs</b>\" field <b>%s</b> "
 
 #~ msgid "ERROR"
 #~ msgstr "ERRORE"

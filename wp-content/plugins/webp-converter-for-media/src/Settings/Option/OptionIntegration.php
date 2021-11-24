@@ -45,13 +45,14 @@ class OptionIntegration {
 		}
 
 		return [
-			'name'     => $this->option->get_name(),
-			'type'     => $option_type,
-			'label'    => $this->option->get_label(),
-			'info'     => $this->option->get_info(),
-			'values'   => $values,
-			'disabled' => $disabled_values ?: [],
-			'value'    => ( $value !== null ) ? $value : $this->option->get_default_value( $settings ),
+			'name'         => $this->option->get_name(),
+			'type'         => $option_type,
+			'label'        => $this->option->get_label(),
+			'notice_lines' => $this->option->get_notice_lines(),
+			'info'         => $this->option->get_info(),
+			'values'       => $values,
+			'disabled'     => $disabled_values ?: [],
+			'value'        => ( $value !== null ) ? $value : $this->option->get_default_value( $settings ),
 		];
 	}
 
