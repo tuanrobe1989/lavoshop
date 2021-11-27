@@ -78,14 +78,22 @@ p.marbt {
 .footer__social ul li i {
   font-size: 1.5rem; }
 
+.footer__social__list {
+  display: block !important; }
+  .footer__social__list a {
+    padding: 0.2rem 0.5rem !important; }
+
+.footer__social__phone {
+  color: #000000; }
+
 .footer__social__youtube {
-  color: red; }
+  color: #BD332D; }
+
+.footer__social__facebook {
+  color: #4267B2; }
 
 .cat-item .icon-dribbble, .cat-item .icon-envelop, .cat-item .icon-phone {
   margin-right: 8px; }
-
-.icon-phone {
-  color: #e8533b; }
 
 .top__banner {
   margin: 0 0 2rem 0 !important; }

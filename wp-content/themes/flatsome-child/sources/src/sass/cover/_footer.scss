@@ -8,13 +8,28 @@
     &__social{
         ul{
             li{
+                a{
+
+                }
                 i{
                     font-size: 1.5rem;
                 }
             }
         }
+        &__list{
+            display: block !important;
+            a{
+                padding: 0.2rem 0.5rem !important;
+            }
+        }
+        &__phone{
+            color: #000000;
+        }
         &__youtube{
-            color: red;
+            color: #BD332D;
+        }
+        &__facebook{
+            color: #4267B2;
         }
     }
 }
@@ -22,7 +37,4 @@
     .icon-dribbble,.icon-envelop,.icon-phone{
         margin-right: 8px;
     }
-}
-.icon-phone{
-    color: $maincolor;
 }
