@@ -41,8 +41,26 @@ p.marbt {
     .widget-title {
       font-size: 1.35rem !important; } }
 
-.widget-title, strong {
+.widget-title,
+strong {
   color: #1a1a1a; }
+
+@media (max-width: 991px) {
+  .hidden-xs {
+    display: none !important; } }
+
+@media (min-width: 992px) {
+  .hidden-pc {
+    display: none !important; } }
+
+.small-container {
+  max-width: 980px;
+  margin: 0 auto; }
+
+.full-width {
+  width: 100%;
+  max-width: 100%;
+  height: auto; }
 
 @media (min-width: 850px) {
   .header-search-form {

@@ -1,36 +1,59 @@
-.tit{
-    &__promo{
-        text-transform: uppercase;
-        color: $darkback;
-        font-size: 2.5rem;
-        text-align: center;
-        width: 100%;
-        display: block;
-        @include breakpoint-up(md){
-            font-size: 4.5rem;
-            text-align: left;
-        }   
-        &.sub{
-            color:$maincolor;
-            font-size: 2rem;
-            @include breakpoint-up(md){
-                font-size: 2.5rem;
-            }  
-        } 
-        
-    }
-}
-p{
-    &.marbt{
-        margin-bottom: 0;
-    }
-}
-.widget-title{
-    color: $maincolor !important;
-    @include breakpoint-up(wmd) {
-        font-size: 1.35rem !important;
-    }
-}
-.widget-title,strong{
+.tit {
+  &__promo {
+    text-transform: uppercase;
     color: $darkback;
+    font-size: 2.5rem;
+    text-align: center;
+    width: 100%;
+    display: block;
+    @include breakpoint-up(md) {
+      font-size: 4.5rem;
+      text-align: left;
+    }
+    &.sub {
+      color: $maincolor;
+      font-size: 2rem;
+      @include breakpoint-up(md) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+p {
+  &.marbt {
+    margin-bottom: 0;
+  }
+}
+.widget-title {
+  color: $maincolor !important;
+  @include breakpoint-up(wmd) {
+    font-size: 1.35rem !important;
+  }
+}
+.widget-title,
+strong {
+  color: $darkback;
+}
+
+.hidden-xs {
+  @include breakpoint-down(md) {
+    display: none !important;
+  }
+}
+
+.hidden-pc {
+  @include breakpoint-up(md) {
+    display: none !important;
+  }
+}
+
+.small-container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.full-width {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
