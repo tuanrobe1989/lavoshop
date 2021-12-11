@@ -542,6 +542,7 @@ class BeRocket_AAPF_single_filter extends BeRocket_custom_post_class {
     }
     public function wc_save_product_without_check( $post_id, $post ) {
         parent::wc_save_product_without_check( $post_id, $post );
+        delete_site_transient('BeRocket_products_label_style_generate');
         $instance = $_POST[$this->post_name];
         
         $filter_type_array = array(

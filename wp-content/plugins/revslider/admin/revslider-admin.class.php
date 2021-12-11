@@ -252,7 +252,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 	 */
 	public function add_slider_meta_box($post_types = null){
 		try {
-			$post_types = array('post','page');
+			$post_types = array();
 			add_meta_box('slider_revolution_metabox', 'Slider Revolution', array('RevSliderAdmin', 'add_meta_box_content'), $post_types, 'side', 'default');
 		} catch (Exception $e){}
 	}
@@ -2544,12 +2544,12 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 		
 		if(!empty($rs_meta_create)){
 			foreach($rs_meta_create as $attach_id => $save_dir){
+				unset($rs_meta_create[$attach_id]);
+				update_option('rs_image_meta_todo', $rs_meta_create);
+
 				if($attach_data = @wp_generate_attachment_metadata($attach_id, $save_dir)){
 					@wp_update_attachment_metadata($attach_id, $attach_data);
 				}
-				unset($rs_meta_create[$attach_id]);
-				
-				update_option('rs_image_meta_todo', $rs_meta_create);
 			}
 		}
 	}

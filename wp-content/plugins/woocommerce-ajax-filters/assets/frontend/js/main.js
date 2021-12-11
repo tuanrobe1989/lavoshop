@@ -809,6 +809,7 @@ function braapf_filtered_filters_set() {
                     html += berocket_apply_filters('default_selected_filters_area_single_taxonomy', html2, taxonomy, html2_elements);
                 }
             });
+            $('.berocket_aapf_widget_selected_area').parents('.berocket_single_filter_widget').removeClass('bapf_mt_none');
             if( html ) {
                 $('.bapf_sfa_mt_hide').show().parent().removeClass('bapf_mt_none');
                 html = berocket_apply_filters('default_selected_filters_area_full_exist', '<div class="berocket_aapf_widget_selected_filter">' + html + '<ul class="bapf_sfa_unall"><li><a href="#Unselect_all" class="braapf_unselect_all"><i class="fa fa-times"></i> '+the_ajax_script.translate.unselect_all+'</a></li></ul>', html, braapf_filtered_filters);
