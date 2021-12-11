@@ -19,7 +19,7 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
 
         public static function admin_init() {
             add_filter('woocommerce_addons_sections', array(__CLASS__, 'woocommerce_addons_sections'));
-            if( isset($_GET['page']) && isset($_GET['section']) && $_GET['page'] == 'wc-addons' && $_GET['section'] == 'berocket' ) {
+            if( isset($_GET['page']) && isset($_GET['section']) && $_GET['page'] == 'wc-addons' && ( $_GET['section'] == 'berocket' || ! empty($_GET['search']) ) ) {
                 add_action('admin_footer', array(__CLASS__, 'woocommerce_addons_berocket'));
             }
         }
@@ -538,6 +538,42 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
             } else {
                 $plugins_key = array();
             }
+            $has_free = false;
+            foreach(self::$plugin_info as $plugin) {
+                if( $plugin['version_capability'] < 10 ) {
+                    $has_free = true;
+                }
+            }
+            if( $has_free ) {
+                if ( time() > 1637841600 and time() < 1637841600+302400 ) {
+                    echo "
+                    <div class='berocket-above-settings-banner' style='background: #1a1a1a; padding: 0;'>
+                        <a href='https://berocket.com/products?utm_source=free_plugin&utm_medium=settings&utm_campaign=account_keys&utm_content=top' target='_blank' 
+                        style='background: transparent; width: auto; border: 0 none; box-shadow: none; padding: 0; margin: 0;'>
+                            <img alt='BeRocket Products' src='https://berocket.ams3.cdn.digitaloceanspaces.com/g/bf21-1202x280.jpg' style='display: block;'>
+                        </a>
+                    </div>";
+                } else if ( time() > 1637841600+302400 and time() < 1637841600+302400+518400 ) {
+	                echo "
+                    <div class='berocket-above-settings-banner berocket-cm21-settings-wrapper' style='background: #07002e; padding: 0;'>
+                        <a href='https://berocket.com/products?utm_source=free_plugin&utm_medium=settings&utm_campaign=account_keys&utm_content=top' target='_blank' >
+                            <img alt='BeRocket Products' src='https://berocket.ams3.cdn.digitaloceanspaces.com/g/cm21.jpg'>
+                            <div class='berocket-cm21-settings'>
+                                <div class='berocket-cm21-settings-header'>
+                                    <p>Don't lose another 5% of the discount. Purchase now!</p>
+                                </div>
+                                <p style='top: 30%; left: 6%; '><span>Monday: <span style='padding-left: 20px; font-size: 1.25em; font-weight: bold;'>-30%</span></span></p>
+                                <p style='top: 32%; left: 55%;'><span>Tuesday: <span style='padding-left: 15px; font-size: 1.2em; font-weight: bold;'>-25%</span></span></p>
+                                <p style='top: 48%; left: 10%;'><span>Wednesday: <span style='padding-left: 5px; font-size: 1.15em'>-20%</span></span></p>
+                                <p style='top: 50%; left: 59%;'><span>Thursday: <span style='padding-left: 10px; font-size: 1.1em'>-15%</span></span></p>
+                                <p style='top: 66%; left: 16%;'><span>Friday: <span style='padding-left: 20px; font-size: 0.9em'>-10%</span></span></p>
+                                <p style='top: 68%; left: 63%;'><span>Saturday: <span style='padding-left: 15px; font-size: 0.9em'>-5%</span></span></p>
+                            </div>
+                            <div class='berocket-cm21-settings-mobiles-title' style='display: none;'>Up to 30% off sitewide!</div>
+                        </a>
+                    </div>";
+                }
+            }
             ?>
             <h2><?php _e('BeRocket Account Settings', 'BeRocket_domain'); ?></h2>
             <div>
@@ -883,7 +919,7 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
                     foreach($products as $product) {
                         $addons[] = (object)array(
                             'title' => $product->name,
-                            'image' => '',
+                            'image' => $product->mini_image,
                             'excerpt' => $product->about,
                             'link'      => $product->plugin_url,
                             'price'     => '$'.$product->price,
@@ -892,12 +928,22 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
                         );
                     }
 
-                    set_transient( 'wc_addons_berocket', $addons, WEEK_IN_SECONDS );
+                    set_transient( 'wc_addons_berocket', $addons, DAY_IN_SECONDS );
                 }
                 
             }
+            if(! empty($_GET['search']) ) {
+                $correct_addon = array();
+                $search  = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
+                foreach($addons as $addon) {
+                    if( stripos($addon->title, $search) !== FALSE || stripos($addon->excerpt, $search) !== FALSE ) {
+                        $correct_addon[] = $addon;
+                    }
+                }
+                $addons = $correct_addon;
+            }
             ?>
-            <ul class="products berocket_section_wc_addons">
+            <ul class="berocket_section_wc_addons" style="display: none;">
             <?php foreach ( $addons as $addon ) : ?>
                 <li class="product">
                     <a href="<?php echo esc_attr( $addon->link ); ?>">
@@ -912,12 +958,108 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
                 </li>
             <?php endforeach; ?>
             </ul>
+            <ul class="berocket_section_wc_addons_new" style="display: none;">
+            <?php 
+            $class_names = array( 'product' );
+            $product_details_classes = 'product-details';
+            foreach( $addons as $addon ) {
+                ?>
+                <li class="<?php echo esc_attr( implode( ' ', $class_names ) ); ?>">
+                    <div class="<?php echo esc_attr( $product_details_classes ); ?>">
+                        <div class="product-text-container">
+                            <a href="<?php echo esc_url( self::link_marketplace($addon->link) ); ?>">
+                                <h2><?php echo esc_html( $addon->title ); ?></h2>
+                            </a>
+                            <div class="product-developed-by">
+                                <?php
+                                $vendor_url = self::link_marketplace('https://berocket.com');
+
+                                printf(
+                                /* translators: %s vendor link */
+                                    esc_html__( 'Developed by %s', 'woocommerce' ),
+                                    sprintf(
+                                        '<a class="product-vendor-link" href="%1$s" target="_blank">%2$s</a>',
+                                        esc_url_raw( $vendor_url ),
+                                        esc_html( 'BeRocket' )
+                                    )
+                                );
+                                ?>
+                            </div>
+                            <p><?php echo wp_kses_post( $addon->excerpt ); ?></p>
+                        </div>
+                        <?php if ( ! empty( $addon->image ) ) : ?>
+                            <span class="product-img-wrap">
+                                <?php /* Show an icon if it exists */ ?>
+                                <img src="<?php echo esc_url( $addon->image ); ?>" />
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="product-footer">
+                        <div class="product-price-and-reviews-container">
+                            <div class="product-price-block">
+                                <?php if ( $addon->price == 0 || $addon->price == '$0' ) : ?>
+                                    <span class="price"><?php esc_html_e( 'Free', 'woocommerce' ); ?></span>
+                                <?php else : ?>
+                                    <span class="price">
+                                        <?php
+                                        echo wp_kses(
+                                            $addon->price,
+                                            array(
+                                                'span' => array(
+                                                    'class' => array(),
+                                                ),
+                                                'bdi'  => array(),
+                                            )
+                                        );
+                                        ?>
+                                    </span>
+                                    <span class="price-suffix"><?php esc_html_e( 'one time', 'woocommerce' ); ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <?php if ( ! empty( $mapped->reviews_count ) && ! empty( $mapped->rating ) ) : ?>
+                                <?php /* Show rating and the number of reviews */ ?>
+                                <div class="product-reviews-block">
+                                    <?php for ( $index = 1; $index <= 5; ++$index ) : ?>
+                                        <?php $rating_star_class = 'product-rating-star product-rating-star__' . self::get_star_class( $mapped->rating, $index ); ?>
+                                        <div class="<?php echo esc_attr( $rating_star_class ); ?>"></div>
+                                    <?php endfor; ?>
+                                    <span class="product-reviews-count">(<?php echo (int) $mapped->reviews_count; ?>)</span>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <a class="button" href="<?php echo esc_url( self::link_marketplace($addon->link) ); ?>">
+                            <?php esc_html_e( 'View details', 'woocommerce' ); ?>
+                        </a>
+                    </div>
+                </li>
+                <?php
+            }
+            ?>
+            </ul>
             <script>
                 if( jQuery('.berocket_section_wc_addons').length && jQuery('.wc_addons_wrap .search-form').length ) {
+                    jQuery('.berocket_section_wc_addons').addClass('products').show();
                     jQuery('.wc_addons_wrap .search-form').after(jQuery('.berocket_section_wc_addons'));
+                }
+                if( jQuery('.berocket_section_wc_addons_new').length && jQuery('.marketplace-content-wrapper').length ) {
+                    jQuery('.berocket_section_wc_addons_new').show();
+                    if( jQuery('.marketplace-content-wrapper .products').length > 0 ) {
+                        jQuery('.marketplace-content-wrapper .products').prepend(jQuery('.berocket_section_wc_addons_new .product'));
+                    } else {
+                        jQuery('.berocket_section_wc_addons_new').addClass('products');
+                        jQuery('.marketplace-content-wrapper').prepend(jQuery('.berocket_section_wc_addons_new'));
+                    }
                 }
             </script>
             <?php
+        }
+        public static function link_marketplace($link) {
+            $link = add_query_arg( array(
+                'utm_source'    => 'free_plugin',
+                'utm_medium'    => 'marketplace',
+                'utm_campaign'  => 'marketplace',
+            ), $link );
+            return $link;
         }
         public static function hide_key($key) {
             if( ! empty($key) ) {

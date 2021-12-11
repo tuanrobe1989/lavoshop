@@ -7757,6 +7757,7 @@ rs-module .material-icons {
 		
 		if($fa === false) return $html;
 		
+		$pc	 = $s->get_param(array('scrolltimeline', 'pullcontent'), false);
 		$ol	 = $s->get_param(array('scrolltimeline', 'layers'), false);
 		$ea	 = $s->get_param(array('scrolltimeline', 'ease'), 'none');
 		$this->easings[$ea] = $ea;
@@ -7767,6 +7768,7 @@ rs-module .material-icons {
 		$sfixe	= $s->get_param(array('scrolltimeline', 'fixedEnd'), 0);
 
 		$se['set'] = $fa;
+		if($pc !== false) $se['pullc'] = $pc;
 		if($ol !== false) $se['layers'] = $ol;
 		if($ea !== 'none') $se['ease'] = $ea;
 		if($sp !== 500 && $sp !== '500' && $sp !== '500ms') $se['speed'] = $sp;

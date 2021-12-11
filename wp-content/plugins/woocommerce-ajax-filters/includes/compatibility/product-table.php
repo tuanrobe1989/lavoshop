@@ -2,10 +2,18 @@
 class BeRocket_AAPF_compat_product_table {
     function __construct() {
         add_action( 'plugins_loaded', array( __CLASS__, 'plugins_loaded' ), 1 );
+        add_action('bapf_class_ready', array($this, 'init'), 10, 1);
+    }
+    public function init($BeRocket_AAPF) {
         $filter_nn_name = apply_filters('berocket_aapf_filter_variable_name_nn', 'filters');
         if(defined('DOING_AJAX') && DOING_AJAX && !empty($_POST['action']) && $_POST['action'] == 'wcpt_load_products') {
             if( ! empty($_POST[$filter_nn_name]) ) {
-                $_GET[$filter_nn_name] = $_POST[$filter_nn_name];
+                $options = $BeRocket_AAPF->get_option();
+                if( empty($options['seo_uri_decode']) ) {
+                    $_GET[$filter_nn_name] = $_POST[$filter_nn_name];
+                } else {
+                    $_GET[$filter_nn_name] = urldecode($_POST[$filter_nn_name]);
+                }
             }
             $table_id = filter_input( INPUT_POST, 'table_id', FILTER_SANITIZE_STRING );
             $table_transient = get_transient( $table_id );
@@ -45,8 +53,9 @@ class BeRocket_AAPF_compat_product_table {
         if( empty($table_args['berocket_ajax']) ) {
             return $query_vars;
         }
-        $BeRocket_AAPF = BeRocket_AAPF::getInstance();
-        $query_vars = $BeRocket_AAPF->woocommerce_filter_query_vars($query_vars);
+        $query_vars = apply_filters('bapf_uparse_apply_filters_to_query_vars_save', $query_vars);
+        global $berocket_parse_page_obj;
+        $berocket_parse_page_obj->save_shortcode_query_vars($query_vars);
         return $query_vars;
     }
     public static function aapf_localize_widget_script($localize) {

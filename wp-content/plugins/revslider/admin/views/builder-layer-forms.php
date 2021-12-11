@@ -534,7 +534,7 @@ if(!defined('ABSPATH')) exit();
 			</div>
 			<!-- LAYER STYLE FONT -->
 			<div id="form_layerstyle_font" class="form_inner open _shft_">
-				<div class="form_inner_header"><i class="material-icons">title</i><?php _e('Font & Icon', 'revslider');?></div>
+				<div id="flf_font_icon" class="form_inner_header"><i class="material-icons">title</i><?php _e('Font & Icon', 'revslider');?></div>
 				<div class="collapsable">
 
 					<row class="directrow __idle__">

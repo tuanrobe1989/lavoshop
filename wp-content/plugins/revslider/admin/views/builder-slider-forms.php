@@ -1132,6 +1132,7 @@ if ($wpml->wpml_exists()) {
 								<div class="div20"></div>
 								<div class="fixedscrollonoff">
 									<longoption><label_a><?php _e('Fix during Scroll', 'revslider');?></label_a><input type="checkbox"  id="sr_sbt_ge_fix_enabled" class="sliderinput easyinit"  data-setclasson="timeline" data-class="fixedscrollon" data-evt="updateFixedScrollRange" data-showhide=".all_sbt_fix_dependencies" data-showhidedep="true"  data-r="scrolltimeline.fixed"/></longoption>
+									<longoption><label_a style="overflow:visible"><?php _e('Pull Content, dyn. Bottom Margin', 'revslider');?></label_a><input type="checkbox"  id="sr_sbt_ge_pull_content" class="sliderinput easyinit" data-r="scrolltimeline.pullcontent"/></longoption>
 								</div>
 								<div class="fixedscrollsettings">
 									<div class="all_sbt_fix_dependencies">
