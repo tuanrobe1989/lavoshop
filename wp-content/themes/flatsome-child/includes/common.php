@@ -53,11 +53,11 @@ function filter_product_add_to_cart_text( $button_text, $product ) {
 /**
  * Hide the button for the product with ID = 10 AND for variable products
  */
-add_filter('woocommerce_loop_add_to_cart_link', function( $add_to_cart_html, $product ) {
+// add_filter('woocommerce_loop_add_to_cart_link', function( $add_to_cart_html, $product ) {
 	
-	// if( $product->get_id() == 1370 || $product->is_type( 'variable' ) ) {
-	// 	return '';
-	// }
-	return $add_to_cart_html.'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+// 	// if( $product->get_id() == 1370 || $product->is_type( 'variable' ) ) {
+// 	// 	return '';
+// 	// }
+// 	return $add_to_cart_html.'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 	
-} );
+// } );
