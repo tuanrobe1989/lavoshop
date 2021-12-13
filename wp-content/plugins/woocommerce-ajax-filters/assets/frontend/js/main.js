@@ -1366,6 +1366,342 @@ brapf_jet_smart_filters;
     });
 })(jQuery);
 jQuery(document).trigger('bapf_js_loaded');
+var braapf_get_current_filters_nice_url,
+braapf_set_filters_to_link_nice_url;
+(function ($){
+    //NICE URL
+    braapf_get_current_filters_nice_url = function(url_data) {
+        var baselink = url_data.baselink;
+        baselink = decodeURI(baselink);
+        baselink = baselink.split('/'+decodeURI(the_ajax_script.nice_url_variable)+'/');
+        if( baselink.length == 2 ) {
+            var lasts = url_data.baselink.substr(-1);
+            url_data.baselink = baselink[0];
+            url_data.filter = baselink[1];
+            if( lasts == '/' ) {
+                url_data.baselink = url_data.baselink + '/';
+                url_data.filter = url_data.filter.substr(0, url_data.filter.length - 1);
+            }
+        }
+        return url_data;
+    }
+    braapf_set_filters_to_link_nice_url = function(url, url_data, parameters, url_without_query, query_get) {
+        if( typeof(url_data.filter) == 'string' && url_data.filter.length ) {
+            var lasts = url_without_query.substr(-1);
+            url = url_without_query;
+            if( lasts == '/' ) {
+                url += the_ajax_script.nice_url_variable + '/' + url_data.filter + '/';
+            } else {
+                url += '/' + the_ajax_script.nice_url_variable + '/' + url_data.filter;
+            }
+            url += query_get;
+        }
+        return url;
+    }
+})(jQuery);
+jQuery(document).ready(function() {
+    if( the_ajax_script.nice_urls ) {
+        berocket_remove_filter('get_current_url_data', braapf_get_current_filters);
+        berocket_remove_filter('url_from_urldata_linkget', braapf_set_filters_to_link);
+        berocket_add_filter('get_current_url_data', braapf_get_current_filters_nice_url);
+        berocket_add_filter('url_from_urldata_linkget', braapf_set_filters_to_link_nice_url);
+    }
+});
+//SEARCH BOX
+var braapf_search_box_alternative_send,
+braapf_search_box_alternative_send_partial,
+braapf_get_url_search_box,
+braapf_search_box_url_filtered,
+braapf_search_box_url_filtered_partial;
+(function ($){
+    braapf_search_box_url_filtered = function (url, context, element) {
+        if( element.closest('.berocket_search_box_block').length ) {
+            var $search_box = element.closest('.berocket_search_box_block');
+            if( $search_box.find('.berocket_aapf_widget_update_button:visible, .bapf_update:visible').length == 0 || context == 'filter' || context == 'searchbox' ) {
+                var search_box_url = braapf_get_url_search_box($search_box);
+                url = search_box_url;
+            }
+        }
+        return url;
+    }
+    braapf_search_box_url_filtered_partial = function (url, context, element) {
+        if( element.closest('.berocket_search_box_block').length ) {
+            var data_id = element.closest('.berocket_search_box_block').data('id');
+            if( typeof(data_id) != 'undefined' ) {
+                if( url.indexOf('?') > 0 ) {
+                    url += '&';
+                } else {
+                    url += '?';
+                }
+                url += 'bapf_gid='+data_id;
+            }
+        }
+        return url;
+    }
+    braapf_search_box_alternative_send = function (issend, context, element) {
+        if( issend && element.closest('.berocket_search_box_block').length ) {
+            issend = false;
+            var $search_box = element.closest('.berocket_search_box_block');
+            if( ($search_box.find('.berocket_aapf_widget_update_button:visible, .bapf_update:visible').length == 0 || braapf_context_is_update(context)) && context != 'searchbox' ) {
+                var search_box_url = braapf_get_url_search_box($search_box);
+                location.href = search_box_url;
+            }
+        }
+        return issend;
+    }
+    braapf_search_box_alternative_send_partial = function (issend, context, element) {
+        if( element.closest('.berocket_search_box_block').length ) {
+            if( element.closest('.berocket_search_box_block').is('.bapf_sbrecount') || element.closest('.berocket_search_box_block').find('.berocket_single_filter_widget.bapf_partload').length > 0 ) {
+                issend = true;
+            } else {
+                issend = false;
+            }
+        }
+        return issend;
+    }
+    braapf_get_url_search_box = function($search_box) {
+        var search_box_send_url = $search_box.data('url');
+        var search_box_filters = braapf_grab_all($search_box);
+        var compat_filters = braapf_compact_filters(search_box_filters);
+        var filter_mask = berocket_apply_filters('braapf_filters_mask', the_ajax_script.url_mask);
+        var filter_string = braapf_compat_filters_to_string(compat_filters, filter_mask, the_ajax_script.url_split);
+        var current_url_data = braapf_get_current_url_data(search_box_send_url);
+        current_url_data.filter = filter_string;
+        current_url_data = braapf_remove_pages_from_url_data(current_url_data);
+        current_url_data = braapf_apply_additional_filter_data(current_url_data, search_box_filters);
+        var url_filtered = braapf_build_url_from_urldata(current_url_data);
+        return url_filtered;
+    }
+    berocket_add_filter( 'apply_filters_to_page', braapf_search_box_alternative_send );
+    berocket_add_filter( 'before_update_products_context_url_filtered', braapf_search_box_url_filtered );
+    berocket_add_filter( 'before_update_products_context_url_filtered_partial', braapf_search_box_url_filtered_partial );
+    berocket_add_filter( 'apply_filters_to_page_partial', braapf_search_box_alternative_send_partial, 900 );
+    $(document).ready(function() {
+        $('.berocket_search_box_block.bapf_sbrecount').each(function() {
+            if( $(this).find('.bapf_update').length ) {
+                berocket_do_action('update_products', 'searchbox', $('.berocket_search_box_block.bapf_sbrecount .berocket_search_box_background'));
+            }
+        });
+    });
+})(jQuery);
+//Count before update button
+var braapf_count_before_changed_element,
+braapf_count_before_update_add_function,
+braapf_count_before_update_get_from_page,
+braapf_get_filter_changed_element,
+braapf_count_before_update_button;
+(function ($){
+    braapf_get_filter_changed_element = function (element_data) {
+        var $element = $('body');
+        if( typeof(element_data) == 'object' &&  element_data.element ) {
+            $element = $element.find(element_data.element).first();
+            if( ! $element.length ) {
+                return $element;
+            }
+            if( typeof(element_data.parent) != 'undefined' && parseInt(element_data.parent) > 0 ) {
+                for(var i = 0; i < parseInt(element_data.parent); i++) {
+                    $element = $element.parent();
+                    if( ! $element.length ) {
+                        return $element;
+                    }
+                }
+            }
+            if( typeof(element_data.find) != 'undefined' && element_data.find != false ) {
+                $element = $element.find(element_data.find).first();
+            }
+        }
+        return $element;
+    }
+    var braapf_latest_update_element_id;
+    braapf_count_before_changed_element = function (element) {
+        braapf_latest_update_element_id = element;
+        return element;
+    }
+    braapf_count_before_update_button = function (issend, context, element, url_filtered) {
+        if( the_ajax_script.ub_product_count && context == 'filter' ) {
+            issend = true;
+        }
+        return issend;
+    }
+    braapf_count_before_update_add_function = function (functions, url, type) {
+        if( typeof(type) != 'undefined' && type == 'partial' && the_ajax_script.ub_product_count ) {
+            functions.done.push(braapf_count_before_update_get_from_page);
+        }
+        return functions;
+    }
+    braapf_count_before_update_get_from_page = function(html) {
+        var $html = $('<div><div>'+html+'</div></div>');
+        var count = $html.find('.bapf_count_before_update');
+        if( count.length ) {
+            var $element_update = braapf_get_filter_changed_element(braapf_latest_update_element_id);
+            if( $element_update.length ) {
+                var theme = $('#bapf_footer_count_before');
+                if( ! theme.length ) {
+                    $('body').append($('<div id="bapf_footer_count_before"></div>'));
+                    theme = $('#bapf_footer_count_before');
+                }
+                theme = theme.data('theme');
+                if( typeof(theme) == 'undefined' || ! theme ) {
+                    theme = 'light';
+                }
+                bapf_tippy_instance = tippy($element_update[0], {
+                    content: count.text()+' '+the_ajax_script.ub_product_text+(the_ajax_script.ub_product_button_text?' <a href="#update" class="berocket_aapf_widget_update_button" >'+the_ajax_script.ub_product_button_text+'</a>':''),
+                    allowHTML: true,
+                    interactive: true,
+                    title:'',
+                    appendTo:document.getElementById('bapf_footer_count_before'),
+                    showOnCreate: true,
+                    trigger: "click",
+                    placement: 'right',
+                    flipBehavior:['right', 'left', 'bottom'],
+                    distance: 0,
+                    theme: theme,
+                    onHidden: function() {
+                        if( Array.isArray(bapf_tippy_instance) ) {
+                            bapf_tippy_instance = bapf_tippy_instance[0];
+                        }
+                        if( typeof(bapf_tippy_instance) != 'undefined' ) {
+                            bapf_tippy_instance.destroy();
+                        }
+                    }
+                });
+            }
+        }
+        return html;
+    }
+    berocket_add_filter('apply_filters_to_page_partial', braapf_count_before_update_button);
+    berocket_add_filter('filter_changed_element', braapf_count_before_changed_element);
+    berocket_add_filter('ajax_load_from_filters_partial', braapf_count_before_update_add_function, 1000);
+})(jQuery);
+
+//Inline filters
+var berocket_rewidth_inline_filters;
+(function ($){
+    berocket_rewidth_inline_filters = function(cfunc) {
+        $('.berocket_inline_filters_rewidth').removeClass('berocket_inline_filters_rewidth');
+        $('.berocket_single_filter_widget.berocket_hidden_clickable').each(function() {
+            $(this).removeClass('berocket_hidden_clickable_left').removeClass('berocket_hidden_clickable_right');
+            var position = $(this).offset().left + $(this).outerWidth();
+            var width = $(window).width();
+            if( position < width/2 ) {
+                $(this).addClass('berocket_hidden_clickable_left');
+            } else {
+                $(this).addClass('berocket_hidden_clickable_right');
+            }
+        });
+        var element_selector = '.berocket_single_filter_widget.berocket_inline_filters:not(".berocket_inline_filters_rewidth"):not(".bapf_mt_none"):visible';
+        while( $(element_selector).length ) {
+            $element = $(element_selector).first();
+            width_to_set = '12.5%!important';
+            $style = $element.attr('style');
+            if( typeof($style) == 'undefined' ) {
+                $style = '';
+            }
+            $style = $style.replace(/width:\s?(\d|\.)+%!important;/g, '');
+            $style = $style.replace(/clear:both!important;/g, '');
+            $style = $style.replace(/opacity:0!important;/g, '');
+            $element.attr('style', $style);
+            min_width = 200;
+            var min_filter_width_inline = $element.data('min_filter_width_inline');
+            if( min_filter_width_inline ) {
+                min_width = parseInt(min_filter_width_inline);
+            }
+            every_clear = 9;
+            $(document).trigger('berocket_inline_before_width_calculate');
+            var check_array = [];
+            check_array.push({clear:2, size:(min_width/4), width:100, block:'.berocket_inline_filters_count_1'});
+            check_array.push({clear:3, size:(min_width/2.5), width:50, block:'.berocket_inline_filters_count_2'});
+            check_array.push({clear:4, size:(min_width/2), width:33.333, block:'.berocket_inline_filters_count_3'});
+            check_array.push({clear:5, size:(min_width/1.6), width:25, block:'.berocket_inline_filters_count_4'});
+            check_array.push({clear:6, size:(min_width/1.32), width:20, block:'.berocket_inline_filters_count_5'});
+            check_array.push({clear:7, size:(min_width/1.14), width:16.666, block:'.berocket_inline_filters_count_6'});
+            check_array.push({clear:8, size:(min_width), width:14.285, block:'.berocket_inline_filters_count_7'});
+            check_array.some(function(element) {
+                if( $element.outerWidth() < element.size || $element.is(element.block) ) {
+                    every_clear = element.clear;
+                    width_to_set = element.width+'%!important';
+                    return true;
+                }
+            });
+            $(document).trigger('berocket_inline_after_width_calculate');
+            var element_i = 0;
+            while($element.is(element_selector) ) {
+                $style = $element.attr('style');
+                if(typeof($style) == 'undefined' ) {
+                    $style = '';
+                }
+                $style = $style.replace(/width\s?:\s?(\d|\.)+%\s?!important;/g, '');
+                $style = $style.replace(/clear\s?:\s?both\s?!important;/g, '');
+                $style = $style.replace(/opacity\s?:\s?0\s?!important;/g, '');
+                $style = $style+'width:'+width_to_set+';';
+                element_i++;
+                if( element_i == every_clear ) {
+                    $style = $style+'clear:both!important;';
+                    element_i = 1;
+                }
+                $element.attr('style', $style+'width:'+width_to_set+';').addClass('berocket_inline_filters_rewidth');
+                do{
+                    $element = $element.next();
+                } while($element.is('.berocket_inline_filters_rewidth') || $element.is('.bapf_mt_none'));
+            }
+        }
+        if ( typeof cfunc == "function" ) {
+            cfunc();
+        }
+    }
+    function berocket_element_above_products_is_hide_init() {
+        $(document).off('berocket_filters_document_ready', berocket_element_above_products_is_hide_init);
+        berocket_rewidth_inline_filters(function (){
+            $('.berocket_element_above_products_is_hide').hide(0).removeClass('br_is_hidden');
+            $(document).on('berocket_ajax_products_loaded berocket_element_above_products_active', function() {
+                berocket_rewidth_inline_filters();
+            });
+        });
+    }
+    $(document).on('berocket_filters_document_ready', berocket_element_above_products_is_hide_init);
+    $(window).on('resize', berocket_rewidth_inline_filters);
+    //GROUP inline title
+    $(document).on('mousedown', function(event) {
+        var $parent = $(event.target).closest('.berocket_hidden_clickable');
+        $('.berocket_hidden_clickable').each(function() {
+            if( ! $parent.length || ! $(this).is($parent) ) {
+                $(this).find('.bapf_sfilter').trigger('bapf_ccolaps');
+            }
+        });
+    });
+    if( $(window).width() > 768 ) {
+        var berocket_hidden_clickable_mouseleave = setTimeout(function(){},0);
+        var berocket_hidden_clickable_mouseenter = setTimeout(function(){},0);
+        $(document).on('mouseenter', '.berocket_single_filter_widget.berocket_hidden_clickable.berocket_inline_clickable_hover', function(event) {
+            clearTimeout(berocket_hidden_clickable_mouseenter);
+            var $this = $(this);
+            var $parent = $(event.target).closest('.berocket_hidden_clickable');
+            var opened_colaps = $('.berocket_hidden_clickable .bapf_ccolaps').length;
+            $('.berocket_hidden_clickable').each(function() {
+                if( ! $parent.length || ! $(this).is($parent) ) {
+                    $(this).find('.bapf_sfilter').trigger('bapf_ccolaps');
+                }
+            });
+            berocket_hidden_clickable_mouseenter = setTimeout(function() {
+                $this.find('.bapf_sfilter').trigger('bapf_ocolaps');
+            }, berocket_apply_filters('hidden_clickable_open_delay', 0, $this, opened_colaps));
+        });
+        $(document).on('mouseenter', '.berocket_single_filter_widget.berocket_hidden_clickable.berocket_inline_clickable_hover, body > .select2-container', function() {
+            clearTimeout(berocket_hidden_clickable_mouseleave);
+        });
+        $(document).on('mouseleave', '.berocket_single_filter_widget.berocket_hidden_clickable.berocket_inline_clickable_hover, body > .select2-container', function() {
+            var $this = $(this);
+            if( berocket_apply_filters('hidden_clickable_close_mouseleave', true, $this) ) {
+                clearTimeout(berocket_hidden_clickable_mouseleave);
+                clearTimeout(berocket_hidden_clickable_mouseenter);
+                berocket_hidden_clickable_mouseleave = setTimeout(function() {
+                    $('.berocket_hidden_clickable').find('.bapf_sfilter').trigger('bapf_ccolaps');
+                }, berocket_apply_filters('hidden_clickable_close_delay', 100, $this));
+            }
+        });
+    }
+})(jQuery);
+
 var braapf_init_ion_slidr,
 braapf_ion_slidr_same,
 braapf_jqrui_slidr_ion_value_wc_price,
@@ -1809,4 +2145,319 @@ braapf_jqrui_slidr_values_link_arr_attr;
             braapf_jqrui_slidr_berocket_add_filter();
         });
     }
+})(jQuery);
+
+var braapf_convert_numeric_to_date,
+braapf_init_datepicker,
+braapf_datepicker_same,
+braapf_convert_date_to_numeric,
+braapf_grab_single_datepicker;
+(function ($){
+    braapf_convert_numeric_to_date = function(numeric, format) {
+        numeric = numeric+"";
+        var year = numeric.substring(0, 4);
+        var year2 = numeric.substring(2, 4);
+        var month = numeric.substring(4, 6);
+        var day = numeric.substring(6, 8);
+        var result_date = format+"";
+        result_date = result_date.replace('yy', year);
+        result_date = result_date.replace('y', year2);
+        result_date = result_date.replace('mm', month);
+        result_date = result_date.replace('dd', day);
+        return result_date;
+    }
+    function braapf_jqui_getDate( element, format ) {
+        var date;
+        try {
+            date = $.datepicker.parseDate( format, element.value );
+        } catch( error ) {
+            date = null;
+        }
+        return date;
+    }
+    braapf_init_datepicker = function () {
+        $(".bapf_datepick:not(.bapf_datepick_ready)").each(function() {
+            if( ! jQuery('.bapfdpapcss').length ) {
+                jQuery('body').append('<div class="bapfdpapcss"></div>');
+            }
+            var taxonomy = $(this).data('taxonomy');
+            var $mainElement = $(this).find('.bapf_date_all');
+            var dateFormat = $mainElement.data('dateformat');
+            var minDate = braapf_convert_numeric_to_date($mainElement.data('min'), dateFormat);
+            var maxDate = braapf_convert_numeric_to_date($mainElement.data('max'), dateFormat);
+            var startDate = braapf_convert_numeric_to_date($mainElement.data('start'), dateFormat);
+            var endDate = braapf_convert_numeric_to_date($mainElement.data('end'), dateFormat);
+            var datepicker_data = {
+                dateFormat: dateFormat,
+                minDate: minDate,
+                maxDate: maxDate,
+                changeMonth: $mainElement.data('changemonth'),
+                changeYear: $mainElement.data('changeyear'),
+                beforeShow: function(textbox, instance){
+                    $('.bapfdpapcss').append($('#ui-datepicker-div'));
+                }
+            };
+            $(this).find('.bapf_date_from input').val(startDate);
+            datepicker_data.minDate = minDate;
+            datepicker_data.maxDate = endDate;
+            datepicker_data = berocket_apply_filters('jqui_datepicker_data', datepicker_data, 'from', $(this).find('.bapf_date_from input'));
+            $(this).find('.bapf_date_from input').datepicker(datepicker_data).on( "change", function() {
+                $('.bapf_datepick.bapf_datepick_ready[data-taxonomy='+taxonomy+']').find('.bapf_date_to input').datepicker( "option", "minDate", braapf_jqui_getDate( this, dateFormat ) );
+                braapf_datepicker_same(taxonomy, [$mainElement.find('.bapf_date_from input').val(), $mainElement.find('.bapf_date_to input').val()]);
+                var filter_changed_element = {
+                    element:'#'+$(this).closest('.bapf_sfilter').attr('id'),
+                    parent: 0,
+                    find: '.bapf_body'
+                };
+                berocket_apply_filters('filter_changed_element', filter_changed_element, $(this));
+                berocket_do_action('update_products', 'filter', $(this));
+            });
+            $(this).find('.bapf_date_to input').val(endDate);
+            datepicker_data.minDate = startDate;
+            datepicker_data.maxDate = maxDate;
+            datepicker_data = berocket_apply_filters('jqui_datepicker_data', datepicker_data, 'to', $(this).find('.bapf_date_to input'));
+            $(this).find('.bapf_date_to input').datepicker(datepicker_data).on( "change", function() {
+                $('.bapf_datepick.bapf_datepick_ready[data-taxonomy='+taxonomy+']').find('.bapf_date_from input').datepicker( "option", "maxDate", braapf_jqui_getDate( this, dateFormat ) );
+                braapf_datepicker_same(taxonomy, [$mainElement.find('.bapf_date_from input').val(), $mainElement.find('.bapf_date_to input').val()]);
+                berocket_do_action('update_products', 'filter', $(this));
+            });
+            $(this).addClass('bapf_datepick_ready');
+        });
+    }
+    braapf_datepicker_same = function (taxonomy, values) {
+        $('.bapf_datepick.bapf_datepick_ready[data-taxonomy='+taxonomy+']').each(function() {
+            $(this).find('.bapf_date_from input').val(values[0]);
+            $(this).find('.bapf_date_to input').val(values[1]);
+        });
+    }
+    braapf_convert_date_to_numeric = function (date) {
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        month = month + "";
+        if( month.length == 1 ) {
+            month = "0"+month;
+        }
+        var day = date.getDate()+"";
+        if( day.length == 1 ) {
+            day = "0"+day;
+        }
+        var numeric = year+""+month+""+day;
+        return numeric;
+    }
+    braapf_grab_single_datepicker = function(single_data, element) {
+        if( element.is('.bapf_datepick.bapf_datepick_ready') && single_data != false ) {
+            var $mainElement = element.find('.bapf_date_all');
+            var minDate = $mainElement.data('min');
+            var maxDate = $mainElement.data('max');
+            var from = element.find('.bapf_date_from input').datepicker( "getDate" );
+            from = braapf_convert_date_to_numeric(from);
+            var from_text = element.find('.bapf_date_from input').val();
+            var to = element.find('.bapf_date_to input').datepicker( "getDate" );
+            to = braapf_convert_date_to_numeric(to);
+            var to_text = element.find('.bapf_date_to input').val();
+            if( from != minDate || to != maxDate ) {
+                single_data.values = [{value:from+'_'+to, html: from_text+' - '+to_text}];
+            }
+        }
+        return single_data;
+    }
+    $(document).on('braapf_unselect braapf_unselect_all', '.bapf_datepick', function(event) {
+        var $mainElement = $(this).find('.bapf_date_all');
+        var dateFormat = $mainElement.data('dateformat');
+        var minDate = braapf_convert_numeric_to_date($mainElement.data('min'), dateFormat);
+        var maxDate = braapf_convert_numeric_to_date($mainElement.data('max'), dateFormat);
+        $(this).find('.bapf_date_from input').val(minDate);
+        $(this).find('.bapf_date_to input').val(maxDate);
+    });
+    berocket_add_filter('braapf_init', braapf_init_datepicker);
+    berocket_add_filter('grab_single_filter_default', braapf_grab_single_datepicker);
+})(jQuery);
+
+var braapf_grab_single_search_field,
+braapf_apply_search_field,
+braapf_show_search_filter_suggestion;
+(function ($){
+    $(document).on('submit', '.bapf_srch .bapf_body .bapf_form', function(event) {
+        event.preventDefault();
+        $(this).trigger('bapf_search_update');
+        berocket_do_action('update_products', 'update', $(this));
+    });
+    $(document).on('bapf_search_update', '.bapf_srch .bapf_body .bapf_form', function() {
+        if ( $(this).is('.bapf_rm_filter') ) {
+            $('.bapf_sfilter:not(.bapf_srch)').trigger('braapf_unselect');
+        }
+        var input = $(this).find('.bapf_input:not(:disabled)');
+        if( input.length ) {
+            var data_name = input.data('name');
+            if( typeof(data_name) != 'undefined' && data_name.length ) {
+                if( data_name != input.val() ) {
+                    input.data('value', '');
+                    input.data('name', '');
+                }
+            }
+        }
+        event.preventDefault();
+        var filter_changed_element = {
+            element:'#'+$(this).closest('.bapf_sfilter').attr('id'),
+            parent: 0,
+            find: '.bapf_body'
+        };
+        berocket_apply_filters('filter_changed_element', filter_changed_element, $(this));
+    });
+    $.expr[":"].brContains = $.expr.createPseudo(function(arg) {
+        return function( elem ) {
+            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+	braapf_show_search_suggestions_list = function($list, $element) {
+        var height = $($element).closest('.bapf_srch').find('.bapf_input_suggestion').data('height');
+        if( typeof(height) == 'undefined' || height <= 0 ) {
+            height = 0;
+        }
+        var html = '<div class="bapf_current_suggest"';
+        if( height != 0 ) {
+            html += ' style="max-height:'+height+'px;"';
+        }
+        html += '></div>';
+		var $html = $(html);
+		$list.each(function(i, val) {
+			var new_element = $(this).clone();
+			$html.append(new_element);
+		});
+        $($element).closest('.bapf_srch').find('.bapf_current_suggest').remove();
+		$($element).closest('.bapf_suggest').append($html);
+	}
+	braapf_last_search_field = false;
+    $(document).on('keyup click', '.bapf_srch .bapf_suggest .bapf_input', function() {
+        var $current_suggest = $(this).closest('.bapf_srch').find('.bapf_current_suggest');
+		braapf_last_search_field = $(this);
+        var value = $(this).val();
+        $(this).data('value', value).data('name', value);
+        if( value.length >= 3 && $(this).closest('.bapf_srch').find('.bapf_input_suggestion').length ) {
+            if( ! $(this).closest('.bapf_srch').find('.bapf_input_suggestion.bapf_ajax_sug').length ) {
+                $current_suggest.remove();
+                var $suggestions = $(this).closest('.bapf_srch').find('.bapf_input_suggestion');
+                var $suggested = $suggestions.find('.bapf_suggest_element:brContains("'+value+'")');
+				braapf_show_search_suggestions_list($suggested, $(this));
+            } else {
+                var current_srch = '';
+                if( $current_suggest.length ) {
+                    current_srch = $(this).closest('.bapf_srch').data('ajax_search');
+                    if( typeof(current_srch) == 'undefined' ) {
+                        current_srch = '';
+                    }
+                }
+				var last_value = $(this).closest('.bapf_srch').find('.bapf_input_suggestion.bapf_ajax_sug').data('lastval');
+                if( current_srch == value ) {
+                    
+				} else if( last_value == value ) {
+                    $current_suggest.remove();
+					var $suggested = $(this).closest('.bapf_srch').find('.bapf_input_suggestion.bapf_ajax_sug').first().find('.bapf_suggest_element');
+					braapf_show_search_suggestions_list($suggested, $(this));
+				} else {
+                    $current_suggest.remove();
+                    var old_value = $(this).data('value');
+                    var old_name = $(this).data('name');
+                    $(this).data('value', '');
+                    $(this).data('name', '');
+					var $html = $(the_ajax_script.load_image);
+					$html = $('<div class="bapf_loader_search">'+$html.html()+'</div>');
+					braapf_show_search_suggestions_list($html, $(this));
+                    $(this).closest('.bapf_srch').data('ajax_search', value);
+					var url_filtered = braapf_get_url_with_filters_selected();
+                    $(this).data('value', old_value);
+                    $(this).data('name', old_name);
+					braapf_ajax_load_from_url(url_filtered, {}, berocket_apply_filters('ajax_load_from_search_field', {done:[braapf_show_search_filter_suggestion, braapf_init_load]}, url_filtered, 'partial'), 'search_field');
+				}
+            }
+        } else {
+            $current_suggest.remove();
+        }
+    });
+	braapf_show_search_filter_suggestion = function(html) {
+		var $new = $(html).find('.bapf_ajax_sug').last().clone();
+		$('.bapf_ajax_sug').replaceWith($new);
+		var $suggested = $('.bapf_ajax_sug').first().find('.bapf_suggest_element');
+		braapf_show_search_suggestions_list($suggested, braapf_last_search_field);
+	}
+    $(document).on('click', function(event) {
+        var $target = $(event.target);
+        if( ! $target.is('.bapf_suggest') && ! $target.closest('.bapf_suggest').length && ! $target.is('.bapf_input') ) {
+            $('.bapf_current_suggest').remove();
+        }
+    });
+    $(document).on('click', '.bapf_srch .bapf_current_suggest .bapf_suggest_open', function(event) {
+        var input = $(this).closest('.bapf_srch').find('.bapf_form .bapf_input:not(:disabled)');
+        if( input.length ) {
+            input.data('value', $(this).data('search'));
+            input.data('name', $(this).data('name'));
+            input.val($(this).data('name'));
+            $(this).closest('.bapf_srch').find('.bapf_form').trigger('submit');
+        }
+    });
+    braapf_grab_single_search_field = function(single_data, element) {
+        if( element.is('.bapf_srch') && single_data != false ) {
+            var input = element.find('.bapf_body .bapf_input:not(:disabled)');
+            var data_value = input.data('value');
+            if( typeof(data_value) != 'undefined' && data_value.length ) {
+                var value = encodeURIComponent(data_value);
+                var data_name = input.data('name');
+                if( typeof(data_name) != 'undefined' && data_name.length ) {
+                    var html = data_name;
+                    input.val(data_name);
+                } else {
+                    var html = value;
+                }
+            } else {
+                var value = encodeURIComponent(input.val());
+                var html = value;
+            }
+            if( value ) {
+                single_data.values.push({value: value, html: html});
+            }
+            single_data.customValuesLine = '';
+            single_data.search = true;
+        }
+        return single_data;
+    }
+    braapf_apply_search_field = function(url_data, single_data) {
+        if(typeof(single_data.search) != 'undefined' && single_data.search) {
+            var exist = false;
+            if( Array.isArray(url_data.queryargs) ) {
+                var newqueryargs = [];
+                $.each(url_data.queryargs, function(i, val) {
+                    if( val.name == single_data.taxonomy ) {
+                        if( single_data.values.length ) {
+                            val.value = single_data.values[0].value;
+                            newqueryargs.push(val);
+                        }
+                        exist = true;
+                    } else {
+                        newqueryargs.push(val);
+                    }
+                });
+                url_data.queryargs = newqueryargs;
+            } else if( single_data.values.length ) {
+                url_data.queryargs = [];
+            }
+            if( ! exist && single_data.values.length ) {
+                url_data.queryargs.push({name:single_data.taxonomy, value:single_data.values[0].value});
+            }
+        }
+        return url_data;
+    }
+    $(document).on('braapf_unselect braapf_unselect_all', '.bapf_srch', function(event, data) {
+        $(this).find('.bapf_input:not(:disabled)').val('').data('value', '');
+    });
+    $(document).on('click', '.bapf_srch span.bapf_search[type="submit"]', function() {
+        $(this).closest('.bapf_form').trigger('submit');
+    });
+    braapf_update_products_search_field = function(context, element) {
+        if( context === 'update' ) {
+            jQuery('.bapf_srch .bapf_body .bapf_form').trigger('bapf_search_update');
+        }
+    }
+    berocket_add_filter('grab_single_filter_default', braapf_grab_single_search_field);
+    berocket_add_filter('apply_additional_filter_data', braapf_apply_search_field);
+    berocket_add_filter('update_products', braapf_update_products_search_field, 2);
 })(jQuery);
