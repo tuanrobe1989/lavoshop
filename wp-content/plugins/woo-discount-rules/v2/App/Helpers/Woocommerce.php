@@ -1687,4 +1687,45 @@ class Woocommerce
            return false;
         }
     }
+
+    /**
+     * @param array|WC_Product_Variation $variation Variation object.
+     * @param bool                       $flat Should this be a flat list or HTML list? (default: false).
+     * @param bool                       $include_names include attribute names/labels in the list.
+     * @param bool                       $skip_attributes_in_name Do not list attributes already part of the variation name.
+     * @return string
+     */
+    static function wc_get_formatted_variation( $variation, $flat = false, $include_names = true, $skip_attributes_in_name = false ) {
+        if (function_exists('wc_get_formatted_variation')) {
+            return wc_get_formatted_variation($variation, $flat, $include_names, $skip_attributes_in_name);
+        } else  {
+            return '';
+        }
+    }
+
+    /**
+     * Get title of product
+     * @param $product - woocommerce product object
+     * @return string
+     */
+    static function getTitleOfProduct($product){
+        if (is_numeric($product)) $product = self::getProduct($product);
+        $product_id = self::getProductId($product);
+        if(self::productTypeIs($product, 'variation')){
+            $attributes = (array) self::getProductAttributes($product);
+            if (count($attributes) > 2) {
+                $variation_parent_id = self::getProductParentId($product);
+                $variation_parent_title = get_the_title($variation_parent_id);
+                $variation_separator = apply_filters('woocommerce_product_variation_title_attributes_separator', ' - ', $product);
+                $variation_attributes = self::wc_get_formatted_variation($product, true, false);
+                $product_title = $variation_parent_title . $variation_separator . $variation_attributes;
+            } else {
+                $product_title = get_the_title($product_id);
+            }
+        } else {
+            $product_title = get_the_title($product_id);
+        }
+
+        return $product_title;
+    }
 }

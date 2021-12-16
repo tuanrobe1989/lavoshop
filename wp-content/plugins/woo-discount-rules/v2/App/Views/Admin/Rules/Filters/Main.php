@@ -61,11 +61,10 @@ if (!defined('ABSPATH')) {
                                             $selected_options = '';
                                             if (!empty($filter->value) && is_array($filter->value)) {
                                                 $item_name = '';
-
                                                 foreach ($filter->value as $option) {
                                                     switch ($filter->type) {
                                                         case 'products':
-                                                            $item_name = '#'.$option.' '.get_the_title($option);
+                                                            $item_name = '#'.$option.' '.\Wdr\App\Helpers\Woocommerce::getTitleOfProduct($option);
                                                             $placeholder = __('Products', 'woo-discount-rules');
                                                             break;
                                                     }

@@ -155,9 +155,12 @@ class WDRAjax extends Base
         $data_store = WC_Data_Store::load('product');
         $ids = $data_store->search_products($query, '', true, false, $this->search_result_limit);
             return array_values(array_map( function ( $post_id ) {
+                $product = Woocommerce::getProduct($post_id);
+                $product_title = Woocommerce::getTitleOfProduct($product);
+
                 return array(
                     'id'   => (string) $post_id,
-                    'text' => '#' . $post_id . ' ' . get_the_title( $post_id ),
+                    'text' => '#' . $post_id . ' ' . $product_title,
                 );
             }, array_filter( $ids ) ));
     }
@@ -278,7 +281,7 @@ class WDRAjax extends Base
             if(function_exists('wc_get_product_id_by_sku') && function_exists('get_the_title')  ){
                 $p_id = wc_get_product_id_by_sku( $result->meta_value );
                 if( $p_id > 0){
-                    $p_title = $p_id.': '.get_the_title( $p_id );
+                    $p_title = $p_id.': '.Woocommerce::getTitleOfProduct($p_id);
                     if(!empty($p_title)){
                         $p_title =  'SKU: ' . $result->meta_value . ' ( ' . $p_title . ' )';
                     }

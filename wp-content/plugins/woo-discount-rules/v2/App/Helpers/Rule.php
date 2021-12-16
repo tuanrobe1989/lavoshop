@@ -908,7 +908,8 @@ class Rule
     }
 
     function getCartItemQuantity($cart_item){
-        return apply_filters('advanced_woo_discount_rules_cart_item_quantity', $cart_item['quantity'], $cart_item, $this->rule);
+        $cart_item_quantity = (isset($cart_item['quantity'])) ? $cart_item['quantity'] : 0;
+        return apply_filters('advanced_woo_discount_rules_cart_item_quantity', intval($cart_item_quantity), $cart_item, $this->rule);
     }
 
     /**
@@ -1542,13 +1543,14 @@ class Rule
         if (!empty($array_filters)) {
             foreach ($array_filters as $key => $array_filter) {
                 if (isset($array_filter['type']) && isset($array_filter['options'])) {
-                    if (in_array($array_filter['type'], array('cart_item_product_combination', 'cart_item_products', 'purchase_previous_orders_for_specific_product')) && !empty($array_filter['options'])) {
+                    if (in_array($array_filter['type'], array('cart_item_product_combination', 'cart_item_products', 'purchase_previous_orders_for_specific_product', 'purchase_quantities_for_specific_product')) && !empty($array_filter['options'])) {
                         $product_field_key = 'product';
                         if ($array_filter['type'] == 'cart_item_products') {
                             $product_field_key = 'value';
-                        } elseif ($array_filter['type'] == 'purchase_previous_orders_for_specific_product') {
+                        } elseif (in_array($array_filter['type'], array('purchase_previous_orders_for_specific_product', 'purchase_quantities_for_specific_product'))) {
                             $product_field_key = 'products';
                         }
+                        
                         if (is_array($array_filter['options']) && isset($array_filter['options'][$product_field_key])) {
                             $array_filters[$key]['options']['product_variants'] = array();
                             if (is_array($array_filter['options'][$product_field_key]) && !empty($array_filter['options'][$product_field_key])) {

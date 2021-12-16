@@ -2,6 +2,7 @@
 
 namespace Wdr\App\Conditions;
 
+use Wdr\App\Helpers\Helper;
 use Wdr\App\Controllers\DiscountCalculator;
 
 if (!defined('ABSPATH')) exit;
@@ -22,13 +23,22 @@ class CartLineItemsCount extends Base
         if(empty($cart)){
             return false;
         }
+        
         if (isset($options->operator) && $options->value) {
             $operator = sanitize_text_field($options->operator);
             $value = $options->value;
             if($options->calculate_from == 'from_filter'){
                 $line_items = DiscountCalculator::getFilterBasedCartQuantities('cart_line_items_count', $this->rule);
             }else{
-                $line_items = (is_array($cart)) ? count($cart) : 0;
+                $line_item_count = 0;
+                if (is_array($cart)) {
+                    foreach ($cart as $cart_item) {
+                        if (Helper::isCartItemConsideredForCalculation(true, $cart_item, 'cart_line_items_count')) {
+                            $line_item_count++;
+                        }
+                    }
+                }
+                $line_items = $line_item_count;
             }
             return $this->doComparisionOperation($operator, $line_items, $value);
         }

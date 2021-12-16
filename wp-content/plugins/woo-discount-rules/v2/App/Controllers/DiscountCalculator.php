@@ -1191,7 +1191,7 @@ class DiscountCalculator extends Base
                     if($condition_type == 'cart_subtotal'){
                         $filter_calculate_values += self::$woocommerce_helper->getCartLineItemSubtotal($cart_item);
                     }elseif ($condition_type == 'cart_quantities'){
-                        $filter_calculate_values += intval((isset($cart_item['quantity'])) ? $cart_item['quantity'] : 0);
+                        $filter_calculate_values += $rule->getCartItemQuantity($cart_item);
                     }elseif ($condition_type == 'cart_line_items_count'){
                         $filter_calculate_values += 1;
                     }else{

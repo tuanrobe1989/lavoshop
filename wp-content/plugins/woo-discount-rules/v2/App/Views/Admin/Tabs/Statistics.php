@@ -30,6 +30,7 @@ if (!defined('ABSPATH')) {
         content: '';
     }
 </style>
+<p class="wdr_settings_desc_text   text-info"><?php _e('<strong>Note</strong> : Free Shipping rules will not be shown in reports.', 'woo-discount-rules'); ?></p>
 <br>
 <div id="wpbody-content" class="awdr-container">
     <form method="post" name="wdr-statistics" class="chart-options">

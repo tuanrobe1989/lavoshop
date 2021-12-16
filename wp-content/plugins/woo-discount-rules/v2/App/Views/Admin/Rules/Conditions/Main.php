@@ -147,7 +147,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                 $used_limits = $rule->getUsedLimits(); ?>
                 <label><b><?php _e('Rule Limits', 'woo-discount-rules'); ?></b>
                     <span class="awdr-rule-limit-timestamp"><?php
-                        if(!empty($current_time)) echo sprintf(esc_html__('Current date and time: %s', 'woo-discount-rules'), '<b>' . date('Y-m-d H:i', $current_time) . '</b>'); ?>
+                        if(!empty($current_time)) echo sprintf(esc_html__('Current server date and time: %s', 'woo-discount-rules'), '<b>' . date('Y-m-d H:i', $current_time) . '</b>'); ?>
                     </span>
                     <span class="awdr-rule-limit-timestamp "> <?php
                         _e('Rule Used: ', 'woo-discount-rules');

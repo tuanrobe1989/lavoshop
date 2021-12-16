@@ -15,7 +15,7 @@
             $check_rule_limit = $rule->checkRuleUsageLimits();
             $rule_id = $rule->getId();
             if ($rule_status == 'in_future') { ?>
-                <div class="notice inline notice notice-warning notice-alt awdr-rule-limit-disabled">
+                <div class="notice inline notice-warning notice-alt awdr-rule-limit-disabled">
                     <p class="rule_limit_msg_future">
                         <b><?php esc_html_e('This rule is not running currently: ', 'woo-discount-rules'); ?></b><?php esc_html_e(' Start date and time is set in the future date', 'woo-discount-rules'); ?>
                     </p><?php
@@ -27,7 +27,7 @@
                 </div><?php
             } elseif ($rule_status == 'expired') {
                 ?>
-                <div class="notice inline notice notice-warning notice-alt awdr-rule-limit-disabled">
+                <div class="notice inline notice-warning notice-alt awdr-rule-limit-disabled">
                     <p class="rule_limit_msg_expired">
                         <b><?php esc_html_e('This rule is not running currently: ', 'woo-discount-rules'); ?></b><?php esc_html_e(' Validity expired', 'woo-discount-rules'); ?>
                     </p><?php
@@ -39,14 +39,47 @@
                 </div><?php
             }else{
                 if($check_rule_limit == 'Disabled') {?>
-                    <div class="notice inline notice notice-warning notice-alt awdr-rule-limit-disabled">
+                    <div class="notice inline notice-warning notice-alt awdr-rule-limit-disabled">
                         <p class="rule_limit_msg">
                             <b><?php esc_html_e('This rule is not running currently: ', 'woo-discount-rules'); ?></b><?php esc_html_e(' Rule reached maximum usage limit  ', 'woo-discount-rules'); ?>
                         </p>
                     </div><?php
                 }
             }?>
-            <div class="notice inline notice notice-warning notice-alt awdr-rule-limit-disabled-outer" style="display: none; padding: 10px;">
+            <?php
+                /* @since 2.3.11 */
+                $notices = apply_filters('advanced_woo_discount_rules_admin_rule_notices', array(), $rule, $rule_status);
+                if (!empty($notices) && is_array($notices)) {
+                    foreach ($notices as $notice) {
+                        $notice_status = 'warning';
+                        $notice_message = $notice_title = '';
+                        if (!empty($notice)) {
+                            if (is_array($notice)) {
+                                $notice_title = isset($notice['title']) ? $notice['title'] : $notice_title;
+                                $notice_status = isset($notice['status']) ? $notice['status'] : $notice_status;
+                                $notice_message = isset($notice['message']) ? $notice['message'] : $notice_message;
+                            } else {
+                                $notice_message = $notice;
+                            }
+                            if (!empty($notice_message)) {
+                                ?>
+                                    <div class="notice inline notice-<?php echo esc_attr($notice_status); ?> notice-alt awdr-rule-notices">
+                                        <p class="rule-notice">
+                                            <?php 
+                                                if (!empty($notice_title)) {
+                                                    echo '<b>' . esc_html($notice_title) . ':</b> ';
+                                                }
+                                                echo esc_html($notice_message);
+                                            ?>
+                                        </p>
+                                    </div>
+                                <?php
+                            }
+                        }
+                    }
+                }
+            ?>
+            <div class="notice inline notice-warning notice-alt awdr-rule-limit-disabled-outer" style="display: none; padding: 10px;">
                 <p class="rule_limit_msg_outer"></p>
             </div>
                 <form id="wdr-save-rule" name="rule_generator">

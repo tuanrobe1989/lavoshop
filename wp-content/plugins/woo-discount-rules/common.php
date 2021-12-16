@@ -89,7 +89,7 @@ add_action('advanced_woo_discount_rules_on_settings_head', function () {
     global $awdr_load_version;
     $version = ($awdr_load_version == "v1") ? "v2" : "v1";
     $url = admin_url('admin.php?page=' . $page . '&awdr_switch_plugin_to=' . $version);
-    $message = __('Switch to Discount Rules V2  which comes with a better UI and advanced rules. (You can switch back any time. Your settings and rules in V1 are  kept as is)', 'woo-discount-rules');
+    $message = __('Discount Rules V2 comes with a better UI and advanced options.', 'woo-discount-rules');
     $button_text = __("Switch to v2", 'woo-discount-rules');
     if($version == "v1"){
         $has_switch = \Wdr\App\Helpers\Migration::hasSwitchBackOption();
@@ -102,6 +102,10 @@ add_action('advanced_woo_discount_rules_on_settings_head', function () {
         } else {
             $nounce = FlycartWooDiscountRulesGeneralHelper::createNonce('wdr_ajax_switch_version');
         }
+        echo '<div class="notice notice-danger" style="background: red; color:#fff; padding: 20px;font-size: 13px;font-weight: bold;">
+            <p><b>Important: </b>This UI will be deprecated from 30th March 2022. It is recommended to switch to V2</p>
+            </div>';
+
         echo '<div style="background: #fff;padding: 20px;font-size: 13px;font-weight: bold;">' . $message . ' <button class="btn btn-info awdr-switch-version-button" data-version="' . $version . '" data-page="'.$page.'" data-nonce="'.$nounce.'">' . $button_text . '</button></div>';
         echo "<div class='wdr_switch_message' style='color:#a00;font-weight: bold;'></div>";
         echo '<div class="modal" id="wdr_switch_popup">

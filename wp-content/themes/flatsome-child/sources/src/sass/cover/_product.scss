@@ -82,15 +82,16 @@
         left: 1rem;
     }
     .badge-circle{
-        height: 90px;
-        width: 90px;
+        height: 6rem;
+        width: 6rem;
         box-sizing: border-box;
-        padding: 0 0.5rem;
         .on-sale{
             background-image: url(../../../images/icon-sale.png);
             background-color: initial !important;
+            background-repeat: no-repeat;
             border-radius: 0;
-            background-size: 100%;
+            background-size: 100% 100%;
+            line-height: 1.2;
         }
     }
 }

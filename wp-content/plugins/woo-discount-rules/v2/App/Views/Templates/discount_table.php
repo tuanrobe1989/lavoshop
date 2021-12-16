@@ -1,4 +1,15 @@
 <?php
+/**
+ * Discount table
+ *
+ * This template can be overridden by copying it to yourtheme/advanced_woo_discount_rules/discount_table.php.
+ *
+ * HOWEVER, on occasion Discount rules will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ */
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 if (!empty($ranges) && !empty($woocommerce)) {
@@ -111,7 +122,6 @@ if (!empty($ranges) && !empty($woocommerce)) {
                 foreach ($ranges as $range) :
                     $cart_discount_text = '';
                     $discount_type_value = isset($range['discount_value']) ? $range['discount_value'] : 0;
-                    //echo "<pre>"; print_r($discount_type_value); echo "</pre>";
                     if (!isset($range['discount_value'])){
                         continue;
                     }

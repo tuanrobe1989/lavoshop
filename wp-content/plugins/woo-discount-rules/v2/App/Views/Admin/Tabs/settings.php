@@ -47,8 +47,8 @@
                     </tr>
                     <tr class="apply_product_discount_subsequently_row" style="<?php echo ($configuration->getConfig('apply_product_discount_to', 'biggest_discount') != 'all') ? 'display:none' : ''; ?>">
                         <td scope="row">
-                            <label for="awdr_subsequent_discount" class="awdr-left-align"><?php _e('Apply discount subsequently', 'woo-discount-rules') ?></label>
-                            <span class="wdr_settings_desc_text awdr-clear-both"><?php esc_attr_e('discounts applied subsequently', 'woo-discount-rules'); ?></span>
+                            <label for="awdr_subsequent_discount" class="awdr-left-align"><?php _e('Apply discount sequentially', 'woo-discount-rules') ?></label>
+                            <span class="wdr_settings_desc_text awdr-clear-both"><?php esc_attr_e('This apply the discount rules in a sequential order.', 'woo-discount-rules'); ?></span>
                         </td>
                         <td>
                             <input type="radio" name="apply_discount_subsequently" id="do_apply_discount_subsequently"
