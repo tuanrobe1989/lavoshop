@@ -74,3 +74,23 @@
     width: 100%;
     max-width: 100%;
 }
+.badge-container{
+    top: auto !important;
+    bottom: 0;
+    margin: 0;
+    &.is-larger{
+        left: 1rem;
+    }
+    .badge-circle{
+        height: 90px;
+        width: 90px;
+        box-sizing: border-box;
+        padding: 0 0.5rem;
+        .on-sale{
+            background-image: url(../../../images/icon-sale.png);
+            background-color: initial !important;
+            border-radius: 0;
+            background-size: 100%;
+        }
+    }
+}

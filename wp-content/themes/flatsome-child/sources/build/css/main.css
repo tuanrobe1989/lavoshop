@@ -176,6 +176,23 @@ strong {
   width: 100%;
   max-width: 100%; }
 
+.badge-container {
+  top: auto !important;
+  bottom: 0;
+  margin: 0; }
+  .badge-container.is-larger {
+    left: 1rem; }
+  .badge-container .badge-circle {
+    height: 90px;
+    width: 90px;
+    box-sizing: border-box;
+    padding: 0 0.5rem; }
+    .badge-container .badge-circle .on-sale {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAMAAAAKE/YAAAAAilBMVEUAAADrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzrUzzoiFsHAAAALXRSTlMA8q3HwBxY2zsK1qN/BPjop5WPcl4uFe2xaEoR/Ih5Uc8n4J2YY0K2MrugSDQCtQe7AAADe0lEQVR42tTaZ5LqQAwE4DbjbIyJJucM2/e/3qstamuptwSDA9J3Av8YST3yoEjB0u/OWtHRhCuvb1nWygvNsdmqb3e9MQRKR8OTveJdiWl25g7kWG5bC4sZNLx1pxfj44Jz2/Al4clN8UGBGyV8gzUYOviM3Trh2xoDN0DVnFnInJJ2D1XyTw0WYT9HVXYDFmbRRRXmNgsVbmOUzD+ycJ6LMvVqLIV9RlmC+oRliRyUYr5iiRodFC9tsmTmgIK5fZZvhiIFESthliiM77EiVhcF6bBCLRQhjlgp4yA3x7BiiY+c/D6r10UuLjMT0/uGzExMOc74MU28qc4Pqin8ZrKm8JvJmvAxeFuEF3UpQBsvOVOEGV6wnFAGF5mNE0pxQFY2xeiPkU2LghjRISlXC3EozAjPLShMI8UzU4pj44kvCjTEYx4FmjjaDsfTA7KkUC7uMxTKCrSMlWsb3BH3KddS6gXrjVocSwnRt/m4ZUPRFiqCUpbgtKZwC/yRUrydlgH+sIEEFuXrSVnq5lk5hVRgMsY1nyp0cK1JFTxcGWsow/9n+ZZKbGTuwR7rx3pix6+RriZ9scaPPdVIYlwEDerh42JORaYS99HPGE2548ck1dbwvs2lr2juH+o2VbF1zfALK5C+DLvlC8CBynT11SE5lb52vGWv56b1K5S8/b/HShGvqE0PjqZcejHS1/HIIUZUpy7jhdVr2hKesr0q0jdbyIG2YPrNlv5P6xaj61Z7YfRFD9LDgOp4/9q7t9wEoQAAogNcFKW+UZSX2NrapLr/7TXpl/9VkkmcFZwdDPFN1ws9VMkLPVDBiN4b0bkRvTai34zogxFdGdFbITraCdFThOiLEd0a0YURfRWio4kQHRCiWyP6KEQ3OyE6QYhujehMiF7MhOgPhOhKiC5nQvQZIToToscI0RshuqmF6BwheitEB4ToLyG6R4iuhOgeIToTogNC9EmIPuNDRxMheoQPHfChm1SIPuBDB3zo+U6IrvCh1/jQCT50WQvR3/jQI3zoDh96jQ+d40PH+NAxPnSMD73Eh17hQ3f40AU69CJDh05SdOgV2NBRgQ6dnNChO7Chkys29HwDNnSeYkOHH5ChxyOQoaefM2TovgBc6MsRXOi/JawK/b/57v42aPebYxH6fihtmGs9bN1dvz9QNdgkPV2W0TN64o7+Fw99fWaEOnGmAAAAAElFTkSuQmCC);
+      background-color: initial !important;
+      border-radius: 0;
+      background-size: 100%; }
+
 .box-blog-post .box-text {
   padding: 1rem !important; }
 
