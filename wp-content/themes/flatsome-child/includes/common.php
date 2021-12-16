@@ -42,22 +42,10 @@ function save_general_product_data_custom_field( $product ) {
 // }
 
 // Change button text to "Call to Order" for simple products not purchasable.
-add_filter( 'woocommerce_product_add_to_cart_text', 'filter_product_add_to_cart_text', 10, 2 );
-function filter_product_add_to_cart_text( $button_text, $product ) {
-    if ( 'yes' === $product->get_meta( '_not_ready_to_sell' ) && $product->is_type('simple') ) {
-        $button_text =  __( 'Call to Order', 'woocommerce' );
-    }
-    return $button_text;
-}
-
-/**
- * Hide the button for the product with ID = 10 AND for variable products
- */
-// add_filter('woocommerce_loop_add_to_cart_link', function( $add_to_cart_html, $product ) {
-	
-// 	// if( $product->get_id() == 1370 || $product->is_type( 'variable' ) ) {
-// 	// 	return '';
-// 	// }
-// 	return $add_to_cart_html.'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
-	
-// } );
+// add_filter( 'woocommerce_product_add_to_cart_text', 'filter_product_add_to_cart_text', 10, 2 );
+// function filter_product_add_to_cart_text( $button_text, $product ) {
+//     if ( 'yes' === $product->get_meta( '_not_ready_to_sell' ) && $product->is_type('simple') ) {
+//         $button_text =  __( 'Call to Order', 'woocommerce' );
+//     }
+//     return $button_text;
+// }

@@ -4,11 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitce0f886f62234b61b70430dc93c704b9
+class ComposerStaticInit65598c892e32e647f09c667d9ac1e16f
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -78,6 +81,7 @@ class ComposerStaticInitce0f886f62234b61b70430dc93c704b9
             'Automattic\\WooCommerce\\GoogleListingsAndAds\\Vendor\\GuzzleHttp\\Promise\\' => 70,
             'Automattic\\WooCommerce\\GoogleListingsAndAds\\Vendor\\GuzzleHttp\\' => 62,
             'Automattic\\WooCommerce\\GoogleListingsAndAds\\Vendor\\Google\\Auth\\' => 63,
+            'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\' => 50,
             'Automattic\\WooCommerce\\GoogleListingsAndAds\\' => 44,
             'Automattic\\Jetpack\\Autoloader\\' => 30,
         ),
@@ -212,6 +216,10 @@ class ComposerStaticInitce0f886f62234b61b70430dc93c704b9
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\Vendor\\Google\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/auth/src',
+        ),
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\' => 
         array (
@@ -602,8 +610,47 @@ class ComposerStaticInitce0f886f62234b61b70430dc93c704b9
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\Proxies\\Tracks' => __DIR__ . '/../..' . '/src/Proxies/Tracks.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\Proxies\\WC' => __DIR__ . '/../..' . '/src/Proxies/WC.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\Proxies\\WP' => __DIR__ . '/../..' . '/src/Proxies/WP.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Shipping\\ShippingZone' => __DIR__ . '/../..' . '/src/Shipping/ShippingZone.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\TaskList\\CompleteSetup' => __DIR__ . '/../..' . '/src/TaskList/CompleteSetup.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\TaskList\\TaskListTrait' => __DIR__ . '/../..' . '/src/TaskList/TaskListTrait.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Framework\\ContainerAwareUnitTest' => __DIR__ . '/../..' . '/tests/Framework/ContainerAwareUnitTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Framework\\RESTControllerUnitTest' => __DIR__ . '/../..' . '/tests/Framework/RESTControllerUnitTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Framework\\UnitTest' => __DIR__ . '/../..' . '/tests/Framework/UnitTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Tools\\HelperTrait\\CouponTrait' => __DIR__ . '/../..' . '/tests/Tools/HelperTrait/CouponTrait.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Tools\\HelperTrait\\DataTrait' => __DIR__ . '/../..' . '/tests/Tools/HelperTrait/DataTrait.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Tools\\HelperTrait\\MerchantTrait' => __DIR__ . '/../..' . '/tests/Tools/HelperTrait/MerchantTrait.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Tools\\HelperTrait\\ProductMetaTrait' => __DIR__ . '/../..' . '/tests/Tools/HelperTrait/ProductMetaTrait.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Tools\\HelperTrait\\ProductTrait' => __DIR__ . '/../..' . '/tests/Tools/HelperTrait/ProductTrait.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Tools\\HelperTrait\\SettingsTrait' => __DIR__ . '/../..' . '/tests/Tools/HelperTrait/SettingsTrait.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\API\\Google\\MerchantMetricsTest' => __DIR__ . '/../..' . '/tests/Unit/API/Google/MerchantMetricsTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\API\\Google\\MerchantTest' => __DIR__ . '/../..' . '/tests/Unit/API/Google/MerchantTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\API\\Site\\Controllers\\MerchantCenter\\ContactInformationControllerTest' => __DIR__ . '/../..' . '/tests/Unit/API/Site/Controllers/MerchantCenter/ContactInformationControllerTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\API\\Site\\Controllers\\MerchantCenter\\PhoneVerificationControllerTest' => __DIR__ . '/../..' . '/tests/Unit/API/Site/Controllers/MerchantCenter/PhoneVerificationControllerTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Assets\\AdminScriptAssetTest' => __DIR__ . '/../..' . '/tests/Unit/Assets/AdminScriptAssetTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Coupon\\CouponMetaHandlerTest' => __DIR__ . '/../..' . '/tests/Unit/Coupon/CouponMetaHandlerTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Coupon\\CouponSyncerTest' => __DIR__ . '/../..' . '/tests/Unit/Coupon/CouponSyncerTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Coupon\\SyncerHooksTest' => __DIR__ . '/../..' . '/tests/Unit/Coupon/SyncerHooksTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Coupon\\WCCouponAdapterTest' => __DIR__ . '/../..' . '/tests/Unit/Coupon/WCCouponAdapterTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\DB\\Migration\\MigratorTest' => __DIR__ . '/../..' . '/tests/Unit/DB/Migration/MigratorTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\MerchantCenter\\ContactInformationTest' => __DIR__ . '/../..' . '/tests/Unit/MerchantCenter/ContactInformationTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\MerchantCenter\\PhoneVerificationTest' => __DIR__ . '/../..' . '/tests/Unit/MerchantCenter/PhoneVerificationTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\Attributes\\AbstractAttributeTest' => __DIR__ . '/../..' . '/tests/Unit/Product/Attributes/AbstractAttributeTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\Attributes\\AttributeManagerTest' => __DIR__ . '/../..' . '/tests/Unit/Product/Attributes/AttributeManagerTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\BatchProductHelperTest' => __DIR__ . '/../..' . '/tests/Unit/Product/BatchProductHelperTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\ProductFactoryTest' => __DIR__ . '/../..' . '/tests/Unit/Product/ProductFactoryTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\ProductHelperTest' => __DIR__ . '/../..' . '/tests/Unit/Product/ProductHelperTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\ProductMetaHandlerTest' => __DIR__ . '/../..' . '/tests/Unit/Product/ProductMetaHandlerTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\ProductRepositoryTest' => __DIR__ . '/../..' . '/tests/Unit/Product/ProductRepositoryTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\ProductSyncerTest' => __DIR__ . '/../..' . '/tests/Unit/Product/ProductSyncerTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\SyncerHooksTest' => __DIR__ . '/../..' . '/tests/Unit/Product/SyncerHooksTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Product\\WCProductAdapterTest' => __DIR__ . '/../..' . '/tests/Unit/Product/WCProductAdapterTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Shipping\\ShippingZoneTest' => __DIR__ . '/../..' . '/tests/Unit/Shipping/ShippingZoneTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Utility\\AddressUtilityTest' => __DIR__ . '/../..' . '/tests/Unit/Utility/AddressUtilityTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Utility\\DateTimeUtilityTest' => __DIR__ . '/../..' . '/tests/Unit/Utility/DateTimeUtilityTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Utility\\ISOUtilityTest' => __DIR__ . '/../..' . '/tests/Unit/Utility/ISOUtilityTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\Value\\PhoneNumberTest' => __DIR__ . '/../..' . '/tests/Unit/Value/PhoneNumberTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\View\\PHPViewFactoryTest' => __DIR__ . '/../..' . '/tests/Unit/View/PHPViewFactoryTest.php',
+        'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tests\\Unit\\View\\PHPViewTest' => __DIR__ . '/../..' . '/tests/Unit/View/PHPViewTest.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tracking\\EventTracking' => __DIR__ . '/../..' . '/src/Tracking/EventTracking.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tracking\\Events\\ActivatedEvents' => __DIR__ . '/../..' . '/src/Tracking/Events/ActivatedEvents.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\Tracking\\Events\\BaseEvent' => __DIR__ . '/../..' . '/src/Tracking/Events/BaseEvent.php',
@@ -791,7 +838,6 @@ class ComposerStaticInitce0f886f62234b61b70430dc93c704b9
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\View\\PHPView' => __DIR__ . '/../..' . '/src/View/PHPView.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\View\\PHPViewFactory' => __DIR__ . '/../..' . '/src/View/PHPViewFactory.php',
         'Automattic\\WooCommerce\\GoogleListingsAndAds\\View\\ViewException' => __DIR__ . '/../..' . '/src/View/ViewException.php',
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
         'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
         'Firebase\\JWT\\JWK' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWK.php',
@@ -5557,7 +5603,9 @@ class ComposerStaticInitce0f886f62234b61b70430dc93c704b9
         'Symfony\\Component\\Validator\\Mapping\\PropertyMetadataInterface' => __DIR__ . '/..' . '/symfony/validator/Mapping/PropertyMetadataInterface.php',
         'Symfony\\Component\\Validator\\Mapping\\TraversalStrategy' => __DIR__ . '/..' . '/symfony/validator/Mapping/TraversalStrategy.php',
         'Symfony\\Component\\Validator\\ObjectInitializerInterface' => __DIR__ . '/..' . '/symfony/validator/ObjectInitializerInterface.php',
+        'Symfony\\Component\\Validator\\Test\\AssertingContextualValidator' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
         'Symfony\\Component\\Validator\\Test\\ConstraintValidatorTestCase' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
+        'Symfony\\Component\\Validator\\Test\\ConstraintViolationAssertion' => __DIR__ . '/..' . '/symfony/validator/Test/ConstraintValidatorTestCase.php',
         'Symfony\\Component\\Validator\\Util\\PropertyPath' => __DIR__ . '/..' . '/symfony/validator/Util/PropertyPath.php',
         'Symfony\\Component\\Validator\\Validation' => __DIR__ . '/..' . '/symfony/validator/Validation.php',
         'Symfony\\Component\\Validator\\ValidatorBuilder' => __DIR__ . '/..' . '/symfony/validator/ValidatorBuilder.php',
@@ -5914,9 +5962,9 @@ class ComposerStaticInitce0f886f62234b61b70430dc93c704b9
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitce0f886f62234b61b70430dc93c704b9::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitce0f886f62234b61b70430dc93c704b9::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitce0f886f62234b61b70430dc93c704b9::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit65598c892e32e647f09c667d9ac1e16f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit65598c892e32e647f09c667d9ac1e16f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit65598c892e32e647f09c667d9ac1e16f::$classMap;
 
         }, null, ClassLoader::class);
     }
