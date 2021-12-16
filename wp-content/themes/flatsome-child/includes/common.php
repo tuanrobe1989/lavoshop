@@ -61,3 +61,13 @@ function filter_product_add_to_cart_text( $button_text, $product ) {
 // 	return $add_to_cart_html.'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 	
 // } );
+
+
+add_filter( 'woocommerce_package_rates', 'override_ups_rates' );
+function override_ups_rates( $rates ) {
+    foreach( $rates as $rate_key => $rate ){
+        // Check if the shipping method ID is UPS for example
+        $rates[$rate_key]->cost = 5.50;
+    }
+    return $rates;        
+}
