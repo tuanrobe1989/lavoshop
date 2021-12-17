@@ -65,3 +65,4 @@ function woocommerce_custom_sale_text($text, $post, $_product)
     return $text;
 }
 
+remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
