@@ -92,6 +92,16 @@
             border-radius: 0;
             background-size: 100% 100%;
             line-height: 1.2;
+            padding: 0.5rem;
+        }
+    }
+}
+.product-small.box{
+    .badge-circle{
+        height: 4rem;
+        width: 4rem;
+        .onsale{
+            font-size: 0.8rem;
         }
     }
 }
