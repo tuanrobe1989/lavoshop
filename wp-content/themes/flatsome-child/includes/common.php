@@ -66,3 +66,15 @@ function woocommerce_custom_sale_text($text, $post, $_product)
 }
 
 remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
+
+add_filter( 'woocommerce_single_product_image_thumbnail_html', 'add_class_to_thumbs', 10, 2 );
+function add_class_to_thumbs( $html, $attachment_id ) {
+	if ( get_post_thumbnail_id() === intval( $attachment_id ) ) {
+        ob_start();
+        do_action('flatsome_sale_flash');
+        $flatsome_sale_flash = ob_get_clean();
+        $html = str_replace('</a></div>','</a>'.$flatsome_sale_flash.'</div>',$html);
+	}
+
+	return $html;
+}

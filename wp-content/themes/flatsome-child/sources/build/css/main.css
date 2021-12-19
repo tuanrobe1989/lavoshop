@@ -725,6 +725,9 @@ strong {
   .row-divided.row-reverse > .col + .col:not(.large-12) {
     border-right: 0 !important; } }
 
+.woocommerce-product-gallery__image {
+  position: relative; }
+
 @media (min-width: 850px) {
   .shop-container .product-type-simple .row .col.large-9 {
     padding-right: 1rem; } }

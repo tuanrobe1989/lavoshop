@@ -3,7 +3,9 @@
         border-right: 0 !important;
     }
 }
-
+.woocommerce-product-gallery__image{
+    position: relative;
+}
 .shop-container {
     .product-type-simple {
         .row {
