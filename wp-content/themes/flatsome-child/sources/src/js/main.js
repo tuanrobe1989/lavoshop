@@ -1,5 +1,7 @@
 import '../sass/main.scss';
 import 'jquery-match-height';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 jQuery(document).ready(function(){
     jQuery('.product-small > .col-inner').matchHeight();
     jQuery('.title-wrapper').matchHeight();

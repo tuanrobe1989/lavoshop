@@ -70,6 +70,7 @@ if ( $out_of_stock ) $classes[] = 'out-of-stock';
 				<?php do_action( 'flatsome_product_box_actions' ); ?>
 			</div>
 			<?php if ( $out_of_stock ) { ?><div class="out-of-stock-label"><?php _e( 'Out of stock', 'woocommerce' ); ?></div><?php } ?>
+			<?php do_action('woocommerce_shop_loop_item_salecover'); ?>
 		</div>
 
 		<div class="box-text <?php echo flatsome_product_box_text_class(); ?>">

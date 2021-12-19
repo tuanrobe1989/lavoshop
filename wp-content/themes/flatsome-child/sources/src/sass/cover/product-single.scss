@@ -179,4 +179,12 @@
     .pwb-single-product-brands{
         display: none;
     }
+
+    &__after_thumb{
+        &--img{
+            border: 1px solid #f9f9f9;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+        }
+    }
 }

@@ -1,4 +1,34 @@
 <?php
+add_action('init','add_lazyload_func');
+function add_lazyload_func(){
+    if(!is_admin()):
+        require_once 'simple_html_dom.php';
+    endif;
+}
+//add_filter('the_content', 'cm_add_image_placeholders');
+function cm_add_image_placeholders($content)
+{   
+    if(is_admin()):
+        return $content;
+    else:
+        if( empty( get_the_content() ) ) return $content;
+        $html = str_get_html($content, '', '', '', false);
+        $placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
+        if ($html) :
+            foreach ($html->find('img') as $element) {
+                if (strpos($element->class, 'lazy') === false) :
+                    $element->class = 'lazy ' . $element->class;
+                    $element->srcset = '';
+                    $element->sizes = '';
+                    $element->{'data-src'} = $element->src;
+                    $element->src = $placeholder;
+                endif;
+            }
+            return $html;
+        endif;
+    endif;
+    return $content;
+}
 // function breadcrum(){
 //     echo "<div class='container'>";
 //     flatsome_breadcrumb();
@@ -65,6 +95,7 @@ function woocommerce_custom_sale_text($text, $post, $_product)
     return $text;
 }
 
+<<<<<<< HEAD
 remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
 
 add_filter( 'woocommerce_single_product_image_thumbnail_html', 'add_class_to_thumbs', 10, 2 );
@@ -78,3 +109,12 @@ function add_class_to_thumbs( $html, $attachment_id ) {
 
 	return $html;
 }
+=======
+add_action( 'after_setup_theme', 'custom_aftersetup_theme', 0 );
+function custom_aftersetup_theme() {
+    remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
+}
+
+add_action('woocommerce_shop_loop_item_salecover', 'woocommerce_show_product_loop_sale_flash', 10);
+
+>>>>>>> 16405ce13c41770dc2611b981e7cacfe6a9b931d
