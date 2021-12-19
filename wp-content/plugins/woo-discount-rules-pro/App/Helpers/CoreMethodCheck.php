@@ -120,4 +120,17 @@ class CoreMethodCheck
             return $price;
         }
     }
+
+    /**
+     * Get title of product
+     * @param $product - woocommerce product object
+     * @return string
+     */
+    static function getTitleOfProduct($product){
+        if(method_exists('\Wdr\App\Helpers\Woocommerce', 'getTitleOfProduct')){
+            return Woocommerce::getTitleOfProduct($product);
+        } else {
+            return get_the_title($product);
+        }
+    }
 }

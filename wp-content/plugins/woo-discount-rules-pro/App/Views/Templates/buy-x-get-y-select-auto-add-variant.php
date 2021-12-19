@@ -21,16 +21,7 @@ foreach ($available_products as $available_product) { //parent_id
             $variation_image = $product_variation->get_image(array( 50, 50));
             // get variation name with attributes
             // Fix - variation name issue, if variation contains more than two attributes
-            $attributes = (array) \Wdr\App\Helpers\Woocommerce::getProductAttributes($product_variation);
-            if (count($attributes) > 2) {
-                $variation_parent_id = \Wdr\App\Helpers\Woocommerce::getProductParentId($product_variation);
-                $variation_parent_title = get_the_title($variation_parent_id);
-                $variation_separator = apply_filters('woocommerce_product_variation_title_attributes_separator', ' - ', $product_variation);
-                $variation_attributes = wc_get_formatted_variation($product_variation, true, false);
-                $variation_name_include_attributes = $variation_parent_title . $variation_separator . $variation_attributes;   
-            } else {
-                $variation_name_include_attributes = get_the_title($available_product);
-            }
+            $variation_name_include_attributes = \WDRPro\App\Helpers\CoreMethodCheck::getTitleOfProduct($product_variation);
             ?>
             <div class="awdr_free_product_variants">
             <span class="awdr_change_product" data-pid="<?php echo $available_product; ?>"

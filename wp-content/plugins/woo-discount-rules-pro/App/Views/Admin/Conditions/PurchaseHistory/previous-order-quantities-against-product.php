@@ -20,7 +20,7 @@ echo ($render_saved_condition == true) ? '' : '<div class="purchase_quantities_f
             if ($wdr_products) {
                 $item_name = '';
                 foreach ($wdr_products as $value) {
-                    $item_name = get_the_title($value);
+                    $item_name = \WDRPro\App\Helpers\CoreMethodCheck::getTitleOfProduct($value);
                     if ($item_name != '') { ?>
                         <option value="<?php echo $value; ?>" selected><?php echo $item_name; ?></option><?php
                     }

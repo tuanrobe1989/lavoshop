@@ -43,6 +43,7 @@ class BuyXGetY
         add_filter('advanced_woo_discount_rules_advance_table_based_on_rule', array(__CLASS__, 'addAdvanceTableForBuyXGetY'), 10, 6);
         add_filter('advanced_woo_discount_rules_filter_passed', array(__CLASS__, 'checkFilterPassed'), 10, 6);
         add_filter('advanced_woo_discount_rules_is_rule_passed_with_out_discount_for_exclusive_rule', array(__CLASS__, 'checkExclusiveRulePassed'), 10, 4);
+        add_filter('advanced_woo_discount_rules_admin_rule_notices',  array(__CLASS__, 'addRuleNotices'), 10, 3);
 
         add_action( 'woocommerce_cart_collaterals', array(__CLASS__, 'loadCrossSellDisplay'), 9 );
     }
@@ -323,18 +324,28 @@ class BuyXGetY
                     foreach ($discount_product_ids as $key => $discount_product_id){
                         if(isset($products_variants->{$discount_product_id}) && !empty($products_variants->{$discount_product_id})){
                             $product_variants = $products_variants->{$discount_product_id};
-                            if(isset($product_variants[0])){
-                                $chosen_product_id = $product_variants[0];
-                                if(isset($awdr_customer_chosen_product[$rule_matched_key][$discount_product_id])){
-                                    $chosen_product_id = $awdr_customer_chosen_product[$rule_matched_key][$discount_product_id];
+                            // Fix - Variable product auto add issues (to check and list bogo purchasable variants)
+                            if (!empty($product_variants)) {
+                                $purchaseable_product_variants = [];
+                                foreach ($product_variants as $variant_id) {
+                                    $product = Woocommerce::getProduct($variant_id);
+                                    if (BOGO::isProductPurchasableForBOGO($product, $discount_quantity, $discount_product_id, $variant_id)) {
+                                        $purchaseable_product_variants[] = $variant_id;
+                                    }
                                 }
-                                $discount_product_ids[$key] = $chosen_product_id;
-                                self::$product_can_be_chosen[$rule_matched_key][$chosen_product_id] = array(
-                                    'matched_rule_identification' => $rule_matched_key,
-                                    'chosen' => $chosen_product_id,
-                                    'parent_product_id' => $discount_product_id,
-                                    'available_products' => $product_variants,
-                                );
+                                if (!empty($purchaseable_product_variants)) {
+                                    $chosen_product_id = $purchaseable_product_variants[0];
+                                    if(isset($awdr_customer_chosen_product[$rule_matched_key][$discount_product_id])){
+                                        $chosen_product_id = $awdr_customer_chosen_product[$rule_matched_key][$discount_product_id];
+                                    }
+                                    $discount_product_ids[$key] = $chosen_product_id;
+                                    self::$product_can_be_chosen[$rule_matched_key][$chosen_product_id] = array(
+                                        'matched_rule_identification' => $rule_matched_key,
+                                        'chosen' => $chosen_product_id,
+                                        'parent_product_id' => $discount_product_id,
+                                        'available_products' => $purchaseable_product_variants,
+                                    );
+                                }
                             }
                         }
                     }
@@ -710,6 +721,51 @@ class BuyXGetY
         }
 
         return $filter_passed;
+    }
+
+    /**
+     * Add Admin rule notices.
+     * 
+     * @param object $rule
+     * @param string $rule_status
+     * 
+     * @return array $notices
+     */
+    public static function addRuleNotices($notices, $rule, $rule_status) {
+        $buy_x_get_y = self::getBuyXGetYAdjustmentsForAdmin($rule);
+        if (!empty($buy_x_get_y) && isset($buy_x_get_y->ranges)) {
+            foreach ($buy_x_get_y->ranges as $range) {
+                if (isset($range->products) && is_array($range->products)) {
+                    foreach ($range->products as $product_id) {
+                        $product = Woocommerce::getProduct($product_id);
+                        if (!is_a($product, 'WC_Product')) {
+                            $notices[] = array(
+                                'status' => 'warning',
+                                'title' => __('Attention required', 'woo-discount-rules'),
+                                'message' => sprintf(__('The product %s is invalid.', 'woo-discount-rules-pro'), '#' . $product_id)
+                            );
+                        } elseif (isset($range->free_qty) && !empty($range->free_qty)) {
+                            $parent_id = Woocommerce::getProductParentId($product);
+                            $variation_id = 0;
+                            if(!empty($parent_id)){
+                                $variation_id = $product_id;
+                                $product_id = $parent_id;
+                            }
+                            $is_bogo_purchaseable = BOGO::isProductPurchasableForBOGO($product, $range->free_qty, $product_id, $variation_id, false, false);
+                            if (!$is_bogo_purchaseable) {
+                                $product_id = ($variation_id != 0) ? $variation_id : $product_id;
+                                $notices[] = array(
+                                    'status' => 'warning',
+                                    'title' => __('Attention required', 'woo-discount-rules'),
+                                    'message' => sprintf(__('The product %s is not purchasable (please check product configuration).', 'woo-discount-rules-pro'), '#' . $product_id)
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $notices;
     }
 
     /**

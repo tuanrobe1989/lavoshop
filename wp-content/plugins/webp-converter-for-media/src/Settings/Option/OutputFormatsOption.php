@@ -65,7 +65,7 @@ class OutputFormatsOption extends OptionAbstract {
 		return [
 			__( 'The AVIF format is a new extension - is the successor to WebP. It allows you to achieve even higher levels of image compression, and the quality of the converted images is better than in WebP.', 'webp-converter-for-media' ),
 			sprintf(
-				/* translators: %1$s: open anchor tag, %2$s: arrow icon, %3$s: close anchor tag */
+			/* translators: %1$s: open anchor tag, %2$s: arrow icon, %3$s: close anchor tag */
 				__( '%1$sRead more %2$s%3$s', 'webp-converter-for-media' ),
 				'<a href="' . esc_url( sprintf( WebpConverterConstants::UPGRADE_PRO_PREFIX_URL, 'field-output-formats-info' ) ) . '" target="_blank">',
 				'<span class="dashicons dashicons-arrow-right-alt"></span>',

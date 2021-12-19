@@ -5,6 +5,7 @@ namespace WebpConverter\Conversion\Method;
 use WebpConverter\Conversion\SkipCrashed;
 use WebpConverter\Conversion\SkipLarger;
 use WebpConverter\Exception;
+use WebpConverter\Service\ServerConfigurator;
 use WebpConverter\Settings\Option\OutputFormatsOption;
 
 /**
@@ -22,9 +23,19 @@ abstract class LibraryMethodAbstract extends MethodAbstract implements LibraryMe
 	 */
 	private $skip_larger;
 
-	public function __construct( SkipCrashed $skip_crashed, SkipLarger $skip_larger ) {
-		$this->skip_crashed = $skip_crashed;
-		$this->skip_larger  = $skip_larger;
+	/**
+	 * @var ServerConfigurator
+	 */
+	private $server_configurator;
+
+	public function __construct(
+		SkipCrashed $skip_crashed,
+		SkipLarger $skip_larger,
+		ServerConfigurator $server_configurator
+	) {
+		$this->skip_crashed        = $skip_crashed;
+		$this->skip_larger         = $skip_larger;
+		$this->server_configurator = $server_configurator;
 	}
 
 	/**
@@ -57,7 +68,8 @@ abstract class LibraryMethodAbstract extends MethodAbstract implements LibraryMe
 	 * @throws Exception\LargerThanOriginalException
 	 */
 	private function convert_path( string $path, string $format, array $plugin_settings ) {
-		$this->set_server_config();
+		$this->server_configurator->set_memory_limit();
+		$this->server_configurator->set_execution_time();
 
 		try {
 			$source_path = $this->get_image_source_path( $path );

@@ -6,6 +6,7 @@ use WebpConverter\Conversion\Format\FormatFactory;
 use WebpConverter\Conversion\SkipCrashed;
 use WebpConverter\Conversion\SkipLarger;
 use WebpConverter\Repository\TokenRepository;
+use WebpConverter\Service\ServerConfigurator;
 
 /**
  * Adds support for all conversion methods and returns information about them.
@@ -28,6 +29,11 @@ class MethodFactory {
 	private $token_repository;
 
 	/**
+	 * @var ServerConfigurator
+	 */
+	private $server_configurator;
+
+	/**
 	 * Objects of supported conversion methods.
 	 *
 	 * @var MethodInterface[]
@@ -37,15 +43,17 @@ class MethodFactory {
 	public function __construct(
 		SkipCrashed $skip_crashed = null,
 		SkipLarger $skip_larger = null,
-		TokenRepository $token_repository = null
+		TokenRepository $token_repository = null,
+		ServerConfigurator $server_configurator = null
 	) {
-		$this->skip_crashed     = $skip_crashed ?: new SkipCrashed();
-		$this->skip_larger      = $skip_larger ?: new SkipLarger();
-		$this->token_repository = $token_repository ?: new TokenRepository();
+		$this->skip_crashed        = $skip_crashed ?: new SkipCrashed();
+		$this->skip_larger         = $skip_larger ?: new SkipLarger();
+		$this->token_repository    = $token_repository ?: new TokenRepository();
+		$this->server_configurator = $server_configurator ?: new ServerConfigurator();
 
-		$this->set_integration( new ImagickMethod( $this->skip_crashed, $this->skip_larger ) );
-		$this->set_integration( new GdMethod( $this->skip_crashed, $this->skip_larger ) );
-		$this->set_integration( new RemoteMethod( $this->skip_larger ) );
+		$this->set_integration( new ImagickMethod( $this->skip_crashed, $this->skip_larger, $this->server_configurator ) );
+		$this->set_integration( new GdMethod( $this->skip_crashed, $this->skip_larger, $this->server_configurator ) );
+		$this->set_integration( new RemoteMethod( $this->skip_larger, $this->token_repository, $this->server_configurator ) );
 	}
 
 	/**

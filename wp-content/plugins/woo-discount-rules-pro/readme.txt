@@ -4,7 +4,7 @@ Donate link: https://flycart.org/
 Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
 Requires at least: 4.4.1
 Tested up to: 5.8
-Stable tag: 2.3.10
+Stable tag: 2.3.11
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -335,6 +335,15 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.3.11 - 16/12/21 =
+* Improvement - Disable free shipping rule in statistics.
+* Improvement - Event: advanced_woo_discount_rules_admin_rule_notices.
+* Improvement - Warning on product doesn't exists / out of stock for BXGY.
+* Fix - Purchase history quantities for Specific Product condition doesn't considered variants.
+* Fix - Not displaying variant name when having more than 3 combination of attributes.
+* Fix - Auto add next available variant when a variant in not purchasable.
+
 
 = 2.3.10 - 15/11/21 =
 * Improvement - Event advanced_woo_discount_rules_calculate_cheapest_discount.

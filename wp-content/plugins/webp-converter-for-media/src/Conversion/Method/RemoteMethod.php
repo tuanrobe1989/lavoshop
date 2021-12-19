@@ -6,6 +6,7 @@ use WebpConverter\Conversion\SkipLarger;
 use WebpConverter\Exception;
 use WebpConverter\Model\Token;
 use WebpConverter\Repository\TokenRepository;
+use WebpConverter\Service\ServerConfigurator;
 use WebpConverter\Settings\Option\AccessTokenOption;
 use WebpConverter\Settings\Option\ExtraFeaturesOption;
 use WebpConverter\Settings\Option\ImagesQualityOption;
@@ -35,9 +36,18 @@ class RemoteMethod extends MethodAbstract {
 	 */
 	private $token;
 
-	public function __construct( SkipLarger $skip_larger, TokenRepository $token_repository = null ) {
-		$this->skip_larger      = $skip_larger;
-		$this->token_repository = $token_repository ?: new TokenRepository();
+	/**
+	 * @var ServerConfigurator
+	 */
+	private $server_configurator;
+
+	public function __construct(
+		SkipLarger $skip_larger,
+		TokenRepository $token_repository,
+		ServerConfigurator $server_configurator ) {
+		$this->skip_larger         = $skip_larger;
+		$this->token_repository    = $token_repository;
+		$this->server_configurator = $server_configurator;
 	}
 
 	/**
@@ -92,6 +102,9 @@ class RemoteMethod extends MethodAbstract {
 	 * @throws Exception\OutputPathException
 	 */
 	public function convert_paths( array $paths, array $plugin_settings, bool $regenerate_force ) {
+		$this->server_configurator->set_memory_limit();
+		$this->server_configurator->set_execution_time();
+
 		$output_formats = $plugin_settings[ OutputFormatsOption::OPTION_NAME ];
 		$file_paths     = $this->get_source_paths( $paths, $plugin_settings );
 

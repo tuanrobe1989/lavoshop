@@ -72,7 +72,17 @@ class SettingsSave {
 		$token = $this->token_validator->validate_token( $plugin_settings[ AccessTokenOption::OPTION_NAME ] );
 		if ( $token->get_valid_status() ) {
 			$plugin_settings[ ConversionMethodOption::OPTION_NAME ] = RemoteMethod::METHOD_NAME;
-			$plugin_settings[ OutputFormatsOption::OPTION_NAME ]    = $plugin_settings[ OutputFormatsOption::OPTION_NAME ] ?: [ WebpFormat::FORMAT_EXTENSION ];
+
+			if ( isset( $_POST[ self::SUBMIT_TOKEN_ACTIVATE ] ) ) {
+				$plugin_settings[ OutputFormatsOption::OPTION_NAME ] = [
+					AvifFormat::FORMAT_EXTENSION,
+					WebpFormat::FORMAT_EXTENSION,
+				];
+			} elseif ( ! $plugin_settings[ OutputFormatsOption::OPTION_NAME ] ) {
+				$plugin_settings[ OutputFormatsOption::OPTION_NAME ] = [
+					WebpFormat::FORMAT_EXTENSION,
+				];
+			}
 		}
 
 		OptionsAccessManager::update_option(

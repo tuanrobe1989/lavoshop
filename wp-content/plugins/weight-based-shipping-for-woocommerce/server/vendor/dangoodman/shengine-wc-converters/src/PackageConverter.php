@@ -333,7 +333,7 @@ class PackageConverter
                     return $product->is_type('variation') ? $product->get_id() : null;
 
                 default:
-                    return call_user_func(array(\WbsVendors_CCR::klass($product), "get_{$attr}"));
+                    return call_user_func(array((\WbsVendors_CCR::klass($product)), "get_{$attr}"));
             }
         }
 

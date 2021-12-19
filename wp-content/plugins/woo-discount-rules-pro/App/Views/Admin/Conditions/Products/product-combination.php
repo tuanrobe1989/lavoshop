@@ -27,7 +27,7 @@ echo ($render_saved_condition == true) ? '' : '<div class="cart_item_product_com
             if ($values) {
                 $item_name = '';
                 foreach ($values as $value) {
-                    $item_name = '#'.$value.' '.get_the_title($value);
+                    $item_name = '#'.$value.' '.\WDRPro\App\Helpers\CoreMethodCheck::getTitleOfProduct($value);
                     if ($item_name != '') { ?>
                         <option value="<?php echo $value; ?>" selected><?php echo $item_name; ?></option><?php
                     }

@@ -132,6 +132,7 @@ return array(
     'WebpConverter\\Repository\\TokenRepository' => $baseDir . '/src/Repository/TokenRepository.php',
     'WebpConverter\\Service\\FileLoader' => $baseDir . '/src/Service/FileLoader.php',
     'WebpConverter\\Service\\OptionsAccessManager' => $baseDir . '/src/Service/OptionsAccessManager.php',
+    'WebpConverter\\Service\\ServerConfigurator' => $baseDir . '/src/Service/ServerConfigurator.php',
     'WebpConverter\\Service\\TokenValidator' => $baseDir . '/src/Service/TokenValidator.php',
     'WebpConverter\\Service\\ViewLoader' => $baseDir . '/src/Service/ViewLoader.php',
     'WebpConverter\\Settings\\AdminAssets' => $baseDir . '/src/Settings/AdminAssets.php',
