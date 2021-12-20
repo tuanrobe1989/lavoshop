@@ -1,4 +1,4 @@
-=== WebP Converter for Media - Convert WebP & Optimize Images ===
+=== WebP Converter for Media - Convert WebP and AVIF & Optimize Images ===
 Contributors: mateuszgbiorczyk
 Donate link: https://ko-fi.com/gbiorczyk/?utm_source=webp-converter-for-media&utm_medium=readme-donate
 Tags: convert webp, webp, optimize images, compress images, webp converter
@@ -9,11 +9,11 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Convert WebP just now! Speed up your website by serving WebP images instead of standard formats JPEG, PNG and GIF.
+Speed up your website by serving WebP and AVIF images instead of standard formats JPEG, PNG and GIF. Reduce image sizes just now!
 
 == Description ==
 
-Speed up your website by serving WebP images. By replacing files in standard JPEG, PNG and GIF formats with WebP format, you can save over a half of the page weight without losing quality.
+Speed up your website by serving WebP and AVIF images. By replacing files in standard JPEG, PNG and GIF formats with WebP and AVIF formats, you can save over a half of the page weight without losing quality.
 
 After installing the plugin you do not have to do anything more. Your current images will be converted into a new format. When compress images is finished, users will automatically receive new, much lighter images than the original ones.
 
@@ -383,27 +383,21 @@ Then find the configuration file in one of the paths *(remember to select config
 - `/etc/nginx/sites-enabled/`
 - `/etc/nginx/conf.d/`
 
-and add below code in this file *(add these lines to very beginning of file if possible - if they will be at the bottom, other rules may block the rules for WebP from working)*:
+and add below code in this file *(add these lines to very beginning of file if possible)*:
 
+`map $http_accept $load_avif {`
+`	~image/avif "/wp-content/uploads-webpc/$path.$ext.avif";`
+`}`
+`map $http_accept $load_webp {`
+`	~image/webp "/wp-content/uploads-webpc/$path.$ext.webp";`
+`}`
+``
 `server {`
 `	location ~ /wp-content/(?<path>.+)\.(?<ext>jpe?g|png|gif)$ {`
-`		if ($http_accept !~* "image/avif") {`
-`			break;`
-`		}`
 `		add_header Vary Accept;`
 `		add_header Cache-Control "private" always;`
 `		expires 365d;`
-`		try_files /wp-content/uploads-webpc/$path.$ext.avif /wp-content/uploads-webpc/$path.$ext.webp $uri =404;`
-`	}`
-`   `
-`	location ~ /wp-content/(?<path>.+)\.(?<ext>jpe?g|png|gif)$ {`
-`		if ($http_accept !~* "image/webp") {`
-`			break;`
-`		}`
-`		add_header Vary Accept;`
-`		add_header Cache-Control "private" always;`
-`		expires 365d;`
-`		try_files /wp-content/uploads-webpc/$path.$ext.webp $uri =404;`
+`		try_files $load_avif $load_webp $uri =404;`
 `	}`
 `	# ...`
 `}`
@@ -486,6 +480,11 @@ This is all very important to us and allows us to do even better things for you!
 3. Screenshot when regenerating images
 
 == Changelog ==
+
+= 4.0.2 (2021-12-17) =
+* `[Fixed]` Fetching large list of files to conversion
+* `[Fixed]` Rewrites caching for some servers
+* `[Changed]` Connection when converting using remote server
 
 = 4.0.1 (2021-12-10) =
 * `[Added]` Informational banners on plugin settings page

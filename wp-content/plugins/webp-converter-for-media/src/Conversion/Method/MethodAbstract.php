@@ -73,16 +73,6 @@ abstract class MethodAbstract implements MethodInterface {
 	}
 
 	/**
-	 * @return void
-	 */
-	protected function set_server_config() {
-		ini_set( 'memory_limit', '1G' ); // phpcs:ignore
-		if ( strpos( ini_get( 'disable_functions' ) ?: '', 'set_time_limit' ) === false ) {
-			set_time_limit( 120 );
-		}
-	}
-
-	/**
 	 * Checks server path of source image.
 	 *
 	 * @param string $source_path Server path of source image.

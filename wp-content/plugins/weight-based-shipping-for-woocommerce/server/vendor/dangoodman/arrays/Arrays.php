@@ -19,7 +19,7 @@ class Arrays
     {
         $result = is_array($list) ? $list : array();
         foreach ($list as $key => $item) {
-            $result[$key] = call_user_func(\WbsVendors_CCR::kallable($callback), $item);
+            $result[$key] = call_user_func((\WbsVendors_CCR::kallable($callback)), $item);
         }
 
         return $result;
@@ -37,7 +37,7 @@ class Arrays
     public static function reduce($input, $callback, $carry = null)
     {
         foreach ($input as $item) {
-            $carry = call_user_func(\WbsVendors_CCR::kallable($callback), $carry, $item);
+            $carry = call_user_func((\WbsVendors_CCR::kallable($callback)), $carry, $item);
         }
 
         return $carry;
@@ -61,7 +61,7 @@ class Arrays
 
         $result = is_array($input) ? $input : array();
         foreach ($input as $key => $item) {
-            if (call_user_func(\WbsVendors_CCR::kallable($callback), $item)) {
+            if (call_user_func((\WbsVendors_CCR::kallable($callback)), $item)) {
                 $result[$key] = $item;
             } else {
                 unset($result[$key]);

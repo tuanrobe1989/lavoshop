@@ -3,11 +3,21 @@
 namespace WebpConverter\Conversion\Endpoint;
 
 use WebpConverter\Conversion\Method\MethodIntegrator;
+use WebpConverter\PluginData;
 
 /**
  * Supports endpoint for converting list of paths to images.
  */
 class RegenerateEndpoint extends EndpointAbstract {
+
+	/**
+	 * @var PluginData
+	 */
+	private $plugin_data;
+
+	public function __construct( PluginData $plugin_data ) {
+		$this->plugin_data = $plugin_data;
+	}
 
 	/**
 	 * {@inheritdoc}

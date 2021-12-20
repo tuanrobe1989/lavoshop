@@ -180,6 +180,7 @@ class HtaccessLoader extends LoaderAbstract {
 
 		$content .= '<IfModule mod_headers.c>' . PHP_EOL;
 		$content .= '  Header always set Cache-Control "private"' . PHP_EOL;
+		$content .= '  Header append Vary "Accept"' . PHP_EOL;
 		$content .= '</IfModule>';
 
 		return apply_filters( 'webpc_htaccess_mod_headers', $content );

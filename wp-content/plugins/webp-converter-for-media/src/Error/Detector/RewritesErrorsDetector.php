@@ -86,7 +86,7 @@ class RewritesErrorsDetector implements ErrorDetector {
 				}
 
 				if ( $this->if_bypassing_apache_is_active() === true ) {
-					return new BypassingApacheNotice( $this->plugin_info );
+					return new BypassingApacheNotice();
 				} elseif ( $this->if_htaccess_can_be_overwritten() !== true ) {
 					return new RewritesNotExecutedNotice();
 				}

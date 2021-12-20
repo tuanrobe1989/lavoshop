@@ -38,7 +38,7 @@ class CartItemsQuantity extends Base
             }else{
                 foreach ($cart as $cart_item) {
                     if(Helper::isCartItemConsideredForCalculation(true, $cart_item, "cart_item_qty_condition")){
-                        $total_quantities += intval((isset($cart_item['quantity'])) ? $cart_item['quantity'] : 0);
+                        $total_quantities += $this->rule->getCartItemQuantity($cart_item);
                     }
                 }
             }

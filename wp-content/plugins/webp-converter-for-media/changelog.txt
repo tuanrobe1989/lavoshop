@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 4.0.2 (2021-12-17) =
+* `[Fixed]` Fetching large list of files to conversion
+* `[Fixed]` Rewrites caching for some servers
+* `[Changed]` Connection when converting using remote server
+
 = 4.0.1 (2021-12-10) =
 * `[Added]` Informational banners on plugin settings page
 

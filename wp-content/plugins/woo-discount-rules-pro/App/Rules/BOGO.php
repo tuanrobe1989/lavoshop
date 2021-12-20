@@ -338,20 +338,22 @@ class BOGO
      * @param $quantity integer
      * @return boolean
      * */
-    public static function isProductPurchasableForBOGO($product, $quantity, $bogo_product_id, $variation_id, $check_existing_qty = true){
+    public static function isProductPurchasableForBOGO($product, $quantity, $bogo_product_id, $variation_id, $check_existing_qty = true, $check_language = true){
         if (!is_object($product)) {
             return false;
         }
 
-        //Check WPML language
-        if(apply_filters( 'advanced_woo_discount_rules_check_wpml_language_for_product_before_auto_add', true, $product, $variation_id)){
-            global $sitepress;
-            if(!empty($sitepress) && method_exists($sitepress, 'get_current_language')){
-                //$current_lang = $sitepress->get_current_language();
-                $post_language_information = apply_filters( 'wpml_post_language_details', NULL, Woocommerce::getProductId($product));
-                if(isset($post_language_information['different_language'])){
-                    if($post_language_information['different_language'] === 1 || $post_language_information['different_language'] === true){
-                        return false;
+        if ($check_language == true) {
+            //Check WPML language
+            if(apply_filters( 'advanced_woo_discount_rules_check_wpml_language_for_product_before_auto_add', true, $product, $variation_id)){
+                global $sitepress;
+                if(!empty($sitepress) && method_exists($sitepress, 'get_current_language')){
+                    //$current_lang = $sitepress->get_current_language();
+                    $post_language_information = apply_filters( 'wpml_post_language_details', NULL, Woocommerce::getProductId($product));
+                    if(isset($post_language_information['different_language'])){
+                        if($post_language_information['different_language'] === 1 || $post_language_information['different_language'] === true){
+                            return false;
+                        }
                     }
                 }
             }

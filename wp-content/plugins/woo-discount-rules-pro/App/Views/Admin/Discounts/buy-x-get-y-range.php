@@ -69,7 +69,7 @@ if(isset($get_buyx_gety_types) && $get_buyx_gety_types == 'bxgy_all'){
                         if (isset($buyx_gety_adjustment->products) && !empty($buyx_gety_adjustment->products)) {
                             $item_name = '';
                             foreach ($buyx_gety_adjustment->products as $product_id) {
-                                $item_name = '#'.$product_id.' '.get_the_title($product_id);
+                                $item_name = '#'.$product_id.' '.\WDRPro\App\Helpers\CoreMethodCheck::getTitleOfProduct($product_id);
                                 if($check_wpml_language){
                                     $post_language_information = apply_filters( 'wpml_post_language_details', NULL, $product_id);
                                     if(isset($post_language_information['language_code'])){

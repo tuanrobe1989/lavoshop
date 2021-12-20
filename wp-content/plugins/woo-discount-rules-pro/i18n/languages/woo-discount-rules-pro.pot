@@ -4,8 +4,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: Woo Discount Rules Pro\n"
-"POT-Creation-Date: 2021-10-20\n"
-"PO-Revision-Date: 2021-10-20\n"
+"POT-Creation-Date: 2021-12-15\n"
+"PO-Revision-Date: 2021-12-15\n"
 "Last-Translator: \n"
 "Language-Team: Flycart\n"
 "MIME-Version: 1.0\n"
@@ -288,13 +288,27 @@ msgstr ""
 msgid "Wdr Free Shipping"
 msgstr ""
 
-#: App/Rules/BOGO.php:156
+#: App/Rules/BOGO.php:165
 msgid "Discount"
 msgstr ""
 
-#: App/Rules/BOGO.php:157 App/Views/Admin/Discounts/buy-x-get-x-range.php:50
+#: App/Rules/BOGO.php:166 App/Views/Admin/Discounts/buy-x-get-x-range.php:50
 #: App/Views/Admin/Discounts/buy-x-get-y-range.php:162
 msgid "Free"
+msgstr ""
+
+#: App/Rules/BuyXGetY.php:744 App/Rules/BuyXGetY.php:759
+msgid "Attention required"
+msgstr ""
+
+#: App/Rules/BuyXGetY.php:745
+#, php-format
+msgid "The product %s is invalid."
+msgstr ""
+
+#: App/Rules/BuyXGetY.php:760
+#, php-format
+msgid "The product %s is not purchasable (please check product configuration)."
 msgstr ""
 
 #: App/Views/Admin/Conditions/Billing/city.php:11
@@ -1556,7 +1570,7 @@ msgid "Show cross sell block on cart?"
 msgstr ""
 
 #: App/Views/Admin/Settings/promotion.php:9
-msgid "This applicable only for BXGY - Product rules"
+msgid "This setting applies only for Buy X Get Y - Product rule  type only."
 msgstr ""
 
 #: App/Views/Admin/Settings/promotion.php:26
@@ -1611,7 +1625,7 @@ msgstr ""
 msgid "Asc"
 msgstr ""
 
-#: App/Views/Templates/buy-x-get-y-select-auto-add-variant.php:5
+#: App/Views/Templates/buy-x-get-y-select-auto-add-variant.php:12
 msgid "Change Variant"
 msgstr ""
 

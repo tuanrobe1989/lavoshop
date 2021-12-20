@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 <tr>
     <td scope="row">
         <label for="" class="awdr-left-align"><?php _e('Show cross sell block on cart?', 'woo-discount-rules-pro') ?></label>
-        <span class="wdr_settings_desc_text awdr-clear-both"><?php esc_attr_e('This applicable only for BXGY - Product rules', 'woo-discount-rules-pro'); ?></span>
+        <span class="wdr_settings_desc_text awdr-clear-both"><?php esc_attr_e('This setting applies only for Buy X Get Y - Product rule  type only.', 'woo-discount-rules-pro'); ?></span>
     </td>
     <td>
         <?php $show_cross_sell_on_cart = $configuration->getConfig('show_cross_sell_on_cart', 0); ?>

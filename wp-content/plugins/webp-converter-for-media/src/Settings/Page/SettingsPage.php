@@ -39,11 +39,11 @@ class SettingsPage extends PageAbstract {
 	public function __construct(
 		PluginInfo $plugin_info,
 		PluginData $plugin_data,
-		TokenRepository $token_repository = null
+		TokenRepository $token_repository
 	) {
 		$this->plugin_info      = $plugin_info;
 		$this->plugin_data      = $plugin_data;
-		$this->token_repository = $token_repository ?: new TokenRepository();
+		$this->token_repository = $token_repository;
 	}
 
 	/**
@@ -79,8 +79,8 @@ class SettingsPage extends PageAbstract {
 					'%s&action=server',
 					PageIntegration::get_settings_page_url()
 				),
-				'api_calculate_url'       => ( new ImagesCounterEndpoint( $this->plugin_data ) )->get_route_url(),
-				'api_paths_url'           => ( new PathsEndpoint( $this->plugin_data ) )->get_route_url(),
+				'api_calculate_url'       => ( new ImagesCounterEndpoint( $this->plugin_data, $this->token_repository ) )->get_route_url(),
+				'api_paths_url'           => ( new PathsEndpoint( $this->plugin_data, $this->token_repository ) )->get_route_url(),
 				'api_regenerate_url'      => ( new RegenerateEndpoint( $this->plugin_data ) )->get_route_url(),
 			]
 		);

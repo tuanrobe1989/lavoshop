@@ -54,12 +54,12 @@ class TokenStatusDetector implements ErrorDetector {
 			return new AccessTokenInvalidNotice();
 		}
 
-		$images_usage = ( $token->get_images_usage() + ( PathsEndpoint::PATHS_PER_REQUEST_REMOTE * 2 ) );
+		$images_usage = ( $token->get_images_usage() + ( PathsEndpoint::PATHS_PER_REQUEST_REMOTE_SMALL * 2 ) );
 		if ( $images_usage > $token->get_images_limit() ) {
 			$token = $this->token_validator->validate_token( $token->get_token_value() );
 		}
 
-		$images_usage = ( $token->get_images_usage() + ( PathsEndpoint::PATHS_PER_REQUEST_REMOTE * 2 ) );
+		$images_usage = ( $token->get_images_usage() + ( PathsEndpoint::PATHS_PER_REQUEST_REMOTE_SMALL * 2 ) );
 		if ( $images_usage > $token->get_images_limit() ) {
 			return new ApiLimitExceededNotice();
 		}
