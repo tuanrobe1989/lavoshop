@@ -17,8 +17,8 @@ function cm_add_image_placeholders($content)
         $placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
         if ($html) :
             foreach ($html->find('img') as $element) {
-                if (strpos($element->class, 'lazy') === false) :
-                    $element->class = 'lazy ' . $element->class;
+                if (strpos($element->class, 'lazyload') === false) :
+                    $element->class = 'lazyload ' . $element->class;
                     $element->srcset = '';
                     $element->sizes = '';
                     $element->{'data-src'} = $element->src;
@@ -130,6 +130,40 @@ function woocommerce_product_afterthumb_func()
 add_action( 'after_setup_theme', 'custom_aftersetup_theme', 0 );
 function custom_aftersetup_theme() {
     remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
+    remove_action( 'woocommerce_load_shipping_methods', 'action_woocommerce_load_shipping_methods', 10, 1 );
 }
 
 add_action('woocommerce_shop_loop_item_salecover', 'woocommerce_show_product_loop_sale_flash', 10);
+
+
+
+
+
+function displaying_cart_items_weight( $item_data, $cart_item ) {
+    // Product quantity
+    $product_qty = $cart_item['quantity'];
+    
+    // Calculate total item weight
+    $item_weight = $cart_item['data']->get_weight() * $product_qty;
+    
+    $item_data[] = array(
+        'key'       => __('Weight', 'woocommerce'),
+        'value'     => $item_weight,
+        'display'   => $item_weight . ' ' . get_option('woocommerce_weight_unit')
+    );
+    
+    return $item_data;
+}
+add_filter( 'woocommerce_get_item_data', 'displaying_cart_items_weight', 10, 2 );
+
+function wcw_cart() {
+    global $woocommerce;
+    if ( WC()->cart->needs_shipping() ) : ?>
+        <tr class="shipping">
+            <th><?php _e( 'Weight', 'woocommerce' ); ?></th>
+            <td><span class="label"><?php echo $woocommerce->cart->cart_contents_weight . ' ' . get_option( 'woocommerce_weight_unit' ); ?></span></td>
+        </tr>
+    <?php endif;
+}
+add_action( 'woocommerce_cart_totals_after_order_total', 'wcw_cart' );
+add_action( 'woocommerce_review_order_after_order_total', 'wcw_cart' );
