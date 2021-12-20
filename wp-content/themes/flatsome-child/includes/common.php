@@ -126,3 +126,10 @@ function woocommerce_product_afterthumb_func()
     </a>
 <?php
 }
+
+add_action( 'after_setup_theme', 'custom_aftersetup_theme', 0 );
+function custom_aftersetup_theme() {
+    remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
+}
+
+add_action('woocommerce_shop_loop_item_salecover', 'woocommerce_show_product_loop_sale_flash', 10);
