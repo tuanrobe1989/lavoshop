@@ -1,17 +1,18 @@
 <?php
-add_action('init','add_lazyload_func');
-function add_lazyload_func(){
-    if(!is_admin()):
+add_action('init', 'add_lazyload_func');
+function add_lazyload_func()
+{
+    if (!is_admin()) :
         require_once 'simple_html_dom.php';
     endif;
 }
 //add_filter('the_content', 'cm_add_image_placeholders');
 function cm_add_image_placeholders($content)
-{   
-    if(is_admin()):
+{
+    if (is_admin()) :
         return $content;
-    else:
-        if( empty( get_the_content() ) ) return $content;
+    else :
+        if (empty(get_the_content())) return $content;
         $html = str_get_html($content, '', '', '', false);
         $placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
         if ($html) :
@@ -88,23 +89,40 @@ function save_general_product_data_custom_field($product)
 add_filter('woocommerce_sale_flash', 'woocommerce_custom_sale_text', 10, 3);
 function woocommerce_custom_sale_text($text, $post, $_product)
 {
-    $sale_text = get_field('sale_text',$post->ID);
-    if($sale_text):
-        $text = '<div class="callout badge badge-circle"><div class="badge-inner secondary on-sale"><span class="onsale">'.$sale_text.'</span></div></div>';
+    $sale_text = get_field('sale_text', $post->ID);
+    if ($sale_text) :
+        $text = '<div class="callout badge badge-circle"><div class="badge-inner secondary on-sale"><span class="onsale">' . $sale_text . '</span></div></div>';
     endif;
     return $text;
 }
 
-remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
+remove_action('woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
 
-add_filter( 'woocommerce_single_product_image_thumbnail_html', 'add_class_to_thumbs', 10, 2 );
-function add_class_to_thumbs( $html, $attachment_id ) {
-	if ( get_post_thumbnail_id() === intval( $attachment_id ) ) {
+add_filter('woocommerce_single_product_image_thumbnail_html', 'add_class_to_thumbs', 10, 2);
+function add_class_to_thumbs($html, $attachment_id)
+{
+    if (get_post_thumbnail_id() === intval($attachment_id)) {
         ob_start();
         do_action('flatsome_sale_flash');
         $flatsome_sale_flash = ob_get_clean();
-        $html = str_replace('</a></div>','</a>'.$flatsome_sale_flash.'</div>',$html);
-	}
+        $html = str_replace('</a></div>', '</a>' . $flatsome_sale_flash . '</div>', $html);
+    }
 
-	return $html;
+    return $html;
+}
+
+add_action('woocommerce_product_afterthumb', 'woocommerce_product_afterthumb_func');
+function woocommerce_product_afterthumb_func()
+{
+    global $product;
+    $sale_image = get_field('sale_image', $product->get_id());
+    $sale_link = get_field('sale_link', $product->get_id());
+    if (!$sale_link) $sale_link = get_permalink($product->get_id());
+?>
+    <a href="<?php echo $sale_link ?>">
+        <figure class="single-product__after_thumb">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo $sale_image['url'] ?>" title="<?php echo $sale_image['title'] ?>" alt="<?php echo $sale_image['alt'] ?>" class="single-product__after_thumb--img lazyload" />
+        </figure>
+    </a>
+<?php
 }
