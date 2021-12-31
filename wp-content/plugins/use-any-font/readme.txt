@@ -2,8 +2,8 @@
 Contributors: dnesscarkey
 Tags: custom fonts, font embed, font uploader, typography, install font 
 Requires at least: 3.0
-Tested up to: 5.8.1
-Stable tag: 6.1.7
+Tested up to: 5.8.2
+Stable tag: 6.1.8
 
 Embed any custom font using font uploader and assign to elements. Upload font in 1 format and other needed formats are auto converted even woff2.
 
@@ -142,6 +142,9 @@ Please do write us after integration and we will add it in our supported list.
 1. Screenshot #6. Assign fonts to custom elements.
 
 == Changelog ==
+
+= 6.1.8 =
+* Added wpnonce for forms
 
 = 6.1.7 =
 * Fixed rtl issue for Font Search

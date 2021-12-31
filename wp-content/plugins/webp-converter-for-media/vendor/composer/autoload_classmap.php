@@ -19,6 +19,7 @@ return array(
     'WebpConverter\\Conversion\\Directory\\DirectoryIntegration' => $baseDir . '/src/Conversion/Directory/DirectoryIntegration.php',
     'WebpConverter\\Conversion\\Directory\\DirectoryInterface' => $baseDir . '/src/Conversion/Directory/DirectoryInterface.php',
     'WebpConverter\\Conversion\\Directory\\GalleryDirectory' => $baseDir . '/src/Conversion/Directory/GalleryDirectory.php',
+    'WebpConverter\\Conversion\\Directory\\PathsGenerator' => $baseDir . '/src/Conversion/Directory/PathsGenerator.php',
     'WebpConverter\\Conversion\\Directory\\PluginsDirectory' => $baseDir . '/src/Conversion/Directory/PluginsDirectory.php',
     'WebpConverter\\Conversion\\Directory\\ThemesDirectory' => $baseDir . '/src/Conversion/Directory/ThemesDirectory.php',
     'WebpConverter\\Conversion\\Directory\\UploadsDirectory' => $baseDir . '/src/Conversion/Directory/UploadsDirectory.php',

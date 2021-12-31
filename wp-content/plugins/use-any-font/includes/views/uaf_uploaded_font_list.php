@@ -12,7 +12,7 @@ if (!empty($fontsData)):
         <div class="font_meta">
                 <div class="font_name"><?php echo ucfirst($fontData['font_name']); ?></div>
                 <?php /* <div class="class_name"><?php echo $fontData['font_name'] ?></div> */ ?>
-                <div class="delete_link"><a onclick="if (!confirm('Are you sure ?')){return false;}" href="admin.php?page=use-any-font&tab=font_upload&delete_font_key=<?php echo $key; ?>">Delete</a></div>
+                <div class="delete_link"><a onclick="if (!confirm('Are you sure ?')){return false;}" href="<?php echo wp_nonce_url( 'admin.php?page=use-any-font&tab=font_upload&delete_font_key='.$key, 'uaf_delete_font', 'uaf_nonce' ); ?>">Delete</a></div>
         </div>
 
         <div class="font_demo">

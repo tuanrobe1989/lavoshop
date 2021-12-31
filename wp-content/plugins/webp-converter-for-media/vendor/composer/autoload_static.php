@@ -34,6 +34,7 @@ class ComposerStaticInit80287993f128e7a857f0f2db132eda4f
         'WebpConverter\\Conversion\\Directory\\DirectoryIntegration' => __DIR__ . '/../..' . '/src/Conversion/Directory/DirectoryIntegration.php',
         'WebpConverter\\Conversion\\Directory\\DirectoryInterface' => __DIR__ . '/../..' . '/src/Conversion/Directory/DirectoryInterface.php',
         'WebpConverter\\Conversion\\Directory\\GalleryDirectory' => __DIR__ . '/../..' . '/src/Conversion/Directory/GalleryDirectory.php',
+        'WebpConverter\\Conversion\\Directory\\PathsGenerator' => __DIR__ . '/../..' . '/src/Conversion/Directory/PathsGenerator.php',
         'WebpConverter\\Conversion\\Directory\\PluginsDirectory' => __DIR__ . '/../..' . '/src/Conversion/Directory/PluginsDirectory.php',
         'WebpConverter\\Conversion\\Directory\\ThemesDirectory' => __DIR__ . '/../..' . '/src/Conversion/Directory/ThemesDirectory.php',
         'WebpConverter\\Conversion\\Directory\\UploadsDirectory' => __DIR__ . '/../..' . '/src/Conversion/Directory/UploadsDirectory.php',

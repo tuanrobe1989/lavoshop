@@ -49,8 +49,8 @@
 						echo wp_kses_post(
 							sprintf(
 							/* translators: %1$s: open anchor tag, %2$s: close anchor tag */
-								__( 'Do you want to know how a plugin works and how to check if it is working properly? Read our %1$splugin FAQ%2$s.', 'webp-converter-for-media' ),
-								'<a href="https://wordpress.org/plugins/webp-converter-for-media/#faq" target="_blank">',
+								__( 'Do you want to know how a plugin works and how to check if it is working properly? Read %1$sour manual%2$s.', 'webp-converter-for-media' ),
+								'<a href="https://wordpress.org/support/topic/how-can-i-check-if-the-plugin-is-working-properly/" target="_blank">',
 								'</a>'
 							)
 						);

@@ -20,19 +20,19 @@
  */
 
 // ** MySQL settings - You can get this info from your web host ** //
-define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME']);
-define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME']);
+// define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME']);
+// define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME']);
 /** The name of the database for WordPress */
-define('DB_NAME', 'shynh_house');
+define('DB_NAME', 'lavoshop');
 
 /** MySQL database username */
-define('DB_USER', 'shynh_housew');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'nKWgl2Wp@#$');
+define('DB_PASSWORD', '');
 
 /** MySQL hostname */
-define('DB_HOST', '103.130.218.110');
+define('DB_HOST', 'localhost');
 
 /** Database charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');

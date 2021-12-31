@@ -130,38 +130,7 @@ Also REST API must be enabled and work without additional restrictions. If you h
 
 = How to check if plugin works? =
 
-When you have installed plugin and converted all images, follow these steps:
-
-1. Run `Google Chrome` and enable `Dev Tools` *(F12)*.
-2. Go to the `Network` tab and select filtering for `Img` *(Images)*.
-3. Refresh your website page.
-4. Check list of loaded images. Note `Type` column.
-5. If value of `webp` is there, then everything works fine.
-6. Remember that this plugin does not change URLs. This means that e.g. link will have path to .jpg file, but `.jpg.webp file will be loaded instead of original .jpg`.
-7. In addition, you can check weight of website before and after using plugin. The difference will be huge!
-8. More information: [here](https://gbiorczyk.pl/webp-converter/check-devtools.png)
-
-Please remember that in default loading mode *(via .htaccess)* URLs will remain unchanged. When you open the image in a new tab or look at its URL, you'll see the original URL.
-
-WebP is only used when loading a image on a website. In default loading mode *(via .htaccess)* it is done by the rules from the .htaccess file, on the server side, without the visible URL change to the image. Yes, it can be called magic :)
-
-That is why the plugin should be tested in Dev Tools. If the Type of file is `WebP`, then everything is working properly. You can also turn off the plugin for a moment and check the weight of your website, then turn it on and test again. The difference should be visible.
-
-The operation of the plugin for non-advanced users may sometimes be less understood, but everything is fine. Thanks to this, regardless of whether your browser supports WebP or not, everything works without problems.
-
-Only images from the `/uploads` directory are automatically converted. If you use other plugins that also save images in the `/uploads` directory then this may not work. Therefore, check the plugin settings and try converting all images again.
-
-= Why are some images not in WebP? =
-
-If the converted image in WebP format is larger than the original, the browser will use the original file. This converted file will be deleted. Therefore, you can also see files other than WebP on the list. When this happens, you will receive information in debug.log.
-
-When such a situation occurs, a file in `.webp.deleted` format will be created. This avoids re-converting images that were larger than original after converting to WebP. If the option of forced conversion of all images is checked, this image will also be re-converted.
-
-If you want to force the use of WebP files, uncheck the `Automatic removal of files in output formats larger than original` option in the plugin settings. Then click on the `Regenerate All` button to convert all images again.
-
-Remember that this plugin supports images from the `/wp-content` directory, e.g. files downloaded from the Media Library. Redirections will not work if your images are downloaded from another domain, i.e. from an external service.
-
-When checking the operation of the plugin, e.g. in Dev Tools, pay attention to the path from which the files are downloaded and which directories you have enabled in the settings of plugin.
+You can find more information on how the plugin works in [our manual](https://wordpress.org/support/topic/how-can-i-check-if-the-plugin-is-working-properly/).
 
 = How to change path to uploads? =
 
@@ -480,6 +449,14 @@ This is all very important to us and allows us to do even better things for you!
 3. Screenshot when regenerating images
 
 == Changelog ==
+
+= 4.0.4 (2021-12-30) =
+* `[Changed]` opcache.revalidate_freq parameter in PHP configuration to avoid problems while updating plugin
+
+= 4.0.3 (2021-12-20) =
+* `[Fixed]` Auto-conversion images with unsupported extensions when uploading files
+* `[Fixed]` Generating directory paths when ABSPATH constant is invalid
+* `[Added]` URL validation for Pass Thru loading mode
 
 = 4.0.2 (2021-12-17) =
 * `[Fixed]` Fetching large list of files to conversion

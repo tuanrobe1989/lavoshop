@@ -102,7 +102,11 @@ $fontsData		= uaf_get_uploaded_font_data(); ?>
             </tr>
             <tr>        
                 <td>&nbsp;</td>
-                <td><input type="submit" name="submit-uaf-font-assign" class="button-primary" value="Assign Font" /></td>
+                <td>
+                    <?php wp_nonce_field( 'uaf_font_assign', 'uaf_nonce' ); ?>
+                    <input type="submit" name="submit-uaf-font-assign" class="button-primary" value="Assign Font" />
+
+                </td>
             </tr>
         </table>	
     </form>
@@ -135,7 +139,7 @@ $fontsImplementData		= json_decode($fontsImplementRawData, true);
         	<td><?php echo $sn; ?></td>
             <td><?php echo @$fontsData[$fontImplementData['font_key']]['font_name']; ?></td>
             <td><?php echo $fontImplementData['font_elements'] ?></td>
-            <td><a onclick="if (!confirm('Are you sure ?')){return false;}" href="admin.php?page=use-any-font&tab=font_assign&delete_font_assign_key=<?php echo $key; ?>">Delete</a></td>
+            <td><a onclick="if (!confirm('Are you sure ?')){return false;}" href="<?php echo wp_nonce_url( 'admin.php?page=use-any-font&tab=font_assign&delete_font_assign_key='.$key, 'uaf_delete_font_assign', 'uaf_nonce' ); ?>">Delete</a></td>
         </tr>
         <?php endforeach; ?>
         <?php else: ?>

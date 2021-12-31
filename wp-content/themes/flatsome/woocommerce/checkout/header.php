@@ -11,6 +11,9 @@
 		return implode(' ', $classes);
 	}
 	$steps = get_theme_mod('cart_steps_numbers', 0);
+	echo "<pre>";
+		print_r($order);
+	echo "</pre>";
 ?>
 
 <div class="checkout-page-title page-title">

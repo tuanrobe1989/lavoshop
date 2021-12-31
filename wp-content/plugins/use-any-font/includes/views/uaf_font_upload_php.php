@@ -38,6 +38,7 @@ add_thickbox();
                          <input type="hidden" name="api_key" value="<?php echo $GLOBALS['uaf_user_settings']['uaf_api_key']; ?>" />
                          <input type="hidden" name="font_count" value="<?php echo uaf_count_uploaded_fonts(); ?>" />
                          <input type="submit" name="submit-uaf-font-php" class="button-primary" value="Upload" />
+                         <?php wp_nonce_field( 'uaf_font_upload_php', 'uaf_nonce' ); ?>
                          <br/>
                             <span>By clicking on Upload, you confirm that you have rights to use this font.</span>
                     </span>     
