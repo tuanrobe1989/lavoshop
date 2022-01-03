@@ -66,7 +66,11 @@
 }
 
 .single-product {
-
+    &__topbanner{
+        @include breakpoint-up(md){
+            margin: 0 -1rem 1rem -1rem;
+        }  
+    }
     #wrapper,
     #main {
         @include breakpoint-up(wmd) {
@@ -187,4 +191,18 @@
             margin: 0.5rem 0;
         }
     }
+}
+
+.bundle_form {
+    @include flex;
+    @include flex-wrap;
+}
+.cart.bundle_data{
+    order: -1;
+}
+.imgbor{
+    border: 1px solid $gray;
+    padding: 1rem;
+    box-sizing: border-box;
+    width: 100%;;
 }

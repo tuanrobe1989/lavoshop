@@ -124,13 +124,14 @@ function woocommerce_product_afterthumb_func()
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo $sale_image['url'] ?>" title="<?php echo $sale_image['title'] ?>" alt="<?php echo $sale_image['alt'] ?>" class="single-product__after_thumb--img lazyload" />
         </figure>
     </a>
-<?php
+    <?php
 }
 
-add_action( 'after_setup_theme', 'custom_aftersetup_theme', 0 );
-function custom_aftersetup_theme() {
-    remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
-    remove_action( 'woocommerce_load_shipping_methods', 'action_woocommerce_load_shipping_methods', 10, 1 );
+add_action('after_setup_theme', 'custom_aftersetup_theme', 0);
+function custom_aftersetup_theme()
+{
+    remove_action('woocommerce_before_shop_loop_item', 'woocommerce_show_product_loop_sale_flash', 10);
+    remove_action('woocommerce_load_shipping_methods', 'action_woocommerce_load_shipping_methods', 10, 1);
 }
 
 add_action('woocommerce_shop_loop_item_salecover', 'woocommerce_show_product_loop_sale_flash', 10);
@@ -139,54 +140,71 @@ add_action('woocommerce_shop_loop_item_salecover', 'woocommerce_show_product_loo
 
 
 
-function displaying_cart_items_weight( $item_data, $cart_item ) {
+function displaying_cart_items_weight($item_data, $cart_item)
+{
     // Product quantity
-    $product_qty = $cart_item['quantity'];
-    
+    $product_qty = $cart_item['quantity'] * 1;
+
     // Calculate total item weight
-    $item_weight = $cart_item['data']->get_weight() * $product_qty;
-    
+    $item_weight = ($cart_item['data']->get_weight() * 1) * $product_qty;
+
     $item_data[] = array(
         'key'       => __('Weight', 'woocommerce'),
         'value'     => $item_weight,
         'display'   => $item_weight . ' ' . get_option('woocommerce_weight_unit')
     );
-    
+
     return $item_data;
 }
-add_filter( 'woocommerce_get_item_data', 'displaying_cart_items_weight', 10, 2 );
+add_filter('woocommerce_get_item_data', 'displaying_cart_items_weight', 10, 2);
 
-function wcw_cart() {
+function wcw_cart()
+{
     global $woocommerce;
-    if ( WC()->cart->needs_shipping() ) : ?>
+    if (WC()->cart->needs_shipping()) : ?>
         <tr class="shipping">
-            <th><?php _e( 'Weight', 'woocommerce' ); ?></th>
-            <td><span class="label"><?php echo $woocommerce->cart->cart_contents_weight . ' ' . get_option( 'woocommerce_weight_unit' ); ?></span></td>
+            <th><?php _e('Weight', 'woocommerce'); ?></th>
+            <td><span class="label"><?php echo $woocommerce->cart->cart_contents_weight . ' ' . get_option('woocommerce_weight_unit'); ?></span></td>
         </tr>
-    <?php endif;
+        <?php endif;
 }
-add_action( 'woocommerce_cart_totals_after_order_total', 'wcw_cart' );
-add_action( 'woocommerce_review_order_after_order_total', 'wcw_cart' );
+add_action('woocommerce_cart_totals_after_order_total', 'wcw_cart');
+add_action('woocommerce_review_order_after_order_total', 'wcw_cart');
 
-    
-  
 
-function hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery($order_id) {
+
+
+function hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery($order_id)
+{
     $order = wc_get_order($order_id);
-    $status = $order->get_status();
-    switch($status):
+    $status = $order->get_status(); 
+    switch ($status):
         case 'canceled':
-            ?>
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/cancel-checkout.png" class="lazyload"/>
-            <?php
+        ?>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/cancel-checkout.png" class="lazyload" />
+        <?php
+            break;
+        case 'pending':
+        ?>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/cancel-checkout.png" class="lazyload" />
+        <?php
+            break;
+        case 'processing':
+        ?>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/thank-you.jpg" class="lazyload" />
+        <?php
             break;
         case 'completed':
-            ?>
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/thank-you.jpg" class="lazyload"/>
-            <?php
+        ?>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/thank-you.jpg" class="lazyload" />
+<?php
             break;
     endswitch;
 }
-add_action( 'woocommerce_thankyou_cod', 'hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery', 1);
-add_action( 'woocommerce_thankyou_cod', function(){echo '<div class="checkout__notification">';},10);
-add_action( 'woocommerce_thankyou_cod', function(){echo '</div>';}, 11);
+add_action('woocommerce_thankyou', 'hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery', 1);
+add_action('woocommerce_thankyou', function () {
+    echo '<div class="checkout__notification">';
+}, 10);
+add_action('woocommerce_thankyou', function () {
+    echo '</div>';
+}, 11);

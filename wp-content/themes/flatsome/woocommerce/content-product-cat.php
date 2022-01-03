@@ -47,7 +47,7 @@ $classes = array( 'product-category', 'col' );
 		?>
 
 		<div class="box box-<?php echo $cat_style; ?>  <?php echo $text_pos; ?> <?php echo $color; ?>">
-			<div class="box-image">
+			<div class="box-image AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
 				<?php
 				/**
 				 * The woocommerce_before_subcategory_title hook.

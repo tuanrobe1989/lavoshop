@@ -1,4 +1,5 @@
 <?php
+require_once( get_stylesheet_directory() . '/inc/shortcodes/ux_products.php' );
 require_once( get_stylesheet_directory() . '/includes/single-product.php' );
 require_once( get_stylesheet_directory() . '/includes/common.php' );
 

@@ -1,7 +1,7 @@
 <?php
 
 // Flatsome Products
-function ux_products($atts, $content = null, $tag = '' ) {
+function function_cover_ux_products($atts, $content = null, $tag = '' ) {
 	$sliderrandomid = rand();
 
   if ( ! is_array( $atts ) ) {
@@ -286,7 +286,7 @@ function ux_products($atts, $content = null, $tag = '' ) {
 
 	            	<div class="<?php echo implode(' ', $classes_col); ?>" <?php echo $animate;?>>
 						<div class="col-inner">
-						<?php woocommerce_show_product_loop_sale_flash(); ?>
+						
 						<div class="product-small <?php echo implode(' ', $classes_box); ?>">
 							<div class="box-image" <?php echo get_shortcode_inline_css($css_args_img); ?>>
 								<div class="<?php echo implode(' ', $classes_image); ?>" <?php echo get_shortcode_inline_css($css_image_height); ?>>
@@ -298,6 +298,7 @@ function ux_products($atts, $content = null, $tag = '' ) {
 									</a>
 									<?php if($image_overlay){ ?><div class="overlay fill" style="background-color: <?php echo $image_overlay;?>"></div><?php } ?>
 									 <?php if($style == 'shade'){ ?><div class="shade"></div><?php } ?>
+									 <?php woocommerce_show_product_loop_sale_flash(); ?>
 								</div>
 								<div class="image-tools top right show-on-hover">
 									<?php do_action('flatsome_product_box_tools_top'); ?>
@@ -350,11 +351,11 @@ function ux_products($atts, $content = null, $tag = '' ) {
 
 	return $content;
 }
-add_shortcode("ux_bestseller_products", "ux_products");
-add_shortcode("ux_featured_products", "ux_products");
-add_shortcode("ux_sale_products", "ux_products");
-add_shortcode("ux_latest_products", "ux_products");
-add_shortcode("ux_custom_products", "ux_products");
-add_shortcode("product_lookbook", "ux_products");
-add_shortcode("products_pinterest_style", "ux_products");
-add_shortcode("ux_products", "ux_products");
+
+function func_cover_after_setup_theme()
+{
+    remove_shortcode( 'ux_products' );
+    add_shortcode("ux_products", "function_cover_ux_products");
+}
+
+add_action('wp_enqueue_scripts', 'func_cover_after_setup_theme');
