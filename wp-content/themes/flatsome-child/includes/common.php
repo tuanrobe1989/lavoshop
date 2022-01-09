@@ -208,3 +208,8 @@ add_action('woocommerce_thankyou', function () {
 add_action('woocommerce_thankyou', function () {
     echo '</div>';
 }, 11);
+
+add_action('wp_footer','add_promotion_form_func');
+function add_promotion_form_func(){
+   echo  do_shortcode('[button text="Lightbox button" link="#promoform"][lightbox id="promoform" class="promoform" width="600px" padding="20px"][contact-form-7 id="1631" title="Form Khuyến Mãi"][/lightbox]');
+}
