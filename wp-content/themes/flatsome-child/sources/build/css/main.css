@@ -84,6 +84,13 @@ strong {
   max-width: 100%;
   height: auto; }
 
+.bormess {
+  border: 1px solid #e6e6e6;
+  margin: 1rem 0 !important;
+  font-size: 1.4rem;
+  padding: 1rem !important;
+  text-transform: uppercase; }
+
 @media (min-width: 850px) {
   .header-search-form {
     min-width: 850px !important; } }

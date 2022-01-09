@@ -57,3 +57,15 @@ strong {
   max-width: 100%;
   height: auto;
 }
+
+.bormess{
+  border: 1px solid $gray;
+  margin : 1rem 0 !important;
+  font-size: 1.4rem ;
+  padding: 1rem !important;
+  text-transform: uppercase;
+}
+
+// .woocommerce-message{
+//   border: 1px solid $gray;
+// }

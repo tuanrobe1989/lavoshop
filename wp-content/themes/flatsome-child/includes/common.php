@@ -177,7 +177,7 @@ add_action('woocommerce_review_order_after_order_total', 'wcw_cart');
 function hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery($order_id)
 {
     $order = wc_get_order($order_id);
-    $status = $order->get_status(); 
+    $status = $order->get_status();
     switch ($status):
         case 'canceled':
         ?>
@@ -197,7 +197,19 @@ function hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery($ord
         case 'completed':
         ?>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/thank-you.jpg" class="lazyload" />
-<?php
+        <?php
+            break;
+    endswitch;
+    $payment_method = $order->get_payment_method();
+    switch ($payment_method):
+        case 'vnpay':
+        ?>
+            <div class="woocommerce-message message-wrapper bormess" role="alert">
+                <div class="message-container container success-color medium-text-center">
+                    <i class="icon-checkmark"></i> <?php _e('Đã thanh toán', LAVOSHOP) ?>
+                </div>
+            </div>
+        <?php
             break;
     endswitch;
 }

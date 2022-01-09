@@ -132,8 +132,10 @@ function func_woocommerce_before_single_product()
 {
     global $product;
     $top_banner = get_field('top_banner', $product->get_id());
-    $product_name = $product->get_name();
-    echo '<div class="single-product__topbanner">';
-    echo '<img src="' . $top_banner . '" alt="' . $product_name . '" title="' . $product_name . '" class="imgbor lazyload"/>';
-    echo '</div>';
+    if ($top_banner) :
+        $product_name = $product->get_name();
+        echo '<div class="single-product__topbanner">';
+        echo '<img src="' . $top_banner . '" alt="' . $product_name . '" title="' . $product_name . '" class="imgbor lazyload"/>';
+        echo '</div>';
+    endif;
 }

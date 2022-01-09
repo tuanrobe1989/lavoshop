@@ -6,3 +6,76 @@ Pass: rqKaktGjR7UMha&93X
 https://woocommerce.com/products/b2b-for-woocommerce/
 https://www.flycart.org/
 https://woocommerce.com/
+
+
+http://lavoshop.localhost/checkout/order-received/1644/?key=wc_order_M9hEDCvZa8R5f
+
+
+
+
+
+// Register new status
+function register_shipping_order_status()
+{
+    register_post_status('wc-shipping', array(
+        'label'                     => __('Đang giao hàng', LAVOSHOP),
+        'public'                    => true,
+        'exclude_from_search'       => false,
+        'show_in_admin_all_list'    => true,
+        'show_in_admin_status_list' => true,
+        'label_count'               => _n_noop(__('Đang giao hàng', LAVOSHOP) . ' (%s)', __('Đang giao hàng', LAVOSHOP) . ' (%s)')
+    ));
+}
+add_action('init', 'register_shipping_order_status');
+
+function register_paid_order_status()
+{
+    register_post_status('wc-shipping', array(
+        'label'                     => __('Đã thanh toán', LAVOSHOP),
+        'public'                    => true,
+        'exclude_from_search'       => false,
+        'show_in_admin_all_list'    => true,
+        'show_in_admin_status_list' => true,
+        'label_count'               => _n_noop(__('Đã thanh toán', LAVOSHOP) . ' (%s)', __('Đã thanh toán', LAVOSHOP) . ' (%s)')
+    ));
+}
+add_action('init', 'register_paid_order_status');
+
+// Add to list of WC Order statuses
+function add_shipping_to_order_statuses($order_statuses)
+{
+
+    $new_order_statuses = array();
+
+    // add new order status after processing
+    foreach ($order_statuses as $key => $status) {
+
+        $new_order_statuses[$key] = $status;
+
+        if ('wc-processing' === $key) {
+            $new_order_statuses['wc-shipping'] = __('Đang giao hàng', LAVOSHOP);
+        }
+    }
+
+    return $new_order_statuses;
+}
+add_filter('wc_order_statuses', 'add_shipping_to_order_statuses');
+
+function add_paid_to_order_statuses($order_statuses)
+{
+
+    $new_order_statuses = array();
+
+    // add new order status after processing
+    foreach ($order_statuses as $key => $status) {
+
+        $new_order_statuses[$key] = $status;
+
+        if ('wc-processing' === $key) {
+            $new_order_statuses['wc-paid'] = __('Đã thanh toán', LAVOSHOP);
+        }
+    }
+
+    return $new_order_statuses;
+}
+add_filter('wc_order_statuses', 'add_paid_to_order_statuses');
