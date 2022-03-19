@@ -172,12 +172,12 @@ function uaf_save_options(){
 							'uaf_disbale_editor_font_list',
 							'uaf_enable_multi_lang_support',
 							'uaf_font_display_property'
-	);
+							);
 
 	foreach ($all_fields_name as $fieldname) {
 		update_option($fieldname,sanitize_text_field($_POST[$fieldname]));
 	}
-
+	
 	uaf_get_options();
 	uaf_write_css();
 	$return['status']   = 'ok';
@@ -202,14 +202,12 @@ function uaf_admin_notices(){
         if ($installedDays > 30 && $fonts_uploaded > 1){
             echo '<div class="updated success" style="padding:10px; font-size:16px; line-height:1.6;color:#205225;">
                     Hey, You have been using Use Any Font for more than 30 days - that’s awesome! Could you please do us a BIG favor and give it a 5-star rating on WordPress ? Just to help us spread the word and boost our motivation.<br/>
-
                     <ul style="padding-left:50px;list-style-type: square;">
                         <li><a href="https://wordpress.org/support/plugin/use-any-font/reviews/?filter=5" target="_blank">Ok, you deserve it</a></li>
                         <li><a href="https://dineshkarki.com.np/contact" target="_blank">I still have problem !!</a></li>
                         <li><a href="?uaf_reviews_notice_hide=1">I already did</a></li>
                         <li><a href="?uaf_reviews_notice_hide=1">Hide this message</a></li>
                     </ul>
-
              </div>';
         }
     }
@@ -218,84 +216,103 @@ function uaf_admin_notices(){
 
 function uaf_trigger_actions(){
 	$actionReturn = array();
-	$actionReturnNonceError = array(
-									'status' 		=> 'error',
-									'body'			=> 'Sorry, your nonce did not verify. Please try again.'
-									);
+	if (current_user_can('manage_options')){	
+		
+		$actionReturnNonceError = array(
+										'status' 		=> 'error',
+										'body'			=> 'Sorry, your nonce did not verify. Please try again.'
+										);
 
-	if (isset($_POST['uaf_api_key_activate'])){
-    	if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_api_key_actions')) {
-    		$actionReturn = uaf_api_key_activate();
-    	} else {
-    		$actionReturn = $actionReturnNonceError;
-    	}
-	}
+		if (isset($_POST['uaf_api_key_activate'])){
+	    	if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_api_key_actions')) {
+	    		$actionReturn = uaf_api_key_activate();
+	    	} else {
+	    		$actionReturn = $actionReturnNonceError;
+	    	}
+		}
 
-	if (isset($_POST['uaf_api_key_deactivate'])){
-	    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_api_key_actions')) {
-	    	$actionReturn = uaf_api_key_deactivate();
-	    } else {
-	    	$actionReturn = $actionReturnNonceError;
-	    }
-	}
-
-	if (isset($_POST['uaf_api_key_hide'])){
-	    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_api_key_actions')) {
-	    	$actionReturn = uaf_api_key_hide();
-	    } else {
-	    	$actionReturn = $actionReturnNonceError;
-	    }
-	}
-
-	if (isset($_POST['submit-uaf-font-js'])){   
-	    $actionReturn = uaf_save_font_files($_POST['font_name'], $_POST['convert_response']);
-	}
-
-	if (isset($_POST['submit-uaf-font-php'])){  
-	    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_font_upload_php')) {
-		    $actionReturn = uaf_upload_font_to_server();
-		    if ($actionReturn['status'] == 'success'){
-		        $actionReturn = uaf_save_font_files($_POST['font_name'], $actionReturn['body']);
+		if (isset($_POST['uaf_api_key_deactivate'])){
+		    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_api_key_actions')) {
+		    	$actionReturn = uaf_api_key_deactivate();
+		    } else {
+		    	$actionReturn = $actionReturnNonceError;
 		    }
-		} else {
-			$actionReturn = $actionReturnNonceError;
 		}
-	}
 
-	if (isset($_POST['submit-uaf-font-assign'])){
-	    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_font_assign')) {
-	    	$actionReturn = uaf_save_font_assign();
-		} else {
-			$actionReturn = $actionReturnNonceError;
+		if (isset($_POST['uaf_api_key_hide'])){
+		    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_api_key_actions')) {
+		    	$actionReturn = uaf_api_key_hide();
+		    } else {
+		    	$actionReturn = $actionReturnNonceError;
+		    }
 		}
-	}
 
-	if (isset($_GET['delete_font_assign_key'])){
-	    if ( isset($_GET['uaf_nonce']) && wp_verify_nonce($_GET['uaf_nonce'], 'uaf_delete_font_assign')) {
-	    	$actionReturn = uaf_delete_font_assign();
-	    } else {
-	    	$actionReturn = $actionReturnNonceError;
-	    }
-	}
+		if (isset($_POST['submit-uaf-font-js'])){   
+		    $font_weight = $font_style  = '';
+		    if (isset($_POST['enable_font_variation'])){
+		    	$font_weight 	= $_POST['font_weight'];
+		    	$font_style 	= $_POST['font_style'];
+		    }
+		    $actionReturn = uaf_save_font_files($_POST['font_name'], $font_weight, $font_style, $_POST['convert_response']);
+		}
 
-	if (isset($_GET['delete_font_key'])){
-	    if ( isset($_GET['uaf_nonce']) && wp_verify_nonce($_GET['uaf_nonce'], 'uaf_delete_font')) {
-	    	$actionReturn = uaf_delete_font();
-	    } else {
-	    	$actionReturn = $actionReturnNonceError;
-	    }
-	}
+		if (isset($_POST['submit-uaf-font-php'])){  
+		    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_font_upload_php')) {
+			    $actionReturn = uaf_upload_font_to_server();
+			    if ($actionReturn['status'] == 'success'){
+			        $font_weight = $font_style  = '';
+				    if (isset($_POST['enable_font_variation'])){
+				    	$font_weight 	= $_POST['font_weight'];
+				    	$font_style 	= $_POST['font_style'];
+				    }
+			        $actionReturn = uaf_save_font_files($_POST['font_name'], $font_weight, $font_style, $actionReturn['body']);
+			    }
+			} else {
+				$actionReturn = $actionReturnNonceError;
+			}
+		}
 
-	if (isset($_POST['save-uaf-options'])){
-	    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_save_settings')) {
-	    	$actionReturn = uaf_save_options();
-	    } else {
-	    	$actionReturn = $actionReturnNonceError;
-	    }
-	}
+		if (isset($_POST['submit-uaf-font-assign'])){
+		    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_font_assign')) {
+		    	$actionReturn = uaf_save_font_assign();
+			} else {
+				$actionReturn = $actionReturnNonceError;
+			}
+		}
 
-	if (isset($_GET['predefinedfontid'])){
-	    $actionReturn = uaf_add_pre_defined_font($_GET['predefinedfontid']);
+		if (isset($_GET['delete_font_assign_key'])){
+		    if ( isset($_GET['uaf_nonce']) && wp_verify_nonce($_GET['uaf_nonce'], 'uaf_delete_font_assign')) {
+		    	$actionReturn = uaf_delete_font_assign();
+		    } else {
+		    	$actionReturn = $actionReturnNonceError;
+		    }
+		}
+
+		if (isset($_GET['delete_font_key'])){
+		    if ( isset($_GET['uaf_nonce']) && wp_verify_nonce($_GET['uaf_nonce'], 'uaf_delete_font')) {
+		    	$actionReturn = uaf_delete_font();
+		    } else {
+		    	$actionReturn = $actionReturnNonceError;
+		    }
+		}
+
+		if (isset($_POST['save-uaf-options'])){
+		    if ( isset($_POST['uaf_nonce']) && wp_verify_nonce($_POST['uaf_nonce'], 'uaf_save_settings')) {
+		    	$actionReturn = uaf_save_options();
+		    } else {
+		    	$actionReturn = $actionReturnNonceError;
+		    }
+		}
+
+		if (isset($_GET['predefinedfontid'])){
+		    $actionReturn = uaf_add_pre_defined_font($_GET['predefinedfontid']);
+		}		
+
+	} else {
+		$actionReturn = array(
+								'status' 		=> 'error',
+								'body'			=> 'Sorry, Something went wrong !'
+							);
 	}
 	
 	$GLOBALS['uaf_action_return'] = $actionReturn;

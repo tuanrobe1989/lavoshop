@@ -3,8 +3,8 @@ Contributors: flycart
 Donate link: https://flycart.org/
 Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
 Requires at least: 4.4.1
-Tested up to: 5.8
-Stable tag: 2.3.11
+Tested up to: 5.9
+Stable tag: 2.3.13
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -335,6 +335,23 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.3.13 - 09/02/22 =
+* Feature - Apply coupon through URL option.
+* Improvement - Compatible option for Multi-Currency by WPML.
+* Improvement - Compatible for WooCommerce Multi-Currency by TIV.NET.
+* Improvement - Compatible for WooCommerce Price Based on Country by Oscar Gare.
+* Improvement - Quantity calculation for Cart Item Product Combination Condition on having multiple product with same Id.
+* Improvement - PHP 8 compatible.
+* Improvement - Event advanced_woo_discount_rules_calculate_discount_for_cart_item.
+* Fix - BXGY categories are not displaying in report.
+* Fix - Warning on applying Cart adjustment.
+* Fix - Discount table doesn't loads for variable product based on exclusive option.
+* Fix - Not in list filter for variant sku also consider for discount.
+
+= 2.3.12 - 13/01/22 =
+* Improvement - WooCommerce 6.1 compatible
+* Fix - Error on API calls.
 
 = 2.3.11 - 16/12/21 =
 * Improvement - Load cart item quantity through event advanced_woo_discount_rules_cart_item_quantity.

@@ -2793,4 +2793,89 @@ jQuery(document).ready(function ($) {
     });
     $('.get_awdr_state_based_country').trigger('change');
 
+    /*Show & hide coupon url section*/
+    $(document).on('change', '.wdr_copon_type', function () {
+        var coupon_type = $(this).val();
+
+        if (coupon_type === "custom_coupon") {
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-one, .wdr-cart-coupon-url-all').css("display", "none");
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-custom').css("display", "block");
+        } else if (coupon_type === "at_least_one") {
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-custom, .wdr-cart-coupon-url-all').css("display", "none");
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-one').css("display", "block");
+        } else if (coupon_type === "all") {
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-custom, .wdr-cart-coupon-url-one').css("display", "none");
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-all').css("display", "block");
+        }
+    });
+
+    /*Copy coupon url*/
+    $(document).on('click', '.wdr-copy-coupon-url', function (e) {
+        e.preventDefault();
+        $(this).parents('.wdr-coupon-url-group').find('input[type=url]').select();
+        if (document.execCommand("copy")) {
+            $(this).html(wdr_data.localization_data.coupon_url_copied);
+            notify(wdr_data.localization_data.coupon_url_success, 'success', alert_counter);
+        } else {
+            notify(wdr_data.localization_data.error, 'error', alert_counter);
+        }
+    });
+
+    /*Toggle coupons list*/
+    $(document).on('change', '.wdr-cart-coupon-url-enable', function(e) {
+        e.preventDefault();
+        $(this).closest('.wdr-cart-coupon-url').find('.wdr-cart-coupon-url-lists').slideToggle();
+    });
+
+    /*Change custom coupon*/
+    $(document).on('change keyup', '.wdr-cart-coupon-value input', function () {
+        var url = wdr_data.home_url;
+        var input = $(this).val();
+        if (input !== '') {
+            $group = '<span class="wdr-coupon-url-group"><label>';
+            $group += ' <input type="url" value="' + url + '?wdr_coupon=' + encodeURIComponent(input) + '"></label>';
+            $group += '<button class="wdr-copy-coupon-url">' + wdr_data.localization_data.coupon_url_copy + '</button></span>';
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-custom').html($group);
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-custom').css("display", "block");
+        } else {
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-custom').css("display", "none");
+        }
+    });
+
+    /*Select coupon option*/
+    $(document).on('change', '.wdr-cart-coupon-search select, select.wdr_copon_type', function () {
+        var url = wdr_data.home_url;
+        var input =  $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-search select').val();
+        var coupon_type = $(this).parents('.wdr_cart_coupon_group').find('select.wdr_copon_type').val();
+        if (input.length !== 0) {
+            if (coupon_type === "at_least_one") {
+                $groups = '';
+                input.forEach(function(value) {
+                    $groups += '<span class="wdr-coupon-url-group"><label>';
+                    $groups += ' <input type="url" value="' + url + '?wdr_coupon=' + encodeURIComponent(value) + '"></label>';
+                    $groups += '<button class="wdr-copy-coupon-url">' + wdr_data.localization_data.coupon_url_copy + '</button></span><br>';
+                });
+                $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-one').html($groups);
+                $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-one').css("display", "block");
+            } else if (coupon_type === "all") {
+                var coupons = '';
+                url += "?wdr_coupon=";
+                input.forEach(function(value) {
+                    coupons += value + ", ";
+                    url += encodeURIComponent(value) + ',';
+                });
+                coupons = coupons.replace(/(^, )|(, $)/g, "");
+                url = url.replace(/(^,)|(,$)/g, "");
+                $group = '<span class="wdr-coupon-url-group"><label>';
+                $group += ' <input type="url" value="' + url + '"></label>';
+                $group += '<button class="wdr-copy-coupon-url">' + wdr_data.localization_data.coupon_url_copy + '</button></span>';
+                $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-all').html($group);
+                $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-all').css("display", "block");
+            }
+        } else {
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-one').css("display", "none");
+            $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-all').css("display", "none");
+        }
+    });
+
 });

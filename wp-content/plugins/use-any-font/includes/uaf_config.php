@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; 
 
-$GLOBALS['uaf_current_version']				= '6.1.8';
+$GLOBALS['uaf_current_version']				= '6.2.1';
 
 
 $GLOBALS['uaf_fix_settings'] 				= array(
@@ -15,10 +15,20 @@ $GLOBALS['uaf_fix_settings'] 				= array(
 																					'polylang/polylang.php', // POLYLANG
 																					'polylang-pro/polylang.php', // POLYLANG PRO
 																					'sitepress-multilingual-cms/sitepress.php' //WPML
-																						)
+																						),
+													'font_weight_variations'=> array(
+																					'100' => 'Thin 100',
+																					'200' => 'Extra light 200',
+																					'300' => 'Light 300',
+																					'400' => 'Regular/Normal 400',
+																					'500' => 'Medium 500',
+																					'600' => 'Semi Bold 600',
+																					'700' => 'Bold 700',
+																					'800' => 'Extra Bold 800',
+																					'900' => 'Black 900'
+																					)
 
 													);
-
 
 $GLOBALS['uaf_user_settings'] 				= array(															
 													'uaf_api_key'					=> '',

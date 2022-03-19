@@ -42,50 +42,76 @@
         }
     }
 }
-.woocommerce-loop-product__title{
-    a{
+
+.woocommerce-loop-product__title {
+    a {
         font-weight: 400;
     }
 }
-.woocommerce-variation-price{
-    .price{
+
+.woocommerce-variation-price {
+    .price {
         font-size: 2.5rem !important;
     }
 }
-.row-large>.flickity-viewport>.flickity-slider>.col, .row-large>.col{
-    @include breakpoint-up(wmd){
+
+.row-large>.flickity-viewport>.flickity-slider>.col,
+.row-large>.col {
+    @include breakpoint-up(wmd) {
         padding: 0 1rem !important;
     }
 }
+
 .single_add_to_cart_button,
-.add_to_cart_button{
+.add_to_cart_button,
+.button__contact {
     width: 100%;
     padding: 0.5rem 1rem !important;
     box-sizing: border-box;
     display: block;
     background: url(../../../images/icon-cart-01.png);
     background-repeat: no-repeat;
-    background-position: center right 1rem;
+    background-position: center right 0.6rem;
+    background-size: auto 18px;
+
+    @include breakpoint-up(md) {
+        background-size: auto;
+        background-position: center right 1rem;
+    }
 }
-.product-summary .quantity{
+
+.button__contact{
+    background-image: url(../../../images/icon-phone.png);
+    position: relative;
+    bottom: -0.5rem;
+}
+.price-wrapper .price{
+    margin: 0.5rem 0 1.5rem 0;
+}
+.product-summary .quantity {
     width: 100%;
 }
-.form-minimal.quantity .qty{
+
+.form-minimal.quantity .qty {
     width: 100%;
     max-width: 100%;
 }
-.badge-container{
+
+.badge-container {
     top: auto !important;
     bottom: 0;
     margin: 0;
-    &.is-larger{
+
+    &.is-larger {
         left: 1rem;
     }
-    .badge-circle{
+
+    .badge-circle {
         height: 6rem;
         width: 6rem;
         box-sizing: border-box;
-        .on-sale{
+
+        .on-sale {
             background-image: url(../../../images/icon-sale.png);
             background-color: initial !important;
             background-repeat: no-repeat;
@@ -96,11 +122,13 @@
         }
     }
 }
-.product-small.box{
-    .badge-circle{
+
+.product-small.box {
+    .badge-circle {
         height: 4rem;
         width: 4rem;
-        .onsale{
+
+        .onsale {
             font-size: 0.8rem;
         }
     }

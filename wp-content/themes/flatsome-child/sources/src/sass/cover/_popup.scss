@@ -1,26 +1,67 @@
-.promoform{
+.promoform {
     max-width: 324px !important;
-    height: 604px !important;
+    height: 620px !important;
     background: url(../../../images/popup.png) no-repeat center;
-    &__around{
-        margin-top: 260px;
+    position: relative;
+    @include flex;
+    @include align-items(end);
+    border-radius: 5px;
+    background-size: cover;
+
+    form {
+        margin: 0;
+    }
+
+    &__around {
         border: 1px solid $white;
         border-radius: 10px;
-        background: #c00c33;
+        background: $yellow;
         box-sizing: border-box;
     }
-    &__input{
+
+    &__input {
         padding: 0.2rem 1rem;
-    }
-    &__desc{
-        margin-top: 32px !important;
-        &__01{
-            text-align: center;
+
+        &.submit {
+            @include flex;
+            justify-content: center;
         }
     }
-    &__title{
+    &__submit{
+        width: 80%;
+        margin: 0 0 1rem 0 !important;
+    }
+
+    &__desc {
+        &__01 {
+            text-align: center;
+            font-size: 2rem;
+            margin: 0;
+            line-height: 1;
+            padding: 1rem 0 !important;
+            text-transform: uppercase;
+        }
+
+        &__02 {
+            font-size: 3rem;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1;
+            padding-bottom: 1rem !important;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 1px 1px #000;
+            border-top: 1px dashed;
+            padding-top: 1rem !important;
+        }
+    }
+
+    &__title {
         position: relative;
-        &__top{
+        padding-top: 32px;
+
+        &__top {
             background: $white;
             position: absolute;
             top: -1px;
@@ -33,5 +74,11 @@
             border-top-right-radius: 10px;
             border-top-left-radius: 10px;
         }
+    }
+    .wpcf7-response-output{
+        background-color: $white;
+    }
+    .wpcf7-spinner{
+        display: none;
     }
 }

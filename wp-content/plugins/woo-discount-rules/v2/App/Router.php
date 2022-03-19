@@ -121,6 +121,9 @@ class Router
             add_filter('woocommerce_get_price_html', array(self::$manage_discount, 'getPriceHtmlSalePriceAdjustment'), 9, 2);
             add_filter('woocommerce_variable_price_html', array(self::$manage_discount, 'getVariablePriceHtml'), 100, 2);
 
+			// Apply url coupons
+	        add_action('wp_loaded', array(self::$manage_discount, 'applyUrlCoupon'));
+
             add_filter('woocommerce_coupon_message', array(self::$manage_discount, 'removeAppliedMessageOfThirdPartyCoupon'), 10, 3);
 
             //Show on sale badge

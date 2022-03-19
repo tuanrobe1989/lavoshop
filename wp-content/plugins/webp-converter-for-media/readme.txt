@@ -3,7 +3,7 @@ Contributors: mateuszgbiorczyk
 Donate link: https://ko-fi.com/gbiorczyk/?utm_source=webp-converter-for-media&utm_medium=readme-donate
 Tags: convert webp, webp, optimize images, compress images, webp converter
 Requires at least: 4.9
-Tested up to: 5.8
+Tested up to: 5.9
 Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2 or later
@@ -23,7 +23,7 @@ This will be a profit both for your users who will not have to download so much 
 
 #### AVIF support
 
-Now you can use AVIF as the output format for your images. The AVIF format is a new extension - is the successor to WebP. It allows you to achieve even higher levels of image compression, and the quality of the converted images is better than in WebP.
+Now in [the PRO version](https://mattplugins.com/products/webp-converter-for-media-pro/?utm_source=webp-converter-for-media&utm_campaign=upgrade-to-pro&utm_medium=readme-avif-support) you can use AVIF as the output format for your images. The AVIF format is a new extension - is the successor to WebP. It allows you to achieve even higher levels of image compression, and the quality of the converted images is better than in WebP.
 
 #### How does this work?
 
@@ -50,7 +50,7 @@ You can convert WebP and optimize images not only from `/uploads` directory but 
 
 We spend hours working on the development of this plugin. Technical support also requires a lot of time, but we do it because we want to offer you the best plugin. We enjoy every new plugin installation.
 
-If you would like to appreciate it, you can [provide us a coffee](https://ko-fi.com/gbiorczyk/?utm_source=webp-converter-for-media&utm_medium=readme-content). **If every user bought at least one, we could work on the plugin 24 hours a day!**
+If you would like to appreciate it, you can try [the PRO version](https://mattplugins.com/products/webp-converter-for-media-pro/?utm_source=webp-converter-for-media&utm_campaign=upgrade-to-pro&utm_medium=readme-plugin-development). In addition, you will gain access to extra functionalities that will allow you to achieve **even better image conversion results**.
 
 #### Please also read the FAQ below. Thank you for being with us!
 
@@ -108,7 +108,7 @@ If you get an error: `File "%s" is unreadable. Please check file permissions.` m
 
 If you get an error: `"%s" is not a valid image file.` means that the file is damaged in some way. Download the file to disk, save it again using any graphics program and add again to the page. If the error applies to individual images then you can ignore it - just the original images will load, not WebP.
 
-If you get an error: `"%s" converted to .webp is larger than original and has been deleted.` means the original image weighed less than WebP. This happens when images have been compressed before. Disable the *"Automatic removal of files in output formats larger than original"* option in plugin settings to force always using WebP.
+If you get an error: `Image "%s" converted to .webp is larger than original and converted .webp file has been deleted.` means the original image weighed less than WebP. This happens when images have been compressed before. Disable the *"Automatic removal of files in output formats larger than original"* option in plugin settings to force always using WebP.
 
 In the case of the above problems, **contacting the support forum will be useless**. Unfortunately, we are unable to help you if your files are damaged. You have to fix it yourself. If you have previously used other tools that changed the original files and damaged them, you will do nothing more.
 
@@ -120,7 +120,7 @@ Practically every hosting meets these requirements. You must use PHP at least 7.
 
 They are required native PHP extensions, used among others by WordPress to generate thumbnails. Your server must also have the modules `mod_mime`, `mod_rewrite` and `mod_expires` enabled.
 
-An example of the correct server configuration can be found [here](https://gbiorczyk.pl/webp-converter/serverinfo.png). Link to your current configuration can be found in the administration panel, on the management plugin page in the section **"We are waiting for your message"** *(or using the URL path: `/wp-admin/options-general.php?page=webpc_admin_page&action=server`)*.
+An example of the correct server configuration can be found [here](https://mattplugins.com/files/webp-server-config.png). Link to your current configuration can be found in the administration panel, on the management plugin page in the section **"We are waiting for your message"** *(or using the URL path: `/wp-admin/options-general.php?page=webpc_admin_page&action=server`)*.
 
 **Note the items marked in red.** If the values marked in red do not appear in your case, it means that your server does not meet the technical requirements. Pay attention to the **WebP Support** value for the GD library and **WEBP in the list of supported extensions** for the Imagick library.
 
@@ -242,17 +242,7 @@ If you would like to integrate with your plugin, which generates images by yours
 
 It is a solution for advanced users. If you would like to integrate with another plugin, it's best to contact the author of that plugin and give him information about the actions available in our plugin. This will help you find a solution faster.
 
-You can automatically run the option to regenerate all new images. This is useful when you use external plugins that generate images themselves. To do this, use the following code:
-
-`do_action( 'webpc_regenerate_all', $paths );`
-
-Below is an example of how to use this action to automatically regenerate images after changing the theme:
-
-`add_action('init', function() {
-	do_action( 'webpc_regenerate_all' );
-});`
-
-To manually start converting selected files, you can use the action to which you will pass an array with a list of paths *(they must be absolute server paths)*:
+You can manually run converting selected files, you can use the action to which you will pass an array with a list of paths *(they must be absolute server paths)*:
 
 `do_action( 'webpc_convert_paths', $paths );`
 
@@ -349,7 +339,7 @@ and add this code line:
 `}`
 
 Then find the configuration file in one of the paths *(remember to select configuration file used by your vhost)*:
-- `/etc/nginx/sites-enabled/`
+- `/etc/nginx/sites-available/` or `/etc/nginx/sites-enabled/`
 - `/etc/nginx/conf.d/`
 
 and add below code in this file *(add these lines to very beginning of file if possible)*:
@@ -373,103 +363,41 @@ and add below code in this file *(add these lines to very beginning of file if p
 
 After making changes, remember to restart the machine: `systemctl restart nginx`.
 
-= Configuration for Multisite Network =
-
-Multisite Network mode works fine but requires adding configuration manually.
-
-Please manually paste the following code **at the beginning of .htaccess file** in the `/wp-content` directory:
-
-`# BEGIN WebP Converter`
-`# ! --- DO NOT EDIT PREVIOUS LINE --- !`
-`<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{HTTP_ACCEPT} image/avif
-	RewriteCond %{DOCUMENT_ROOT}/wp-content/uploads-webpc/$1.jpg.avif -f
-	RewriteRule (.+)\.jpg$ /wp-content/uploads-webpc/$1.jpg.avif [NC,T=image/avif,L]
-	RewriteCond %{HTTP_ACCEPT} image/avif
-	RewriteCond %{DOCUMENT_ROOT}/wp-content/uploads-webpc/$1.jpeg.avif -f
-	RewriteRule (.+)\.jpeg$ /wp-content/uploads-webpc/$1.jpeg.avif [NC,T=image/avif,L]
-	RewriteCond %{HTTP_ACCEPT} image/avif
-	RewriteCond %{DOCUMENT_ROOT}/wp-content/uploads-webpc/$1.png.avif -f
-	RewriteRule (.+)\.png$ /wp-content/uploads-webpc/$1.png.avif [NC,T=image/avif,L]
-</IfModule>
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{HTTP_ACCEPT} image/webp
-	RewriteCond %{DOCUMENT_ROOT}/wp-content/uploads-webpc/$1.jpg.webp -f
-	RewriteRule (.+)\.jpg$ /wp-content/uploads-webpc/$1.jpg.webp [NC,T=image/webp,L]
-	RewriteCond %{HTTP_ACCEPT} image/webp
-	RewriteCond %{DOCUMENT_ROOT}/wp-content/uploads-webpc/$1.jpeg.webp -f
-	RewriteRule (.+)\.jpeg$ /wp-content/uploads-webpc/$1.jpeg.webp [NC,T=image/webp,L]
-	RewriteCond %{HTTP_ACCEPT} image/webp
-	RewriteCond %{DOCUMENT_ROOT}/wp-content/uploads-webpc/$1.png.webp -f
-	RewriteRule (.+)\.png$ /wp-content/uploads-webpc/$1.png.webp [NC,T=image/webp,L]
-</IfModule>
-<IfModule mod_headers.c>
-  Header Set Cache-Control "private"
-</IfModule>`
-`# ! --- DO NOT EDIT NEXT LINE --- !`
-`# END WebP Converter`
-
-And the following code **at the beginning of .htaccess file** in the `/wp-content/uploads-webpc` directory:
-
-`# BEGIN WebP Converter`
-`# ! --- DO NOT EDIT PREVIOUS LINE --- !`
-`<IfModule mod_mime.c>
-	AddType image/webp .webp
-	AddType image/avif .avif
-</IfModule>
-<IfModule mod_expires.c>
-	ExpiresActive On
-	ExpiresByType image/webp "access plus 1 year"
-	ExpiresByType image/avif "access plus 1 year"
-</IfModule>
-<IfModule mod_headers.c>
-  Header Set Cache-Control "private"
-</IfModule>`
-`# ! --- DO NOT EDIT NEXT LINE --- !`
-`# END WebP Converter`
-
-= Is the plugin completely free? =
-
-The plugin is free and you can use it without restrictions. We also offer a paid version that allows for additional functionalities
-
-However, working on plugins and technical support requires many hours of work. If you are using the free version of the plugin and if you want to appreciate us, you can [provide us a coffee](https://ko-fi.com/gbiorczyk/?utm_source=webp-converter-for-media&utm_medium=readme-faq). Thanks everyone!
-
-Thank you for all the ratings and reviews.
-
-If you are satisfied with this plugin, please recommend it to your friends. Every new person using our plugin is valuable to us.
-
-This is all very important to us and allows us to do even better things for you!
-
 == Screenshots ==
 
-1. How to start using plugin few moments?
-2. Screenshot of the options panel
-3. Screenshot when regenerating images
+1. Screenshot of the options panel
+2. Screenshot when regenerating images
 
 == Changelog ==
 
-= 4.0.4 (2021-12-30) =
-* `[Changed]` opcache.revalidate_freq parameter in PHP configuration to avoid problems while updating plugin
+= 4.2.4 (2022-03-01) =
+* `[Fixed]` Generating paths for via .htaccess loading mode
 
-= 4.0.3 (2021-12-20) =
-* `[Fixed]` Auto-conversion images with unsupported extensions when uploading files
-* `[Fixed]` Generating directory paths when ABSPATH constant is invalid
-* `[Added]` URL validation for Pass Thru loading mode
+= 4.2.3 (2022-02-27) =
+* `[Fixed]` Closing of admin notice
 
-= 4.0.2 (2021-12-17) =
-* `[Fixed]` Fetching large list of files to conversion
-* `[Fixed]` Rewrites caching for some servers
-* `[Changed]` Connection when converting using remote server
+= 4.2.2 (2022-02-21) =
+* `[Changed]` Error message for bypassing_apache error in server configuration
+* `[Added]` Automatic continuation of conversion process after connection lost
+* `[Added]` ICC/ICM profile support for conversion using Imagick
+* `[Added]` Notification asking to clear cache for Cloudflare
 
-= 4.0.1 (2021-12-10) =
-* `[Added]` Informational banners on plugin settings page
+= 4.2.1 (2022-02-17) =
+* `[Fixed]` Cache settings for .htaccess rewrites
+* `[Added]` Limit for error messages displayed while converting
+* `[Added]` Support for plain permalink structure
 
-= 4.0.0 (2021-12-04) =
-* `[Added]` Converting images using remote server
-* `[Added]` Converting images to AVIF format
-* `[Added]` Error detection for invalid permalinks structure
+= 4.2.0 (2022-02-13) =
+* `[Removed]` Action `webpc_regenerate_all`
+* `[Fixed]` Issue with plugin settings after changing Gd or Imagick library configuration
+* `[Fixed]` Server configuration error detection when cURL is disabled
+* `[Fixed]` URL for the server configuration tab
+* `[Changed]` Automatically conversion of images after upload
+* `[Changed]` Automatically conversion of images from outside the Media Library
+* `[Changed]` Message for conversion error when converted file is larger than original
+* `[Added]` List of allowed file extensions for cache rules in .htaccess file
+* `[Added]` Status of automatic image conversion on the top bar in the WordPress Dashboard
+* `[Added]` Debug information about plugin settings
 
 See [changelog.txt](https://plugins.svn.wordpress.org/webp-converter-for-media/trunk/changelog.txt) for previous versions.
 

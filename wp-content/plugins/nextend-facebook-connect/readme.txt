@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: social login, facebook, google, twitter, linkedin, register, login, social, nextend facebook connect, social sign in
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
-Tested up to: 5.8.2
-Stable tag: 3.1.3
+Tested up to: 5.9
+Stable tag: 3.1.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,7 +47,7 @@ Providers are the services which the visitors can use to register and log in to 
 * UserPro compatibility
 * Ultimate Member compatibility
 * Easy Digital Downloads compatibility
-* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord, Slack and more coming soon
+* Pro providers: LinkedIn, Amazon, VKontakte, WordPress.com, Yahoo, PayPal, Disqus, Apple, GitHub, Microsoft, Line, Discord, Slack, TikTok and more coming soon
 * Configure whether email address should be asked on registration at each provider
 * Configure whether username should be asked on registration at each provider
 * Choose from icons or wide buttons
@@ -124,6 +124,17 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 4. The Settings page of the Facebook provider.
 
 == Changelog ==
+
+= 3.1.4 =
+* Fix: PHP Warning on redirects, when the "Host" header is not sent by the browser ( e.g when an action happens with CLI )
+* Fix: The redirect parameter of the shortcode didn't work in AJAX requests
+* Fix: Provider order modification didn't work in WordPress 5.9
+* Improvement: [Google Getting Started](https://nextendweb.com/nextend-social-login-docs/provider-google/#configuration) Update
+* Improvement: [Twitter Getting Started](https://nextendweb.com/nextend-social-login-docs/provider-Twitter/#configuration) Update
+* Feature: Option to attempt to [Bypass cache on redirect](https://nextendweb.com/nextend-social-login-docs/global-settings/#bypass-cache) by adding a GET parameter to the redirect URL
+
+* PRO: New provider: [TikTok](https://nextendweb.com/nextend-social-login-docs/provider-tiktok/)
+
 
 = 3.1.3 =
 * Fix: Database error on clean install

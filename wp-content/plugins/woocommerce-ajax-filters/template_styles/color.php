@@ -25,6 +25,7 @@ if( ! class_exists('BeRocket_AAPF_Template_Style_color') ) {
             $berocket_term = get_metadata( 'berocket_term', $term->term_id, 'color' );
             $meta_color = br_get_value_from_array($berocket_term, 0, '');
             $meta_color = str_replace('#', '', $meta_color);
+            $meta_color = esc_attr($meta_color);
             $template['content']['checkbox'] = BeRocket_AAPF_dynamic_data_template::create_element_arrays($template['content']['checkbox'], array('attributes', 'style'));
             $template['content']['checkbox']['attributes']['style']['display'] = 'display:none;';
             $template['content']['label']['content'] = array(
@@ -102,6 +103,7 @@ if( ! class_exists('BeRocket_AAPF_Template_Style_image') ) {
         function template_single_item($template, $term, $i, $berocket_query_var_title) {
             $berocket_term = get_metadata( 'berocket_term', $term->term_id, 'image' );
             $meta_image = br_get_value_from_array($berocket_term, 0, '');
+            $meta_image = esc_attr($meta_image);
             $template['content']['checkbox'] = BeRocket_AAPF_dynamic_data_template::create_element_arrays($template['content']['checkbox'], array('attributes', 'style'));
             $template['content']['checkbox']['attributes']['style']['display'] = 'display:none;';
             $template['content']['label']['content'] = array(

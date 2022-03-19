@@ -11,6 +11,10 @@
  * @package WebP Converter for Media
  */
 
+$token_value = ( $token_valid_status )
+	? substr( $option['value'], 0, 32 ) . str_repeat( '*', 32 )
+	: $option['value'];
+
 ?>
 <?php if ( $option['info'] ) : ?>
 	<p><?php echo wp_kses_post( $option['info'] ); ?></p>
@@ -18,7 +22,7 @@
 <div class="webpInput">
 	<input type="text"
 		name="<?php echo esc_attr( $option['name'] ); ?>"
-		value="<?php echo esc_attr( $option['value'] ); ?>"
+		value="<?php echo esc_attr( $token_value ); ?>"
 		id="<?php echo esc_attr( $option['name'] ); ?>"
 		class="webpInput__field"
 		<?php echo ( $token_valid_status ) ? 'readonly' : ''; ?>
@@ -39,7 +43,7 @@
 </div>
 <p data-calculate-widget data-calculate-widget-api="<?php echo esc_url( $api_calculate_url ); ?>">
 	<?php
-	echo esc_html( __( 'How many maximum images to convert are on my website?', 'webp-converter-for-media' ) );
+	echo esc_html( __( 'How many maximum images for conversion are on my website?', 'webp-converter-for-media' ) );
 	echo ' ';
 	echo wp_kses_post(
 		sprintf(
@@ -53,5 +57,5 @@
 	<strong data-calculate-widget-loading hidden>
 		<?php echo esc_html( __( 'Please wait...', 'webp-converter-for-media' ) ); ?>
 	</strong>
-	<strong data-calculate-widget-output hidden></strong>
+	<strong style="display: block;" data-calculate-widget-output hidden></strong>
 </p>

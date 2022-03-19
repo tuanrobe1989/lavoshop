@@ -1700,6 +1700,44 @@ var berocket_rewidth_inline_filters;
             }
         });
     }
+    //ORDER PRODUCTS
+    braapf_grab_single_order_products = function(single_data, element) {
+        if( element.data('taxonomy') == 'orderby' ) {
+            single_data.customValuesLine = '';
+            single_data.orderby = true;
+        }
+        return single_data;
+    }
+    braapf_apply_order_products = function(url_data, single_data) {
+        if(typeof(single_data.orderby) != 'undefined' && single_data.orderby) {
+            console.log(url_data);
+            console.log(single_data);
+            var exist = false;
+            if( Array.isArray(url_data.queryargs) ) {
+                var newqueryargs = [];
+                $.each(url_data.queryargs, function(i, val) {
+                    if( val.name == single_data.taxonomy ) {
+                        if( single_data.values.length ) {
+                            val.value = single_data.values[0].value;
+                            newqueryargs.push(val);
+                        }
+                        exist = true;
+                    } else {
+                        newqueryargs.push(val);
+                    }
+                });
+                url_data.queryargs = newqueryargs;
+            } else if( single_data.values.length ) {
+                url_data.queryargs = [];
+            }
+            if( ! exist && single_data.values.length ) {
+                url_data.queryargs.push({name:single_data.taxonomy, value:single_data.values[0].value});
+            }
+        }
+        return url_data;
+    }
+    berocket_add_filter('apply_additional_filter_data', braapf_apply_order_products);
+    berocket_add_filter('grab_single_filter_default', braapf_grab_single_order_products);
 })(jQuery);
 
 var braapf_init_ion_slidr,

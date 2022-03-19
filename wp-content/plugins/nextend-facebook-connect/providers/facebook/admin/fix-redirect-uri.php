@@ -11,7 +11,7 @@ $provider = $this->getProvider();
     <li><?php _e('In the left sidebar, click on "<b>Facebook Login > Settings</b>"', 'nextend-facebook-connect'); ?></li>
     <li><?php
         $loginUrls = $provider->getAllRedirectUrisForAppCreation();
-        printf(__('Add the following URL to the "<b>Valid OAuth redirect URIs</b>" field:', 'nextend-facebook-connect'));
+        printf(__('Add the following URL to the %s field:', 'nextend-facebook-connect'), '"<b>Valid OAuth redirect URIs</b>"');
         echo "<ul>";
         foreach ($loginUrls as $loginUrl) {
             echo "<li><strong>" . $loginUrl . "</strong></li>";

@@ -59,7 +59,11 @@ class BeRocket_AAPF_get_terms {
             $args['taxonomy'] = array_pop($args['taxonomy']);
         }
         if( empty($terms) || is_wp_error($terms) || empty($args['taxonomy']) || is_array($args['taxonomy']) ) {
-            return apply_filters("berocket_aapf_get_terms_filter_after_not_correct", $terms, $args, $additional);
+            $terms = apply_filters("berocket_aapf_get_terms_filter_after_not_correct", $terms, $args, $additional);
+            if( ! is_array($terms) ) {
+                $terms = array();
+            }
+            return $terms;
         }
         $terms = apply_filters("berocket_aapf_get_terms_filter_after", $terms, $args, $additional);
         

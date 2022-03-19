@@ -30,12 +30,12 @@ $settings = $provider->settings;
                     <input name="consumer_key" type="text" id="consumer_key"
                            value="<?php echo esc_attr($settings->get('consumer_key')); ?>" class="regular-text">
                     <p class="description"
-                       id="tagline-consumer_key"><?php printf(__('If you are not sure what is your %1$s, please head over to <a href="%2$s">Getting Started</a>', 'nextend-facebook-connect'), 'API secret key', $this->getUrl()); ?></p>
+                       id="tagline-consumer_key"><?php printf(__('If you are not sure what is your %1$s, please head over to <a href="%2$s">Getting Started</a>', 'nextend-facebook-connect'), 'API Key', $this->getUrl()); ?></p>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label
-                            for="consumer_secret"><?php _e('API secret key', 'nextend-facebook-connect'); ?></label>
+                            for="consumer_secret"><?php _e('API Key Secret', 'nextend-facebook-connect'); ?></label>
                 </th>
                 <td><input name="consumer_secret" type="text" id="consumer_secret"
                            value="<?php echo esc_attr($settings->get('consumer_secret')); ?>" class="regular-text"

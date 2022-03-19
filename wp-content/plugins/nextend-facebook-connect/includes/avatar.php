@@ -235,6 +235,7 @@ class NextendSocialLoginAvatar {
                         'image/gif'  => 'gif',
                         'image/bmp'  => 'bmp',
                         'image/tiff' => 'tif',
+                        'image/webp' => 'webp'
                     ));
 
                     /**
@@ -376,7 +377,8 @@ class NextendSocialLoginAvatar {
 
     /**
      * Adjusted according to WordPress 5.7
-     * Override for WordPress default download_url() since wp_tempnam() can not handle long urls properly to generate temp file names.
+     * Override for WordPress default download_url() since wp_tempnam() can not handle long urls properly to generate
+     * temp file names.
      *
      * Downloads a URL to a local temporary file using the WordPress HTTP API.
      *
@@ -405,10 +407,10 @@ class NextendSocialLoginAvatar {
         }
 
         $response = wp_safe_remote_get($url, array(
-                'timeout'  => $timeout,
-                'stream'   => true,
-                'filename' => $tmpfname,
-            ));
+            'timeout'  => $timeout,
+            'stream'   => true,
+            'filename' => $tmpfname,
+        ));
 
         if (is_wp_error($response)) {
             unlink($tmpfname);
@@ -501,9 +503,9 @@ class NextendSocialLoginAvatar {
 
                 if ($signature_url) {
                     $signature_request = wp_safe_remote_get($signature_url, array(
-                            'limit_response_size' => 10 * KB_IN_BYTES,
-                            // 10KB should be large enough for quite a few signatures.
-                        ));
+                        'limit_response_size' => 10 * KB_IN_BYTES,
+                        // 10KB should be large enough for quite a few signatures.
+                    ));
 
                     if (!is_wp_error($signature_request) && 200 === wp_remote_retrieve_response_code($signature_request)) {
                         $signature = explode("\n", wp_remote_retrieve_body($signature_request));

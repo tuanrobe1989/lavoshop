@@ -51,8 +51,8 @@ class NextendSocialProviderTwitter extends NextendSocialProvider {
         $this->path = dirname(__FILE__);
 
         $this->requiredFields = array(
-            'consumer_key'    => 'Consumer Key',
-            'consumer_secret' => 'Consumer Secret'
+            'consumer_key'    => 'API Key',
+            'consumer_secret' => 'API Key Secret'
         );
 
         $this->oauthRedirectBehavior = 'default_redirect_but_app_has_restriction';

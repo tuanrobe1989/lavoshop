@@ -285,14 +285,22 @@ braapf_compat_filters_result_separate_link;
         return url;
     }
 })(jQuery);
-
-//Remove filters
-berocket_add_filter('get_current_url_data', braapf_get_current_filters_separate_link);
-//Add filters
-berocket_add_filter('glue_by_operator', braapf_glue_by_operator_separate_link, 1);
-berocket_add_filter('compat_filters_result_single', braapf_compat_filters_result_separate_link, 20);
-berocket_add_filter('compat_filters_to_string_single', braapf_compat_filters_to_string_single_separate_link);
-berocket_add_filter('url_from_urldata_linkget', braapf_set_filters_to_link_separate_link);
+function braapf_separate_link_init() {
+    //Remove filters
+    berocket_add_filter('get_current_url_data', braapf_get_current_filters_separate_link);
+    //Add filters
+    berocket_add_filter('glue_by_operator', braapf_glue_by_operator_separate_link, 1);
+    berocket_add_filter('compat_filters_result_single', braapf_compat_filters_result_separate_link, 20);
+    berocket_add_filter('compat_filters_to_string_single', braapf_compat_filters_to_string_single_separate_link);
+    berocket_add_filter('url_from_urldata_linkget', braapf_set_filters_to_link_separate_link);
+}
+if( typeof(berocket_add_filter) == 'function' ) {
+    braapf_separate_link_init();
+} else {
+    jQuery(document).on('berocket_hooks_ready', function() {
+        braapf_separate_link_init();
+    });
+}
         <?php
     }
     function localize_widget_script($localization) {

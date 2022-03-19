@@ -54,6 +54,21 @@
     </tr>
 
     <tr>
+        <th scope="row"><?php _e('Bypass cache on redirect', 'nextend-facebook-connect'); ?></th>
+        <td>
+            <fieldset>
+                <label><input type="radio" name="bypass_cache"
+                              value="0" <?php if ($settings->get('bypass_cache') == '0') : ?> checked="checked" <?php endif; ?>>
+                    <span><?php _e('Disabled', 'nextend-facebook-connect'); ?></span></label><br>
+                <label><input type="radio" name="bypass_cache"
+                              value="1" <?php if ($settings->get('bypass_cache') == '1') : ?> checked="checked" <?php endif; ?>>
+                    <span><?php _e('Enabled', 'nextend-facebook-connect'); ?></span></label><br>
+            </fieldset>
+            <p class="description" id="tagline-bypass_cache"><?php printf(__('Enabling this option will add a GET parameter to the URL where we redirect after a successful registration or login with social login. %1$sLearn more%2$s.', 'nextend-facebook-connect'), '<a href="https://nextendweb.com/nextend-social-login-docs/how-to-bypass-the-cache-after-the-login-with-social-login/#how-to-bypass" target="_blank">', '</a>'); ?></p>
+        </td>
+    </tr>
+
+    <tr>
         <th scope="row"><?php _e('Page for register flow', 'nextend-facebook-connect'); ?></th>
         <td>
             <?php

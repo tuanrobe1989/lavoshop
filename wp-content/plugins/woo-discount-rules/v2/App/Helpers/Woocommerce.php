@@ -27,9 +27,10 @@ class Woocommerce
 
     static function productTypeIs($product, $type)
     {
-        if (method_exists($product, 'is_type')) {
-            return $product->is_type($type);
-        }
+        if(!empty($product))
+            if (method_exists($product, 'is_type')) {
+                return $product->is_type($type);
+            }
         return false;
     }
 
@@ -88,17 +89,20 @@ class Woocommerce
      */
     static function getProductId($product)
     {
-        if (method_exists($product, 'get_id')) {
-            return $product->get_id();
-        } elseif (isset($product->id)) {
-            $product_id = $product->id;
-            if (isset($product->variation_id)) {
-                $product_id = $product->variation_id;
+        if(!empty($product)){
+            if (method_exists($product, 'get_id')) {
+                return $product->get_id();
+            } elseif (isset($product->id)) {
+                $product_id = $product->id;
+                if (isset($product->variation_id)) {
+                    $product_id = $product->variation_id;
+                }
+                return $product_id;
+            } else {
+                return NULL;
             }
-            return $product_id;
-        } else {
-            return NULL;
         }
+        return NULL;
     }
 
     /**
@@ -137,7 +141,9 @@ class Woocommerce
 
     static function is_ajax()
     {
-        if (function_exists('is_ajax')) {
+        if (function_exists('wp_doing_ajax')) {
+            return wp_doing_ajax();
+        } else if (function_exists('is_ajax')) {
             return is_ajax();
         }
         return false;
@@ -168,13 +174,14 @@ class Woocommerce
      */
     static function getProductSalePrice($product)
     {
-        if (self::isProductInSale($product)) {
-            if (method_exists($product, 'get_sale_price')) {
-                $price = $product->get_sale_price();
-                return apply_filters('advanced_woo_discount_rules_get_sale_price', $price, $product);
+        if(!empty($product))
+            if (self::isProductInSale($product)) {
+                if (method_exists($product, 'get_sale_price')) {
+                    $price = $product->get_sale_price();
+                    return apply_filters('advanced_woo_discount_rules_get_sale_price', $price, $product);
+                }
+                return false;
             }
-            return false;
-        }
         return false;
     }
 
@@ -185,15 +192,16 @@ class Woocommerce
      */
     static function isProductInSale($product)
     {
-        if (method_exists($product, 'is_on_sale') && method_exists($product, 'get_sale_price')) {
-            if($product->is_on_sale('')){
-                if($product->get_sale_price()){
-                    return apply_filters('advanced_woo_discount_rules_is_on_sale', true, $product);
-                }else{
-                    return apply_filters('advanced_woo_discount_rules_is_on_sale', false, $product);
+        if(!empty($product))
+            if (method_exists($product, 'is_on_sale') && method_exists($product, 'get_sale_price')) {
+                if($product->is_on_sale('')){
+                    if($product->get_sale_price()){
+                        return apply_filters('advanced_woo_discount_rules_is_on_sale', true, $product);
+                    }else{
+                        return apply_filters('advanced_woo_discount_rules_is_on_sale', false, $product);
+                    }
                 }
             }
-        }
         return false;
     }
 
@@ -204,10 +212,11 @@ class Woocommerce
      */
     static function getProductRegularPrice($product)
     {
-        if (method_exists($product, 'get_regular_price')) {
-            $price = $product->get_regular_price();
-            return apply_filters('advanced_woo_discount_rules_get_regular_price', $price, $product);
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_regular_price')) {
+                $price = $product->get_regular_price();
+                return apply_filters('advanced_woo_discount_rules_get_regular_price', $price, $product);
+            }
         return false;
     }
 
@@ -218,10 +227,11 @@ class Woocommerce
      */
     static function getProductPrice($product)
     {
-        if (method_exists($product, 'get_price')) {
-            $price = $product->get_price();
-            return apply_filters('advanced_woo_discount_rules_get_price', $price, $product);
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_price')) {
+                $price = $product->get_price();
+                return apply_filters('advanced_woo_discount_rules_get_price', $price, $product);
+            }
         return false;
     }
 
@@ -233,14 +243,15 @@ class Woocommerce
     static function getProductCategories($product)
     {
         $categories = $variant = array();
-        if (method_exists($product, 'get_category_ids')) {
-            if (self::productTypeIs($product, 'variation')) {
-                $variant = $product;
-                $parent_id = self::getProductParentId($product);
-                $product = self::getProduct($parent_id);
+        if(!empty($product))
+            if (method_exists($product, 'get_category_ids')) {
+                if (self::productTypeIs($product, 'variation')) {
+                    $variant = $product;
+                    $parent_id = self::getProductParentId($product);
+                    $product = self::getProduct($parent_id);
+                }
+                $categories = $product->get_category_ids();
             }
-            $categories = $product->get_category_ids();
-        }
         return apply_filters('advanced_woo_discount_rules_get_product_categories', $categories, $product, $variant);
     }
 
@@ -251,9 +262,10 @@ class Woocommerce
      */
     static function getProductTags($product)
     {
-        if (method_exists($product, 'get_tag_ids')) {
-            return $product->get_tag_ids();
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_tag_ids')) {
+                return $product->get_tag_ids();
+            }
         return array();
     }
 
@@ -264,9 +276,10 @@ class Woocommerce
      */
     static function getProductAttributes($product)
     {
-        if (method_exists($product, 'get_attributes')) {
-            return $product->get_attributes();
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_attributes')) {
+                return $product->get_attributes();
+            }
         return array();
     }
 
@@ -277,9 +290,10 @@ class Woocommerce
      */
     static function getProductChildren($product)
     {
-        if (method_exists($product, 'get_children')) {
-            return $product->get_children();
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_children')) {
+                return $product->get_children();
+            }
         return array();
     }
 
@@ -290,9 +304,10 @@ class Woocommerce
      */
     static function getProductSku($product)
     {
-        if (method_exists($product, 'get_sku')) {
-            return $product->get_sku();
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_sku')) {
+                return $product->get_sku();
+            }
         return NULL;
     }
 
@@ -305,9 +320,10 @@ class Woocommerce
      */
     static function getProductPriceSuffix($product, $price = '', $discount_prices = array())
     {
-        if (method_exists($product, 'get_price_suffix')) {
-            return apply_filters('advanced_woo_discount_rules_price_suffix', $product->get_price_suffix($price), $product, $price, $discount_prices);
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_price_suffix')) {
+                return apply_filters('advanced_woo_discount_rules_price_suffix', $product->get_price_suffix($price), $product, $price, $discount_prices);
+            }
         return NULL;
     }
 
@@ -666,9 +682,10 @@ class Woocommerce
         if (is_int($product)) {
             $product = self::getProduct($product);
         }
-        if (method_exists($product, 'get_parent_id')) {
-            $parent_id = $product->get_parent_id();
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_parent_id')) {
+                $parent_id = $product->get_parent_id();
+            }
         return apply_filters('advanced_woo_discount_rules_get_product_parent_id', $parent_id, $product);
     }
 
@@ -863,10 +880,14 @@ class Woocommerce
      */
     static function getIncludingTaxPrice($product, $original_price, $quantity)
     {
-        if (function_exists('wc_get_price_including_tax')) {
-            $price = wc_get_price_including_tax($product, array('qty' => $quantity, 'price' => $original_price));
-        } else if (method_exists($product, 'get_price_including_tax')) {
-            $price = $product->get_price_including_tax($quantity, $original_price);
+        if(!empty($product)){
+            if (function_exists('wc_get_price_including_tax')) {
+                $price = wc_get_price_including_tax($product, array('qty' => $quantity, 'price' => $original_price));
+            } else if (method_exists($product, 'get_price_including_tax')) {
+                $price = $product->get_price_including_tax($quantity, $original_price);
+            } else {
+                $price = $original_price;
+            }
         } else {
             $price = $original_price;
         }
@@ -883,10 +904,14 @@ class Woocommerce
      */
     static function getExcludingTaxPrice($product, $original_price, $quantity)
     {
-        if (function_exists('wc_get_price_excluding_tax')) {
-            $price = wc_get_price_excluding_tax($product, array('qty' => $quantity, 'price' => $original_price));
-        } else if (method_exists($product, 'get_price_excluding_tax')) {
-            $price = $product->get_price_excluding_tax($quantity, $original_price);
+        if(!empty($product)){
+            if (function_exists('wc_get_price_excluding_tax')) {
+                $price = wc_get_price_excluding_tax($product, array('qty' => $quantity, 'price' => $original_price));
+            } else if (method_exists($product, 'get_price_excluding_tax')) {
+                $price = $product->get_price_excluding_tax($quantity, $original_price);
+            } else {
+                $price = $original_price;
+            }
         } else {
             $price = $original_price;
         }
@@ -1049,8 +1074,10 @@ class Woocommerce
     static function getSession($key, $default = NULL)
     {
         if (function_exists('WC')) {
-            if (method_exists(WC()->session, 'get')) {
-                return WC()->session->get($key);
+            if(isset(WC()->session) && WC()->session != null) {
+                if (method_exists(WC()->session, 'get')) {
+                    return WC()->session->get($key);
+                }
             }
         }
         return $default;
@@ -1064,8 +1091,10 @@ class Woocommerce
     static function setSession($key, $value)
     {
         if (function_exists('WC')) {
-            if (method_exists(WC()->session, 'set')) {
-                WC()->session->set($key, $value);
+            if(isset(WC()->session) && WC()->session != null) {
+                if (method_exists(WC()->session, 'set')) {
+                    WC()->session->set($key, $value);
+                }
             }
         }
     }
@@ -1542,9 +1571,10 @@ class Woocommerce
      */
     static function getPriceHtml($product){
         $html = false;
-        if (method_exists($product, 'get_price_html')) {
-            $html = $product->get_price_html();
-        }
+        if(!empty($product))
+            if (method_exists($product, 'get_price_html')) {
+                $html = $product->get_price_html();
+            }
         return apply_filters('advanced_woo_discount_rules_get_price_html', $html, $product);
     }
 
@@ -1637,9 +1667,10 @@ class Woocommerce
      * @return string
      */
     public static function get_variation_regular_price($product, $min_or_max = 'min', $for_display = false){
-        if(method_exists($product, 'get_variation_regular_price')){
-            return  $product->get_variation_regular_price($min_or_max, $for_display);
-        }
+        if(!empty($product))
+            if(method_exists($product, 'get_variation_regular_price')){
+                return  $product->get_variation_regular_price($min_or_max, $for_display);
+            }
         return 0;
     }
 
@@ -1655,24 +1686,25 @@ class Woocommerce
      * @param $product
      * @return array
      */
-   public static function availableProductVariations($product){
-       $available_variations = array();
-       $is_variable_product = self::productTypeIs($product, 'variable');
-       if ($is_variable_product && method_exists($product, 'get_available_variations')){
-           $available_variations = $product->get_available_variations();
-       }
-       return $available_variations;
-   }
+    public static function availableProductVariations($product){
+        $available_variations = array();
+        $is_variable_product = self::productTypeIs($product, 'variable');
+        if(!empty($product))
+            if ($is_variable_product && method_exists($product, 'get_available_variations')){
+                $available_variations = $product->get_available_variations();
+            }
+        return $available_variations;
+    }
 
-   /**
-    * WC format price
-    * */
-   public static function wc_format_decimal($price, $dp = false, $trim_zeros = false ){
-       if (function_exists('wc_format_decimal')) {
-           $price = wc_format_decimal($price, $dp, $trim_zeros);
-       }
-       return $price;
-   }
+    /**
+     * WC format price
+     * */
+    public static function wc_format_decimal($price, $dp = false, $trim_zeros = false ){
+        if (function_exists('wc_format_decimal')) {
+            $price = wc_format_decimal($price, $dp, $trim_zeros);
+        }
+        return $price;
+    }
 
     /**
      * get the product visibility
@@ -1681,11 +1713,12 @@ class Woocommerce
      */
     static function variationIsVisible($product)
     {
-        if (method_exists($product, 'variation_is_visible')) {
-            return $product->variation_is_visible();
-        } else  {
-           return false;
+        if(!empty($product)){
+            if (method_exists($product, 'variation_is_visible')) {
+                return $product->variation_is_visible();
+            }
         }
+        return false;
     }
 
     /**

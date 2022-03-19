@@ -24,7 +24,7 @@ class Notices {
                 'load'
             ), 11);
 
-            if (basename($_SERVER['PHP_SELF']) !== 'options-general.php' || empty($_GET['page']) || $_GET['page'] !== 'nextend-social-login') {
+            if ((!empty($_SERVER['PHP_SELF']) && basename($_SERVER['PHP_SELF']) !== 'options-general.php') || empty($_GET['page']) || $_GET['page'] !== 'nextend-social-login') {
                 add_action('admin_notices', array(
                     $this,
                     'admin_notices'

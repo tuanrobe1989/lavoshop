@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-11-15 18:51+0100\n"
-"PO-Revision-Date: 2021-11-15 18:51+0100\n"
+"POT-Creation-Date: 2022-02-14 08:32+0100\n"
+"PO-Revision-Date: 2022-02-14 08:32+0100\n"
 "Last-Translator: Erik Molenaar <info@erikmolenaar.nl>\n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: nl_NL\n"
@@ -865,6 +865,16 @@ msgstr "Adminbalk voor rollen uitschakelen"
 msgid "Debug mode"
 msgstr "Debugmodus"
 
+msgid "Bypass cache on redirect"
+msgstr ""
+
+#, php-format
+msgid ""
+"Enabling this option will add a GET parameter to the URL where we redirect "
+"after a successful registration or login with social login. %1$sLearn more"
+"%2$s."
+msgstr ""
+
 msgid "Page for register flow"
 msgstr "Pagina voor registreerproces"
 
@@ -1360,15 +1370,10 @@ msgstr "Klik op de App met App ID: %s"
 msgid "In the left sidebar, click on \"<b>Facebook Login > Settings</b>\""
 msgstr "Klik in de linkerbalk op \"Facebook Login/Instellingen\""
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"Valid OAuth redirect URIs\" field: <b>%s</"
-#| "b>"
-msgid ""
-"Add the following URL to the \"<b>Valid OAuth redirect URIs</b>\" field:"
-msgstr ""
-"Voeg de volgende URL toe aan het veld \"Geldige OAuth omleidings-URI's\": <b>"
-"%s</b>"
+#, fuzzy, php-format
+#| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
+msgid "Add the following URL to the %s field:"
+msgstr "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
 
 #, fuzzy
 #| msgid "Click on \"Save Changes\""
@@ -1805,6 +1810,14 @@ msgstr ""
 "te klikken en je kunt van daaruit de Client ID en Client Geheim kopiëren en "
 "plakken."
 
+#, php-format
+msgid ""
+"Currently your App is in %1$s mode, so only limited number of people can use "
+"it. To allow this App for any user with a Google Account, click on the \"%2$s"
+"\" option on the left side, then click the \"%3$s\" button under the \"%4$s"
+"\" section, and press the \"%5$s\" button. "
+msgstr ""
+
 msgid "Client ID"
 msgstr "Client ID"
 
@@ -1836,28 +1849,29 @@ msgstr "Ontkoppel van <b>Google</b>"
 msgid "Required API: %1$s"
 msgstr "Vereiste API: %1$s"
 
-#, fuzzy
-#| msgid "Find your App and click on the Details button"
-msgid ""
-"Find your App and click on the <b>App settings</b> icon. (The one that looks "
-"like a gear.)"
-msgstr "Vind jew app en klik op de knop Details"
-
-#, fuzzy
-#| msgid "Click on the \"Create an App\" button on the top right corner."
-msgid "Click on the <b>Edit</b> button at <b>Authentication settings</b>."
-msgstr "Klik op de knop \"Maak een App\" in de rechterbovenhoek."
+#, fuzzy, php-format
+#| msgid ""
+#| "In the left sidebar under the Products section, click on \"Facebook Login"
+#| "\" and select Settings"
+msgid "On the left side, under the %s section click on the name of your App."
+msgstr ""
+"Klik in de linkerzijbalk onder de Producten-sectie op \"Facebook Login\" en "
+"selecteer Instellingen"
 
 #, fuzzy, php-format
-#| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>%1$s</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
+#| msgid "Click on the Create button"
+msgid "Click on the %1$s button at %2$s."
+msgstr "Klik op de knop Aanmaken"
 
 #, fuzzy, php-format
 #| msgid "Enter the URL of your site to the \"Home Page URL\" field: <b>%s</b>"
-msgid ""
-"Make sure the \"<b>%1$s</b>\" field contains the following URL: <b>%2$s</b>"
+msgid "Make sure the %1$s field contains the following URL: %2$s"
 msgstr "Voer de URL van je site in het veld \"Home Page URL\" in: <b>%s</b>"
+
+#, fuzzy, php-format
+#| msgid "Click on \"Save\""
+msgid "Click on %s"
+msgstr "Klik op \"Opslaan\""
 
 msgid ""
 "If you don't have a developer account yet, please apply one by filling all "
@@ -1882,15 +1896,19 @@ msgstr ""
 msgid "Click on \"<b>%s</b>\"!"
 msgstr "Klik op \"Opslaan\""
 
+#, php-format
 msgid ""
 "Name your project, and go through the basic setup. You’ll need to select "
-"your use case, give a description and enter a name for the App as well."
+"your use case, give a description then click the %s button."
 msgstr ""
 
-#, fuzzy, php-format
-#| msgid "Click \"Edit\"."
-msgid "Click \"<b>%s</b>\"!"
-msgstr "Klik op \"Bewerken\"."
+#, php-format
+msgid "Choose the %1$s option for %2$s, then press %3$s!"
+msgstr ""
+
+#, php-format
+msgid "Into the %1$s field, enter a name for your App, then press %2$s again!"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -1907,12 +1925,12 @@ msgstr ""
 
 #, fuzzy, php-format
 #| msgid "Name your project and then click on the Create button again"
-msgid "Scroll down and click on the \"<b>%1$s</b>\" button at \"<b>%2$s</b>\"."
+msgid "Scroll down and click on the %1$s button at %2$s."
 msgstr "Geef je project een naam en klik dan opnieuw op de knop Aanmaken"
 
 #, fuzzy, php-format
 #| msgid "Click on the Create button"
-msgid "Switch on the \"<b>%s</b>\" option."
+msgid "Switch on the %s option."
 msgstr "Klik op de knop Aanmaken"
 
 #, fuzzy, php-format
@@ -1923,24 +1941,39 @@ msgstr "Voer de URL van je site in het veld \"Home Page URL\" in: <b>%s</b>"
 #, php-format
 msgid ""
 "If you want to get the email address as well, then don’t forget to enable "
-"the \"<b>%1$s</b>\" option. In this case you also need to fill the \"<b>"
-"%2$s</b>\" and the \"<b>%3$s</b>\" fields with the corresponding URLs!"
+"the %1$s option. In this case you also need to fill the \"<b>%2$s</b>\" and "
+"the \"<b>%3$s</b>\" fields with the corresponding URLs!"
 msgstr ""
 
 #, fuzzy, php-format
 #| msgid "Click on \"Save\""
-msgid "Click on \"<b>%s</b>\"."
+msgid "Click on %s."
 msgstr "Klik op \"Opslaan\""
 
 #, php-format
-msgid "Go back to %1$s and <b>Verify</b> your %2$s provider."
+msgid ""
+"On the left side, under the \"<b>%s</b>\" section click on the name of your "
+"Project ( that you created the App for )."
+msgstr ""
+
+#, php-format
+msgid ""
+"Click on the %1$s button, then fill the %2$s, %3$s, %4$s and %5$s forms."
+msgstr ""
+
+#, php-format
+msgid ""
+"Once your application for the Elevated access has been approved, go back to "
+"%1$s then <b>verify</b> and <b>enable</b> the %2$s provider!"
 msgstr ""
 
 msgid "API Key"
 msgstr "API Sleutel"
 
-msgid "API secret key"
-msgstr "API geheime sleutel"
+#, fuzzy
+#| msgid "API Secret"
+msgid "API Key Secret"
+msgstr "API Geheim"
 
 msgid "Profile image size"
 msgstr "Profielafbeelding grootte"
@@ -2123,12 +2156,10 @@ msgstr ""
 msgid "Click \"<b>Edit</b>\"."
 msgstr "Klik op \"Bewerken\"."
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"Allowed Return URLs\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Allowed Return URLs</b>\" field: "
-msgstr ""
-"Voeg de volgende URL toe aan het veld \"Toegestane Return URLs\" <b>%s</b> "
+#, fuzzy, php-format
+#| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
+msgid "Add the following URL to the %s field: "
+msgstr "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
 
 #, php-format
 msgid ""
@@ -2238,11 +2269,6 @@ msgid ""
 msgstr ""
 "Vul het \"Callback Domein\" veld in met je domeinnaam waarschijnlijk: <b>%s</"
 "b> "
-
-#, fuzzy
-#| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Return URLs</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
 
 msgid ""
 "Finally press \"<b>Next</b>\" then \"<b>Done</b>\" and finally click on the "
@@ -2550,10 +2576,10 @@ msgid ""
 "Settings section on the left side."
 msgstr ""
 
-#, fuzzy
-#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
-msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+#, fuzzy, php-format
+#| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
+msgid "Add the following URL in the %s field:"
+msgstr "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
 
 #, fuzzy
 #| msgid "Click on the \"Create New Application\" button."
@@ -2575,11 +2601,6 @@ msgstr ""
 msgid ""
 "On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
 msgstr "Klik op de \"Inloggegevens\" in het linker menu"
-
-#, fuzzy
-#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
 
 #, fuzzy
 #| msgid "Click on the \"Save Changes\" button."
@@ -2636,11 +2657,6 @@ msgid ""
 msgstr ""
 "Selecteer het tabblad \"Instellingen\" en scroll naar beneden naar de sectie "
 "Authenticatie!"
-
-#, fuzzy
-#| msgid "Add the following URL to the \"Callback URLs\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>Callback URL</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Callback URL's\": <b>%s</b>"
 
 #, fuzzy
 #| msgid "Click on the \"Save Changes\" button."
@@ -2742,11 +2758,6 @@ msgid "Make sure the <b>Homepage URL</b> matches with: <b>%s</b>"
 msgstr "Voer de URL van je site in het veld \"Home Page URL\" in: <b>%s</b>"
 
 #, fuzzy
-#| msgid "Add the following URL to the \"Callback URLs\" field: <b>%s</b>"
-msgid "Add the following URL to the <b>Authorization callback URL</b> field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Callback URL's\": <b>%s</b>"
-
-#, fuzzy
 #| msgid "Hit update to save the changes"
 msgid "Press the <b>Update application</b> button to save the changes."
 msgstr "Klik op update om de wijzigingen op te slaan"
@@ -2825,9 +2836,9 @@ msgstr "Navigeer naar %s"
 msgid "Select your %s App and click on the LINE Login section."
 msgstr ""
 
-#, fuzzy
+#, fuzzy, php-format
 #| msgid "Add the following URL to the \"Callback URLs\" field: <b>%s</b>"
-msgid "Change your URL in the \"<b>Callback URL</b>\" field:"
+msgid "Change your URL in the %s field:"
 msgstr "Voeg de volgende URL toe aan het veld \"Callback URL's\": <b>%s</b>"
 
 #, php-format
@@ -2971,11 +2982,6 @@ msgid "Click on your App and go to the \"<b>Auth</b>\" tab."
 msgstr ""
 
 #, fuzzy
-#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Redirect URLs</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
-
-#, fuzzy
 #| msgid "Hit update to save the changes"
 msgid "Click on \"<b>Update</b>\" to save the changes"
 msgstr "Klik op update om de wijzigingen op te slaan"
@@ -3034,13 +3040,11 @@ msgstr ""
 msgid "Click on the \"<b>Auth</b>\" tab."
 msgstr "Klik op de knop Aanmaken"
 
-#, fuzzy
+#, fuzzy, php-format
 #| msgid ""
 #| "Find \"OAuth 2.0 settings\" section and add the following URL to the "
 #| "\"Redirect URLs:\" field: <b>%s</b>"
-msgid ""
-"Find \"<b>OAuth 2.0 settings</b>\" section and add the following URL to the "
-"\"<b>Redirect URLs</b>\" field:"
+msgid "Find the %1$s section and add the following URL to the %2$s field:"
 msgstr ""
 "Zoek de sectie \"OAuth 2.0-instellingen\" en voeg de volgende URL toe aan "
 "het veld \"Omleidings-URLs:\": <b>%s</b>"
@@ -3088,11 +3092,6 @@ msgstr "Klik op de App met App ID: %s"
 msgid "Click on the link next to the Redirect URIs label."
 msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
 
-#, fuzzy
-#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Redirect URIs</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
-
 #, fuzzy, php-format
 #| msgid "Log in with your %s credentials if you are not logged in yet"
 msgid ""
@@ -3117,11 +3116,6 @@ msgid ""
 "on the selected value! If you are not sure what to choose, then %1$shere%2$s "
 "you can learn more."
 msgstr ""
-
-#, fuzzy
-#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Redirect URI</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
 
 #, fuzzy
 #| msgid "Click on the \"Create New Application\" button."
@@ -3260,11 +3254,6 @@ msgid ""
 msgstr ""
 "Scroll naar beneden naar \"LIVE APP INSTELLINGEN\", zoek in de rubriek "
 "\"Live Return URL\" en klik op \"Weergeven\"."
-
-#, fuzzy
-#| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Live Return URL</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
 
 msgid "Click on \"Save\""
 msgstr "Klik op \"Opslaan\""
@@ -3562,6 +3551,124 @@ msgstr "Koppel met <b>Facebook</b>"
 msgid "Unlink account from <b>Slack</b>"
 msgstr "Ontkoppel van <b>Facebook</b>"
 
+#, fuzzy, php-format
+#| msgid "Log in with your %s credentials if you are not logged in yet"
+msgid "Log in to your %s developer account, if you are not logged in yet."
+msgstr "Log in met je %s inloggegevens als je nog niet ingelogd bent"
+
+#, php-format
+msgid ""
+"On the top right corner click on %1$s then click on the name of that App "
+"that you used for the configuration."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Scroll down to the %s section."
+msgstr "Klik op de knop Aanmaken"
+
+#, fuzzy, php-format
+#| msgid "Enter your domain name to the App Domains"
+msgid ""
+"Enter your domain name into the %1$s field, if it is not added already: %2$s"
+msgstr "Voer je domeinnaam in bij de App Domeinen"
+
+#, php-format
+msgid "Press the %s button."
+msgstr ""
+
+msgid "Allow some time for these modifications to take effect."
+msgstr ""
+
+#, php-format
+msgid ""
+"Log in to your %s developer account or register one if you don't have any!"
+msgstr ""
+
+#, php-format
+msgid "On the top right corner click on %1$s then click on the %2$s option."
+msgstr ""
+
+#, php-format
+msgid ""
+"A modal will appear where you need to select an image as %1$s and enter a "
+"name into the %2$s field."
+msgstr ""
+
+#, php-format
+msgid "Press the %1$s button."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "For %1$s choose the %2$s option."
+msgstr "Klik op de knop Aanmaken"
+
+#, php-format
+msgid "Under the %s section you should fill all of the required fields."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Enter your domain name to the App Domains"
+msgid "Enter your domain name to the %1$s field, probably: %2$s"
+msgstr "Voer je domeinnaam in bij de App Domeinen"
+
+#, php-format
+msgid ""
+"Under the %1$s section you need to make sure the option %2$s is checked."
+msgstr ""
+
+#, php-format
+msgid ""
+"Into the %1$s field you should write a text, that describes what you are "
+"going to do with the App. In this particular case, you will use it to offer "
+"%2$s login option for your visitors."
+msgstr ""
+
+#, php-format
+msgid ""
+"Wait until your App gets approved. This can take a couple of days. If you "
+"scroll up to the top of the page you will be able to find the %s below the "
+"name of your App."
+msgstr ""
+
+#, php-format
+msgid ""
+"Once the %1$s says %2$s, the %3$s and %4$s will appear below the %1$s text. "
+"You will need these for the provider configuration."
+msgstr ""
+
+#, php-format
+msgid ""
+"<b>WARNING:</b> The %1$s API can not return any email address or phone "
+"number! %2$sLearn more%3$s."
+msgstr ""
+
+#, fuzzy
+#| msgid "Client ID"
+msgid "Client Key"
+msgstr "Client ID"
+
+#, fuzzy
+#| msgid "Continue with <b>LinkedIn</b>"
+msgid "Continue with <b>TikTok</b>"
+msgstr "Doorgaan met <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>LinkedIn</b>"
+msgid "Sign up with <b>TikTok</b>"
+msgstr "Doorgaan met <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>LinkedIn</b>"
+msgid "Link account with <b>TikTok</b>"
+msgstr "Koppel met <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>LinkedIn</b>"
+msgid "Unlink account from <b>TikTok</b>"
+msgstr "Ontkoppel van <b>LinkedIn</b>"
+
 #, fuzzy
 #| msgid "Click on the Manage button at the App"
 msgid "Click on the \"<b>Manage</b>\" button next to the associated App."
@@ -3571,14 +3678,6 @@ msgstr "Klik op de knop Beheer bij de App"
 #| msgid "Go to the Settings menu"
 msgid "Go to the \"<b>Settings</b>\" menu"
 msgstr "Ga naar het menu Instellingen"
-
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"Authorized redirect URI:\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>Authorized redirect URI</b>\" field: "
-msgstr ""
-"Voeg de volgende URL toe aan het veld \"Geautoriseerde omleidings-URI:\": <b>"
-"%s</b>"
 
 #, fuzzy
 #| msgid "Locate the \"Create app\" button and click on it."
@@ -3739,11 +3838,6 @@ msgid "Click on the App which has its credentials associated with the plugin."
 msgstr "Klik op de App met de inloggegevens die aan de plugin zijn gekoppeld."
 
 #, fuzzy
-#| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
-msgid "Add the following URL to the \"<b>Redirect URI(s)</b>\" field:"
-msgstr "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
-
-#, fuzzy
 #| msgid "Click on the \"Create an App\" button on the top right corner."
 msgid "Click on the \"<b>Create an App</b>\" button on the top right corner."
 msgstr "Klik op de knop \"Maak een App\" in de rechterbovenhoek."
@@ -3814,6 +3908,113 @@ msgstr "OF"
 
 msgid "Social accounts"
 msgstr "Social accounts"
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"Valid OAuth redirect URIs\" field: <b>%s</"
+#~| "b>"
+#~ msgid ""
+#~ "Add the following URL to the \"<b>Valid OAuth redirect URIs</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Geldige OAuth omleidings-URI's\": "
+#~ "<b>%s</b>"
+
+#, fuzzy
+#~| msgid "Find your App and click on the Details button"
+#~ msgid ""
+#~ "Find your App and click on the <b>App settings</b> icon. (The one that "
+#~ "looks like a gear.)"
+#~ msgstr "Vind jew app en klik op de knop Details"
+
+#, fuzzy
+#~| msgid "Click on the \"Create an App\" button on the top right corner."
+#~ msgid "Click on the <b>Edit</b> button at <b>Authentication settings</b>."
+#~ msgstr "Klik op de knop \"Maak een App\" in de rechterbovenhoek."
+
+#, fuzzy, php-format
+#~| msgid "Click \"Edit\"."
+#~ msgid "Click \"<b>%s</b>\"!"
+#~ msgstr "Klik op \"Bewerken\"."
+
+#~ msgid "API secret key"
+#~ msgstr "API geheime sleutel"
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"Allowed Return URLs\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Allowed Return URLs</b>\" field: "
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Toegestane Return URLs\" <b>%s</"
+#~ "b> "
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Return URLs</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+#~ msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Callback URLs\" field: <b>%s</b>"
+#~ msgid "Add the following URL to the \"<b>Callback URL</b>\" field:"
+#~ msgstr "Voeg de volgende URL toe aan het veld \"Callback URL's\": <b>%s</b>"
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Callback URLs\" field: <b>%s</b>"
+#~ msgid ""
+#~ "Add the following URL to the <b>Authorization callback URL</b> field:"
+#~ msgstr "Voeg de volgende URL toe aan het veld \"Callback URL's\": <b>%s</b>"
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Redirect URLs</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Redirect URIs</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Redirect URI</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Live Return URL\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Live Return URL</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het \"Live Return URL\" veld <b>%s</b> "
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"Authorized redirect URI:\" field: <b>%s</"
+#~| "b>"
+#~ msgid ""
+#~ "Add the following URL to the \"<b>Authorized redirect URI</b>\" field: "
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Geautoriseerde omleidings-URI:\": "
+#~ "<b>%s</b>"
+
+#, fuzzy
+#~| msgid "Add the following URL to the \"Redirect URLs\" field <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Redirect URI(s)</b>\" field:"
+#~ msgstr ""
+#~ "Voeg de volgende URL toe aan het veld \"Omleidings-URLs\" <b>%s</b> "
 
 #, fuzzy, php-format
 #~| msgid ""
@@ -3982,13 +4183,6 @@ msgstr "Social accounts"
 #~ msgstr ""
 #~ "Selecteer \"Integreer Facebook Login\" op de Selecteer een Scenario "
 #~ "pagina en klik vervolgens op Bevestigen."
-
-#~ msgid ""
-#~ "In the left sidebar under the Products section, click on \"Facebook Login"
-#~ "\" and select Settings"
-#~ msgstr ""
-#~ "Klik in de linkerzijbalk onder de Producten-sectie op \"Facebook Login\" "
-#~ "en selecteer Instellingen"
 
 #~ msgid ""
 #~ "In the top of the left sidebar, click on \"Settings\" and select \"Basic\""

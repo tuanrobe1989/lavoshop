@@ -575,6 +575,9 @@ class BeRocket_AAPF extends BeRocket_Framework {
         if( ! empty($GLOBALS['woocommerce-aelia-currencyswitcher']) ) {
             include_once(plugin_dir_path( __FILE__ ) . "includes/compatibility/aelia-currencyswitcher.php");
         }
+        if( defined( 'SEARCHWP_WOOCOMMERCE_VERSION') ) {
+            include_once(plugin_dir_path( __FILE__ ) . "includes/compatibility/wpsearch_wc_compatibility.php");
+        }
         if( apply_filters('BeRocket_AAPF_widget_load_file', true) ) {
             foreach (glob(__DIR__ . "/includes/display_filter/*.php") as $filename)
             {

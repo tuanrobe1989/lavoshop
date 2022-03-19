@@ -1543,3 +1543,41 @@ div.awdr_recipe_main_card{
     clear: both;
     padding-top: 15px;
 }
+
+.wdr-cart-coupon-url {
+    display: inline-grid !important;
+    width: 100%;
+}
+.wdr-cart-coupon-url-lists {
+    margin-top: 10px !important;
+}
+.wdr-cart-coupon-url-custom,
+.wdr-cart-coupon-url-one,
+.wdr-cart-coupon-url-all,
+.wdr-coupon-url-group {
+    margin-left: 0;
+}
+.wdr-coupon-url-group label {
+    vertical-align: top;
+}
+.wdr-coupon-url-group button {
+    height: 30px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 0 4px 4px 0;
+    background: #f0f0f1;
+    margin-left: -8px;
+    margin-bottom: 10px;
+    color: #0a4b78;
+    border: 1px dashed #0a4b78;
+}
+.wdr-coupon-url-group button:hover {
+    background: #f0f0f1;
+    border: 1px dashed #0a4b78;
+    cursor: pointer;
+}
+.wdr-coupon-url-group input,
+.wdr-coupon-url-group input:focus{
+    border: 1px dashed #0a4b78;
+    box-shadow: none;
+}

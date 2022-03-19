@@ -9,6 +9,7 @@ use MailPoet\Entities\DynamicSegmentFilterData;
 use MailPoet\Entities\DynamicSegmentFilterEntity;
 use MailPoet\Segments\DynamicSegments\Exceptions\InvalidFilterException;
 use MailPoet\Segments\DynamicSegments\Filters\EmailAction;
+use MailPoet\Segments\DynamicSegments\Filters\EmailActionClickAny;
 use MailPoet\Segments\DynamicSegments\Filters\EmailOpensAbsoluteCountAction;
 use MailPoet\Segments\DynamicSegments\Filters\Filter;
 use MailPoet\Segments\DynamicSegments\Filters\MailPoetCustomFields;
@@ -18,6 +19,7 @@ use MailPoet\Segments\DynamicSegments\Filters\SubscriberSubscribedDate;
 use MailPoet\Segments\DynamicSegments\Filters\UserRole;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceCategory;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceCountry;
+use MailPoet\Segments\DynamicSegments\Filters\WooCommerceMembership;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceNumberOfOrders;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceProduct;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceSubscription;
@@ -45,6 +47,9 @@ class FilterFactory {
   /** @var WooCommerceTotalSpent */
   private $wooCommerceTotalSpent;
 
+  /** @var WooCommerceMembership */
+  private $wooCommerceMembership;
+
   /** @var WooCommerceSubscription */
   private $wooCommerceSubscription;
 
@@ -60,13 +65,15 @@ class FilterFactory {
   /** @var MailPoetCustomFields */
   private $mailPoetCustomFields;
 
-  /**
-   * @var SubscriberSegment
-   */
+  /** @var SubscriberSegment */
   private $subscriberSegment;
+
+  /** @var EmailActionClickAny */
+  private $emailActionClickAny;
 
   public function __construct(
     EmailAction $emailAction,
+    EmailActionClickAny $emailActionClickAny,
     UserRole $userRole,
     MailPoetCustomFields $mailPoetCustomFields,
     WooCommerceProduct $wooCommerceProduct,
@@ -75,6 +82,7 @@ class FilterFactory {
     EmailOpensAbsoluteCountAction $emailOpensAbsoluteCount,
     WooCommerceNumberOfOrders $wooCommerceNumberOfOrders,
     WooCommerceTotalSpent $wooCommerceTotalSpent,
+    WooCommerceMembership $wooCommerceMembership,
     WooCommerceSubscription $wooCommerceSubscription,
     SubscriberSubscribedDate $subscriberSubscribedDate,
     SubscriberScore $subscriberScore,
@@ -86,6 +94,7 @@ class FilterFactory {
     $this->wooCommerceCategory = $wooCommerceCategory;
     $this->wooCommerceCountry = $wooCommerceCountry;
     $this->wooCommerceNumberOfOrders = $wooCommerceNumberOfOrders;
+    $this->wooCommerceMembership = $wooCommerceMembership;
     $this->wooCommerceSubscription = $wooCommerceSubscription;
     $this->emailOpensAbsoluteCount = $emailOpensAbsoluteCount;
     $this->wooCommerceTotalSpent = $wooCommerceTotalSpent;
@@ -93,6 +102,7 @@ class FilterFactory {
     $this->subscriberScore = $subscriberScore;
     $this->mailPoetCustomFields = $mailPoetCustomFields;
     $this->subscriberSegment = $subscriberSegment;
+    $this->emailActionClickAny = $emailActionClickAny;
   }
 
   public function getFilterForFilterEntity(DynamicSegmentFilterEntity $filter): Filter {
@@ -104,6 +114,8 @@ class FilterFactory {
         return $this->userRole($action);
       case DynamicSegmentFilterData::TYPE_EMAIL:
         return $this->email($action);
+      case DynamicSegmentFilterData::TYPE_WOOCOMMERCE_MEMBERSHIP:
+        return $this->wooCommerceMembership();
       case DynamicSegmentFilterData::TYPE_WOOCOMMERCE_SUBSCRIPTION:
         return $this->wooCommerceSubscription();
       case DynamicSegmentFilterData::TYPE_WOOCOMMERCE:
@@ -130,8 +142,14 @@ class FilterFactory {
     $countActions = [EmailOpensAbsoluteCountAction::TYPE, EmailOpensAbsoluteCountAction::MACHINE_TYPE];
     if (in_array($action, $countActions)) {
       return $this->emailOpensAbsoluteCount;
+    } elseif ($action === EmailActionClickAny::TYPE) {
+      return $this->emailActionClickAny;
     }
     return $this->emailAction;
+  }
+
+  private function wooCommerceMembership() {
+    return $this->wooCommerceMembership;
   }
 
   private function wooCommerceSubscription() {

@@ -2,9 +2,9 @@
 Contributors: SkyVerge, maxrice, tamarazuk, chasewiseman, nekojira, beka.rice
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Customizer
 Tags: woocommerce, woocommerce shop, woocommerce filters, woocommerce text
-Requires at least: 4.4
-Tested up to: 5.4.1
-Stable tag: 2.7.4
+Requires at least: 4.7
+Tested up to: 5.9.1
+Stable tag: 2.7.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,7 +14,7 @@ Helps you customize WooCommerce without writing any code!
 
 WooCommerce includes tons of filters to let you customize button text, labels, and more, but you have to write PHP code to use them. This plugin provides a settings page where you can add your customizations and save them without needing to write any code or modify any templates, which is helpful for quick change testing.
 
-> **Requires** WooCommerce 3.0.9+
+> **Requires** WooCommerce 3.9.4+
 
 Here are some customizations you can make:
 
@@ -71,6 +71,12 @@ Of course! Please fork the [GitHub](https://github.com/skyverge/woocommerce-cust
 
 == Changelog ==
 
+= 2022.03.02 - version 2.7.6 =
+* Fix - Remove image placeholder (this is included in WC 3.5+)
+
+= 2022.03.01 - version 2.7.5 =
+* Misc - Require WooCommerce 3.9.4 or newer
+
 = 2020.05.04 - version 2.7.4 =
 * Misc - Add support for WooCommerce 4.1
 
@@ -83,12 +89,12 @@ Of course! Please fork the [GitHub](https://github.com/skyverge/woocommerce-cust
 = 2019.11.11 - version 2.7.1 =
 * Misc - Add support for WooCommerce 3.8
 
-= 2019.08.15 - version 2.7.0
+= 2019.08.15 - version 2.7.0 =
 * Misc - Add support for WooCommerce 3.7
 * Misc - Remove support for WooCommerce 2.6
 * Misc - Require WordPress 4.4+
 
-= 2019.06.12 - version 2.6.1
+= 2019.06.12 - version 2.6.1 =
 * Misc - Declare WooCommerce 3.6 compatibility
 
 = 2018.07.17 - version 2.6.0 =

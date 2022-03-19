@@ -355,6 +355,7 @@ class NextendSocialLoginAdmin {
         foreach ($postedData as $key => $value) {
             switch ($key) {
                 case 'debug':
+                case 'bypass_cache':
                 case 'login_restriction':
                 case 'avatars_in_all_media':
                 case 'custom_register_label':

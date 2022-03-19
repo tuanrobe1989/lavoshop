@@ -79,7 +79,7 @@ class Services extends APIEndpoint {
 
     if (!$key) {
       return $this->badRequest([
-        APIError::BAD_REQUEST  => $this->wp->__('Please specify a key.', 'mailpoet'),
+        APIError::BAD_REQUEST => $this->wp->__('Please specify a key.', 'mailpoet'),
       ]);
     }
 
@@ -133,7 +133,7 @@ class Services extends APIEndpoint {
         $code = !empty($result['code']) ? $result['code'] : Bridge::CHECK_ERROR_UNKNOWN;
         $errorMessage = $this->wp->__('Error validating MailPoet Sending Service key, please try again later (%s).', 'mailpoet');
         // If site runs on localhost
-        if ( 1 === preg_match("/^(http|https)\:\/\/(localhost|127\.0\.0\.1)/", $this->wp->siteUrl()) ) {
+        if (1 === preg_match("/^(http|https)\:\/\/(localhost|127\.0\.0\.1)/", $this->wp->siteUrl())) {
           $errorMessage .= ' ' . $this->wp->__("Note that it doesn't work on localhost.", 'mailpoet');
         }
         $error = sprintf(
@@ -151,7 +151,7 @@ class Services extends APIEndpoint {
 
     if (!$key) {
       return $this->badRequest([
-        APIError::BAD_REQUEST  => $this->wp->__('Please specify a key.', 'mailpoet'),
+        APIError::BAD_REQUEST => $this->wp->__('Please specify a key.', 'mailpoet'),
       ]);
     }
 
@@ -211,9 +211,18 @@ class Services extends APIEndpoint {
 
   public function recheckKeys() {
     $this->mssWorker->init();
-    $this->mssWorker->checkKey();
+    $mssCheck = $this->mssWorker->checkKey();
     $this->premiumWorker->init();
-    $this->premiumWorker->checkKey();
+    $premiumCheck = $this->premiumWorker->checkKey();
+    // continue sending when it is paused and states are valid
+    $mailerLog = MailerLog::getMailerLog();
+    if (
+      (isset($mailerLog['status']) && $mailerLog['status'] === MailerLog::STATUS_PAUSED)
+      && (isset($mssCheck['state']) && $mssCheck['state'] === Bridge::KEY_VALID)
+      && (isset($premiumCheck['state']) && $premiumCheck['state'] === Bridge::PREMIUM_KEY_VALID)
+    ) {
+      MailerLog::resumeSending();
+    }
     return $this->successResponse();
   }
 

@@ -1,5 +1,5 @@
 <?php
-add_action('init', 'add_lazyload_func');
+//add_action('init', 'add_lazyload_func');
 function add_lazyload_func()
 {
     if (!is_admin()) :
@@ -37,17 +37,30 @@ function cm_add_image_placeholders($content)
 // }
 // add_action('flatsome_before_blog','breadcrum');
 // To change add to cart text on single product page
-add_filter('woocommerce_product_single_add_to_cart_text', 'woocommerce_custom_single_add_to_cart_text');
+add_filter('woocommerce_product_single_add_to_cart_text', 'woocommerce_custom_single_add_to_cart_text', 99);
 function woocommerce_custom_single_add_to_cart_text()
 {
-    return __('Đặt Hàng Ngay', 'woocommerce');
+    global $product;
+    $name = __('Đặt Hàng Ngay', 'woocommerce');
+    if (!$product->get_price()) $name = __('Liên Hệ: 18007019', 'woocommerce');
+    return $name;
 }
 
 // To change add to cart text on product archives(Collection) page
-add_filter('woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text');
+add_filter('woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text', 99);
 function woocommerce_custom_product_add_to_cart_text()
 {
-    return __('Đặt Hàng Ngay', 'woocommerce');
+    global $product;
+    $name = __('Đặt Hàng Ngay', 'woocommerce');
+    if (!$product->get_price()) $name = __('Liên Hệ: 18007019', 'woocommerce');
+    return $name;
+}
+
+add_action('woocommerce_single_product_summary', 'woocommerce_after_add_to_cart_form_func', 40);
+function woocommerce_after_add_to_cart_form_func()
+{
+    global $product;
+    if (!$product->get_price()) echo '<a href=""  class="single_add_to_cart_button button button__contact">' . $name = __('Liên Hệ Đặt Hàng: 18007019', 'woocommerce') . '</a>';
 }
 
 // Add a custom field in the Product data's General tab (for simple products).
@@ -112,6 +125,7 @@ function add_class_to_thumbs($html, $attachment_id)
 }
 
 add_action('woocommerce_product_afterthumb', 'woocommerce_product_afterthumb_func');
+add_action('woocommerce_product_thumbnails', 'woocommerce_product_afterthumb_func', 90);
 function woocommerce_product_afterthumb_func()
 {
     global $product;
@@ -179,12 +193,7 @@ function hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery($ord
     $order = wc_get_order($order_id);
     $status = $order->get_status();
     switch ($status):
-        case 'canceled':
-        ?>
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/cancel-checkout.png" class="lazyload" />
-        <?php
-            break;
-        case 'pending':
+        case 'cancelled':
         ?>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/cancel-checkout.png" class="lazyload" />
         <?php
@@ -197,19 +206,30 @@ function hwn_add_thankyou_custom_text_for_orders_paid_with_cash_on_delivery($ord
         case 'completed':
         ?>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="<?php echo get_stylesheet_directory_uri() ?>/images/thank-you.jpg" class="lazyload" />
-        <?php
+            <?php
             break;
     endswitch;
     $payment_method = $order->get_payment_method();
+
     switch ($payment_method):
         case 'vnpay':
-        ?>
-            <div class="woocommerce-message message-wrapper bormess" role="alert">
-                <div class="message-container container success-color medium-text-center">
-                    <i class="icon-checkmark"></i> <?php _e('Đã thanh toán', LAVOSHOP) ?>
+            if ($status == 'processing' || $status == 'completed') :
+            ?>
+                <div class="woocommerce-message message-wrapper bormess" role="alert">
+                    <div class="message-container container success-color medium-text-center">
+                        <i class="icon-checkmark"></i> <?php _e('Đã thanh toán', LAVOSHOP) ?>
+                    </div>
                 </div>
-            </div>
-        <?php
+            <?php
+            else :
+            ?>
+                <div class="woocommerce-message message-wrapper bormess" role="alert">
+                    <div class="message-container container alert-color medium-text-center">
+                        <i class="icon-checkmark"></i> <?php _e('Đã hủy thanh toán', LAVOSHOP) ?>
+                    </div>
+                </div>
+    <?php
+            endif;
             break;
     endswitch;
 }
@@ -221,7 +241,151 @@ add_action('woocommerce_thankyou', function () {
     echo '</div>';
 }, 11);
 
-add_action('wp_footer','add_promotion_form_func');
-function add_promotion_form_func(){
-   echo  do_shortcode('[button text="Lightbox button" link="#promoform"][lightbox id="promoform" class="promoform" width="600px" padding="20px"][contact-form-7 id="1631" title="Form Khuyến Mãi"][/lightbox]');
+add_action('wp_footer', 'add_promotion_form_func');
+function add_promotion_form_func()
+{
+    $str = '';
+    if ($_COOKIE['promoform'] != 1 && !is_cart() && !is_checkout()) :
+        $str = 'auto_open="true" auto_timer="3000" auto_show="always"';
+    endif;
+    if (is_front_page()) :
+        echo  do_shortcode('[lightbox id="promoform" ' . $str . ' class="promoform" width="600px" padding="20px"][contact-form-7 id="1631" title="Form Khuyến Mãi"][/lightbox]');
+    endif;
 }
+
+add_filter('text_fly', 'text_fly_func');
+function text_fly_func()
+{
+    return 'GHTK Giao Nhanh';
+}
+add_filter('text_xteam', 'text_xteam_func');
+function text_xteam_func()
+{
+    return 'Giao nhanh xFast 2h';
+}
+add_filter('text_road', 'text_road_func');
+function text_road_func()
+{
+    return 'GHTK Tiêu chuẩn';
+}
+
+function woocom_extra_register_fields()
+{ ?>
+
+    <p class="form-row form-row-first">
+
+        <label for="reg_billing_first_name"><?php _e('First name', 'woocommerce'); ?><span class="required">*</span></label>
+        <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
+    </p>
+
+    <p class="form-row form-row-last">
+
+        <label for="reg_billing_last_name"><?php _e('Last name', 'woocommerce'); ?><span class="required">*</span></label>
+        <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
+    </p>
+
+    <p class="form-row form-row-wide">
+        <label for="reg_billing_phone"><?php _e('Phone', 'woocommerce'); ?><span class="required">*</span></label>
+        <input type="text" class="input-text" name="billing_phone" id="reg_billing_phone" value="<?php if (!empty($_POST['billing_phone'])) esc_attr_e($_POST['billing_phone']); ?>" />
+    </p>
+
+<?php
+
+}
+
+add_action('woocommerce_register_form_start', 'woocom_extra_register_fields');
+
+function woocom_validate_extra_register_fields($username, $email, $validation_errors)
+
+{
+    if (isset($_POST['billing_phone']) && empty($_POST['billing_phone'])) {
+        $validation_errors->add('billing_mobile_number_error', __('Mobile number cannot be left blank.', 'woocommerce'));
+    }
+
+    if (isset($_POST['billing_phone']) && strlen($_POST['billing_phone']) < 9) {
+        $validation_errors->add('billing_mobile_number_error', __('Phone number length should not be less than 9 digit', 'woocommerce'));
+    }
+
+    if (isset($_POST['billing_phone'])) {
+        $hasPhoneNumber = get_users('meta_value=' . $_POST['billing_phone']);
+        if (!empty($hasPhoneNumber)) {
+            $validation_errors->add('billing_phone_error', __('Mobile number is already used!.', 'woocommerce'));
+        }
+    }
+
+
+    if (isset($_POST['billing_first_name']) && empty($_POST['billing_first_name'])) {
+
+        $validation_errors->add('billing_first_name_error', __('First Name is required!', 'woocommerce'));
+    }
+
+    if (isset($_POST['billing_last_name']) && empty($_POST['billing_last_name'])) {
+
+        $validation_errors->add('billing_last_name_error', __('Last Name is required!', 'woocommerce'));
+    }
+
+    return $validation_errors;
+}
+
+add_action('woocommerce_register_post', 'woocom_validate_extra_register_fields', 20, 3);
+
+
+///
+
+//  Allow login via phone number and email
+
+///
+
+function njengah_loginWithPhoneNumber($user, $username, $password)
+{
+
+    //  Try logging in via their billing phone number
+
+    if (is_numeric($username)) {
+
+        //  The passed username is numeric - that's a start
+
+        //  Now let's grab all matching users with the same phone number:
+
+        $matchingUsers = get_users(array(
+
+            'meta_key'     => 'billing_phone',
+
+            'meta_value'   => $username,
+
+            'meta_compare' => 'LIKE'
+
+        ));
+
+        //  Let's save time and assume there's only one.
+
+        if (is_array($matchingUsers) && !empty($matchingUsers)) {
+
+            $username = $matchingUsers[0]->user_login;
+        }
+    } elseif (is_email($username)) {
+
+        //  The passed username is email- that's a start
+
+        //  Now let's grab all matching users with the same email:
+
+        $matchingUsers = get_user_by("email", $username);
+
+        //  Let's save time and assume there's only one.
+
+        if (isset($matchingUsers->user_login)) {
+
+            $username = $matchingUsers->user_login;
+        }
+    }
+
+    return wp_authenticate_username_password(null, $username, $password);
+}
+
+add_filter('authenticate', 'njengah_loginWithPhoneNumber', 20, 3);
+
+function header_cover_func(){
+    echo do_shortcode('[block id="topbar"]');
+}
+add_action('wp_head','header_cover_func');
+

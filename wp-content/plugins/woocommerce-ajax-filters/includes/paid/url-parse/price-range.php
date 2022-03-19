@@ -91,8 +91,8 @@ if( ! class_exists('BeRocket_url_parse_page_price_range') ) {
             foreach($filter['val_arr'] as $price_val) {
                 if( isset($price_val['from']) && isset($price_val['to']) ) {
                     $prices[] = $wpdb->prepare(
-                        'wc_product_meta_lookup.min_price >= %f AND wc_product_meta_lookup.max_price <= %f',
-                        $price_val['from'],
+                        'wc_product_meta_lookup.min_price >= %f AND wc_product_meta_lookup.max_price < %f',
+                        ($price_val['from'] - 1),
                         $price_val['to']
                     );
                 }
@@ -115,8 +115,8 @@ if( ! class_exists('BeRocket_url_parse_page_price_range') ) {
             foreach($filter['val_arr'] as $price_val) {
                 if( isset($price_val['from']) && isset($price_val['to']) ) {
                     $prices[] = $wpdb->prepare(
-                        'bapf_price_lookup.min_price >= %f AND bapf_price_lookup.max_price <= %f',
-                        $price_val['from'],
+                        'bapf_price_lookup.min_price >= %f AND bapf_price_lookup.max_price < %f',
+                        ($price_val['from'] - 1),
                         $price_val['to']
                     );
                 }
@@ -209,8 +209,23 @@ if( ! class_exists('BeRocket_url_parse_page_price_range') ) {
             if ( $attr_filter_type == 'attribute' ) {
                 if ( (berocket_isset($type) == 'ranges' || in_array(berocket_isset($new_template), array('checkbox', 'select'))) && $attr_type == 'price' ) {
                     $terms_ready = true;
+                    if(is_array($ranges)) {
+                        $prev_range = -1;
+                        foreach($ranges as $i => $range) {
+                            if(strlen($range) == 0) {
+                                unset($ranges[$i]);
+                                continue;
+                            }
+                            if(floatval($range) <= $prev_range) {
+                                unset($ranges[$i]);
+                                continue;
+                            }
+                            $prev_range = floatval($range);
+                        }
+                    }
+                    $ranges = array_values($ranges);
 
-                    if ( count( $ranges ) < 2 ) {
+                    if ( ! is_array($ranges) || count( $ranges ) < 2 ) {
                         $terms_error_return = 'ranges < 2';
                         $terms = $ranges;
                         return array($terms_error_return, $terms_ready, $terms, $type);
@@ -272,7 +287,7 @@ if( ! class_exists('BeRocket_url_parse_page_price_range') ) {
                             $range_to = intval( apply_filters( 'berocket_price_filter_widget_max_amount', apply_filters( 'woocommerce_price_filter_widget_max_amount', $price_range['to'] ), $price_range['to'] ) );
                             $index = ($i + 1);
                         }
-                        $t_id       = ( $price_range['from'] + 1 ) . '*' . $price_range['to'];
+                        $t_id       = ( $price_range['real_from'] + 1 ) . '*' . $price_range['real_to'];
                         $t_name = $this->ranges_name_generate('', $index, $range_from, $range_to, $instance);
                         $term       = array( 'term_id'  => $t_id,
                                              'slug'     => $t_id,

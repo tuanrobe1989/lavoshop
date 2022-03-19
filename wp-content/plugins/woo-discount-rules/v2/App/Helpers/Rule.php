@@ -1682,6 +1682,39 @@ class Rule
         return $custom_coupons;
     }
 
+	/**
+	 * get all url coupons
+	 * @return array
+	 */
+	function getAllUrlCoupons()
+	{
+		$available_rules = DBTable::getRules();
+		$url_coupons = array();
+		foreach ($available_rules as $rule) {
+			if (isset($rule->enabled) && $rule->enabled == 1 && isset($rule->conditions) && !empty($rule->conditions) && $rule->conditions != '{}' && $rule->conditions != '[]') {
+				$conditions = json_decode($rule->conditions);
+				foreach ($conditions as $condition) {
+					$option_obj = (isset($condition->options) && !empty($condition->options) ? $condition->options : '');
+					$type = (isset($condition->type) && !empty($condition->type) ? $condition->type : '');
+					$operator = (isset($option_obj->operator) && !empty($option_obj->operator) ? $option_obj->operator : '');
+					$enable_url = (isset($option_obj->enable_url)) ? true : false;
+					$values = (isset($option_obj->value) && is_array($option_obj->value)) ? $option_obj->value : [];
+					$custom_value = (isset($option_obj->custom_value) && !empty($option_obj->custom_value) ? $option_obj->custom_value : '');
+					if ($type == 'cart_coupon' && $enable_url) {
+						if ($operator == 'custom_coupon' && $custom_value != '') {
+							$url_coupons[] = $custom_value;
+						} elseif (in_array($operator, ['all', 'at_least_one'])) {
+							foreach ($values as $value) {
+								$url_coupons[] = $value;
+							}
+						}
+					}
+				}
+			}
+		}
+		return array_unique($url_coupons);
+	}
+
     /**
      * get all custom coupons
      * @return array

@@ -7,12 +7,15 @@ if (!defined('ABSPATH')) exit;
 
 use MailPoet\API\JSON\API;
 use MailPoet\AutomaticEmails\AutomaticEmails;
+use MailPoet\Automation\Automation;
 use MailPoet\Cron\CronTrigger;
+use MailPoet\Features\FeaturesController;
 use MailPoet\InvalidStateException;
 use MailPoet\PostEditorBlocks\PostEditorBlock;
 use MailPoet\PostEditorBlocks\WooCommerceBlocksIntegration;
 use MailPoet\Router;
 use MailPoet\Settings\SettingsController;
+use MailPoet\Statistics\Track\SubscriberActivityTracker;
 use MailPoet\Util\ConflictResolver;
 use MailPoet\Util\Helpers;
 use MailPoet\Util\Notices\PermanentNotices;
@@ -22,8 +25,6 @@ use MailPoet\WP\Functions as WPFunctions;
 use MailPoet\WP\Notice as WPNotice;
 
 class Initializer {
-  public $automaticEmails;
-
   /** @var AccessControl */
   private $accessControl;
 
@@ -81,8 +82,20 @@ class Initializer {
   /** @var Localizer */
   private $localizer;
 
+  /** @var AutomaticEmails */
+  private $automaticEmails;
+
   /** @var AssetsLoader */
   private $assetsLoader;
+
+  /** @var SubscriberActivityTracker */
+  private $subscriberActivityTracker;
+
+  /** @var Automation */
+  private $automation;
+
+  /** @var FeaturesController */
+  private $featuresController;
 
   const INITIALIZED = 'MAILPOET_INITIALIZED';
 
@@ -105,7 +118,11 @@ class Initializer {
     WooCommerceBlocksIntegration $woocommerceBlocksIntegration,
     WooCommerceHelper $wcHelper,
     Localizer $localizer,
-    AssetsLoader $assetsLoader
+    AutomaticEmails $automaticEmails,
+    SubscriberActivityTracker $subscriberActivityTracker,
+    AssetsLoader $assetsLoader,
+    Automation $automation,
+    FeaturesController $featuresController
   ) {
     $this->rendererFactory = $rendererFactory;
     $this->accessControl = $accessControl;
@@ -125,7 +142,11 @@ class Initializer {
     $this->postEditorBlock = $postEditorBlock;
     $this->woocommerceBlocksIntegration = $woocommerceBlocksIntegration;
     $this->localizer = $localizer;
+    $this->automaticEmails = $automaticEmails;
+    $this->subscriberActivityTracker = $subscriberActivityTracker;
     $this->assetsLoader = $assetsLoader;
+    $this->automation = $automation;
+    $this->featuresController = $featuresController;
   }
 
   public function init() {
@@ -143,6 +164,10 @@ class Initializer {
           'data-beacon-article' => '596de7db2c7d3a73488b2f8d',
         ]
       ));
+    }
+
+    if ($this->featuresController->isSupported(FeaturesController::AUTOMATION)) {
+      $this->automation->initialize();
     }
 
     // activation function
@@ -240,6 +265,7 @@ class Initializer {
       $this->setupPermanentNotices();
       $this->setupAutomaticEmails();
       $this->setupWoocommerceBlocksIntegration();
+      $this->subscriberActivityTracker->trackActivity();
       $this->postEditorBlock->init();
 
       WPFunctions::get()->doAction('mailpoet_initialized', MAILPOET_VERSION);
@@ -260,7 +286,7 @@ class Initializer {
     }
 
     // if current db version and plugin version differ
-    if (version_compare($currentDbVersion, Env::$version) !== 0) {
+    if (version_compare((string)$currentDbVersion, Env::$version) !== 0) {
       $this->activator->activate();
     }
   }
@@ -372,9 +398,8 @@ class Initializer {
   }
 
   public function setupAutomaticEmails() {
-    $automaticEmails = new AutomaticEmails();
-    $automaticEmails->init();
-    $automaticEmails->getAutomaticEmails();
+    $this->automaticEmails->init();
+    $this->automaticEmails->getAutomaticEmails();
   }
 
   public function multisiteDropTables($tables) {

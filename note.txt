@@ -1,3 +1,39 @@
+*** SERVER: ***
+- phpmyadmin
++ pass: lwn$l;J&@]8i
++ user: lavos395_live
++ database: lavos395_live
+
+
+*** GHTK PLUGIN ***
+DEVVN-5423-6rHzitWc6erQgK3aNJiK6xEP
+
+*** GHTK ACCOUNT ***
+- Mã-Shop: S17063335
+- LIVE SITE: 8d6F6708a6368A73A03A50aBB615c0ed959e3833
+
+-TESTSITE:
+8d6F6708a6368A73A03A50aBB615c0ed959e3833
+
+
+*** VNPAY: ***
+https://lavoshop.com/wp-admin/admin-ajax.php?action=update_shipping_status&hash=Bt959wHZmqS895Zr5mqcbiK4
+
+LAVOSHOP 
+FUEDJBNBCMXVAMWIFCSSZEXKWFQSRIDB 
+https://pay.vnpay.vn/vpcpay.html
+
+
+LAVOSHOP
+https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+ZCJMNXMBCSQMJHEIDSNNHTZJNDLSRSOO
+
+
+
+
+
+
+*** WEB ACCOUNT ***
 User: lavoshopadmin
 Pass: rqKaktGjR7UMha&93X
 

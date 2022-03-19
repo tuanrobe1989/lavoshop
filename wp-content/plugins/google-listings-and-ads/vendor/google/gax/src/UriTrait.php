@@ -32,7 +32,8 @@
 
 namespace Google\ApiCore;
 
-use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\GuzzleHttp\Psr7;
+use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\GuzzleHttp\Psr7\Query;
+use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -60,9 +61,9 @@ trait UriTrait
             }
         }
 
-        return Psr7\uri_for($uri)
+        return Utils::uriFor($uri)
             ->withQuery(
-                Psr7\build_query($query)
+                Query::build($query)
             );
     }
 }

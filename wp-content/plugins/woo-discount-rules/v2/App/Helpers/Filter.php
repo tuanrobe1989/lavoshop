@@ -193,8 +193,8 @@ class Filter
         if(!empty($parent_id)){
             $parent_product = Woocommerce::getProduct($parent_id);
             $parant_product_sku = Woocommerce::getProductSku($parent_product);
-            $result = $this->checkInList($parant_product_sku, $operation_method, $operation_values);
-            if($result){
+            if (in_array($parant_product_sku, $operation_values)) {
+                $result = $this->checkInList($parant_product_sku, $operation_method, $operation_values);
                 return $result;
             }
         }

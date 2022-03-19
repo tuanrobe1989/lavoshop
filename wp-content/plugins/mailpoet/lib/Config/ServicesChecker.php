@@ -28,6 +28,10 @@ class ServicesChecker {
     $this->subscribersFeature = ContainerWrapper::getInstance()->get(SubscribersFeature::class);
   }
 
+  public function isPremiumPluginActive() {
+    return License::getLicense() ? true : false;
+  }
+
   public function isMailPoetAPIKeyValid($displayErrorNotice = true, $forceCheck = false) {
     if (!$forceCheck && !Bridge::isMPSendingServiceEnabled()) {
       return null;
@@ -36,7 +40,8 @@ class ServicesChecker {
     $mssKeySpecified = Bridge::isMSSKeySpecified();
     $mssKey = $this->settings->get(Bridge::API_KEY_STATE_SETTING_NAME);
 
-    if (!$mssKeySpecified
+    if (
+      !$mssKeySpecified
       || empty($mssKey['state'])
       || $mssKey['state'] == Bridge::KEY_INVALID
     ) {
@@ -52,7 +57,8 @@ class ServicesChecker {
         WPNotice::displayError($error, '', '', false, false);
       }
       return false;
-    } elseif ($mssKey['state'] == Bridge::KEY_EXPIRING
+    } elseif (
+      $mssKey['state'] == Bridge::KEY_EXPIRING
       && !empty($mssKey['data']['expire_at'])
     ) {
       if ($displayErrorNotice) {
@@ -83,7 +89,8 @@ class ServicesChecker {
       $displayErrorNotice = false;
     }
 
-    if (!$premiumKeySpecified
+    if (
+      !$premiumKeySpecified
       || empty($premiumKey['state'])
       || $premiumKey['state'] === Bridge::KEY_INVALID
       || $premiumKey['state'] === Bridge::KEY_ALREADY_USED
@@ -98,14 +105,15 @@ class ServicesChecker {
         );
         $error = Helpers::replaceLinkTags(
           $error,
-          'admin.php?page=mailpoet-premium',
+          'admin.php?page=mailpoet-upgrade',
           [],
           'link2'
         );
         WPNotice::displayWarning($error);
       }
       return false;
-    } elseif ($premiumKey['state'] === Bridge::KEY_EXPIRING
+    } elseif (
+      $premiumKey['state'] === Bridge::KEY_EXPIRING
       && !empty($premiumKey['data']['expire_at'])
     ) {
       if ($displayErrorNotice) {
@@ -159,5 +167,15 @@ class ServicesChecker {
       return $this->settings->get(Bridge::PREMIUM_KEY_SETTING_NAME);
     }
     return null;
+  }
+
+  public function generatePartialApiKey(): string {
+    $key = (string)($this->getAnyValidKey());
+    if ($key) {
+      $halfKeyLength = (int)(strlen($key) / 2);
+
+      return substr($key, 0, $halfKeyLength);
+    }
+    return '';
   }
 }

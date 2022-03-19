@@ -981,7 +981,7 @@ class ManageDiscount extends Base
                         $this->applyFakeCouponsForCartRules($label);
                     }else{
                         $total_combined_discounts += $discount['value'];
-                        $combined_discounts_cart_items = array_merge($combined_discounts_cart_items, $discount['cart_item_key']);
+                        $combined_discounts_cart_items = array_merge($combined_discounts_cart_items, $discount['cart_item_keys']);
                     }
                 }
             }
@@ -1031,6 +1031,33 @@ class ManageDiscount extends Base
             }
         }
     }
+
+	/**
+	 * Apply url coupon
+	 */
+	function applyUrlCoupon() {
+		global $woocommerce;
+
+		if (isset($_GET['wdr_coupon']) && !empty($_GET['wdr_coupon']) && isset($woocommerce->cart)) {
+			if ( method_exists( $woocommerce->cart, 'has_discount' ) && method_exists( $woocommerce->cart, 'add_discount' ) ) {
+				$rule_helper           = new Rule();
+				$available_url_coupons = $rule_helper->getAllUrlCoupons();
+                $available_url_coupons = array_map('\Wdr\App\Helpers\Woocommerce::formatStringToLower', $available_url_coupons);
+				$coupons = explode(",", $_GET['wdr_coupon']);
+				foreach ( $coupons as $coupon ) {
+					$coupon_code = rawurldecode( $coupon );
+                    $coupon_code = Woocommerce::formatStringToLower($coupon_code);
+					if ( in_array( $coupon_code, $available_url_coupons ) ) {
+						if ( ! $woocommerce->cart->has_discount( $coupon_code ) ) {
+							$woocommerce->cart->add_discount( $coupon_code );
+						}
+					} else {
+						Woocommerce::wc_add_notice( sprintf( __( 'Coupon "%s" is currently not available!', 'woo-discount-rules' ), $coupon_code ), 'error' );
+					}
+				}
+			}
+		}
+	}
 
     /**
      * Get product ids from cart key
@@ -1521,6 +1548,9 @@ class ManageDiscount extends Base
                         $bxgy_cheapest_from_product_discount_price = isset($value['buy_x_get_y_cheapest_from_products_discount']['discount_price_per_quantity']) ? $value['buy_x_get_y_cheapest_from_products_discount']['discount_price_per_quantity'] : 0;
                         $bxgy_cheapest_from_product_discount_qty = isset($value['buy_x_get_y_cheapest_from_products_discount']['discount_quantity']) ? $value['buy_x_get_y_cheapest_from_products_discount']['discount_quantity'] : 0;
                         $bxgy_cheapest_from_product_discount = $bxgy_cheapest_from_product_discount_price * $bxgy_cheapest_from_product_discount_qty;
+                        $bxgy_cheapest_from_categories_discount_price = isset($value['buy_x_get_y_cheapest_from_categories_discount']['discount_price_per_quantity']) ? $value['buy_x_get_y_cheapest_from_categories_discount']['discount_price_per_quantity'] : 0;
+                        $bxgy_cheapest_from_categories_discount_qty = isset($value['buy_x_get_y_cheapest_from_categories_discount']['discount_quantity']) ? $value['buy_x_get_y_cheapest_from_categories_discount']['discount_quantity'] : 0;
+                        $bxgy_cheapest_from_categories_discount = $bxgy_cheapest_from_categories_discount_price * $bxgy_cheapest_from_categories_discount_qty;
                         $bogo_cheapest_aditional_sum = 0;
                         if(!empty($buy_x_get_y_cheapest_additional)) {
                             $bogo_cheapest_aditional = array();
@@ -1532,7 +1562,7 @@ class ManageDiscount extends Base
                             $bogo_cheapest_aditional_sum = array_sum($bogo_cheapest_aditional);
                         }
 
-                        $discount_price = $simple_discount + $bulk_discount + $set_discount + $bxgx_discount + $bxgy_discount + $bxgy_cheapest_discount + $bogo_cheapest_aditional_sum + $bxgy_cheapest_from_product_discount;
+                        $discount_price = $simple_discount + $bulk_discount + $set_discount + $bxgx_discount + $bxgy_discount + $bxgy_cheapest_discount + $bogo_cheapest_aditional_sum + $bxgy_cheapest_from_product_discount + $bxgy_cheapest_from_categories_discount;
                         if ($discount_price < 0) {
                             $discount_price = 0;
                         }

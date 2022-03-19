@@ -36,15 +36,12 @@ API](https://developers.google.com/google-ads/api/docs/start).
     [composer.json](composer.json) of this library.
     *   **PHP**: You can find the required minimum PHP version in `"php"` under the [**`require`**](https://getcomposer.org/doc/01-basic-usage.md#the-require-key) key of [`composer.json`](composer.json). We usually set it to the minimum PHP version for which the PHP development team still provide security fixes. Whenever such a version is sunset, we'll update the composer file accordingly. Currently, the update frequency is around once a year based on the [official schedule](https://www.php.net/supported-versions.php).
     Visit [this page](https://www.php.net/manual/en/getting-started.php) for introduction to PHP.
-    *   **gRPC**: To install the gRPC PHP extension, visit the
-        [**Install the gRPC PHP extension**](https://grpc.io/docs/languages/php/quickstart/#install-the-grpc-php-extension) section. It takes some time to install. To learn more about this requirement, please check the [Transport](https://developers.google.com/google-ads/api/docs/client-libs/php/transport) guide.
+    *   **gRPC**: To install the gRPC PHP extension, make sure to meet any additional requirements listed in the project's [**documentation**](https://grpc.io/docs/languages/php/quickstart/#prerequisites). You can learn more about how gRPC is used by this library by reading our [Transport](https://developers.google.com/google-ads/api/docs/client-libs/php/transport) guide. It usually take minutes to install using `PECL`:
         1.  Install the extension using the command `sudo pecl install grpc`.
         1.  Add a line `extension=grpc.so` to the `php.ini` file.
         1.  Run `php -i | grep grpc` in a terminal: it is well installed
             and configured if it returns something
-    *   **Protobuf**: To install the Protobuf PHP extension, visit the [**C implementation**](https://grpc.io/docs/languages/php/quickstart/#c-implementation-for-better-performance) section.
-        It takes some time to install. If you encounter any error, you can skip this step and the PHP
-        implementation will be used instead. More details can be found in the [Protobuf implementations](https://developers.google.com/google-ads/api/docs/client-libs/php/protobuf) guide.
+    *   **Protobuf**: To install the Protobuf PHP extension, make sure to meet any additional requirements listed in the project's [**documentation**](https://github.com/protocolbuffers/protobuf/tree/master/php#requirements). If you encounter any error during the installation, you can skip this step and the PHP implementation will be used instead. You can learn more about how Protobuf is used by this library by reading our [Protobuf implementations](https://developers.google.com/google-ads/api/docs/client-libs/php/protobuf) guide. It usually take minutes to install using `PECL`:
         1.  Install the extension using the command `sudo pecl install protobuf`.
         1.  Add a line `extension=protobuf.so` to the `php.ini` file.
         1.  Run `php -i | grep protobuf` in a terminal: it is well installed
@@ -52,6 +49,7 @@ API](https://developers.google.com/google-ads/api/docs/start).
 *   You need a [developer
     token](https://developers.google.com/google-ads/api/docs/first-call/dev-token)
     to connect to the Google Ads API.
+*   One version of the library typically supports multiple versions of the Google Ads API. You can check the [CHANGELOG.md](https://github.com/googleads/google-ads-php/blob/master/CHANGELOG.md) file to identify what versions of the library added or removed the support for a specific version of the Google Ads API. For example, the version `V7` of the Google Ads API was added in the version `v9.0.0` of the library as described [here](https://github.com/googleads/google-ads-php/blob/master/CHANGELOG.md#900).
 
 ## Getting started
 
@@ -140,7 +138,7 @@ API](https://developers.google.com/google-ads/api/docs/start).
 ### Instantiate a client
 
 To issue requests via the Google Ads API, you first need to create a
-[GoogleAdsClient](https://github.com/googleads/google-ads-php/blob/master/src/Google/Ads/GoogleAds/Lib/V6/GoogleAdsClient.php).
+[GoogleAdsClient](https://github.com/googleads/google-ads-php/blob/master/src/Google/Ads/GoogleAds/Lib/V8/GoogleAdsClient.php).
 
 For more information on how to configure a client when instantiating it, see the
 [configuration guide](https://developers.google.com/google-ads/api/docs/client-libs/php/configuration).

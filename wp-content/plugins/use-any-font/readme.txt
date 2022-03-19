@@ -2,8 +2,8 @@
 Contributors: dnesscarkey
 Tags: custom fonts, font embed, font uploader, typography, install font 
 Requires at least: 3.0
-Tested up to: 5.8.2
-Stable tag: 6.1.8
+Tested up to: 5.9
+Stable tag: 6.2.1
 
 Embed any custom font using font uploader and assign to elements. Upload font in 1 format and other needed formats are auto converted even woff2.
 
@@ -127,7 +127,7 @@ No, our server is needed during font conversion only. After that all fonts are s
 You can use <strong>uaf_get_font_families();</strong> function to get the list of custom fonts uploaded with Use Any Font. You can add it in your font family select box or list.
 
 <em>if (function_exists('uaf_get_font_families')){
-	$uaf_font_families = uaf_get_font_families();	// Return Array
+	$uaf_font_families = uaf_get_font_families();	// Returns Array
 }</em>
 
 Please do write us after integration and we will add it in our supported list.
@@ -142,6 +142,14 @@ Please do write us after integration and we will add it in our supported list.
 1. Screenshot #6. Assign fonts to custom elements.
 
 == Changelog ==
+
+= 6.2.1 =
+* Fixed warning notice.
+* Fixed only 1 font showing in font list
+* Security Fixes.
+
+= 6.2 =
+* Added multi variation font support.
 
 = 6.1.8 =
 * Added wpnonce for forms

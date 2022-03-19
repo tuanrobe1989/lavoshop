@@ -160,7 +160,7 @@ if( ! function_exists( 'br_color_picker' ) ) {
         $class = htmlentities( ( isset($additional['class']) && trim( $additional['class'] ) ) ? ' ' . trim( $additional['class'] ) : '' );
         $extra = htmlentities( ( isset($additional['extra']) && trim( $additional['extra'] ) ) ? ' ' . trim( $additional['extra'] ) : '' );
         $default = htmlentities( isset($default) && strlen($default) > 1 ? ( $default == -1 ? '' : ( $default[0] == '#' ? $default : '#' . $default ) ) : '#000000' );
-        $value = htmlentities( empty($value) ? $default : ( $value[0] == '#' ? $value : '#' . $value ) );
+        $value = esc_attr(htmlentities( empty($value) ? $default : ( $value[0] == '#' ? $value : '#' . $value ) ));
         $return = '';
         $return .= '<div class="berocket_color"><div class="br_colorpicker" data-default="' . $default . '" data-color="' . $value . '" style="background-color:' . $value . ';"></div>
             <input class="br_colorpicker_value' . $class . '" type="hidden" value="' . $value . '" name="' . $name . '"' . $extra . '/>';
@@ -189,7 +189,7 @@ if ( ! function_exists( 'br_upload_image' ) ) {
         $remove_button = ( isset($additional['remove_button']) ? $additional['remove_button'] : true );
         $class = htmlentities( ( isset($additional['class']) && trim( $additional['class'] ) ) ? ' ' . trim( $additional['class'] ) : '' );
         $extra = htmlentities( ( isset($additional['extra']) && trim( $additional['extra'] ) ) ? ' ' . trim( $additional['extra'] ) : '' );
-        $value = htmlentities($value);
+        $value = esc_attr(htmlentities($value));
         $result = '<div>';
         $result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" readonly class="berocket_image_value ' . $class . '"' . $extra . '/>';
 		$result .= ( empty($value) ? '<span class="berocket_selected_image" style="display:none;"></span>' : '<span class="berocket_selected_image"><image src="' . $value . '"></span>' );
@@ -240,7 +240,7 @@ if ( ! function_exists( 'br_fontawesome_image' ) ) {
         $remove_button = ( isset($additional['remove_button']) ? $additional['remove_button'] : true );
         $class = htmlentities( ( isset($additional['class']) && trim( $additional['class'] ) ) ? ' ' . trim( $additional['class'] ) : '' );
         $extra = htmlentities( ( isset($additional['extra']) && trim( $additional['extra'] ) ) ? ' ' . trim( $additional['extra'] ) : '' );
-        $value = htmlentities($value);
+        $value = esc_attr(htmlentities($value));
         $result = '<div class="berocket_select_fontawesome berocket_select_image">';
         $result .= berocket_fa_dark();
         $result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" readonly class="berocket_image_value berocket_fa_value ' . $class . '"' . $extra . '/>';
@@ -274,7 +274,7 @@ if ( ! function_exists( 'br_select_fontawesome' ) ) {
         $remove_button = ( isset($additional['remove_button']) ? $additional['remove_button'] : true );
         $class = htmlentities( ( isset($additional['class']) && trim( $additional['class'] ) ) ? ' ' . trim( $additional['class'] ) : '' );
         $extra = htmlentities( ( isset($additional['extra']) && trim( $additional['extra'] ) ) ? ' ' . trim( $additional['extra'] ) : '' );
-        $value = htmlentities($value);
+        $value = esc_attr(htmlentities($value));
         $result = '<div class="berocket_select_fontawesome">';
         $result .= berocket_fa_dark();
         $result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" readonly class="berocket_fa_value ' . $class . '"' . $extra . '/>

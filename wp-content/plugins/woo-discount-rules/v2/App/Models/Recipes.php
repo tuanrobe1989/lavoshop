@@ -30,7 +30,7 @@ class Recipes
             'set_adjustments' => '{"cart_label":""}',
             'advanced_discount_message' => '{"display":"0","badge_color_picker":"#ffffff","badge_text_color_picker":"#000000","badge_text":""}',
             'discount_type' => 'wdr_simple_discount',
-            'used_coupons' => '[]'
+            'used_coupons' => '["summer"]'
             ),
         'simple_recipe_2' => array(
             'title' => 'Subtotal tiered discount - sample',

@@ -240,6 +240,7 @@ class Settings extends Base
                 'searching_text' => __('Searching…', 'woo-discount-rules'),
             ),
             'lists' => $preloaded_lists,
+            'home_url' => home_url(),
             'admin_url' => admin_url('admin.php?page=woo_discount_rules'),
             'localization_data' => $localization_data,
             'enable_subtotal_promo_text' => $conig->getConfig('show_subtotal_promotion', ''),
@@ -518,6 +519,9 @@ If a customer buys  2 of Product A - Small,  4 of Product A - Medium,  6 of Prod
             'invalid_rule_limit_with_date_future' => __("<b>This rule is not running currently:</b> Start date and time is set in the future date", 'woo-discount-rules'),
             'invalid_rule_limit_with_date_expire' => __("<b>This rule is not running currently:</b> Validity expired", 'woo-discount-rules'),
             'select_state' => __("Select State", 'woo-discount-rules'),
+            'coupon_url_copy' => __("Copy URL", 'woo-discount-rules'),
+            'coupon_url_copied' => __("Copied!", 'woo-discount-rules'),
+            'coupon_url_success' => __("Coupon url copied!", 'woo-discount-rules'),
         );
     }
 }

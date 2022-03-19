@@ -62,6 +62,10 @@ class DiscountCalculator extends Base
             $calculate_discount_from = self::$config->getConfig('calculate_discount_from', 'sale_price');
             $language_helper_object = self::$language_helper;
             $discount_calculator = $this;
+            //Fix for filter exclusive rule on ajax request as the rules are not filtered in ajax request.
+            if($get_variable_product_table){
+                $discount_calculator->filterExclusiveRule(1, false, false, false);
+            }
             foreach (self::$rules as $rule) {
                 if (!$rule->isEnabled()) {
                     continue;

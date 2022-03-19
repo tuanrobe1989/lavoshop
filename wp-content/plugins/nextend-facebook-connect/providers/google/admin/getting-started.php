@@ -2,7 +2,7 @@
 defined('ABSPATH') || die();
 /** @var $this NextendSocialProviderAdmin */
 
-$lastUpdated = '2021-09-09';
+$lastUpdated = '2021-12-09';
 
 $provider = $this->getProvider();
 ?>
@@ -50,6 +50,7 @@ $provider = $this->getProvider();
             </li>
             <li><?php printf(__('Click on the "<b>%1$s</b>" button', 'nextend-facebook-connect'), 'Create'); ?></li>
             <li><?php printf(__('A modal should pop up with your credentials. If that doesn\'t happen, go to the %1$s in the left hand menu and select your app by clicking on its name and you\'ll be able to copy-paste the "<b>%2$s</b>" and "<b>%3$s</b>" from there.', 'nextend-facebook-connect'), 'Credentials', 'Client ID', 'Client Secret'); ?></li>
+            <li><?php printf(__('Currently your App is in %1$s mode, so only limited number of people can use it. To allow this App for any user with a Google Account, click on the "%2$s" option on the left side, then click the "%3$s" button under the "%4$s" section, and press the "%5$s" button. ', 'nextend-facebook-connect'), 'Testing', '<b>OAuth consent screen</b>', '<b>PUBLISH APP</b>', '<b>Publishing status</b>', '<b>Confirm</b>'); ?></li>
         </ol>
 
         <a href="<?php echo $this->getUrl('settings'); ?>"

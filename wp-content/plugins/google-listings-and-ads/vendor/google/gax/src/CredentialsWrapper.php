@@ -35,6 +35,7 @@ use DomainException;
 use Exception;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\ApplicationDefaultCredentials;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\Cache\MemoryCacheItemPool;
+use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\Credentials\ServiceAccountCredentials;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\CredentialsLoader;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\FetchAuthTokenCache;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\FetchAuthTokenInterface;
@@ -98,6 +99,9 @@ class CredentialsWrapper
      *     @type string[] $defaultScopes
      *           A string array of default scopes to use when acquiring
      *           credentials.
+     *     @type bool $useJwtAccessWithScope
+     *           Ensures service account credentials use JWT Access (also known as self-signed
+     *           JWTs), even when user-defined scopes are supplied.
      * }
      * @return CredentialsWrapper
      * @throws ValidationException
@@ -113,6 +117,7 @@ class CredentialsWrapper
             'authCacheOptions'  => [],
             'quotaProject'      => null,
             'defaultScopes'     => null,
+            'useJwtAccessWithScope' => true,
         ];
         $keyFile = $args['keyFile'];
         $authHttpHandler = $args['authHttpHandler'] ?: self::buildHttpHandlerFactory();
@@ -143,6 +148,12 @@ class CredentialsWrapper
                 $keyFile,
                 $args['defaultScopes']
             );
+        }
+
+        if ($loader instanceof ServiceAccountCredentials && $args['useJwtAccessWithScope']) {
+            // Ensures the ServiceAccountCredentials uses JWT Access, also known
+            // as self-signed JWTs, even when user-defined scopes are supplied.
+            $loader->useJwtAccessWithScope();
         }
 
         if ($args['enableCaching']) {

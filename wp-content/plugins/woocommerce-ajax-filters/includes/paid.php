@@ -74,6 +74,7 @@ class BeRocket_AAPF_paid extends BeRocket_plugin_variations {
             add_filter('BeRocket_AAPF_template_full_content', array($this, 'datepicker_selected'), 10, 4);
             include "paid/search_field.php";
             include "paid/advanced_caching.php";
+            include "paid/order-product.php";
         }
     }
 
@@ -1990,6 +1991,7 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
         add_filter('berocket_query_var_title_before_widget', array($this, 'correct_terms_child_parent_fix'), 10100, 5);
         add_filter('braapf_single_filter_hide_cat_value_limit', array($this, 'display_cat_value_limit'));
         self::search_field();
+        self::sortby_field();
     }
     public static function include_paid_tempate_styles() {
         $BeRocket_AAPF = BeRocket_AAPF::getInstance();
@@ -2049,13 +2051,16 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
             if( empty($term_taxonomy_echo) ) {
                 $term_taxonomy_echo = berocket_isset($term, 'taxonomy');
             }
-            global $berocket_parse_page_obj;
+            global $berocket_parse_page_obj, $wp_rewrite;
             $filter_data = $berocket_parse_page_obj->modify_data(array(
                 'values' => array(
                     array('value' => $term->term_id, 'taxonomy' => $term->taxonomy)
                 ), 'op' => $operator, 'calculate' => FALSE)
             );
-            $term_link = $berocket_parse_page_obj->get_link_from_data($filter_data);
+            $link = "//".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            $link = preg_replace( "|$wp_rewrite->pagination_base/\d+/?$|", '', $link );
+            $link = preg_replace( "~paged?/[0-9]+/?~", "", $link );
+            $term_link = $berocket_parse_page_obj->get_link_from_data($filter_data, $link);
             $element['content']['label']['content'] = array(
                 'link'     => array(
                     'type'          => 'tag',
@@ -2182,12 +2187,20 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
     }
     static function price_ranges($settings_name, $braapf_filter_settings) {
         $ranges = br_get_value_from_array($braapf_filter_settings, 'ranges', '');
-        if ( ! empty( $ranges ) && is_array( $ranges ) && count( $ranges ) > 0 ) {
-            foreach($ranges as $i => $range ) {
-                if( ! isset($range) || $range < 0 ) {
+        if(! empty( $ranges ) && is_array( $ranges ) && count( $ranges ) > 0) {
+            $prev_range = -1;
+            foreach($ranges as $i => $range) {
+                if(strlen($range) == 0) {
                     unset($ranges[$i]);
+                    continue;
                 }
+                if(floatval($range) <= $prev_range) {
+                    unset($ranges[$i]);
+                    continue;
+                }
+                $prev_range = floatval($range);
             }
+            $ranges = array_values($ranges);
         }
         if ( empty( $ranges ) || ! is_array( $ranges ) || count( $ranges ) <= 1 ) {
             $ranges = array(1,100,1000);
@@ -2572,8 +2585,8 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
         );
         ?>
         <script>
-        berocket_show_element('.braapf_custom_price_ranges', '{#braapf_filter_type} == "price" && (!braapf_current_template! == "select" || !braapf_current_template! == "checkbox")');
-        berocket_show_element('.braapf_custom_price_ranges_text', '{#braapf_filter_type} == "price" && {#braapf_custom_price_ranges} == true && (!braapf_current_template! == "select" || !braapf_current_template! == "checkbox")');
+        berocket_show_element('.braapf_custom_price_ranges', '{.braapf_widget_type input[type=radio]} == "filter" && {#braapf_filter_type} == "price" && (!braapf_current_template! == "select" || !braapf_current_template! == "checkbox")');
+        berocket_show_element('.braapf_custom_price_ranges_text', '{.braapf_widget_type input[type=radio]} == "filter" && {#braapf_filter_type} == "price" && {#braapf_custom_price_ranges} == true && (!braapf_current_template! == "select" || !braapf_current_template! == "checkbox")');
         </script>
         <?php
     }
@@ -2849,6 +2862,20 @@ class BeRocket_AAPF_paid_new extends BeRocket_plugin_variations {
             'specific'  => array('elements'),
             'info'  => '<p>' . __('Create search input field for products.', 'BeRocket_AJAX_domain') . '</p>'
             . '<p>' . __('Default WordPress functionality for searching is being used.', 'BeRocket_AJAX_domain') . '</p>'
+        );
+        return $widget_types;
+    }
+    static function sortby_field() {
+        add_filter('braapf_new_widget_edit_page_widget_types', array(__CLASS__, 'widget_type_sortby_field'), 1, 1001);
+    }
+    static function widget_type_sortby_field($widget_types) {
+        $widget_types['sortby_field'] = array(
+            'value' => 'sortby_field',
+            'name'  => __('Sort By Field', 'BeRocket_AJAX_domain'),
+            'image' => plugin_dir_url( BeRocket_AJAX_filters_file ) . 'assets/paid/sortby_field.png',
+            'templates' => array('select', 'checkbox'),
+            'info'  => '<p>' . __('Create drop-down field for products sorting.', 'BeRocket_AJAX_domain') . '</p>'
+            . '<p>' . __('Default WordPress functionality for products sorting.', 'BeRocket_AJAX_domain') . '</p>'
         );
         return $widget_types;
     }

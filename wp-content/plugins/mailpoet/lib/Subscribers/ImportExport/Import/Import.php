@@ -107,8 +107,9 @@ class Import {
     ];
     // 1. data should contain all required fields
     // 2. column names should only contain alphanumeric & underscore characters
-    if (count(array_intersect_key(array_flip($requiredDataFields), $data)) !== count($requiredDataFields) ||
-       preg_grep('/[^a-zA-Z0-9_]/', array_keys($data['columns']))
+    if (
+      count(array_intersect_key(array_flip($requiredDataFields), $data)) !== count($requiredDataFields) ||
+      preg_grep('/[^a-zA-Z0-9_]/', array_keys($data['columns']))
     ) {
       throw new \Exception(__('Missing or invalid import data.', 'mailpoet'));
     }
@@ -271,7 +272,7 @@ class Import {
 
     // We attempt converting with both date formats
     foreach ($data as $index => $date) {
-      if (empty($date) ) {
+      if (empty($date)) {
         $dateTimeDates[$index] = $date;
         $customFormatDates[$index] = $date;
         continue;
@@ -534,6 +535,7 @@ class Import {
     ];
     $customFieldCount = count($subscribersCustomFieldsIds);
     $customFieldBatchSize = (int)(round(self::DB_QUERY_CHUNK_SIZE / $customFieldCount) * $customFieldCount);
+    $customFieldBatchSize = ($customFieldBatchSize > 0) ? $customFieldBatchSize : 1;
     foreach (array_chunk($subscribersCustomFieldsData, $customFieldBatchSize) as $subscribersCustomFieldsDataChunk) {
       $this->importExportRepository->insertMultiple(
         SubscriberCustomFieldEntity::class,

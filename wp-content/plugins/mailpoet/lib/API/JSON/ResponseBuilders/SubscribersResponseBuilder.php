@@ -67,7 +67,7 @@ class SubscribersResponseBuilder {
       'count_confirmations' => $subscriber->getConfirmationsCount(),
       'wp_user_id' => $subscriber->getWpUserId(),
       'is_woocommerce_user' => $subscriber->getIsWoocommerceUser(),
-      'created_at' => $subscriber->getCreatedAt()->format(self::DATE_FORMAT),
+      'created_at' => ($createdAt = $subscriber->getCreatedAt()) ? $createdAt->format(self::DATE_FORMAT) : null,
       'engagement_score' => $subscriber->getEngagementScore(),
     ];
   }
@@ -83,7 +83,7 @@ class SubscribersResponseBuilder {
       'last_name' => $subscriberEntity->getLastName(),
       'first_name' => $subscriberEntity->getFirstName(),
       'email' => $subscriberEntity->getEmail(),
-      'created_at' => $subscriberEntity->getCreatedAt()->format(self::DATE_FORMAT),
+      'created_at' => ($createdAt = $subscriberEntity->getCreatedAt()) ? $createdAt->format(self::DATE_FORMAT) : null,
       'updated_at' => $subscriberEntity->getUpdatedAt()->format(self::DATE_FORMAT),
       'deleted_at' => ($deletedAt = $subscriberEntity->getDeletedAt()) ? $deletedAt->format(self::DATE_FORMAT) : null,
       'subscribed_ip' => $subscriberEntity->getSubscribedIp(),
@@ -96,8 +96,8 @@ class SubscribersResponseBuilder {
       'unsubscribe_token' => $subscriberEntity->getUnsubscribeToken(),
       'link_token' => $subscriberEntity->getLinkToken(),
     ];
-    $data = $this->buildCustomFields($subscriberEntity, $data);
-    return $data;
+
+    return $this->buildCustomFields($subscriberEntity, $data);
   }
 
   private function buildSubscriptions(SubscriberEntity $subscriberEntity): array {
@@ -107,6 +107,9 @@ class SubscribersResponseBuilder {
       $segment = $subscription->getSegment();
       if ($segment instanceof SegmentEntity) {
         $result[] = [
+          'id' => $subscription->getId(),
+          'subscriber_id' => (string)$subscriberEntity->getId(),
+          'created_at' => ($createdAt = $subscription->getCreatedAt()) ? $createdAt->format(self::DATE_FORMAT) : null,
           'segment_id' => (string)$segment->getId(),
           'status' => $subscription->getStatus(),
           'updated_at' => $subscription->getUpdatedAt()->format(self::DATE_FORMAT),

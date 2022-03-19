@@ -25,8 +25,8 @@ use Firebase\JWT\SignatureInvalidException;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\Cache\MemoryCacheItemPool;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\HttpHandler\HttpClientCache;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\Google\Auth\HttpHandler\HttpHandlerFactory;
-use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\GuzzleHttp\Psr7;
 use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\GuzzleHttp\Psr7\Request;
+use Automattic\WooCommerce\GoogleListingsAndAds\Vendor\GuzzleHttp\Psr7\Utils;
 use InvalidArgumentException;
 use phpseclib\Crypt\RSA;
 use phpseclib\Math\BigInteger;
@@ -300,7 +300,7 @@ class AccessToken
             }
         }
 
-        $body = Psr7\stream_for(http_build_query(['token' => $token]));
+        $body = Utils::streamFor(http_build_query(['token' => $token]));
         $request = new Request('POST', self::OAUTH2_REVOKE_URI, [
             'Cache-Control' => 'no-store',
             'Content-Type'  => 'application/x-www-form-urlencoded',

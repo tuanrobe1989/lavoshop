@@ -9,8 +9,12 @@ use MailPoet\Entities\DynamicSegmentFilterData;
 use MailPoet\Entities\FormEntity;
 use MailPoet\Models\Newsletter;
 use MailPoet\Models\Subscriber;
+use MailPoet\Segments\DynamicSegments\Filters\EmailAction;
 use MailPoet\Segments\DynamicSegments\Filters\UserRole;
+use MailPoet\Segments\DynamicSegments\Filters\WooCommerceCategory;
 use MailPoet\Segments\DynamicSegments\Filters\WooCommerceProduct;
+use MailPoet\Segments\DynamicSegments\Filters\WooCommerceSubscription;
+use MailPoet\Settings\SettingsChangeHandler;
 use MailPoet\Settings\SettingsController;
 use MailPoet\Util\Helpers;
 
@@ -22,10 +26,19 @@ class Migrator {
   public $prefix;
   private $charsetCollate;
   private $models;
+
+  /** @var SettingsController */
   private $settings;
 
-  public function __construct() {
-    $this->settings = SettingsController::getInstance();
+  /** @var SettingsChangeHandler */
+  private $settingsChangeHandler;
+
+  public function __construct(
+    SettingsController $settings,
+    SettingsChangeHandler $settingsChangeHandler
+  ) {
+    $this->settings = $settings;
+    $this->settingsChangeHandler = $settingsChangeHandler;
     $this->prefix = Env::$dbPrefix;
     $this->charsetCollate = Env::$dbCharsetCollate;
     $this->models = [
@@ -78,6 +91,10 @@ class Migrator {
     $this->removeDeprecatedStatisticsIndexes();
     $this->migrateSerializedFilterDataToNewColumns();
     $this->migratePurchasedProductDynamicFilters();
+    $this->migrateWooSubscriptionsDynamicFilters();
+    $this->migratePurchasedInCategoryDynamicFilters();
+    $this->migrateEmailActionsFilters();
+    $this->updateDefaultInactiveSubscriberTimeRange();
     return $output;
   }
 
@@ -625,7 +642,7 @@ class Migrator {
   private function updateNullInUnsubscribeStats() {
     global $wpdb;
     // perform once for versions below or equal to 3.47.6
-    if (version_compare($this->settings->get('db_version', '3.47.6'), '3.47.6', '>')) {
+    if (version_compare((string)$this->settings->get('db_version', '3.47.6'), '3.47.6', '>')) {
       return false;
     }
     $query = "
@@ -646,7 +663,7 @@ class Migrator {
    */
   private function fixScheduledTasksSubscribersTimestampColumns() {
     // skip the migration if the DB version is higher than 3.63.0 or is not set (a new install)
-    if (version_compare($this->settings->get('db_version', '3.63.1'), '3.63.0', '>')) {
+    if (version_compare((string)$this->settings->get('db_version', '3.63.1'), '3.63.0', '>')) {
       return false;
     }
 
@@ -678,7 +695,7 @@ class Migrator {
   private function removeDeprecatedStatisticsIndexes(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.67.1 or is not set (a new install)
-    if (version_compare($this->settings->get('db_version', '3.67.1'), '3.67.1', '>')) {
+    if (version_compare((string)$this->settings->get('db_version', '3.67.1'), '3.67.1', '>')) {
       return false;
     }
 
@@ -710,7 +727,7 @@ class Migrator {
   private function migrateSerializedFilterDataToNewColumns(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.73.1 or is not set (a new install)
-    if (version_compare($this->settings->get('db_version', '3.73.1'), '3.73.0', '>')) {
+    if (version_compare((string)$this->settings->get('db_version', '3.73.1'), '3.73.0', '>')) {
       return false;
     }
 
@@ -740,7 +757,7 @@ class Migrator {
   private function migratePurchasedProductDynamicFilters(): bool {
     global $wpdb;
     // skip the migration if the DB version is higher than 3.74.3 or is not set (a new install)
-    if (version_compare($this->settings->get('db_version', '3.74.3'), '3.74.2', '>')) {
+    if (version_compare((string)$this->settings->get('db_version', '3.74.3'), '3.74.2', '>')) {
       return false;
     }
 
@@ -772,6 +789,175 @@ class Migrator {
       $wpdb->update($dynamicSegmentFiltersTable, [
         'filter_data' => serialize($filterData),
       ], ['id' => $dynamicSegmentFilter['id']]);
+    }
+
+    return true;
+  }
+
+  private function migratePurchasedInCategoryDynamicFilters(): bool {
+    global $wpdb;
+    // skip the migration if the DB version is higher than 3.75.1 or is not set (a new install)
+    if (version_compare((string)$this->settings->get('db_version', '3.76.0'), '3.75.1', '>')) {
+      return false;
+    }
+
+    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE;
+    $action = WooCommerceCategory::ACTION_CATEGORY;
+    $dynamicSegmentFilters = $wpdb->get_results("
+      SELECT `id`, `filter_data`, `filter_type`, `action`
+      FROM {$dynamicSegmentFiltersTable}
+      WHERE `filter_type` = '{$filterType}'
+        AND `action` = '{$action}'
+    ", ARRAY_A);
+
+    foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
+      $filterData = unserialize($dynamicSegmentFilter['filter_data']);
+      if (!isset($filterData['category_ids'])) {
+        $filterData['category_ids'] = [];
+      }
+
+      if (isset($filterData['category_id']) && !in_array($filterData['category_id'], $filterData['category_ids'])) {
+        $filterData['category_ids'][] = $filterData['category_id'];
+        unset($filterData['category_id']);
+      }
+
+      if (!isset($filterData['operator'])) {
+        $filterData['operator'] = DynamicSegmentFilterData::OPERATOR_ANY;
+      }
+
+      $wpdb->update($dynamicSegmentFiltersTable, [
+        'filter_data' => serialize($filterData),
+      ], ['id' => $dynamicSegmentFilter['id']]);
+    }
+
+    return true;
+  }
+
+  private function migrateWooSubscriptionsDynamicFilters(): bool {
+    global $wpdb;
+    // skip the migration if the DB version is higher than 3.75.1 or is not set (a new installation)
+    if (version_compare((string)$this->settings->get('db_version', '3.76.0'), '3.75.1', '>')) {
+      return false;
+    }
+
+    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $filterType = DynamicSegmentFilterData::TYPE_WOOCOMMERCE_SUBSCRIPTION;
+    $action = WooCommerceSubscription::ACTION_HAS_ACTIVE;
+    $dynamicSegmentFilters = $wpdb->get_results("
+      SELECT `id`, `filter_data`, `filter_type`, `action`
+      FROM {$dynamicSegmentFiltersTable}
+      WHERE `filter_type` = '{$filterType}'
+        AND `action` = '{$action}'
+    ", ARRAY_A);
+
+    foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
+      $filterData = unserialize($dynamicSegmentFilter['filter_data']);
+      if (!isset($filterData['product_ids'])) {
+        $filterData['product_ids'] = [];
+      }
+
+      if (isset($filterData['product_id']) && !in_array($filterData['product_id'], $filterData['product_ids'])) {
+        $filterData['product_ids'][] = $filterData['product_id'];
+        unset($filterData['product_id']);
+      }
+
+      if (!isset($filterData['operator'])) {
+        $filterData['operator'] = DynamicSegmentFilterData::OPERATOR_ANY;
+      }
+
+      $wpdb->update($dynamicSegmentFiltersTable, [
+        'filter_data' => serialize($filterData),
+      ], ['id' => $dynamicSegmentFilter['id']]);
+    }
+    return true;
+  }
+
+  private function migrateEmailActionsFilters(): bool {
+    global $wpdb;
+    // skip the migration if the DB version is higher than 3.77.1 or is not set (a new installation)
+    if (version_compare($this->settings->get('db_version', '3.77.2'), '3.77.1', '>')) {
+      return false;
+    }
+
+    $dynamicSegmentFiltersTable = "{$this->prefix}dynamic_segment_filters";
+    $filterType = DynamicSegmentFilterData::TYPE_EMAIL;
+    $dynamicSegmentFilters = $wpdb->get_results("
+      SELECT `id`, `filter_data`, `filter_type`, `action`
+      FROM {$dynamicSegmentFiltersTable}
+      WHERE `filter_type` = '{$filterType}'
+    ", ARRAY_A);
+
+    foreach ($dynamicSegmentFilters as $dynamicSegmentFilter) {
+      if (!is_array($dynamicSegmentFilter)) {
+        continue;
+      }
+      $filterData = unserialize($dynamicSegmentFilter['filter_data']);
+      if (!is_array($filterData)) {
+        continue;
+      }
+      $action = $dynamicSegmentFilter['action'];
+
+      // Not clicked filter is no longer used and was replaced by clicked with none of operator
+      if ($action === EmailAction::ACTION_NOT_CLICKED) {
+        $action = EmailAction::ACTION_CLICKED;
+        $filterData['operator'] = DynamicSegmentFilterData::OPERATOR_NONE;
+      }
+
+      // Clicked link filter is refactored to work with multiple link ids
+      if ($action === EmailAction::ACTION_CLICKED) {
+        if (!isset($filterData['link_ids'])) {
+          $filterData['link_ids'] = [];
+        }
+
+        if (isset($filterData['link_id']) && !in_array($filterData['link_id'], $filterData['link_ids'])) {
+          $filterData['link_ids'][] = (int)$filterData['link_id'];
+          unset($filterData['link_id']);
+        }
+      }
+
+      // Not opened filter is no longer used and was replaced by opened with none of operand
+      if ($action === EmailAction::ACTION_NOT_OPENED) {
+        $action = EmailAction::ACTION_OPENED;
+        $filterData['operator'] = DynamicSegmentFilterData::OPERATOR_NONE;
+      }
+
+      // Opened and Machine opened filters are refactored to work with multiple newsletters
+      if (($action === EmailAction::ACTION_OPENED) || ($action === EmailAction::ACTION_MACHINE_OPENED)) {
+        if (!isset($filterData['newsletters'])) {
+          $filterData['newsletters'] = [];
+        }
+
+        if (isset($filterData['newsletter_id']) && !in_array($filterData['newsletter_id'], $filterData['newsletters'])) {
+          $filterData['newsletters'][] = (int)$filterData['newsletter_id'];
+          unset($filterData['newsletter_id']);
+        }
+      }
+
+      // Ensure default operator
+      if (!isset($filterData['operator'])) {
+        $filterData['operator'] = DynamicSegmentFilterData::OPERATOR_ANY;
+      }
+
+      $wpdb->update($dynamicSegmentFiltersTable, [
+        'filter_data' => serialize($filterData),
+        'action' => $action,
+      ], ['id' => $dynamicSegmentFilter['id']]);
+    }
+    return true;
+  }
+
+  private function updateDefaultInactiveSubscriberTimeRange(): bool {
+    // Skip if the installed version is newer than the release that preceded this migration, or if it's a fresh install
+    $currentlyInstalledVersion = (string)$this->settings->get('db_version', '3.78.1');
+    if (version_compare($currentlyInstalledVersion, '3.78.0', '>')) {
+      return false;
+    }
+
+    $currentValue = (int)$this->settings->get('deactivate_subscriber_after_inactive_days');
+    if ($currentValue === 180) {
+      $this->settings->set('deactivate_subscriber_after_inactive_days', 365);
+      $this->settingsChangeHandler->onInactiveSubscribersIntervalChange();
     }
 
     return true;

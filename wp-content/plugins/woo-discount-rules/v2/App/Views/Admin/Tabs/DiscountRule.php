@@ -386,7 +386,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
     if(!$is_pro){ ?>
         <div class="col-md-6 col-lg-6 text-right" style="width: 27%; float: right;">
             <div class="col-md-12">
-                <a href="https://www.flycart.org/products/wordpress/woocommerce-discount-rules?utm_source=wpwoodiscountrules&utm_medium=plugin&utm_campaign=inline&utm_content=woo-discount-rules" target="_blank" class="btn btn-success"><?php esc_html_e('Looking for more features? Upgrade to PRO', 'woo-discount-rules'); ?></a>
+                <a href="https://docs.flycart.org/en/articles/3806305-upgrade-from-free-to-pro?utm_source=wpwoodiscountrules&utm_medium=plugin&utm_campaign=inline&utm_content=upgrade" target="_blank" class="btn btn-success"><?php esc_html_e('Looking for more features? Upgrade to PRO', 'woo-discount-rules'); ?></a>
             </div>
             <div class="woo-side-panel">
                 <div class="panel">

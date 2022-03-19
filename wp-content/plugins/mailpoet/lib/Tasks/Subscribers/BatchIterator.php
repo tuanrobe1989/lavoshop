@@ -29,10 +29,14 @@ class BatchIterator implements \Iterator, \Countable {
     $this->batchSize = (int)$batchSize;
   }
 
-  public function rewind() {
+  public function rewind(): void {
     $this->lastProcessedId = 0;
   }
 
+  /**
+   * @return mixed - it's required for PHP8.1 to prevent using ReturnTypeWillChange that cause an error in PHPStan with PHP7
+   */
+  #[\ReturnTypeWillChange]
   public function current() {
     $subscribers = $this->getSubscribers()
       ->orderByAsc('subscriber_id')
@@ -43,19 +47,23 @@ class BatchIterator implements \Iterator, \Countable {
     return $subscribers;
   }
 
+  /**
+   * @return string|float|int|bool|null - it's required for PHP8.1 to prevent using ReturnTypeWillChange that cause an error in PHPStan with PHP7
+   */
+  #[\ReturnTypeWillChange]
   public function key() {
     return null;
   }
 
-  public function next() {
+  public function next(): void {
     $this->lastProcessedId = $this->batchLastId;
   }
 
-  public function valid() {
+  public function valid(): bool {
     return $this->count() > 0;
   }
 
-  public function count() {
+  public function count(): int {
     return $this->getSubscribers()->count();
   }
 

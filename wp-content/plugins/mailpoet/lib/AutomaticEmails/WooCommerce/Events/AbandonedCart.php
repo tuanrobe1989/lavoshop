@@ -6,16 +6,16 @@ if (!defined('ABSPATH')) exit;
 
 
 use MailPoet\AutomaticEmails\WooCommerce\WooCommerce as WooCommerceEmail;
+use MailPoet\Entities\SubscriberEntity;
 use MailPoet\Models\Subscriber;
 use MailPoet\Newsletter\Scheduler\AutomaticEmailScheduler;
-use MailPoet\Statistics\Track\Clicks;
-use MailPoet\Util\Cookies;
+use MailPoet\Statistics\Track\SubscriberActivityTracker;
+use MailPoet\Statistics\Track\SubscriberCookie;
 use MailPoet\WooCommerce\Helper as WooCommerceHelper;
 use MailPoet\WP\Functions as WPFunctions;
 
 class AbandonedCart {
   const SLUG = 'woocommerce_abandoned_shopping_cart';
-  const LAST_VISIT_TIMESTAMP_OPTION_NAME = 'mailpoet_last_visit_timestamp';
   const TASK_META_NAME = 'cart_product_ids';
 
   /** @var WPFunctions */
@@ -24,21 +24,27 @@ class AbandonedCart {
   /** @var WooCommerceHelper */
   private $wooCommerceHelper;
 
-  /** @var Cookies */
-  private $cookies;
-
-  /** @var AbandonedCartPageVisitTracker */
-  private $pageVisitTracker;
+  /** @var SubscriberCookie */
+  private $subscriberCookie;
 
   /** @var AutomaticEmailScheduler */
   private $scheduler;
 
-  public function __construct() {
-    $this->wp = WPFunctions::get();
-    $this->wooCommerceHelper = new WooCommerceHelper();
-    $this->cookies = new Cookies();
-    $this->pageVisitTracker = new AbandonedCartPageVisitTracker($this->wp, $this->wooCommerceHelper, $this->cookies);
-    $this->scheduler = new AutomaticEmailScheduler();
+  /** @var SubscriberActivityTracker */
+  private $subscriberActivityTracker;
+
+  public function __construct(
+    WPFunctions $wp,
+    WooCommerceHelper $wooCommerceHelper,
+    SubscriberCookie $subscriberCookie,
+    SubscriberActivityTracker $subscriberActivityTracker,
+    AutomaticEmailScheduler $scheduler
+  ) {
+    $this->wp = $wp;
+    $this->wooCommerceHelper = $wooCommerceHelper;
+    $this->subscriberCookie = $subscriberCookie;
+    $this->subscriberActivityTracker = $subscriberActivityTracker;
+    $this->scheduler = $scheduler;
   }
 
   public function getEventDetails() {
@@ -124,10 +130,9 @@ class AbandonedCart {
       10
     );
 
-    $this->wp->addAction(
-      'wp',
-      [$this, 'trackPageVisit'],
-      10
+    $this->subscriberActivityTracker->registerCallback(
+      'mailpoet_abandoned_cart',
+      [$this, 'handleSubscriberActivity']
     );
   }
 
@@ -137,16 +142,13 @@ class AbandonedCart {
       $this->scheduleAbandonedCartEmail($this->getCartProductIds($cart));
     } else {
       $this->cancelAbandonedCartEmail();
-      $this->pageVisitTracker->stopTracking();
     }
   }
 
-  public function trackPageVisit() {
-    // on page visit reschedule all currently scheduled (not yet sent) emails for given subscriber
+  public function handleSubscriberActivity(SubscriberEntity $subscriber) {
+    // on subscriber activity on site reschedule all currently scheduled (not yet sent) emails for given subscriber
     // (it tracks at most once per minute to avoid processing many calls at the same time, i.e. AJAX)
-    $this->pageVisitTracker->trackVisit(function () {
-      $this->rescheduleAbandonedCartEmail();
-    });
+    $this->rescheduleAbandonedCartEmail($subscriber);
   }
 
   private function getCartProductIds($cart) {
@@ -162,17 +164,10 @@ class AbandonedCart {
 
     $meta = [self::TASK_META_NAME => $cartProductIds];
     $this->scheduler->scheduleOrRescheduleAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, $subscriber->id, $meta);
-
-    // start tracking page visits to detect inactivity
-    $this->pageVisitTracker->startTracking();
   }
 
-  private function rescheduleAbandonedCartEmail() {
-    $subscriber = $this->getSubscriber();
-    if (!$subscriber) {
-      return;
-    }
-    $this->scheduler->rescheduleAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, $subscriber->id);
+  private function rescheduleAbandonedCartEmail(SubscriberEntity $subscriberEntity) {
+    $this->scheduler->rescheduleAutomaticEmail(WooCommerceEmail::SLUG, self::SLUG, $subscriberEntity->getId());
   }
 
   private function cancelAbandonedCartEmail() {
@@ -190,9 +185,9 @@ class AbandonedCart {
     }
 
     // if user not logged in, try to find subscriber by cookie
-    $cookieData = $this->cookies->get(Clicks::ABANDONED_CART_COOKIE_NAME);
-    if ($cookieData && isset($cookieData['subscriber_id'])) {
-      return Subscriber::findOne($cookieData['subscriber_id']) ?: null;
+    $subscriberId = $this->subscriberCookie->getSubscriberId();
+    if ($subscriberId) {
+      return Subscriber::findOne($subscriberId) ?: null;
     }
     return null;
   }

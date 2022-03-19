@@ -6,6 +6,8 @@ namespace Automattic\WooCommerce\GoogleListingsAndAds\Internal\DependencyManagem
 use Automattic\WooCommerce\GoogleListingsAndAds\ActionScheduler\ActionScheduler;
 use Automattic\WooCommerce\GoogleListingsAndAds\Admin\ActivationRedirect;
 use Automattic\WooCommerce\GoogleListingsAndAds\Admin\Admin;
+use Automattic\WooCommerce\GoogleListingsAndAds\Admin\BulkEdit\BulkEditInitializer;
+use Automattic\WooCommerce\GoogleListingsAndAds\Admin\BulkEdit\CouponBulkEdit;
 use Automattic\WooCommerce\GoogleListingsAndAds\Admin\MetaBox\ChannelVisibilityMetaBox;
 use Automattic\WooCommerce\GoogleListingsAndAds\Admin\MetaBox\CouponChannelVisibilityMetaBox;
 use Automattic\WooCommerce\GoogleListingsAndAds\Admin\MetaBox\MetaBoxInitializer;
@@ -14,6 +16,7 @@ use Automattic\WooCommerce\GoogleListingsAndAds\Admin\Product\Attributes\Attribu
 use Automattic\WooCommerce\GoogleListingsAndAds\Admin\Product\Attributes\VariationsAttributes;
 use Automattic\WooCommerce\GoogleListingsAndAds\Ads\AdsAwareInterface;
 use Automattic\WooCommerce\GoogleListingsAndAds\Ads\AdsService;
+use Automattic\WooCommerce\GoogleListingsAndAds\Ads\AccountService as AdsAccountService;
 use Automattic\WooCommerce\GoogleListingsAndAds\API\Google\Merchant;
 use Automattic\WooCommerce\GoogleListingsAndAds\API\Google\MerchantMetrics;
 use Automattic\WooCommerce\GoogleListingsAndAds\API\Google\Settings as GoogleSettings;
@@ -60,6 +63,7 @@ use Automattic\WooCommerce\GoogleListingsAndAds\Notes\ReviewAfterClicks as Revie
 use Automattic\WooCommerce\GoogleListingsAndAds\Notes\ReviewAfterConversions as ReviewAfterConversionsNote;
 use Automattic\WooCommerce\GoogleListingsAndAds\Notes\SetupCampaign as SetupCampaignNote;
 use Automattic\WooCommerce\GoogleListingsAndAds\Notes\SetupCampaignTwoWeeks as SetupCampaign2Note;
+use Automattic\WooCommerce\GoogleListingsAndAds\Notes\SetupCouponSharing as SetupCouponSharingNote;
 use Automattic\WooCommerce\GoogleListingsAndAds\Options\AdsAccountState;
 use Automattic\WooCommerce\GoogleListingsAndAds\Options\AdsSetupCompleted;
 use Automattic\WooCommerce\GoogleListingsAndAds\Options\MerchantAccountState;
@@ -116,9 +120,11 @@ class CoreServiceProvider extends AbstractServiceProvider {
 		AddressUtility::class         => true,
 		Reports::class                => true,
 		AssetsHandlerInterface::class => true,
+		BulkEditInitializer::class    => true,
 		ContactInformationNote::class => true,
 		CompleteSetup::class          => true,
 		CompleteSetupNote::class      => true,
+		CouponBulkEdit::class         => true,
 		CouponHelper::class           => true,
 		CouponMetaHandler::class      => true,
 		CouponSyncer::class           => true,
@@ -140,6 +146,7 @@ class CoreServiceProvider extends AbstractServiceProvider {
 		SetupMerchantCenter::class    => true,
 		SetupCampaignNote::class      => true,
 		SetupCampaign2Note::class     => true,
+		SetupCouponSharingNote::class => true,
 		TableManager::class           => true,
 		TrackerSnapshot::class        => true,
 		Tracks::class                 => true,
@@ -168,6 +175,7 @@ class CoreServiceProvider extends AbstractServiceProvider {
 		VariationsAttributes::class   => true,
 		DeprecatedFilters::class      => true,
 		ShippingZone::class           => true,
+		AdsAccountService::class      => true,
 	];
 
 	/**
@@ -201,13 +209,19 @@ class CoreServiceProvider extends AbstractServiceProvider {
 			 ->invokeMethod( 'set_merchant_center_object', [ MerchantCenterService::class ] );
 
 		// Set up Ads service, and inflect classes that need it.
-		$this->share_with_tags( AdsService::class );
+		$this->share_with_tags( AdsAccountState::class );
+		$this->share_with_tags( AdsService::class, AdsAccountState::class );
 		$this->getLeagueContainer()
 			 ->inflector( AdsAwareInterface::class )
 			 ->invokeMethod( 'set_ads_object', [ AdsService::class ] );
 
 		// Set up the installer.
-		$installer_definition = $this->share_with_tags( Installer::class, InstallableInterface::class, FirstInstallInterface::class );
+		$installer_definition = $this->share_with_tags(
+			Installer::class,
+			InstallableInterface::class,
+			FirstInstallInterface::class,
+			WP::class
+		);
 		$installer_definition->setConcrete(
 			function ( ...$arguments ) {
 				return new Installer( ...$arguments );
@@ -227,7 +241,7 @@ class CoreServiceProvider extends AbstractServiceProvider {
 			MerchantCenterService::class,
 			AdsService::class
 		);
-		$this->conditionally_share_with_tags( ActivationRedirect::class );
+		$this->conditionally_share_with_tags( ActivationRedirect::class, WP::class );
 		$this->conditionally_share_with_tags( GetStarted::class );
 		$this->conditionally_share_with_tags( SetupMerchantCenter::class );
 		$this->conditionally_share_with_tags( SetupAds::class );
@@ -244,14 +258,16 @@ class CoreServiceProvider extends AbstractServiceProvider {
 		$this->conditionally_share_with_tags( SiteVerificationMeta::class, ContainerInterface::class );
 		$this->conditionally_share_with_tags( MerchantSetupCompleted::class );
 		$this->conditionally_share_with_tags( AdsSetupCompleted::class );
+		$this->conditionally_share_with_tags( AdsAccountService::class, ContainerInterface::class );
 
 		// Inbox Notes
 		$this->share_with_tags( ContactInformationNote::class );
 		$this->share_with_tags( CompleteSetupNote::class );
 		$this->share_with_tags( ReviewAfterClicksNote::class, MerchantMetrics::class, WP::class );
 		$this->share_with_tags( ReviewAfterConversionsNote::class, MerchantMetrics::class, WP::class );
-		$this->share_with_tags( SetupCampaignNote::class );
-		$this->share_with_tags( SetupCampaign2Note::class );
+		$this->share_with_tags( SetupCampaignNote::class, MerchantStatuses::class );
+		$this->share_with_tags( SetupCampaign2Note::class, MerchantStatuses::class );
+		$this->share_with_tags( SetupCouponSharingNote::class, MerchantStatuses::class );
 		$this->share_with_tags( NoteInitializer::class, ActionScheduler::class, Note::class );
 
 		// Product attributes
@@ -259,7 +275,6 @@ class CoreServiceProvider extends AbstractServiceProvider {
 		$this->conditionally_share_with_tags( AttributesTab::class, Admin::class, AttributeManager::class, MerchantCenterService::class );
 		$this->conditionally_share_with_tags( VariationsAttributes::class, Admin::class, AttributeManager::class, MerchantCenterService::class );
 
-		$this->share_with_tags( AdsAccountState::class );
 		$this->share_with_tags( MerchantAccountState::class );
 		$this->share_with_tags( MerchantStatuses::class );
 		$this->share_with_tags( PhoneVerification::class, Merchant::class, WP::class, ISOUtility::class );
@@ -312,6 +327,10 @@ class CoreServiceProvider extends AbstractServiceProvider {
 		$this->conditionally_share_with_tags( ChannelVisibilityMetaBox::class, Admin::class, ProductMetaHandler::class, ProductHelper::class, MerchantCenterService::class );
 		$this->conditionally_share_with_tags( CouponChannelVisibilityMetaBox::class, Admin::class, CouponMetaHandler::class, CouponHelper::class, MerchantCenterService::class );
 		$this->conditionally_share_with_tags( MetaBoxInitializer::class, Admin::class, MetaBoxInterface::class );
+
+		// Share bulk edit views
+		$this->share_with_tags( CouponBulkEdit::class, CouponMetaHandler::class, MerchantCenterService::class );
+		$this->share_with_tags( BulkEditInitializer::class );
 
 		$this->share_with_tags( PHPViewFactory::class );
 

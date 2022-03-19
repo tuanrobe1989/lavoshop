@@ -17,7 +17,7 @@
  * needs please refer to http://www.skyverge.com/product/woocommerce-customizer/ for more information.
  *
  * @author      SkyVerge
- * @copyright   Copyright (c) 2013-2020, SkyVerge, Inc. (info@skyverge.com)
+ * @copyright   Copyright (c) 2013-2022, SkyVerge, Inc. (info@skyverge.com)
  * @license     http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
@@ -394,7 +394,7 @@ class WC_Customizer_Settings extends WC_Settings_Page {
 					),
 
 					array(
-						'id'       => 'woocommerce_countries_tax_or_vat',
+						'id'       => 'woocommerce_rate_label',
 						'title'    => __( 'Tax Label', 'woocommerce-customizer' ),
 						'desc_tip' => __( 'Changes the Taxes label. Defaults to Tax for USA, VAT for European countries', 'woocommerce-customizer' ),
 						'type'     => 'text'
@@ -411,20 +411,6 @@ class WC_Customizer_Settings extends WC_Settings_Page {
 						'id'       => 'woocommerce_countries_ex_tax_or_vat',
 						'title'    => __( 'Excluding Tax Label', 'woocommerce-customizer' ),
 						'desc_tip' => __( 'Changes the Excluding Taxes label. Defaults to Exc. tax for USA, Exc. VAT for European countries', 'woocommerce-customizer' ),
-						'type'     => 'text'
-					),
-
-					array( 'type' => 'sectionend' ),
-
-					array(
-						'title' => __( 'Images', 'woocommerce-customizer' ),
-						'type'  => 'title'
-					),
-
-					array(
-						'id'       => 'woocommerce_placeholder_img_src',
-						'title'    => __( 'Placeholder Image source', 'woocommerce-customizer' ),
-						'desc_tip' => __( 'Change the default placeholder image by setting this to a valid image URL', 'woocommerce-customizer' ),
 						'type'     => 'text'
 					),
 

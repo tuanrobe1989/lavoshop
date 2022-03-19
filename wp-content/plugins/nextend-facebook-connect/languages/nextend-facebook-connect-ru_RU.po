@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-11-15 18:51+0100\n"
-"PO-Revision-Date: 2021-11-15 18:51+0100\n"
+"POT-Creation-Date: 2022-02-14 08:32+0100\n"
+"PO-Revision-Date: 2022-02-14 08:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: ru\n"
@@ -773,6 +773,16 @@ msgstr ""
 msgid "Debug mode"
 msgstr ""
 
+msgid "Bypass cache on redirect"
+msgstr ""
+
+#, php-format
+msgid ""
+"Enabling this option will add a GET parameter to the URL where we redirect "
+"after a successful registration or login with social login. %1$sLearn more"
+"%2$s."
+msgstr ""
+
 msgid "Page for register flow"
 msgstr ""
 
@@ -1206,8 +1216,8 @@ msgstr ""
 msgid "In the left sidebar, click on \"<b>Facebook Login > Settings</b>\""
 msgstr ""
 
-msgid ""
-"Add the following URL to the \"<b>Valid OAuth redirect URIs</b>\" field:"
+#, php-format
+msgid "Add the following URL to the %s field:"
 msgstr ""
 
 msgid "Click on \"<b>Save Changes</b>\""
@@ -1551,6 +1561,14 @@ msgid ""
 "from there."
 msgstr ""
 
+#, php-format
+msgid ""
+"Currently your App is in %1$s mode, so only limited number of people can use "
+"it. To allow this App for any user with a Google Account, click on the \"%2$s"
+"\" option on the left side, then click the \"%3$s\" button under the \"%4$s"
+"\" section, and press the \"%5$s\" button. "
+msgstr ""
+
 msgid "Client ID"
 msgstr ""
 
@@ -1582,21 +1600,20 @@ msgstr "Отвязать аккаунты от <b>Google</b>"
 msgid "Required API: %1$s"
 msgstr ""
 
-msgid ""
-"Find your App and click on the <b>App settings</b> icon. (The one that looks "
-"like a gear.)"
-msgstr ""
-
-msgid "Click on the <b>Edit</b> button at <b>Authentication settings</b>."
+#, php-format
+msgid "On the left side, under the %s section click on the name of your App."
 msgstr ""
 
 #, php-format
-msgid "Add the following URL to the \"<b>%1$s</b>\" field:"
+msgid "Click on the %1$s button at %2$s."
 msgstr ""
 
 #, php-format
-msgid ""
-"Make sure the \"<b>%1$s</b>\" field contains the following URL: <b>%2$s</b>"
+msgid "Make sure the %1$s field contains the following URL: %2$s"
+msgstr ""
+
+#, php-format
+msgid "Click on %s"
 msgstr ""
 
 msgid ""
@@ -1614,13 +1631,18 @@ msgstr ""
 msgid "Click on \"<b>%s</b>\"!"
 msgstr ""
 
+#, php-format
 msgid ""
 "Name your project, and go through the basic setup. You’ll need to select "
-"your use case, give a description and enter a name for the App as well."
+"your use case, give a description then click the %s button."
 msgstr ""
 
 #, php-format
-msgid "Click \"<b>%s</b>\"!"
+msgid "Choose the %1$s option for %2$s, then press %3$s!"
+msgstr ""
+
+#, php-format
+msgid "Into the %1$s field, enter a name for your App, then press %2$s again!"
 msgstr ""
 
 #, php-format
@@ -1637,11 +1659,11 @@ msgid ""
 msgstr ""
 
 #, php-format
-msgid "Scroll down and click on the \"<b>%1$s</b>\" button at \"<b>%2$s</b>\"."
+msgid "Scroll down and click on the %1$s button at %2$s."
 msgstr ""
 
 #, php-format
-msgid "Switch on the \"<b>%s</b>\" option."
+msgid "Switch on the %s option."
 msgstr ""
 
 #, php-format
@@ -1651,22 +1673,35 @@ msgstr ""
 #, php-format
 msgid ""
 "If you want to get the email address as well, then don’t forget to enable "
-"the \"<b>%1$s</b>\" option. In this case you also need to fill the \"<b>"
-"%2$s</b>\" and the \"<b>%3$s</b>\" fields with the corresponding URLs!"
+"the %1$s option. In this case you also need to fill the \"<b>%2$s</b>\" and "
+"the \"<b>%3$s</b>\" fields with the corresponding URLs!"
 msgstr ""
 
 #, php-format
-msgid "Click on \"<b>%s</b>\"."
+msgid "Click on %s."
 msgstr ""
 
 #, php-format
-msgid "Go back to %1$s and <b>Verify</b> your %2$s provider."
+msgid ""
+"On the left side, under the \"<b>%s</b>\" section click on the name of your "
+"Project ( that you created the App for )."
+msgstr ""
+
+#, php-format
+msgid ""
+"Click on the %1$s button, then fill the %2$s, %3$s, %4$s and %5$s forms."
+msgstr ""
+
+#, php-format
+msgid ""
+"Once your application for the Elevated access has been approved, go back to "
+"%1$s then <b>verify</b> and <b>enable</b> the %2$s provider!"
 msgstr ""
 
 msgid "API Key"
 msgstr ""
 
-msgid "API secret key"
+msgid "API Key Secret"
 msgstr ""
 
 msgid "Profile image size"
@@ -1810,7 +1845,8 @@ msgstr ""
 msgid "Click \"<b>Edit</b>\"."
 msgstr ""
 
-msgid "Add the following URL to the \"<b>Allowed Return URLs</b>\" field: "
+#, php-format
+msgid "Add the following URL to the %s field: "
 msgstr ""
 
 #, php-format
@@ -1878,9 +1914,6 @@ msgstr ""
 msgid ""
 "Fill the \"<b>Domains and Subdomains</b>\" field with your domain name "
 "probably: <b>%s</b>"
-msgstr ""
-
-msgid "Add the following URL to the \"<b>Return URLs</b>\" field:"
 msgstr ""
 
 msgid ""
@@ -2156,7 +2189,8 @@ msgid ""
 "Settings section on the left side."
 msgstr ""
 
-msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
+#, php-format
+msgid "Add the following URL in the %s field:"
 msgstr ""
 
 msgid "Click the \"<b>New Application</b>\" button."
@@ -2173,9 +2207,6 @@ msgstr ""
 #, php-format
 msgid ""
 "On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
-msgstr ""
-
-msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
 msgstr ""
 
 msgid "Click the \"<b>Save Changes</b>\" button."
@@ -2218,9 +2249,6 @@ msgstr ""
 msgid ""
 "Select the \"<b>Settings</b>\" tab and scroll down to the Authentication "
 "section!"
-msgstr ""
-
-msgid "Add the following URL to the \"<b>Callback URL</b>\" field:"
 msgstr ""
 
 msgid "Click on the \"<b>Save Changes</b>\" button."
@@ -2288,9 +2316,6 @@ msgstr ""
 msgid "Make sure the <b>Homepage URL</b> matches with: <b>%s</b>"
 msgstr ""
 
-msgid "Add the following URL to the <b>Authorization callback URL</b> field:"
-msgstr ""
-
 msgid "Press the <b>Update application</b> button to save the changes."
 msgstr ""
 
@@ -2350,7 +2375,8 @@ msgstr ""
 msgid "Select your %s App and click on the LINE Login section."
 msgstr ""
 
-msgid "Change your URL in the \"<b>Callback URL</b>\" field:"
+#, php-format
+msgid "Change your URL in the %s field:"
 msgstr ""
 
 #, php-format
@@ -2466,9 +2492,6 @@ msgstr "Отвязать аккаунты от <b>LinkedIn</b>"
 msgid "Click on your App and go to the \"<b>Auth</b>\" tab."
 msgstr ""
 
-msgid "Add the following URL to the \"<b>Redirect URLs</b>\" field:"
-msgstr ""
-
 msgid "Click on \"<b>Update</b>\" to save the changes"
 msgstr ""
 
@@ -2511,9 +2534,8 @@ msgstr ""
 msgid "Click on the \"<b>Auth</b>\" tab."
 msgstr ""
 
-msgid ""
-"Find \"<b>OAuth 2.0 settings</b>\" section and add the following URL to the "
-"\"<b>Redirect URLs</b>\" field:"
+#, php-format
+msgid "Find the %1$s section and add the following URL to the %2$s field:"
 msgstr ""
 
 msgid ""
@@ -2548,9 +2570,6 @@ msgstr ""
 msgid "Click on the link next to the Redirect URIs label."
 msgstr ""
 
-msgid "Add the following URL to the \"<b>Redirect URIs</b>\" field:"
-msgstr ""
-
 #, php-format
 msgid ""
 "Log in with your %s credentials if you are not logged in or create a new "
@@ -2569,9 +2588,6 @@ msgid ""
 "strong> On our Settings tab, you will need to select the Audience depending "
 "on the selected value! If you are not sure what to choose, then %1$shere%2$s "
 "you can learn more."
-msgstr ""
-
-msgid "Add the following URL to the \"<b>Redirect URI</b>\" field:"
 msgstr ""
 
 msgid "Create your App with the \"<b>Register</b>\" button."
@@ -2681,9 +2697,6 @@ msgstr ""
 msgid ""
 "Scroll down to \"<b>LIVE APP SETTINGS</b>\", find the \"<b>Live Return URL</"
 "b>\" heading and click \"<b>Show</b>\"."
-msgstr ""
-
-msgid "Add the following URL to the \"<b>Live Return URL</b>\" field:"
 msgstr ""
 
 msgid "Click on \"Save\""
@@ -2897,13 +2910,120 @@ msgstr "Связать аккаунты с <b>Facebook</b>"
 msgid "Unlink account from <b>Slack</b>"
 msgstr "Отвязать аккаунты от <b>Facebook</b>"
 
+#, php-format
+msgid "Log in to your %s developer account, if you are not logged in yet."
+msgstr ""
+
+#, php-format
+msgid ""
+"On the top right corner click on %1$s then click on the name of that App "
+"that you used for the configuration."
+msgstr ""
+
+#, php-format
+msgid "Scroll down to the %s section."
+msgstr ""
+
+#, php-format
+msgid ""
+"Enter your domain name into the %1$s field, if it is not added already: %2$s"
+msgstr ""
+
+#, php-format
+msgid "Press the %s button."
+msgstr ""
+
+msgid "Allow some time for these modifications to take effect."
+msgstr ""
+
+#, php-format
+msgid ""
+"Log in to your %s developer account or register one if you don't have any!"
+msgstr ""
+
+#, php-format
+msgid "On the top right corner click on %1$s then click on the %2$s option."
+msgstr ""
+
+#, php-format
+msgid ""
+"A modal will appear where you need to select an image as %1$s and enter a "
+"name into the %2$s field."
+msgstr ""
+
+#, php-format
+msgid "Press the %1$s button."
+msgstr ""
+
+#, php-format
+msgid "For %1$s choose the %2$s option."
+msgstr ""
+
+#, php-format
+msgid "Under the %s section you should fill all of the required fields."
+msgstr ""
+
+#, php-format
+msgid "Enter your domain name to the %1$s field, probably: %2$s"
+msgstr ""
+
+#, php-format
+msgid ""
+"Under the %1$s section you need to make sure the option %2$s is checked."
+msgstr ""
+
+#, php-format
+msgid ""
+"Into the %1$s field you should write a text, that describes what you are "
+"going to do with the App. In this particular case, you will use it to offer "
+"%2$s login option for your visitors."
+msgstr ""
+
+#, php-format
+msgid ""
+"Wait until your App gets approved. This can take a couple of days. If you "
+"scroll up to the top of the page you will be able to find the %s below the "
+"name of your App."
+msgstr ""
+
+#, php-format
+msgid ""
+"Once the %1$s says %2$s, the %3$s and %4$s will appear below the %1$s text. "
+"You will need these for the provider configuration."
+msgstr ""
+
+#, php-format
+msgid ""
+"<b>WARNING:</b> The %1$s API can not return any email address or phone "
+"number! %2$sLearn more%3$s."
+msgstr ""
+
+msgid "Client Key"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>LinkedIn</b>"
+msgid "Continue with <b>TikTok</b>"
+msgstr "Войти через <b>LinkedIn</b>"
+
+#, fuzzy
+msgid "Sign up with <b>TikTok</b>"
+msgstr "Войти через <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>LinkedIn</b>"
+msgid "Link account with <b>TikTok</b>"
+msgstr "Связать аккаунты с <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>LinkedIn</b>"
+msgid "Unlink account from <b>TikTok</b>"
+msgstr "Отвязать аккаунты от <b>LinkedIn</b>"
+
 msgid "Click on the \"<b>Manage</b>\" button next to the associated App."
 msgstr ""
 
 msgid "Go to the \"<b>Settings</b>\" menu"
-msgstr ""
-
-msgid "Add the following URL to the \"<b>Authorized redirect URI</b>\" field: "
 msgstr ""
 
 msgid "Locate the blue \"<b>Create app</b>\" button and click on it."
@@ -3012,9 +3132,6 @@ msgid "Unlink account from <b>WordPress.com</b>"
 msgstr "Отвязать аккаунты от <b>WordPress.com</b>"
 
 msgid "Click on the App which has its credentials associated with the plugin."
-msgstr ""
-
-msgid "Add the following URL to the \"<b>Redirect URI(s)</b>\" field:"
 msgstr ""
 
 msgid "Click on the \"<b>Create an App</b>\" button on the top right corner."

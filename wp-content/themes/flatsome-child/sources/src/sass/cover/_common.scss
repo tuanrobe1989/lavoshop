@@ -66,6 +66,20 @@ strong {
   text-transform: uppercase;
 }
 
+.visible-xs{
+  display: block !important;
+  @include breakpoint-up(md){
+    display: none !important;
+  }
+}
+
+.visible-md{
+  display: block !important;
+  @include breakpoint-up(lg){
+    display: none !important;
+  }
+}
+
 // .woocommerce-message{
 //   border: 1px solid $gray;
 // }

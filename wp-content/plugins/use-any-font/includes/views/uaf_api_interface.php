@@ -20,7 +20,7 @@
                                 echo '##############################';
                             } else {
                                 echo $GLOBALS['uaf_user_settings']['uaf_api_key'];
-                            } ?>                           
+                            } ?>
 
                         - Active</span>
                         

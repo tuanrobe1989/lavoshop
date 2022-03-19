@@ -37,23 +37,35 @@ class DateTime {
     return $dateFormat;
   }
 
-  public function getCurrentTime($format=false) {
+  /**
+   * @param string $format Type of time to retrieve. Accepts 'mysql', 'timestamp', 'U',
+   * or PHP date format string (e.g. 'Y-m-d').
+   *
+   * @return int|string Integer if `$format` is 'timestamp' or 'U'
+   */
+  public function getCurrentTime(string $format = '') {
     if (empty($format)) $format = $this->getTimeFormat();
     return $this->wp->currentTime($format);
   }
 
-  public function getCurrentDate($format=false) {
+  /**
+   * @param string $format Type of time to retrieve. Accepts 'mysql', 'timestamp', 'U',
+   * or PHP date format string (e.g. 'Y-m-d').
+
+   * @return int|string Integer if `$format` is 'timestamp' or 'U'
+   */
+  public function getCurrentDate(string $format = '') {
     if (empty($format)) $format = $this->getDateFormat();
     return $this->getCurrentTime($format);
   }
 
-  public function formatTime($timestamp, $format=false) {
+  public function formatTime($timestamp, $format = false) {
     if (empty($format)) $format = $this->getTimeFormat();
 
     return date($format, $timestamp);
   }
 
-  public function formatDate($timestamp, $format=false) {
+  public function formatDate($timestamp, $format = false) {
     if (empty($format)) $format = $this->getDateFormat();
 
     return date($format, $timestamp);
@@ -64,9 +76,9 @@ class DateTime {
    * formatted and mapped from DEFAULT_TIME_FORMAT to WordPress time strings.
    */
   public function getTimeInterval(
-    $startTime='00:00:00',
-    $timeStep='+1 hour',
-    $totalSteps=24
+    $startTime = '00:00:00',
+    $timeStep = '+1 hour',
+    $totalSteps = 24
   ) {
     $steps = [];
 
@@ -82,5 +94,9 @@ class DateTime {
     }
 
     return $steps;
+  }
+
+  public function getCurrentDateTime(): \DateTime {
+    return new \DateTime("now", wp_timezone());
   }
 }

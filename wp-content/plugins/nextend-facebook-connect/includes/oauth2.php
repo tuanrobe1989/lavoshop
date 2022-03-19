@@ -143,6 +143,8 @@ abstract class NextendSocialOauth2 extends NextendSocialAuth {
                 throw new Exception(sprintf(__('Unexpected response: %s', 'nextend-facebook-connect'), wp_remote_retrieve_body($request)));
             }
 
+            $accessTokenData = $this->extendAccessTokenData($accessTokenData);
+
             $accessTokenData['created'] = time();
 
             $this->access_token_data = $accessTokenData;
@@ -309,5 +311,18 @@ abstract class NextendSocialOauth2 extends NextendSocialAuth {
     protected function extendAllHttpArgs($http_args) {
 
         return $http_args;
+    }
+
+    /**
+     * @param $access_token_data
+     *
+     *  Can be used for adding additional data into the access_token_data array or modifying its structure
+     *  if the format is wrong.
+     *
+     * @return mixed
+     */
+    protected function extendAccessTokenData($access_token_data) {
+
+        return $access_token_data;
     }
 }

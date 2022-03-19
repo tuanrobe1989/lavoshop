@@ -20,8 +20,34 @@ add_thickbox();
                          <span class="field_error">Please give font name.</span>
                      </span>
                  </p>
-
                  <p>
+                     <label>&nbsp;</label>
+                     <span class="field">
+                         <input type="checkbox" name="enable_font_variation" id="enable_font_variation" onclick="multi_variation_holder_toggle();"> Enable Font Weight Variation ( For Advance Users ). <a href="https://dineshkarki.com.np/add-multiple-font-variation-in-use-any-font.html" target="_blank">How to !</a>
+                     </span>
+                 </p>
+                 <div class="multi_variation_holder" style="display:none;">
+                     <p>
+                         <label>Font Weight *</label>
+                         <span class="field">
+                             <select name="font_weight" class="medium">
+                                <?php foreach ($GLOBALS['uaf_fix_settings']['font_weight_variations'] as $variation => $variation_label): ?>
+                                    <option value="<?php echo $variation ?>"><?php echo $variation_label; ?></option>
+                                <?php endforeach; ?>
+                             </select>
+                         </span>
+                    </p>
+                    <p>
+                         <label>Font Style *</label>
+                         <span class="field">
+                             <select name="font_style" class="medium">
+                                <option value="normal">Normal</option>
+                                <option value="italic">Italic</option>                            
+                             </select>
+                         </span>
+                    </p>
+                </div>
+                <p>
                      <label>Font File *</label>
                      <span class="field">
                             <input type="file" id="fontfile" name="fontfile" value="" class="uaf_required" accept=".woff,.ttf,.otf" />
@@ -48,7 +74,7 @@ add_thickbox();
             </form>
         <?php else: ?>
             <div class="dcinfo"><p>You need to add API key in <a href="admin.php?page=use-any-font&tab=api">API key</a> section to upload the fonts.</p></div>
-        <?php endif; ?>     
+        <?php endif; ?>
     </div>
 </div>
 

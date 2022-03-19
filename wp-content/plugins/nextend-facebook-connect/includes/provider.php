@@ -1096,6 +1096,7 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
      * Redirect the source of the popup window to a specified url.
      */
     public static function redirect($title, $url) {
+        $url = NextendSocialLogin::maybeAddBypassCacheArgToUrl($url);
         ?>
         <!doctype html>
         <html lang=en>

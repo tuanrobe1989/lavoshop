@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2021-11-15 18:50+0100\n"
-"PO-Revision-Date: 2021-11-15 18:50+0100\n"
+"POT-Creation-Date: 2022-02-14 08:32+0100\n"
+"PO-Revision-Date: 2022-02-14 08:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: it_IT\n"
@@ -845,6 +845,16 @@ msgstr "Disabilita l'amministrazione per i ruoli"
 msgid "Debug mode"
 msgstr "Modalità debug"
 
+msgid "Bypass cache on redirect"
+msgstr ""
+
+#, php-format
+msgid ""
+"Enabling this option will add a GET parameter to the URL where we redirect "
+"after a successful registration or login with social login. %1$sLearn more"
+"%2$s."
+msgstr ""
+
 msgid "Page for register flow"
 msgstr "Pagina per il flusso di registrazione"
 
@@ -1317,9 +1327,10 @@ msgstr ""
 "Sulla barra laterale clicca clicca su \"<b>Accesso Facebook > Impostazioni</"
 "b>\""
 
-msgid ""
-"Add the following URL to the \"<b>Valid OAuth redirect URIs</b>\" field:"
-msgstr "Aggiungi l'URL seguente al campo \"<b>Valid OAuth redirect URIs</b>\":"
+#, fuzzy, php-format
+#| msgid "Add the following URL to the \"<b>Return URLs</b>\" field: <b>%s</b>"
+msgid "Add the following URL to the %s field:"
+msgstr "Aggiungi l'URL seguente al campo \"<b>URLs di ritorno</b>\": <b>%s</b>"
 
 msgid "Click on \"<b>Save Changes</b>\""
 msgstr "Clicca su \"<b>Salva Modifiche</b>\""
@@ -1742,6 +1753,14 @@ msgstr ""
 "cliccando sul suo nome e sarai in grado di fare copia-incolla del "
 "\"<b>Client ID</b>\" e del \"<b>Client Secret</b>\" da lì."
 
+#, php-format
+msgid ""
+"Currently your App is in %1$s mode, so only limited number of people can use "
+"it. To allow this App for any user with a Google Account, click on the \"%2$s"
+"\" option on the left side, then click the \"%3$s\" button under the \"%4$s"
+"\" section, and press the \"%5$s\" button. "
+msgstr ""
+
 msgid "Client ID"
 msgstr "Client ID"
 
@@ -1774,34 +1793,28 @@ msgstr "Scollega account da <b>Google</b>"
 msgid "Required API: %1$s"
 msgstr "API richiesta: %1$s"
 
-#, fuzzy
-#| msgid "Find your App and click on the \"<b>Details</b>\" button"
-msgid ""
-"Find your App and click on the <b>App settings</b> icon. (The one that looks "
-"like a gear.)"
-msgstr "Cerca la tua App e clicca sul bottone \"<b>Dettagli</b>\""
-
-#, fuzzy
-#| msgid ""
-#| "Click on the \"<b>Create an App</b>\" button on the top right corner."
-msgid "Click on the <b>Edit</b> button at <b>Authentication settings</b>."
+#, php-format
+msgid "On the left side, under the %s section click on the name of your App."
 msgstr ""
-"Clicca sul bottone \"<b>Crea un'App</b>\" nell'angolo in alto a destra."
 
 #, fuzzy, php-format
-#| msgid "Add the following URL to the \"<b>Return URLs</b>\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>%1$s</b>\" field:"
-msgstr "Aggiungi l'URL seguente al campo \"<b>URLs di ritorno</b>\": <b>%s</b>"
+#| msgid "Click on the \"<b>Create</b>\" button"
+msgid "Click on the %1$s button at %2$s."
+msgstr "Clicca sul bottone \"<b>Crea</b>\""
 
 #, fuzzy, php-format
 #| msgid ""
 #| "Make sure the <b>%1$s</b> tab is selected and click on the <b>%2$s</b> "
 #| "button."
-msgid ""
-"Make sure the \"<b>%1$s</b>\" field contains the following URL: <b>%2$s</b>"
+msgid "Make sure the %1$s field contains the following URL: %2$s"
 msgstr ""
 "Accertati che la tab <b>%1$s</b> sia selezionata e clicca sul bottone <b>"
 "%2$s</b>."
+
+#, fuzzy, php-format
+#| msgid "Click on \"Save\""
+msgid "Click on %s"
+msgstr "Clicca su \"Salva\""
 
 msgid ""
 "If you don't have a developer account yet, please apply one by filling all "
@@ -1822,14 +1835,19 @@ msgstr ""
 msgid "Click on \"<b>%s</b>\"!"
 msgstr "Clicca su \"<b>%s</b>\"!"
 
+#, php-format
 msgid ""
 "Name your project, and go through the basic setup. You’ll need to select "
-"your use case, give a description and enter a name for the App as well."
+"your use case, give a description then click the %s button."
 msgstr ""
 
 #, php-format
-msgid "Click \"<b>%s</b>\"!"
-msgstr "Clicca \"<b>>%s</b>\"!"
+msgid "Choose the %1$s option for %2$s, then press %3$s!"
+msgstr ""
+
+#, php-format
+msgid "Into the %1$s field, enter a name for your App, then press %2$s again!"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -1845,11 +1863,12 @@ msgid ""
 msgstr ""
 
 #, php-format
-msgid "Scroll down and click on the \"<b>%1$s</b>\" button at \"<b>%2$s</b>\"."
+msgid "Scroll down and click on the %1$s button at %2$s."
 msgstr ""
 
-#, php-format
-msgid "Switch on the \"<b>%s</b>\" option."
+#, fuzzy, php-format
+#| msgid "Switch on the \"<b>%s</b>\" option."
+msgid "Switch on the %s option."
 msgstr "Scegli l'opzione \"<b>%s</b>\"."
 
 #, php-format
@@ -1859,23 +1878,39 @@ msgstr "Inserisci l'URL del tuo sito nel campo \"<b>%1$s</b>\": <b>%2$s</b>"
 #, php-format
 msgid ""
 "If you want to get the email address as well, then don’t forget to enable "
-"the \"<b>%1$s</b>\" option. In this case you also need to fill the \"<b>"
-"%2$s</b>\" and the \"<b>%3$s</b>\" fields with the corresponding URLs!"
+"the %1$s option. In this case you also need to fill the \"<b>%2$s</b>\" and "
+"the \"<b>%3$s</b>\" fields with the corresponding URLs!"
 msgstr ""
 
-#, php-format
-msgid "Click on \"<b>%s</b>\"."
+#, fuzzy, php-format
+#| msgid "Click on \"<b>%s</b>\"."
+msgid "Click on %s."
 msgstr "Clicca su \"<b>%s</b>\"."
 
 #, php-format
-msgid "Go back to %1$s and <b>Verify</b> your %2$s provider."
+msgid ""
+"On the left side, under the \"<b>%s</b>\" section click on the name of your "
+"Project ( that you created the App for )."
+msgstr ""
+
+#, php-format
+msgid ""
+"Click on the %1$s button, then fill the %2$s, %3$s, %4$s and %5$s forms."
+msgstr ""
+
+#, php-format
+msgid ""
+"Once your application for the Elevated access has been approved, go back to "
+"%1$s then <b>verify</b> and <b>enable</b> the %2$s provider!"
 msgstr ""
 
 msgid "API Key"
 msgstr "API Key"
 
-msgid "API secret key"
-msgstr "API secret key"
+#, fuzzy
+#| msgid "API Secret"
+msgid "API Key Secret"
+msgstr "API Secret"
 
 msgid "Profile image size"
 msgstr "Dimensioni immagine profilo"
@@ -2031,10 +2066,10 @@ msgstr ""
 msgid "Click \"<b>Edit</b>\"."
 msgstr "Clicca \"<b>Modifica</b>\"."
 
-msgid "Add the following URL to the \"<b>Allowed Return URLs</b>\" field: "
-msgstr ""
-"Aggiungi l'url seguente alle \"<b>URL di Ritorno consentite</b>\" campo <b>"
-"%s</b>: "
+#, fuzzy, php-format
+#| msgid "Add the following URL to the \"<b>Return URLs</b>\" field: <b>%s</b>"
+msgid "Add the following URL to the %s field: "
+msgstr "Aggiungi l'URL seguente al campo \"<b>URLs di ritorno</b>\": <b>%s</b>"
 
 #, php-format
 msgid ""
@@ -2113,11 +2148,6 @@ msgid ""
 msgstr ""
 "Compila il campo \"<b>Domini e Sottodomini</b>\" col nome del tuo dominio, "
 "probabilmente: <b>%s</b>"
-
-#, fuzzy
-#| msgid "Add the following URL to the \"<b>Return URLs</b>\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>Return URLs</b>\" field:"
-msgstr "Aggiungi l'URL seguente al campo \"<b>URLs di ritorno</b>\": <b>%s</b>"
 
 msgid ""
 "Finally press \"<b>Next</b>\" then \"<b>Done</b>\" and finally click on the "
@@ -2450,8 +2480,10 @@ msgid ""
 "Settings section on the left side."
 msgstr ""
 
-msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
-msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect</b>\":"
+#, fuzzy, php-format
+#| msgid "Add the following URL to the \"<b>Return URLs</b>\" field: <b>%s</b>"
+msgid "Add the following URL in the %s field:"
+msgstr "Aggiungi l'URL seguente al campo \"<b>URLs di ritorno</b>\": <b>%s</b>"
 
 msgid "Click the \"<b>New Application</b>\" button."
 msgstr "Clicca sul bottone \"<b>Crea Nuova Applicazione</b>\"."
@@ -2469,9 +2501,6 @@ msgstr ""
 msgid ""
 "On the left side, click on the “<b>%1$s</b>” menu point in the Settings."
 msgstr "A sinistra, clicca nel menù su “<b>%1$s</b>” nei Settaggi."
-
-msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
-msgstr "Aggiungi l'URL seguente al campo \"<b>Redirect</b>\":"
 
 msgid "Click the \"<b>Save Changes</b>\" button."
 msgstr "Clicca sul bottone \"<b>Salva Modifiche</b>\"."
@@ -2516,9 +2545,6 @@ msgid ""
 msgstr ""
 "Seleziona la tab \"<b>Settaggi</b>\" e scrolla giù alla sezione "
 "Autenticazione!"
-
-msgid "Add the following URL to the \"<b>Callback URL</b>\" field:"
-msgstr "Aggiungi l'URL seguente al campo \"<b>Callback URLs</b>\":"
 
 msgid "Click on the \"<b>Save Changes</b>\" button."
 msgstr "Clicca sul bottone \"<b>Salva Modifiche</b>\"."
@@ -2597,9 +2623,6 @@ msgstr "Clicca sul nome dell'App che hai configurato per %s."
 msgid "Make sure the <b>Homepage URL</b> matches with: <b>%s</b>"
 msgstr "Accertati che l'<b>URL della Homepage</b> coincida con: <b>%s</b>"
 
-msgid "Add the following URL to the <b>Authorization callback URL</b> field:"
-msgstr "Aggiungi questa URL nel campo della <b>Authorization callback URL</b>:"
-
 msgid "Press the <b>Update application</b> button to save the changes."
 msgstr ""
 "Clicca sul botton <b>Aggiorna applicatione</b>per salvare le modifiche."
@@ -2672,10 +2695,10 @@ msgstr "Naviga a %s"
 msgid "Select your %s App and click on the LINE Login section."
 msgstr ""
 
-#, fuzzy
+#, fuzzy, php-format
 #| msgid ""
 #| "Add the following URL to the \"<b>Callback URLs</b>\" field: <b>%s</b>"
-msgid "Change your URL in the \"<b>Callback URL</b>\" field:"
+msgid "Change your URL in the %s field:"
 msgstr "Aggiungi l'URL seguente al campo \"<b>Callback URLs</b>\": <b>%s</b>"
 
 #, php-format
@@ -2836,12 +2859,6 @@ msgstr "Scollega account da <b>LinkedIn</b>"
 msgid "Click on your App and go to the \"<b>Auth</b>\" tab."
 msgstr "Clicca sulla tua App e vai nella tab \"<b>Auth</b>\"."
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>Redirect URLs</b>\" field:"
-msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect URLs</b>\": <b>%s</b>"
-
 msgid "Click on \"<b>Update</b>\" to save the changes"
 msgstr "Clicca su \"<b>Aggiorna</b>\" per salvare le modifiche"
 
@@ -2895,9 +2912,11 @@ msgstr ""
 msgid "Click on the \"<b>Auth</b>\" tab."
 msgstr "Clicca sulla tab \"<b>Auth</b>\"."
 
-msgid ""
-"Find \"<b>OAuth 2.0 settings</b>\" section and add the following URL to the "
-"\"<b>Redirect URLs</b>\" field:"
+#, fuzzy, php-format
+#| msgid ""
+#| "Find \"<b>OAuth 2.0 settings</b>\" section and add the following URL to "
+#| "the \"<b>Redirect URLs</b>\" field:"
+msgid "Find the %1$s section and add the following URL to the %2$s field:"
 msgstr ""
 "Cerca la sezione \"<b>OAuth 2.0 settings</b>\" e aggiungi l'URL seguente al "
 "campo \"<b>Redirect URLs</b>\":"
@@ -2941,13 +2960,6 @@ msgid "Click on the link next to the Redirect URIs label."
 msgstr ""
 "Aggiungi la seguente URL al campo \"<b>Redirect URI(s)</b>\": <b>%s</b>"
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Redirect URI(s)</b>\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>Redirect URIs</b>\" field:"
-msgstr ""
-"Aggiungi la seguente URL al campo \"<b>Redirect URI(s)</b>\": <b>%s</b>"
-
 #, fuzzy, php-format
 #| msgid "Log in with your %s credentials if you are not logged in yet"
 msgid ""
@@ -2974,13 +2986,6 @@ msgid ""
 "on the selected value! If you are not sure what to choose, then %1$shere%2$s "
 "you can learn more."
 msgstr ""
-
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Redirect URI(s)</b>\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>Redirect URI</b>\" field:"
-msgstr ""
-"Aggiungi la seguente URL al campo \"<b>Redirect URI(s)</b>\": <b>%s</b>"
 
 #, fuzzy
 #| msgid ""
@@ -3116,13 +3121,6 @@ msgid ""
 msgstr ""
 "Scendi giù fino a \"<b>SETTAGGI APP LIVE</b>\", cerca il titolo \"<b>Live "
 "Return URL</b>\" e clicca su \"<b>Mostra</b>\"."
-
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Live Return URL</b>\" field: <b>%s</b> "
-msgid "Add the following URL to the \"<b>Live Return URL</b>\" field:"
-msgstr ""
-"Aggiungi l'URL seguente al campo \"<b>Live Return URL</b>\": <b>%s</b> "
 
 msgid "Click on \"Save\""
 msgstr "Clicca su \"Salva\""
@@ -3412,20 +3410,137 @@ msgstr "Collega account con <b>Facebook</b>"
 msgid "Unlink account from <b>Slack</b>"
 msgstr "Scollega account da <b>Facebook</b>"
 
+#, fuzzy, php-format
+#| msgid "Log in with your %s credentials if you are not logged in yet"
+msgid "Log in to your %s developer account, if you are not logged in yet."
+msgstr "Accedi con le tue credenziali %s se non sei ancora loggato"
+
+#, php-format
+msgid ""
+"On the top right corner click on %1$s then click on the name of that App "
+"that you used for the configuration."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Switch on the \"<b>%s</b>\" option."
+msgid "Scroll down to the %s section."
+msgstr "Scegli l'opzione \"<b>%s</b>\"."
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Enter your domain name to the \"<b>App Domains</b>\" field, probably: <b>"
+#| "%s</b>"
+msgid ""
+"Enter your domain name into the %1$s field, if it is not added already: %2$s"
+msgstr ""
+"Inserisci il nome del tuo dominio nel campo \"<b>Domini App</b>\", "
+"probabilmente: <b>%s</b>"
+
+#, php-format
+msgid "Press the %s button."
+msgstr ""
+
+msgid "Allow some time for these modifications to take effect."
+msgstr ""
+
+#, php-format
+msgid ""
+"Log in to your %s developer account or register one if you don't have any!"
+msgstr ""
+
+#, php-format
+msgid "On the top right corner click on %1$s then click on the %2$s option."
+msgstr ""
+
+#, php-format
+msgid ""
+"A modal will appear where you need to select an image as %1$s and enter a "
+"name into the %2$s field."
+msgstr ""
+
+#, php-format
+msgid "Press the %1$s button."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Choose the \"<b>OAuth client ID</b>\" option."
+msgid "For %1$s choose the %2$s option."
+msgstr "Scegli l'opzione \"<b>OAuth client ID</b>\"."
+
+#, php-format
+msgid "Under the %s section you should fill all of the required fields."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Enter your domain name to the \"<b>App Domains</b>\" field, probably: <b>"
+#| "%s</b>"
+msgid "Enter your domain name to the %1$s field, probably: %2$s"
+msgstr ""
+"Inserisci il nome del tuo dominio nel campo \"<b>Domini App</b>\", "
+"probabilmente: <b>%s</b>"
+
+#, php-format
+msgid ""
+"Under the %1$s section you need to make sure the option %2$s is checked."
+msgstr ""
+
+#, php-format
+msgid ""
+"Into the %1$s field you should write a text, that describes what you are "
+"going to do with the App. In this particular case, you will use it to offer "
+"%2$s login option for your visitors."
+msgstr ""
+
+#, php-format
+msgid ""
+"Wait until your App gets approved. This can take a couple of days. If you "
+"scroll up to the top of the page you will be able to find the %s below the "
+"name of your App."
+msgstr ""
+
+#, php-format
+msgid ""
+"Once the %1$s says %2$s, the %3$s and %4$s will appear below the %1$s text. "
+"You will need these for the provider configuration."
+msgstr ""
+
+#, php-format
+msgid ""
+"<b>WARNING:</b> The %1$s API can not return any email address or phone "
+"number! %2$sLearn more%3$s."
+msgstr ""
+
+#, fuzzy
+#| msgid "Client ID"
+msgid "Client Key"
+msgstr "Client ID"
+
+#, fuzzy
+#| msgid "Continue with <b>LinkedIn</b>"
+msgid "Continue with <b>TikTok</b>"
+msgstr "Continua con <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Continue with <b>LinkedIn</b>"
+msgid "Sign up with <b>TikTok</b>"
+msgstr "Continua con <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>LinkedIn</b>"
+msgid "Link account with <b>TikTok</b>"
+msgstr "Collega account con <b>LinkedIn</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>LinkedIn</b>"
+msgid "Unlink account from <b>TikTok</b>"
+msgstr "Scollega account da <b>LinkedIn</b>"
+
 msgid "Click on the \"<b>Manage</b>\" button next to the associated App."
 msgstr "Clicca sul bottone \"<b>Gestisci</b>\" vicino l'App associata."
 
 msgid "Go to the \"<b>Settings</b>\" menu"
 msgstr "Vai al menu \"<b>Settaggi</b>\""
-
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Authorized redirect URI</b>\" field: <b>"
-#| "%s</b>"
-msgid "Add the following URL to the \"<b>Authorized redirect URI</b>\" field: "
-msgstr ""
-"Aggiungi l'URL seguente al campo \"<b>Authorized redirect URI</b>\": <b>%s</"
-"b>"
 
 msgid "Locate the blue \"<b>Create app</b>\" button and click on it."
 msgstr "Cerca il bottone \"<b>Crea app</b>\" e cliccaci."
@@ -3551,13 +3666,6 @@ msgstr "Scollega account da <b>WordPress.com</b>"
 msgid "Click on the App which has its credentials associated with the plugin."
 msgstr "Clicca sull'App che ha le credenziali associate col plugin."
 
-#, fuzzy
-#| msgid ""
-#| "Add the following URL to the \"<b>Redirect URI(s)</b>\" field: <b>%s</b>"
-msgid "Add the following URL to the \"<b>Redirect URI(s)</b>\" field:"
-msgstr ""
-"Aggiungi la seguente URL al campo \"<b>Redirect URI(s)</b>\": <b>%s</b>"
-
 msgid "Click on the \"<b>Create an App</b>\" button on the top right corner."
 msgstr ""
 "Clicca sul bottone \"<b>Crea un'App</b>\" nell'angolo in alto a destra."
@@ -3619,6 +3727,103 @@ msgstr "OR"
 
 msgid "Social accounts"
 msgstr "Account social"
+
+#~ msgid ""
+#~ "Add the following URL to the \"<b>Valid OAuth redirect URIs</b>\" field:"
+#~ msgstr ""
+#~ "Aggiungi l'URL seguente al campo \"<b>Valid OAuth redirect URIs</b>\":"
+
+#, fuzzy
+#~| msgid "Find your App and click on the \"<b>Details</b>\" button"
+#~ msgid ""
+#~ "Find your App and click on the <b>App settings</b> icon. (The one that "
+#~ "looks like a gear.)"
+#~ msgstr "Cerca la tua App e clicca sul bottone \"<b>Dettagli</b>\""
+
+#, fuzzy
+#~| msgid ""
+#~| "Click on the \"<b>Create an App</b>\" button on the top right corner."
+#~ msgid "Click on the <b>Edit</b> button at <b>Authentication settings</b>."
+#~ msgstr ""
+#~ "Clicca sul bottone \"<b>Crea un'App</b>\" nell'angolo in alto a destra."
+
+#, php-format
+#~ msgid "Click \"<b>%s</b>\"!"
+#~ msgstr "Clicca \"<b>>%s</b>\"!"
+
+#~ msgid "API secret key"
+#~ msgstr "API secret key"
+
+#~ msgid "Add the following URL to the \"<b>Allowed Return URLs</b>\" field: "
+#~ msgstr ""
+#~ "Aggiungi l'url seguente alle \"<b>URL di Ritorno consentite</b>\" campo "
+#~ "<b>%s</b>: "
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"<b>Return URLs</b>\" field: <b>%s</b>"
+#~ msgid "Add the following URL to the \"<b>Return URLs</b>\" field:"
+#~ msgstr ""
+#~ "Aggiungi l'URL seguente al campo \"<b>URLs di ritorno</b>\": <b>%s</b>"
+
+#~ msgid "Add the following URL in the \"<b>Redirects</b>\" field:"
+#~ msgstr "Aggiungi l'URL seguente nel campo \"<b>Redirect</b>\":"
+
+#~ msgid "Add the following URL to the \"<b>Redirects</b>\" field:"
+#~ msgstr "Aggiungi l'URL seguente al campo \"<b>Redirect</b>\":"
+
+#~ msgid "Add the following URL to the \"<b>Callback URL</b>\" field:"
+#~ msgstr "Aggiungi l'URL seguente al campo \"<b>Callback URLs</b>\":"
+
+#~ msgid ""
+#~ "Add the following URL to the <b>Authorization callback URL</b> field:"
+#~ msgstr ""
+#~ "Aggiungi questa URL nel campo della <b>Authorization callback URL</b>:"
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"<b>Redirect URLs</b>\" field: <b>%s</b>"
+#~ msgid "Add the following URL to the \"<b>Redirect URLs</b>\" field:"
+#~ msgstr ""
+#~ "Aggiungi l'URL seguente nel campo \"<b>Redirect URLs</b>\": <b>%s</b>"
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"<b>Redirect URI(s)</b>\" field: <b>%s</b>"
+#~ msgid "Add the following URL to the \"<b>Redirect URIs</b>\" field:"
+#~ msgstr ""
+#~ "Aggiungi la seguente URL al campo \"<b>Redirect URI(s)</b>\": <b>%s</b>"
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"<b>Redirect URI(s)</b>\" field: <b>%s</b>"
+#~ msgid "Add the following URL to the \"<b>Redirect URI</b>\" field:"
+#~ msgstr ""
+#~ "Aggiungi la seguente URL al campo \"<b>Redirect URI(s)</b>\": <b>%s</b>"
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"<b>Live Return URL</b>\" field: <b>%s</b> "
+#~ msgid "Add the following URL to the \"<b>Live Return URL</b>\" field:"
+#~ msgstr ""
+#~ "Aggiungi l'URL seguente al campo \"<b>Live Return URL</b>\": <b>%s</b> "
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"<b>Authorized redirect URI</b>\" field: "
+#~| "<b>%s</b>"
+#~ msgid ""
+#~ "Add the following URL to the \"<b>Authorized redirect URI</b>\" field: "
+#~ msgstr ""
+#~ "Aggiungi l'URL seguente al campo \"<b>Authorized redirect URI</b>\": <b>"
+#~ "%s</b>"
+
+#, fuzzy
+#~| msgid ""
+#~| "Add the following URL to the \"<b>Redirect URI(s)</b>\" field: <b>%s</b>"
+#~ msgid "Add the following URL to the \"<b>Redirect URI(s)</b>\" field:"
+#~ msgstr ""
+#~ "Aggiungi la seguente URL al campo \"<b>Redirect URI(s)</b>\": <b>%s</b>"
 
 #~ msgid ""
 #~ "Disable, when you don't want to see the consent screen on each login."

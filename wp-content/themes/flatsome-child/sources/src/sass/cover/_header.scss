@@ -19,7 +19,10 @@
         border-radius: 10px;
     }
     .searchform .button.icon{
-        width: 100px;
+        width: 50px;
+        @include breakpoint-up(md){
+            width: 100px;
+        }
     }
     .search_categories {
         width: 8rem !important; 
@@ -28,4 +31,12 @@
     input[type=search]{
         border-radius: 0 !important;
     }
+}
+#top-bar{
+    @include breakpoint-down(sm){
+        display: none;
+    }
+}
+.search-form-categories{
+    max-width: 60px;
 }

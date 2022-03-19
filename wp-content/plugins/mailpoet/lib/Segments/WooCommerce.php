@@ -127,11 +127,14 @@ class WooCommerce {
           $data['last_name'] = $wpUser->last_name; // phpcs:ignore Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps
         }
         $subscriber = $this->subscriberSaveController->createOrUpdate($data, $subscriber);
-        // add subscriber to the WooCommerce Customers segment
-        $this->subscriberSegmentRepository->subscribeToSegments(
-          $subscriber,
-          [$wcSegment]
-        );
+        // add subscriber to the WooCommerce Customers segment when relation doesn't exist
+        $subscriberSegment = $this->subscriberSegmentRepository->findOneBy(['subscriber' => $subscriber, 'segment' => $wcSegment]);
+        if (!$subscriberSegment) {
+          $this->subscriberSegmentRepository->subscribeToSegments(
+            $subscriber,
+            [$wcSegment]
+          );
+        }
         break;
     }
 
@@ -170,17 +173,17 @@ class WooCommerce {
     }
   }
 
-  public function synchronizeCustomers(int $lastProcessedOrderId = 0, ?int $highestOrderId = null, int $batchSize = 1000): int {
+  public function synchronizeCustomers(int $lastCheckedOrderId = 0, ?int $highestOrderId = null, int $batchSize = 1000): int {
 
     $this->wpSegment->synchronizeUsers(); // synchronize registered users
 
     $this->markRegisteredCustomers();
 
-    $processedOrders = $this->insertSubscribersFromOrders($lastProcessedOrderId, $batchSize);
+    $processedOrders = $this->insertSubscribersFromOrders($lastCheckedOrderId, $batchSize);
     $this->updateNames($processedOrders);
 
-    $lastProcessedOrderId = end($processedOrders);
-    if (!$highestOrderId || $lastProcessedOrderId === $highestOrderId) {
+    $lastCheckedOrderId = $lastCheckedOrderId + $batchSize;
+    if (!$highestOrderId || $lastCheckedOrderId >= $highestOrderId) {
       $this->insertUsersToSegment();
       $this->unsubscribeUsersFromSegment();
       $this->removeOrphanedSubscribers();
@@ -188,7 +191,7 @@ class WooCommerce {
       $this->updateGlobalStatus();
     }
 
-    return (int)$lastProcessedOrderId;
+    return $lastCheckedOrderId;
   }
 
   private function ensureColumnCollation(): void {

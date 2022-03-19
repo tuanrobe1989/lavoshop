@@ -5,21 +5,21 @@
  * Description: Customize WooCommerce without code! Easily change add to cart button text and more.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com
- * Version: 2.7.4
+ * Version: 2.7.6
  * Text Domain: woocommerce-customizer
  * Domain Path: /i18n/languages/
  *
- * Copyright: (c) 2013-2020, SkyVerge, Inc. (info@skyverge.com)
+ * Copyright: (c) 2013-2022, SkyVerge, Inc. (info@skyverge.com)
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @author    SkyVerge
- * @copyright Copyright (c) 2013-2020, SkyVerge, Inc. (info@skyverge.com)
+ * @copyright Copyright (c) 2013-2022, SkyVerge, Inc. (info@skyverge.com)
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
- * WC requires at least: 3.0.9
- * WC tested up to: 4.1.0
+ * WC requires at least: 3.9.4
+ * WC tested up to: 6.2.1
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -46,10 +46,10 @@ class WC_Customizer {
 
 
 	/** plugin version number */
-	const VERSION = '2.7.4';
+	const VERSION = '2.7.6';
 
 	/** required WooCommerce version number */
-	const MIN_WOOCOMMERCE_VERSION = '3.0.9';
+	const MIN_WOOCOMMERCE_VERSION = '3.9.4';
 
 	/** @var \WC_Customizer single instance of this plugin */
 	protected static $instance;
@@ -167,13 +167,6 @@ class WC_Customizer {
 					} else {
 
 						add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'customize_add_to_cart_text' ), 50, 2 );
-					}
-
-				} elseif ( 'woocommerce_placeholder_img_src' === $filter_name ) {
-
-					// only filter placeholder images on the frontend
-					if ( ! is_admin() ) {
-						add_filter( $filter_name, array( $this, 'customize' ), 50 );
 					}
 
 				} elseif ( 'loop_sale_flash_text' === $filter_name || 'single_sale_flash_text' === $filter_name ) {
@@ -405,7 +398,7 @@ class WC_Customizer {
 	public function customize_single_backorder_text( $text, $product ) {
 
 		// backorder text
-		if ( isset( $this->filters['single_backorder_text'] ) && $product->managing_stock() && $product->is_on_backorder( 1 ) ) {
+		if ( isset( $this->filters['single_backorder_text'] ) && $product->is_on_backorder( 1 ) ) {
 			return $this->filters['single_backorder_text'];
 		}
 

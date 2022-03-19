@@ -19,9 +19,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.1.3';
+    public static $version = '3.1.4';
 
-    public static $nslPROMinVersion = '3.1.3';
+    public static $nslPROMinVersion = '3.1.4';
 
     public static $proxyPage = false;
 
@@ -214,6 +214,7 @@ class NextendSocialLogin {
             'memberpress_account_details'              => 'after',
             'registration_notification_notify'         => '0',
             'debug'                                    => '0',
+            'bypass_cache'                             => '1',
             'show_linked_providers'                    => '0',
             'login_restriction'                        => '0',
             'avatars_in_all_media'                     => '0',
@@ -284,7 +285,11 @@ class NextendSocialLogin {
             }
 
             update_option('nsl-version', self::$version, true);
-            wp_redirect(set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+            if (!empty($_SERVER['HTTP_HOST'])) {
+                wp_redirect(set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+            } else {
+                wp_redirect(admin_url());
+            }
             exit;
         } else if (isset($_REQUEST['repairnsl']) && current_user_can('manage_options') && check_admin_referer('repairnsl')) {
             self::install();
@@ -418,7 +423,7 @@ class NextendSocialLogin {
             if (!empty($_REQUEST['loginSocial'])) {
                 global $HideMyWP;
                 $loginPath = '/wp-login.php';
-                if (is_object($HideMyWP) && substr($_SERVER['PHP_SELF'], -1 * strlen($loginPath))) {
+                if (is_object($HideMyWP) && !empty($_SERVER['PHP_SELF']) && substr($_SERVER['PHP_SELF'], -1 * strlen($loginPath))) {
                     $login_query = $HideMyWP->opt('login_query');
                     if (!$login_query) {
                         $login_query = 'hide_my_wp';
@@ -1044,8 +1049,11 @@ class NextendSocialLogin {
             $ret = '<div class="nsl-container ' . self::$styles[$style]['container'] . '"' . ($style !== 'fullwidth' ? ' data-align="' . esc_attr($align) . '"' : '') . '>' . $heading . $buttons . '</div>';
             if (defined('DOING_AJAX') && DOING_AJAX) {
                 $id  = md5(uniqid('nsl-ajax-'));
-                $ret = '<div id="' . $id . '">' . $ret . '</div><script>window._nslDOMReady(function(){var socialButtonContainer=document.getElementById("' . $id . '");if(socialButtonContainer){var socialButtons=socialButtonContainer.querySelectorAll("a");socialButtons.forEach(function(el,i){var href=el.getAttribute("href");if(href.indexOf("?")===-1){href+="?"}else{href+="&"}
+                $ret = '<div id="' . $id . '">' . $ret . '</div>';
+                if (!$redirect_to) {
+                    $ret .= '<script>window._nslDOMReady(function(){var socialButtonContainer=document.getElementById("' . $id . '");if(socialButtonContainer){var socialButtons=socialButtonContainer.querySelectorAll("a");socialButtons.forEach(function(el,i){var href=el.getAttribute("href");if(href.indexOf("?")===-1){href+="?"}else{href+="&"}
 el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href))})}});</script>';
+                }
             }
 
             return $ret;
@@ -1057,7 +1065,7 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
 
     public static function getCurrentPageURL() {
 
-        if (defined('DOING_AJAX') && DOING_AJAX) {
+        if ((defined('DOING_AJAX') && DOING_AJAX) || empty($_SERVER['HTTP_HOST']) || empty($_SERVER['REQUEST_URI'])) {
             return false;
         }
 
@@ -1408,6 +1416,28 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
         }
 
         return $id;
+    }
+
+    /**
+     * For logged in users, this function might add the 'nsl_bypass_cache' GET parameter to a URL with a unique value
+     * to bypass the cache.
+     *
+     * @param $url
+     *
+     * @return string
+     */
+    public static function maybeAddBypassCacheArgToUrl($url) {
+        if ($url && self::$settings->get('bypass_cache')) {
+            if (is_user_logged_in()) {
+                if (has_filter('nsl_bypass_cache_url')) {
+                    $url = apply_filters('nsl_bypass_cache_url', $url);
+                } else {
+                    $url = add_query_arg(array('nsl_bypass_cache' => wp_hash(get_current_user_id() . current_time('timestamp'))), $url);
+                }
+            }
+        }
+
+        return $url;
     }
 
 }

@@ -178,11 +178,9 @@ if ( ! function_exists( 'br_is_term_selected' ) ) {
         if( $term_taxonomy == '_rating' ) {
             $term_taxonomy = 'product_visibility';
         }
-        $is_checked = false;
+        $is_checked = apply_filters('br_is_term_selected_checked', false, $term_taxonomy, $term, $checked, $child_parent, $depth);
 
-        global $berocket_parse_page_obj;
-        $filter_data = $berocket_parse_page_obj->get_current();
-        if ( $child_parent ) {
+        if ( ! $is_checked && $child_parent ) {
             $selected_terms = br_get_selected_term( $term_taxonomy );
             foreach( $selected_terms as $selected_term ) {
                 $ancestors = get_ancestors( $selected_term, $term_taxonomy );
@@ -193,13 +191,20 @@ if ( ! function_exists( 'br_is_term_selected' ) ) {
                 }
             }
         }
-        if( isset($filter_data['filters']) && is_array($filter_data['filters']) ) {
-            foreach($filter_data['filters'] as $filter) {
-                if( $is_checked || ($filter['taxonomy'] == $term_taxonomy && in_array($term->term_id, $filter['val_ids'])) ) {
-                    if($checked) return ' checked="checked"';
-                    else return ' selected="selected"';
+        if( ! $is_checked ) {
+            global $berocket_parse_page_obj;
+            $filter_data = $berocket_parse_page_obj->get_current();
+            if( isset($filter_data['filters']) && is_array($filter_data['filters']) ) {
+                foreach($filter_data['filters'] as $filter) {
+                    if( $filter['taxonomy'] == $term_taxonomy && in_array($term->term_id, $filter['val_ids']) ) {
+                        $is_checked = true;
+                    }
                 }
             }
+        }
+        if( $is_checked ) {
+            if($checked) return ' checked="checked"';
+            else return ' selected="selected"';
         }
         return '';
     }

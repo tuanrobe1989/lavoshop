@@ -4,7 +4,7 @@ if( ! class_exists('BeRocket_AAPF_compat_Relevanssi') ) {
         function __construct() {
             if( function_exists('relevanssi_do_query') ) {
                 remove_filter('berocket_aapf_recount_terms_query', array('BeRocket_AAPF_faster_attribute_recount', 'search_query'), 50, 3);
-                add_filter('berocket_aapf_recount_terms_query', array(__CLASS__, 'search_query'), 50, 3);
+                add_filter('berocket_aapf_recount_terms_query', array(__CLASS__, 'search_query'), 500, 3);
                 add_filter('berocket_aapf_recount_price_query', array(__CLASS__, 'search_query_simple'), 50, 1);
                 add_filter('berocket_aapf_simple_recount_terms_query', array(__CLASS__, 'search_query_simple'), 50, 1);
                 add_filter('bapf_query_count_before_update', array(__CLASS__, 'count_before_update'));
@@ -45,6 +45,7 @@ if( ! class_exists('BeRocket_AAPF_compat_Relevanssi') ) {
                 global $wpdb;
                 $queryrelevanssi = new WP_Query();
                 $queryrelevanssi->parse_query( $args );
+                $queryrelevanssi = apply_filters( 'relevanssi_modify_wp_query', $queryrelevanssi );
 
                 $posts = relevanssi_do_query( $queryrelevanssi );
                 if( empty($posts) || count($posts) == 0 ) {

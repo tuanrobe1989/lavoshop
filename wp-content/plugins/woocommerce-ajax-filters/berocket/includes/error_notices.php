@@ -20,7 +20,7 @@ if( ! class_exists('BeRocket_error_notices') ) {
             return $errors;
         }
         public static function save_plugin_error($plugin_id, $errors) {
-            if( count($errors) > 5000 ) {
+            if( count($errors) > 200 ) {
                 $i = 0;
                 foreach($errors as $error_id => $error) {
                     if($i > 100) break;

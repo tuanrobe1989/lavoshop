@@ -4,9 +4,9 @@ Tags: ecommerce, woocommerce, shipping, woocommerce shipping, weight-based shipp
 conditional flat rate, table rate shipping, weight, subtotal, country, shipping classes
 Requires PHP: 7.1
 Requires at least: 4.0
-Tested up to: 5.8
+Tested up to: 5.9
 WC requires at least: 3.2
-WC tested up to: 6.0
+WC tested up to: 6.1
 Stable tag: trunk
 
 
@@ -56,6 +56,9 @@ See <a href="https://wordpress.org/plugins/weight-based-shipping-for-woocommerce
 
 
 == Changelog ==
+
+= 5.3.19 =
+* Tested with WordPress 5.9, WooCommerce 6.1.
 
 = 5.3.18 =
 * Tested with WooCommerce 6.0.

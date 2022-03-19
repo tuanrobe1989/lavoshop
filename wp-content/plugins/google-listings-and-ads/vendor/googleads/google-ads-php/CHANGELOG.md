@@ -1,3 +1,54 @@
+## 12.1.0
+*   Added support for v9 of Google Ads API.
+*   Added `grpc` and `protobuf` extensions to `require-dev` of `composer.json`.
+*   Added support for conversion adjustments in `GoogleAdsError`.
+*   Updated `composer.json` of LaravelSampleApp.
+*   Migrated the following extension examples to use assets.
+    * AddSitelinksUsingFeed (renamed to AddSitelinksUsingAssets)
+    * AddHotelCallout
+    * AddPrices
+*   Updated the AddSmartCampaign example to use newly available methods and
+    specifications in v9.
+*   Updated UploadStoreSalesTransactions to support the `enableWarnings` mode of
+    `OfflineUserDataJobService`. See
+    the [Warnings](https://developers.google.com/google-ads/api/docs/best-practices/warnings)
+    guide for details.
+
+## 12.0.0
+*   Added support for sending the library name and version with each request.
+*   Updated the minimum required version of `google/protobuf` to 3.18.0.
+*   Updated `composer.json` and `composer.lock` of LaravelSampleApp.
+*   Added code examples:
+    * AddBiddingDataExclusion
+    * AddBiddingSeasonalityAdjustment
+*   Fixed code examples:
+    * AddDisplayUploadAd
+    * AddLocalCampaign
+    * AddMerchantCenterDynamicRemarketingCampaign
+    * AddSmartDisplayAd
+    * UploadImage
+    * UploadImageAsset
+    * UploadMediaBundle
+
+## 11.0.0
+*   Added support for v8_1 of Google Ads API.
+*   Added 1.26 to the minimum required version constraints of the `monolog/monolog` dependency.
+*   Removed support for v6 of Google Ads API.
+*   Improved the FieldMasks utility:
+    * Support getting enum value names from fields in the getFieldValue method.
+    * Support the case when a modified field is an empty Message with no fields declared in the
+      compare method.
+*   Fixed/improved code examples:
+    * GetAdGroupBidModifiers
+    * AddSmartCampaign
+    * GetChangeDetails
+    * AddLocalCampaign
+*   Removed the code example AddGmailAd.
+
+## 10.1.0
+*   Moved the CampaignReportToCsv example to the Migration/ directory.
+*   Added the LIMIT clause to the query of the GetAdGroupBidModifiers example.
+
 ## 10.0.0
 *   Added support for v8 of Google Ads API.
 *   Removed support for v5 of Google Ads API.

@@ -101,6 +101,22 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 						'priority'        => 1.1
 					),
 					array(
+						'title'    => __( 'Show label inside swatches', 'wcvs' ),
+						'fields'   => array(
+							array(
+								'id'   => 'wcvs-show-label-on-color-swatches',
+								'type' => 'checkbox',
+								'name' => 'show-label-on-color-swatches',
+							)
+						),
+						'class'          => 'indent',
+						'field_to_check' => 'wcvs-enable-color-swatches',
+						'desc'           => __( 'Show the label for color swatches', 'wcvs' ),
+						'show_if_checked' => true,
+						'priority'       => 1.2,
+						'is_pro_feature' => true,
+					),
+					array(
 						'title'    => __( 'Enable Image Swatches', 'wcvs' ),
 						'fields'   => array(
 							array(
@@ -111,7 +127,7 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 						),
 						'class'=>'main-ajax-trigger',
 						'desc'     => __( 'Enable the Image type for Product Attributes', 'wcvs' ),
-						'priority' => 1.2
+						'priority' => 1.3
 					),
 					array(
 						'title'           => __( 'Select Attributes', 'wcvs' ),
@@ -131,7 +147,21 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 						'class'           => 'indent ajax-to-update',
 						'field_to_check'  => 'wcvs-enable-image-swatches',
 						'show_if_checked' => true,
-						'priority'        => 1.3
+						'priority'        => 1.4
+					),
+					array(
+						'title'    => __( 'Enable Radio Button Swatches', 'wcvs' ),
+						'fields'   => array(
+							array(
+								'id'   => 'wcvs-enable-radio-swatches',
+								'type' => 'checkbox',
+								'name' => 'enable-radio-swatches',
+							)
+						),
+						'class'          => 'main-ajax-trigger',
+						'desc'           => __( 'Enable the Radio button type for Product Attributes', 'wcvs' ),
+						'priority'       => 1.5,
+						'is_pro_feature' => true,
 					),
 					array(
 						'title'    => __( 'Auto Convert Dropdowns To Label', 'wcvs' ),
@@ -143,7 +173,7 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 							)
 						),
 						'desc'     => __( 'Automatically covert dropdowns to &#34;Label Swatch&#34; by default', 'wcvs' ),
-						'priority' => 1.4
+						'priority' => 1.8
 					),
 					array(
 						'title'           => __( 'Select Attributes', 'wcvs' ),
@@ -171,6 +201,18 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 						'is_pro_feature' => true,
 						'desc'           => __( 'Automatically covert dropdowns to &#34;Image Swatch&#34; if variation has an image.', 'wcvs' ),
 						'priority'       => 3
+					),
+					array(
+						'title'          => __( 'Disable checking the variation product availability', 'wcvs' ),
+						'fields'         => array(
+							array(
+								'id'   => 'wcvs-disable-checking-availability',
+								'type' => 'checkbox',
+								'name' => 'disable-checking-availability',
+							)
+						),
+						'desc'           => __( 'All variations will be shown as available to select.', 'wcvs' ),
+						'priority'       => 4.1
 					),
 					array(
 						'title'    => __( 'Choose your swatch shape', 'wcvs' ),
@@ -256,6 +298,26 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 						'class'    => 'swatch-image-ratio-wrapper',
 						'desc'     => __( 'It will be applied to the swatch image only.<br><i><u>Note:</u></i> <b>Swatch Height</b> in <b>Design</b> tab will be ignored.', 'wcvs' ),
 						'priority' => 5.1
+					),
+					array(
+						'title'    => __( 'Image position', 'woosuite-variation-swatches-pro' ),
+						'fields'   => array(
+							array(
+								'id'            => 'wcvs-image-position-pro',
+								'type'          => 'select',
+								'options_group' => array(
+									array(
+										'value' => 'default',
+										'label' => __( 'Default', 'woosuite-variation-swatches-pro' ),
+									)
+								),
+								'class'         => 'br-type',
+								'name'          => 'image-position',
+							)
+						),
+						'desc'     => __( 'Select option', 'woosuite-variation-swatches-pro' ),
+						'priority' => 5.2,
+						'is_pro_feature' => true,
 					),
 					array(
 						'title'    => __( 'Disable Default Plugin Stylesheet', 'wcvs' ),
@@ -416,25 +478,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-mar-top',
 									'type'          => 'number',
 									'name'          => 'mar-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-right',
 									'type'          => 'number',
 									'name'          => 'mar-right',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-bottom',
 									'type'          => 'number',
 									'name'          => 'mar-bottom',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-left',
 									'type'          => 'number',
 									'name'          => 'mar-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-type',
@@ -470,25 +536,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-pad-top',
 									'type'          => 'number',
 									'name'          => 'pad-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-right',
 									'type'          => 'number',
 									'name'          => 'pad-right',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-bottom',
 									'type'          => 'number',
 									'name'          => 'pad-bottom',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-left',
 									'type'          => 'number',
 									'name'          => 'pad-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-type',
@@ -524,25 +594,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-wrm-top',
 									'type'          => 'number',
 									'name'          => 'wrm-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-right',
 									'type'          => 'number',
 									'name'          => 'wrm-right',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-bottom',
 									'type'          => 'number',
 									'name'          => 'wrm-bottom',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-left',
 									'type'          => 'number',
 									'name'          => 'wrm-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-type',
@@ -578,25 +652,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-wrp-top',
 									'type'          => 'number',
 									'name'          => 'wrp-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-right',
 									'type'          => 'number',
 									'name'          => 'wrp-right',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-bottom',
 									'type'          => 'number',
 									'name'          => 'wrp-bottom',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-left',
 									'type'          => 'number',
 									'name'          => 'wrp-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-type',
@@ -756,25 +834,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-mar-top',
 									'type'          => 'number',
 									'name'          => 'mar-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-right',
 									'type'          => 'number',
 									'name'          => 'mar-right',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-bottom',
 									'type'          => 'number',
 									'name'          => 'mar-bottom',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-left',
 									'type'          => 'number',
 									'name'          => 'mar-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-mar-type',
@@ -810,25 +892,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-pad-top',
 									'type'          => 'number',
 									'name'          => 'pad-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-right',
 									'type'          => 'number',
 									'name'          => 'pad-right',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-bottom',
 									'type'          => 'number',
 									'name'          => 'pad-bottom',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-left',
 									'type'          => 'number',
 									'name'          => 'pad-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-pad-type',
@@ -864,25 +950,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-wrm-top',
 									'type'          => 'number',
 									'name'          => 'wrm-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-right',
 									'type'          => 'number',
 									'name'          => 'wrm-right',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-bottom',
 									'type'          => 'number',
 									'name'          => 'wrm-bottom',
-									'default_value' => '15'
+									'default_value' => '15',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-left',
 									'type'          => 'number',
 									'name'          => 'wrm-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrm-type',
@@ -918,25 +1008,29 @@ if ( ! class_exists( 'VSWC_Setting_Fields_Manager' ) ) {
 									'id'            => 'wcvs-wrp-top',
 									'type'          => 'number',
 									'name'          => 'wrp-top',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&uarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-right',
 									'type'          => 'number',
 									'name'          => 'wrp-right',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&rarr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-bottom',
 									'type'          => 'number',
 									'name'          => 'wrp-bottom',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&darr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-left',
 									'type'          => 'number',
 									'name'          => 'wrp-left',
-									'default_value' => '0'
+									'default_value' => '0',
+									'html_before'    => '<span class="sw-input-type-icon">&larr;</span>'
 								),
 								array(
 									'id'            => 'wcvs-wrp-type',

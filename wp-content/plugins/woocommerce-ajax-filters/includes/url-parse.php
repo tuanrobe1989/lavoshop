@@ -443,7 +443,7 @@ if( ! class_exists('BeRocket_url_parse_page') ) {
                         }
                     }
                 }
-                $filter = apply_filters('', $filter, $data);
+                $filter = apply_filters('bapf_uparse_sort_filters_single', $filter, $data);
             }
             if( is_array($sort_array) && is_array($data['filters']) ) {
                 array_multisort($sort_array, $data['filters']);
